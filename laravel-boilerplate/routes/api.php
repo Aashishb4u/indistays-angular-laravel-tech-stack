@@ -19,13 +19,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group([
-
-    'middleware' => 'api'
-
+    'middleware' => 'api',
+    'prefix' => 'auth' // Adding the 'auth' prefix
 ], function ($router) {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
-    Route::get('profile', [AuthController::class, 'profile']);
     Route::get('refresh', [AuthController::class, 'refresh']);
     Route::post('logout', [AuthController::class, 'logout']);
+});
+
+Route::prefix('v1')->middleware('auth.check')->group(function () {
+    Route::get('profile', [AuthController::class, 'profile']);
+    // Other v1 authenticated routes go here
 });

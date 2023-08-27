@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
@@ -14,7 +14,7 @@ class AuthController extends Controller
    {
        $validator = Validator::make($request->all(), [
            'name' => 'required|string',
-           'email' => 'required|string|email',
+           'email' => 'required|string|email|unique:users',
            'password' => 'required|string|min:6|confirmed'
        ]);
 
@@ -35,22 +35,11 @@ class AuthController extends Controller
    }
 
 
-   public function login(Request $request) {
-
-       $validator = Validator::make($request->all(), [
-           'email' => 'required|string|email',
-           'password' => 'required|string|min:6'
-       ]);
-
-       if ($validator->fails()) {
-           return response()->json($validator->errors(), 422);
-       }
-
+   public function login(LoginRequest $request) {
        $credentials = $request->only('email', 'password');
-
        if (Auth::attempt($credentials)) {
            $user = Auth::user();
-           $token = auth()->attempt($validator->validated());
+           $token = auth()->attempt($request->validated());
 
            return response()->json([
                'message' => 'Login successful',
