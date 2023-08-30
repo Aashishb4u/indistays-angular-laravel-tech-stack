@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddDestinationRequest;
+use App\Http\Requests\EditDestinationRequest;
 use Illuminate\Http\Request;
 use App\Models\Destination;
 
@@ -33,29 +35,18 @@ class DestinationController extends Controller
         return response()->json($destinations);
     }
 
-    public function addDestination(Request $request)
+    public function addDestination(AddDestinationRequest $request)
     {
-        $destinationData = $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-        ]);
-
+        $destinationData = $request->all();
         $destination = Destination::create($destinationData);
-
         return response()->json(['message' => 'Destination created successfully', 'data' => $destination], 201);
     }
 
-    public function editDestination(Request $request, $id)
+    public function editDestination(EditDestinationRequest $request, $id)
     {
         $destination = Destination::findOrFail($id);
-
-        $destinationData = $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-        ]);
-
+        $destinationData = $request->all();
         $destination->update($destinationData);
-
         return response()->json(['message' => 'Destination updated successfully', 'data' => $destination]);
     }
 

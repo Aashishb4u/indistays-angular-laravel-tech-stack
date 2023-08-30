@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\CampingController;
 use App\Http\Controllers\CustomPricingController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -71,6 +72,9 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::delete('custom-pricing/{id}', [CustomPricingController::class, 'deleteCustomPricing']);
     Route::get('custom-pricing/all', [CustomPricingController::class, 'getAllCustomPricings']);
 
+    // upload Images
+    Route::post('upload-images/{entity}', [ImageController::class, 'uploadImages']);
+    Route::post('upload-profile-image/{entity}/{id}', [ImageController::class, 'uploadProfileImage']);
 
 
     // Other v1 authenticated routes go here
