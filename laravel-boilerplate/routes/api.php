@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccommodationController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CampingController;
 use App\Http\Controllers\CustomPricingController;
 use App\Http\Controllers\ImageController;
@@ -45,7 +46,6 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::get('destinations/all', [DestinationController::class, 'getAllDestinationsData']);
 
     // Campings API
-
     Route::get('campings', [CampingController::class, 'getCampingsData']);
     Route::post('campings', [CampingController::class, 'addCamping']);
     Route::put('campings/{id}', [CampingController::class, 'editCamping'])
@@ -53,9 +53,7 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::delete('campings/{id}', [CampingController::class, 'deleteCamping']);
     Route::get('campings/all', [CampingController::class, 'getAllCampingsData']);
 
-
-    // Campings API
-
+    // Accommodations API
     Route::get('accommodations', [AccommodationController::class, 'getAccommodationsData']);
     Route::post('accommodations', [AccommodationController::class, 'addAccommodation']);
     Route::put('accommodations/{id}', [AccommodationController::class, 'editAccommodation'])
@@ -63,14 +61,20 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::delete('accommodations/{id}', [AccommodationController::class, 'deleteAccommodation']);
     Route::get('accommodations/all', [AccommodationController::class, 'getAllAccommodationsData']);
 
-    // Custome Pricings API
-
+    // Custom Pricings API
     Route::get('custom-pricing', [CustomPricingController::class, 'getCustomPricings']);
     Route::post('custom-pricing', [CustomPricingController::class, 'addCustomPricing']);
     Route::put('custom-pricing/{id}', [CustomPricingController::class, 'editCustomPricing'])
         ->where('id', '[0-9]+');
     Route::delete('custom-pricing/{id}', [CustomPricingController::class, 'deleteCustomPricing']);
     Route::get('custom-pricing/all', [CustomPricingController::class, 'getAllCustomPricings']);
+
+    // Custom Bookings API
+    Route::get('bookings', [BookingController::class, 'getAllBookings']);
+    Route::get('bookings-paginate', [BookingController::class, 'getBookings']);
+    Route::post('bookings', [BookingController::class, 'addBooking']);
+    Route::put('bookings/{id}', [BookingController::class, 'editBooking']);
+    Route::delete('bookings/{id}', [BookingController::class, 'deleteBooking']);
 
     // upload Images
     Route::post('upload-images/{entity}', [ImageController::class, 'uploadImages']);

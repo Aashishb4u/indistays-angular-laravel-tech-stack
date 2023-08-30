@@ -18,11 +18,6 @@ class Camping extends Model
         return $this->hasMany(Accommodation::class);
     }
 
-    public function profileImage()
-    {
-        return $this->images()->profileImage()->first();
-    }
-
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
