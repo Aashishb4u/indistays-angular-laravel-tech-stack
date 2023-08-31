@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Auth;
 use Validator;
@@ -34,24 +35,36 @@ class AuthController extends Controller
        ]);
    }
 
+    public function login(LoginRequest $request) {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-   public function login(LoginRequest $request) {
-       $credentials = $request->only('email', 'password');
-       if (Auth::attempt($credentials)) {
-           $user = Auth::user();
-           $token = auth()->attempt($request->validated());
+            // Generate access and refresh tokens
+            // This sequence is important, refresh should generate first
+            $refresh_token = auth()->refresh();
+            $access_token = auth()->attempt($request->validated());
 
-           return response()->json([
-               'message' => 'Login successful',
-               'user' => $user,
-               'access_token' => $token
-           ], 200);
-       } else {
-           return response()->json(['message' => 'Invalid credentials'], 401);
-       }
-   }
+            // Fetch user_roles data based on the user's role ID
+            $userRole = UserRole::find($user->user_role_id);
 
-   public function profile() {
+            // Include role information under the user object
+            $user->role = $userRole;
+
+            return response()->json([
+                'message' => 'Login successful',
+                'user' => $user,
+                'tokens' => ['access' => ['token' => $access_token], 'refresh' => ['token' => $refresh_token]]
+//                'access_token' => $access_token,
+//                'refresh_token' => $refresh_token
+            ], 200);
+        } else {
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        }
+    }
+
+
+    public function profile() {
        return response()->json(auth()->user());
    }
 

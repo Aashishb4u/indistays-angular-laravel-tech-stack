@@ -16,8 +16,8 @@ class UserRolesSeeder extends Seeder
         $now = Carbon::now();
 
         $userRoles = [
-            ['id' => 1, 'role_name' => 'admin', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'role_name' => 'customer', 'created_at' => $now, 'updated_at' => $now]
+            ['id' => 1, 'name' => 'admin', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 2, 'name' => 'customer', 'created_at' => $now, 'updated_at' => $now]
         ];
 
         DB::table('user_roles')->insert($userRoles);

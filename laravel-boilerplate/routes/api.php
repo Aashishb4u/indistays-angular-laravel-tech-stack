@@ -5,6 +5,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CampingController;
 use App\Http\Controllers\CustomPricingController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -36,6 +37,9 @@ Route::group([
 
 Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::get('profile', [AuthController::class, 'profile']);
+
+    Route::get('roles', [UserController::class, 'getUserRoles']);
+
 
     // Destinations APIs
     Route::get('destinations', [DestinationController::class, 'getDestinationsData']);

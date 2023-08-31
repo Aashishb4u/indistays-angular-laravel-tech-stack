@@ -1,0 +1,24 @@
+<div class="login-container">
+  <form [formGroup]="loginForm" class="login-form" (keyup.enter)="onSubmit()">
+    <div class="logo-container">
+      <img [src]="sharedService.companyLogoName" alt="Company Logo" class="logo-image">
+    </div>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email</mat-label>
+      <input tabindex="1" matInput formControlName="email" type="email" placeholder="Enter your email">
+      <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">Please enter a valid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Password</mat-label>
+      <input tabindex="2" maxlength="10" matInput formControlName="password" type="password" placeholder="Enter your password">
+      <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">Please enter a password</mat-error>
+    </mat-form-field>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <button mat-button color="primary" (click)="goToLanding()">Go to Home Page</button>
+      <button mat-raised-button color="primary" tabindex="3" (click)="onSubmit()" type="submit">Login</button>
+    </div>
+  </form>
+</div>
