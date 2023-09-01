@@ -104,6 +104,10 @@ export class ApiService {
     );
   }
 
+  changePassword(data) {
+    return this.http.post(`${this.baseAuthUrl}reset-password`, data, {});
+  }
+
   getRoles() {
     return this.http.get(`${this.baseURL}roles`, {});
   }

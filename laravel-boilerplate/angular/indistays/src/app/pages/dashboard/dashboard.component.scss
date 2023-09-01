@@ -1,0 +1,60 @@
+.main-page-container {
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-sidenav-container {
+  background: #3f51b538 !important;
+  .dashboard-sidenav {
+    background: var(--primary-color);
+    color: var(--color-white);
+    min-width: 220px;
+  }
+}
+
+.logo-container {
+  text-align: center;
+  img.logo-image {
+    width: 100px;
+    height: auto;
+  }
+}
+
+.toolbar-logo-container {
+  img.logo-image {
+    width: 65px;
+  }
+}
+
+.dashboard-toolbar {
+  color: var(--primary-color);
+  padding: 2rem;
+}
+
+.mat-divider-white {
+  border-top-color: var(--color-lightgray) !important;
+}
+
+.user-name-box {
+  font-size: 12px;
+  color: var(--primary-color) !important;
+  line-height: 1.5;
+}
+
+.nav-list {
+  color: var(--color-gray-100) !important;
+}
+
+$text: ('position', 'name', 'weight', 'symbol', 'action');
+
+@each $item in $text {
+  $index: index($text, $item);
+  $size: 100; // Define your desired size here
+
+  .mat-column-#{$item} {
+    // flex: 0 1 #{$size}px;
+    border-right: 1px solid lightgray;
+  }
+}

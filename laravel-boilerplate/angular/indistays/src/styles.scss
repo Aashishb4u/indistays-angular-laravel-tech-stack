@@ -1,7 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+@import "assets/theme/custom-theme";
+@import "assets/theme/custom-theme-variables";
+@import "assets/theme/custom-classes";
+// Custom theme -
+
+@font-face {
+  font-family: 'Lato-Reg';
+  src: url(/assets/fonts/Lato/Lato-Regular.ttf) format("truetype");
+  font-weight:300;
+}
+body { margin: 0;
+  font-family: Lato-Reg, serif !important;
+  background: #fff;
+}
+
+@font-face {
+  font-family: 'Lato-bold';
+  src: url(/assets/fonts/Lato/Lato-Bold.ttf) format("truetype");
+  font-weight:300;
+}

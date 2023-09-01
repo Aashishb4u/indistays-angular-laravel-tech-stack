@@ -7,6 +7,7 @@ export const appConstants = {
     googleApiKey: 'AIzaSyBU3AEIpIorZF9EcGUUfYkv_z2taqRA9eI',
     localDomain: 'localhost:4200',
     creativeHandLogoName: 'assets/company-logo/logo-no-background.png',
+    creativeHandLogoTransperant: 'assets/company-logo/logo-transparent.png',
     creativeHandLogo: 'assets/company-logo/logo-color.png',
     creativeHandLogoAnimation: 'assets/company-logo/creative_hand_logo_animation.gif',
 

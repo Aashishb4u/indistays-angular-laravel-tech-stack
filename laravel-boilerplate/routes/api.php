@@ -33,6 +33,7 @@ Route::group([
     Route::post('login', [AuthController::class, 'login']);
     Route::get('refresh', [AuthController::class, 'refresh']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('reset-password', [AuthController::class, 'changePassword']);
 });
 
 Route::prefix('v1')->middleware('auth.check')->group(function () {

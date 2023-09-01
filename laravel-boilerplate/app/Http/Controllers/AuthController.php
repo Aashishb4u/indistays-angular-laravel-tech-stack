@@ -84,4 +84,28 @@ class AuthController extends Controller
             ], 401); // Return a 401 Unauthorized response
         }
     }
+
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user(); // Get the authenticated user
+
+        // Validate the request data
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:8',
+        ]);
+
+        // Check if the current password is correct
+        if (!Hash::check($request->input('current_password'), $user->password)) {
+            return response()->json(['message' => 'Current password is incorrect'], 400);
+        }
+
+
+        // Update the user's password
+        $user->update([
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        return response()->json(['message' => 'Password changed successfully']);
+    }
 }

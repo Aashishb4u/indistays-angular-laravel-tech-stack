@@ -1,0 +1,82 @@
+// My Custom Theme
+
+@use '@angular/material' as mat;
+/* You can add global styles to this file, and also import other style files */
+
+@include mat.core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-primary: (
+  50 : #e0e4e5,
+  100 : #b3bbbe,
+  200 : #808e93,
+  300 : #4d6068,
+  400 : #263e47,
+  500 : #001c27,
+  600 : #001923,
+  700 : #00141d,
+  800 : #001117,
+  900 : #00090e,
+  A100 : #51b9ff,
+  A200 : #1ea5ff,
+  A400 : #008cea,
+  A700 : #007dd0,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+/* For use in src/lib/core/theming/_palette.scss */
+$md-secondary: (
+  50 : #ffede0,
+  100 : #ffd1b3,
+  200 : #ffb380,
+  300 : #ff944d,
+  400 : #ff7d26,
+  500 : #ff6600,
+  600 : #ff5e00,
+  700 : #ff5300,
+  800 : #ff4900,
+  900 : #ff3800,
+  A100 : #ffffff,
+  A200 : #fff4f2,
+  A400 : #ffc9bf,
+  A700 : #ffb4a6,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$primary: mat.define-palette($md-primary);
+$secondary: mat.define-palette($md-secondary);
+
+$theme: mat.define-light-theme($primary, $secondary);
+
+@include mat.all-component-themes($theme);

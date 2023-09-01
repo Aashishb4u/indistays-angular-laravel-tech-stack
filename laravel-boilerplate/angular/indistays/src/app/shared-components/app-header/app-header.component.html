@@ -1,0 +1,63 @@
+<nav *ngIf="showHeader" class="shadow-class navbar nav-background sticky-top navbar-expand-md navbar-light bg-light">
+  <div #home class="landing-nav container-fluid">
+    <a class="navbar-brand d-flex align-items-center justify-content-center" href="#">
+      <img width="50" [src]="sharedService?.companyLogo" alt="Company Logo" class="logo-image">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div  class="collapse navbar-collapse menu-bar" id="navbarSupportedContent">
+      <div  class="d-flex ml-auto flex-basis-70">
+        <ul *ngIf="!isAuthenticated" class="navbar-nav">
+          <li class="nav-item nav-menu">
+            <a class="cursor-pointer nav-link" aria-current="page">Home</a>
+          </li>
+          <li class="nav-item nav-menu ">
+            <a class="cursor-pointer nav-link">Product</a>
+          </li>
+          <li class="nav-item nav-menu">
+            <a class="cursor-pointer nav-link">Multi Language</a>
+          </li>
+          <li class="nav-item nav-menu">
+            <a class="cursor-pointer nav-link" >Register Your Business</a>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="!isAuthenticated" class="ml-auto d-flex align-items-center flex-basis-30 justify-content-end">
+        <button class="setting-icon-mobile" [matMenuTriggerFor]="menu" mat-mini-fab
+                aria-label="Example icon button with a filter list icon">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="isAuthenticated" class="cursor-pointer flex-basis-30 d-flex justify-content-end">
+        <div [matMenuTriggerFor]="userMenu" #menuTrigger class="d-flex justify-content-center align-items-center">
+          <div class="user-icon">
+            <button mat-mini-fab class="mat-button-icon-btn m-r-1"
+                    aria-label="Example icon button with a plus one icon">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          </div>
+          <div class="color-white user-name-box"><b>Hello, {{apiService?.userName | titlecase}}</b></div>
+        </div>
+        <mat-menu #userMenu="matMenu">
+          <ng-template matMenuContent let-id="id">
+            <button mat-menu-item
+                    (click)="onChangePassword()">Change Password
+              <mat-icon color="primary">lock</mat-icon>
+            </button>
+            <button mat-menu-item
+                    (click)="logout()">Log Out
+              <mat-icon color="primary">logout</mat-icon>
+            </button>
+          </ng-template>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<mat-menu #menu="matMenu">
+  <button (click)="onLogin()" mat-menu-item><mat-icon color="primary">
+    account_circle</mat-icon>Log In</button>
+</mat-menu>

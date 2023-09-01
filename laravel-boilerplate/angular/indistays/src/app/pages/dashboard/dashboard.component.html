@@ -1,2 +1,153 @@
-<p>dashboard works!</p>
-<button mat-raised-button color="primary" tabindex="3" (click)="logout()" type="submit">Logout</button>
+<mat-drawer-container class="dashboard-sidenav-container" autosize>
+  <mat-drawer #drawer class="dashboard-sidenav" mode="side">
+    <div>
+      <div class="logo-container p-3">
+        <img [src]="sharedService.companyLogo" alt="Company Logo" class="logo-image">
+        <mat-divider class="mat-divider-white"></mat-divider>
+      </div>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="pb-3 d-flex pl-1 cursor-pointer">
+          <button mat-button class="nav-list">
+            <mat-icon>location_on</mat-icon> &nbsp; Destinations
+          </button>
+        </div>
+        <div class="pb-3 d-flex pl-1 cursor-pointer">
+          <button mat-button class="nav-list"><mat-icon>nature_people</mat-icon> &nbsp; Camping</button>
+        </div>
+        <div class="pb-3 d-flex pl-1 cursor-pointer">
+          <button mat-button class="nav-list"><mat-icon>hotel</mat-icon> &nbsp; Accommodation</button>
+        </div>
+        <div class="pb-3 d-flex pl-1 cursor-pointer">
+          <button mat-button class="nav-list"><mat-icon>attach_money</mat-icon> &nbsp; Custom Pricing</button>
+        </div>
+        <div class="pb-3 d-flex pl-1 cursor-pointer">
+          <button mat-button class="nav-list"><mat-icon>book</mat-icon> &nbsp; Manual Booking</button>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+
+  <div class="main-page-container">
+    <mat-toolbar class="dashboard-toolbar">
+      <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      &nbsp;
+      <div class="toolbar-logo-container mr-1">
+        <img [src]="sharedService.companyLogoTransperant" alt="Company Logo" class="logo-image">
+      </div>
+
+      &nbsp;
+      <div class="d-flex full-width justify-content-between align-items-center">
+        <div class="font-14">
+          Welcome Back, &nbsp; <span class="font-18 color-secondary">{{apiService.userName | titlecase}}</span>
+        </div>
+        <div class="cursor-pointer flex-basis-30 d-flex justify-content-end">
+          <div [matMenuTriggerFor]="userMenu" #menuTrigger class="d-flex justify-content-center align-items-center">
+            <div class="user-icon">
+              <button mat-mini-fab class="mat-button-icon-btn m-r-1"
+                      aria-label="Example icon button with a plus one icon">
+                <mat-icon>account_circle</mat-icon>
+              </button>
+            </div>
+            <div class="color-white user-name-box">Hello, <br> <b>{{apiService?.userName | titlecase}}</b></div>
+          </div>
+          <mat-menu #userMenu="matMenu">
+            <ng-template matMenuContent let-id="id">
+              <button (click)="onChangePassword()" mat-menu-item>Change Password
+                <mat-icon color="primary">lock</mat-icon>
+              </button>
+              <button mat-menu-item
+                      (click)="logout()">Log Out
+                <mat-icon color="primary">logout</mat-icon>
+              </button>
+            </ng-template>
+          </mat-menu>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <div class="p-3">
+      <div class="pb-3">
+        <mat-card>
+          <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center" style="padding: 1rem">
+             <div style="font-size: 16px; font-weight: bold">Users Table</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <mat-paginator
+                [pageSize]="pageSize"
+                #paginator
+                (page)="onPageChange($event)"
+                [length]="totalLength">
+              </mat-paginator>
+              <div style="padding: 0 20px">
+                <button class="color-white" mat-raised-button color="accent">Add User</button>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div class="pb-3">
+        <mat-card>
+          <div>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="action" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                <td style="width: 60px" [matMenuTriggerData]="element" [matMenuTriggerFor]="userFeedbackMenu" #menuTrigger mat-cell *matCellDef="let element">
+                  <div style="cursor: pointer; text-align: center"><mat-icon>more_vert</mat-icon></div>
+                </td>
+              </ng-container>
+
+              <mat-menu #userFeedbackMenu="matMenu">
+                <ng-template matMenuContent let-status="status" let-id="id">
+                  <button mat-menu-item>Edit
+                    <mat-icon color="primary">edit</mat-icon>
+                  </button>
+                  <button mat-menu-item>Delete
+                    <mat-icon color="primary">delete</mat-icon>
+                  </button>
+                </ng-template>
+              </mat-menu>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+
+</mat-drawer-container>
+
+

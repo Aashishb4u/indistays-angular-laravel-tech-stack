@@ -33,13 +33,19 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpTokenInterceptorsService} from "./authentication/http-token-interceptors.service";
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AppHeaderComponent } from './shared-components/app-header/app-header.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    LandingComponent
+    LandingComponent,
+    NotFoundComponent,
+    AppHeaderComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +75,8 @@ import {HttpTokenInterceptorsService} from "./authentication/http-token-intercep
     MatSnackBarModule,
     MatPaginatorModule,
     MatTabsModule, // SwiperModule
-    ReactiveFormsModule, NgbModule,
+    ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},

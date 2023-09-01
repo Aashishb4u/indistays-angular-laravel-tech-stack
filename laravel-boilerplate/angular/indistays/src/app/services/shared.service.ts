@@ -15,6 +15,7 @@ export class SharedService {
   showBrandSpinner = new BehaviorSubject(false);
   companyLogo: any = appConstants.creativeHandLogo;
   companyLogoName: any = appConstants.creativeHandLogoName;
+  companyLogoTransperant: any = appConstants.creativeHandLogoTransperant;
   companyLogoAnimation: any = appConstants.creativeHandLogoAnimation;
   businessLogoName: any = '';
   businessLogoImageLink: any = '';
