@@ -37,8 +37,16 @@ Route::group([
 });
 
 Route::prefix('v1')->middleware('auth.check')->group(function () {
-    Route::get('profile', [AuthController::class, 'profile']);
 
+    // User APIs
+
+    Route::get('users', [UserController::class, 'paginate']);
+    Route::post('users', [UserController::class, 'store']);
+    Route::delete('users/{id}', [UserController::class, 'destroy']);
+    Route::put('users/{id}', [UserController::class, 'update']);
+    Route::post('users/all', [UserController::class, 'index']);
+
+    Route::get('profile', [AuthController::class, 'profile']);
     Route::get('roles', [UserController::class, 'getUserRoles']);
 
 

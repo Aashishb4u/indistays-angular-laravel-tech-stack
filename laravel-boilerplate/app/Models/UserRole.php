@@ -11,4 +11,10 @@ class UserRole extends Model
     protected $fillable = [
         'role_name',
     ];
+
+    // Define the reverse relationship with users
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

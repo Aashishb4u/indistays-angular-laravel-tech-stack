@@ -1,5 +1,5 @@
 <div class="login-container">
-  <form [formGroup]="loginForm" class="login-form" (keyup.enter)="onSubmit()">
+  <form [formGroup]="loginForm" class="login-form" (submit)="onSubmit()" (keydown.enter)="onSubmit()">
     <div class="logo-container">
       <img [src]="sharedService.companyLogoName" alt="Company Logo" class="logo-image">
     </div>
@@ -18,7 +18,7 @@
 
     <div class="d-flex justify-content-between align-items-center">
       <button mat-button color="primary" (click)="goToLanding()">Go to Home Page</button>
-      <button mat-raised-button color="primary" tabindex="3" (click)="onSubmit()" type="submit">Login</button>
+      <button mat-raised-button color="primary" tabindex="3" type="submit">Login</button>
     </div>
   </form>
 </div>

@@ -108,9 +108,33 @@ export class ApiService {
     return this.http.post(`${this.baseAuthUrl}reset-password`, data, {});
   }
 
+  // Users Apis -
+
   getRoles() {
     return this.http.get(`${this.baseURL}roles`, {});
   }
+
+  getUsers(params) {
+    return this.http.get(`${this.baseURL}users`, {params});
+  }
+
+  getUserById(data) {
+    return this.http.post(`${this.baseURL}users/all`, data, {});
+  }
+
+  addUser(data) {
+    return this.http.post(`${this.baseURL}users`, data, {});
+  }
+
+  updateUserById(data, id) {
+    return this.http.put(`${this.baseURL}users/${id}`, data, {});
+  }
+
+  deleteUser(id) {
+    return this.http.delete(`${this.baseURL}users/${id}`, {});
+  }
+
+
 
   commonError(err: any) {
     const errCode = err.status;

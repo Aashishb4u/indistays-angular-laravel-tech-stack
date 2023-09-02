@@ -6,7 +6,7 @@
 }
 
 .dashboard-sidenav-container {
-  background: #3f51b538 !important;
+  background: var(--panel-background) !important;
   .dashboard-sidenav {
     background: var(--primary-color);
     color: var(--color-white);
@@ -47,14 +47,6 @@
   color: var(--color-gray-100) !important;
 }
 
-$text: ('position', 'name', 'weight', 'symbol', 'action');
-
-@each $item in $text {
-  $index: index($text, $item);
-  $size: 100; // Define your desired size here
-
-  .mat-column-#{$item} {
-    // flex: 0 1 #{$size}px;
-    border-right: 1px solid lightgray;
-  }
+.active-link {
+  color: var(--secondary-color) !important;
 }

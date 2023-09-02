@@ -1,0 +1,13 @@
+<div class="p-2">
+  <div class="mb-4">
+    <h1 class="color-secondary" mat-dialog-title>{{ title }}</h1>
+    <div class="color-primary" mat-dialog-content>
+      {{ message }}
+    </div>
+  </div>
+  <div class="d-flex justify-content-end" mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+    <button (click)="onConfirmClick()" mat-raised-button color="primary">{{confirmLabel}}</button>
+  </div>
+
+</div>

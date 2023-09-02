@@ -36,6 +36,11 @@ import {HttpTokenInterceptorsService} from "./authentication/http-token-intercep
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AppHeaderComponent } from './shared-components/app-header/app-header.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { UsersComponent } from './pages/dashboard/users/users.component';
+import { AddEditUsersComponent } from './pages/dashboard/add-edit-users/add-edit-users.component';
+import { ConfirmationPopupComponent } from './shared-components/confirmation-popup/confirmation-popup.component';
+import { DebounceKeyUpDirective } from './custom-directives/debounce-key-up.directive';
+import { AbstractDebounceDirective } from './custom-directives/abstract-debounce.directive';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,11 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     LandingComponent,
     NotFoundComponent,
     AppHeaderComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UsersComponent,
+    AddEditUsersComponent,
+    ConfirmationPopupComponent,
+    DebounceKeyUpDirective
   ],
   imports: [
     BrowserModule,
