@@ -24,6 +24,9 @@ class EditDestinationRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif',
+            'image_ids_to_update' => 'array',
+            'edited_images.*' => 'image|mimes:jpeg,png,gif',
         ];
     }
 }

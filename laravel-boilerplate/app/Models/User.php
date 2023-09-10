@@ -68,8 +68,12 @@ class User extends Authenticatable implements JWTSubject
     }
 
     // Define the relationship between User and UserRole
+    // Read Like this ti understand - User Role belongs to User
+    // How Laravel detects foreign key in this case -
+    // the column name in users table for role is ->
+    // 'user_role_id' so the function name will be userRole
     public function userRole()
     {
-        return $this->belongsTo(UserRole::class);
+        return $this->belongsTo(UserRole::class); // user_role_id column
     }
 }

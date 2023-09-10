@@ -39,7 +39,7 @@ export class ApiService {
           const resBody = {
             refreshToken: token
           };
-          return this.http.post(`${this.baseAuthUrl}refresh-tokens`, resBody);
+          return this.http.get(`${this.baseAuthUrl}refresh-tokens`);
         } else {
           // No stored refresh token
           return of(null);
@@ -134,7 +134,25 @@ export class ApiService {
     return this.http.delete(`${this.baseURL}users/${id}`, {});
   }
 
+  addDestination(data) {
+    return this.http.post(`${this.baseURL}destinations`, data, {});
+  }
 
+  updateDestinationById(data, id) {
+    return this.http.post(`${this.baseURL}destinations/edit/${id}`, data, {});
+  }
+
+  getDestinationById(data) {
+    return this.http.post(`${this.baseURL}destinations/all`, data, {});
+  }
+
+  getDestinations(params) {
+    return this.http.get(`${this.baseURL}destinations`, {params});
+  }
+
+  deleteDestination(id) {
+    return this.http.delete(`${this.baseURL}destinations/${id}`, {});
+  }
 
   commonError(err: any) {
     const errCode = err.status;

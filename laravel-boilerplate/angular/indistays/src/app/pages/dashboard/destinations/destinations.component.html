@@ -3,21 +3,12 @@
     <mat-card>
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center" style="padding: 1rem">
-          <div style="font-size: 16px; font-weight: bold">Users</div>
+          <div style="font-size: 16px; font-weight: bold">Destinations</div>
         </div>
         <div class="d-flex align-items-center">
-<!--          <div [formGroup]="searchForm" (ngSubmit)="onSearch()" style="width: 200px" class="input-group">-->
-<!--            <input placeholder="Search User" formControlName="search" class="form-control py-2 border-right-0 border" type="search" value="search" id="example-search-input">-->
-<!--            <span class="input-group-append">-->
-<!--              <button class="btn btn-outline-secondary border-left-0 border" type="submit">-->
-<!--                    <i class="fa fa-search"></i>-->
-<!--              </button>-->
-<!--            </span>-->
-<!--          </div>-->
-
           <div class="search-input-box width-300 input-group">
             <input appDebounceKeyUp [debounceTime]="1000"
-                   (onEvent)="handleDebouncedKeyUp($event)" type="text" class="form-control" placeholder="Search User">
+                   (onEvent)="handleDebouncedKeyUp($event)" type="text" class="form-control" placeholder="Search Destination">
             <div class="input-group-append">
               <button class="btn" type="button">
                 <i class="fa fa-search"></i>
@@ -32,7 +23,7 @@
             [length]="totalLength">
           </mat-paginator>
           <div style="padding: 0 20px">
-            <button (click)="onAddUser()" class="color-white" mat-raised-button color="accent"> Add User &nbsp; <mat-icon>add</mat-icon></button>
+            <button (click)="onAddDestination()" class="color-white" mat-raised-button color="accent"> Add Destination &nbsp; <mat-icon>add</mat-icon></button>
           </div>
         </div>
       </div>
@@ -40,7 +31,7 @@
   </div>
   <div class="pb-3">
     <mat-card>
-      <div *ngIf="dataSource && dataSource.length > 0">
+      <div class="overflow-scroll" *ngIf="dataSource && dataSource.length > 0">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
           <!--- Note that these columns can be defined in any order.
@@ -48,20 +39,39 @@
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> User Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <th mat-header-cell *matHeaderCellDef> Destination </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 350px" class="d-flex flex-column p-3 justify-content-center align-items-center">
+                <div style="margin-left: 1rem; margin-bottom: 5px">
+                 <div style="font-size: 18px"> {{element.name}} </div>
+                </div>
+                <div class="d-flex p-1 justify-content-center">
+                  <img style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); max-width: 95%; height: auto; border-radius: 5px;"
+                       src="{{element.profile_image_url}}" alt="">
+                </div>
+              </div>
+            </td>
           </ng-container>
 
           <!-- Weight Column -->
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> User Email </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element">
+             <div style="min-width: 400px; padding: 15px" class="truncate-text" [innerHTML]="element.description">
+             </div>
+            </td>
           </ng-container>
 
           <!-- Weight Column -->
-          <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef> User Role </th>
-            <td mat-cell *matCellDef="let element"> {{element.role | titlecase}} </td>
+          <ng-container matColumnDef="gallery">
+            <th mat-header-cell *matHeaderCellDef> Image Gallery </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="d-flex">
+                <ng-container *ngFor="let image of element.images">
+                  <img style="border-radius: 5px; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); object-fit: cover; width: 300px; height: 200px; padding: 10px; margin: 10px" src="{{image?.url}}" alt="">
+                </ng-container>
+              </div>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="action" stickyEnd>

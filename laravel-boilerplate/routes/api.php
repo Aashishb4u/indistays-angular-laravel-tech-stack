@@ -31,7 +31,7 @@ Route::group([
 ], function ($router) {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
-    Route::get('refresh', [AuthController::class, 'refresh']);
+    Route::get('refresh-tokens', [AuthController::class, 'refresh']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('reset-password', [AuthController::class, 'changePassword']);
 });
@@ -51,12 +51,15 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
 
 
     // Destinations APIs
-    Route::get('destinations', [DestinationController::class, 'getDestinationsData']);
+    Route::get('destinations', [DestinationController::class, 'paginate']);
     Route::post('destinations', [DestinationController::class, 'addDestination']);
-    Route::put('destinations/{id}', [DestinationController::class, 'editDestination'])
-        ->where('id', '[0-9]+');
+
+    // laravel is having bug that formData does not work with put or patch method.
+    // In laravel, put method is not by default working with formData
+    // so we need to use post method here
+    Route::post('destinations/edit/{id}', [DestinationController::class, 'editDestination']);
     Route::delete('destinations/{id}', [DestinationController::class, 'deleteDestination']);
-    Route::get('destinations/all', [DestinationController::class, 'getAllDestinationsData']);
+    Route::post('destinations/all', [DestinationController::class, 'index']);
 
     // Campings API
     Route::get('campings', [CampingController::class, 'getCampingsData']);

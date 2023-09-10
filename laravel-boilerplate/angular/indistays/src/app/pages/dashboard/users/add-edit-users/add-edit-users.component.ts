@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ApiService} from "../../../services/api.service";
-import {StorageService} from "../../../services/storage.service";
-import {SharedService} from "../../../services/shared.service";
+import {ApiService} from "../../../../services/api.service";
+import {StorageService} from "../../../../services/storage.service";
+import {SharedService} from "../../../../services/shared.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
