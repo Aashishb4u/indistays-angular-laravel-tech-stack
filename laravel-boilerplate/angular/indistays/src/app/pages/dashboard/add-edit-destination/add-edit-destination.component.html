@@ -1,0 +1,142 @@
+<div class="dashboard-container p-3">
+  <div class="pb-3">
+    <mat-card>
+      <div class="d-flex justify-content-between p-3">
+        <div class="d-flex">
+          <div class="d-flex align-items-center">
+            <button (click)="goGridPage()" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+          </div>
+          <div class="ml-1 d-flex align-items-center">
+            <div style="font-size: 18px; font-weight: bold">{{this.destinationId ? 'Update' : 'Add'}} Destination</div>
+          </div>
+        </div>
+        <div>
+          <button (click)="userAction()" class="color-white" mat-raised-button color="accent">{{this.destinationId ? 'Update' : 'Add'}} Destination</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="pb-3">
+    <mat-card>
+      <div class="component-container p-5">
+        <div class="container">
+          <form [formGroup]="componentForm" (ngSubmit)="userAction()">
+            <div class="row">
+              <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mb-2">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Name</mat-label>
+                  <input tabindex="1" #name maxlength="40" matInput formControlName="name" type="text" placeholder="Enter Destination Name">
+                  <mat-hint align="end">{{name.value.length}} / 40</mat-hint>
+                  <mat-error *ngIf="componentForm.get('name')?.invalid && componentForm.get('name')?.touched">Please enter a valid email</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-12">
+                <div class="mb-4 image-message">
+                  Please Add Destination Banner Image below.
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mb-4">
+                <div style="position: relative; border: 1px solid #666; border-radius: 5px" class="full-width d-flex justify-content-center">
+
+                  <ng-container>
+                    <img class="destination-banner"
+                         [src]="profileImageBase64?.value ?
+                         profileImageBase64?.value : profileImageUrlControl.value"
+                         alt="Business Image">
+                  </ng-container>
+
+                  <div style="position: absolute; top: 10px; right: 10px;">
+                    <div style="position: relative">
+                      <label  for="profileImage" class="edit_profile_icon">
+                        <i class="fa fa-pencil"></i>
+                      </label>
+                      <input type='file' style="display: none" id="profileImage"
+                             accept=".png, .jpg, .jpeg"
+                             (change)="uploadFile($event)"/>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mb-4">
+                <ngx-editor-menu [toolbar]="toolbar" [editor]="editor"></ngx-editor-menu>
+                <ngx-editor class="ngx-editor" [editor]="editor"
+                            formControlName="description"></ngx-editor>
+              </div>
+              <div class="col-lg-12">
+                <div class="mb-4 image-message">
+                  Please Add 5 Destination Gallery Images
+                </div>
+              </div>
+              <div class="col-lg-12 row">
+                <ng-container formArrayName="galleryImages"
+                              *ngFor="let singleImage of galleryImages.controls; let i = index">
+                  <div style="margin-bottom: 50px; position: relative"
+                       class="col-lg-4 d-flex justify-content-center align-items-center">
+                    <div class="avatar-upload">
+                      <div class="avatar-edit">
+                        <input type='file' [id]="'imageUploadPortfolio' + i"
+                               accept=".png, .jpg, .jpeg" #fileInput
+                               (change)="portfolioImageAction($event, i)"/>
+                      </div>
+                      <div class="avatar-preview">
+                        <label [for]="'imageUploadPortfolio' + i"
+                               [ngClass]="['custom-label', 'upload-image']">
+                          <i class="fa fa-pen"></i>
+                        </label>
+                        <div class="d-flex justify-content-center">
+                          <ng-container *ngIf="singleImage.get('imageBase64')?.value">
+                            <img style="padding: 5px; object-fit: cover; width: 100%"
+                                 [src]="singleImage.get('imageBase64')?.value ?
+                                                         singleImage.get('imageBase64')?.value : noImageIcon"
+                                 alt="Business Image">
+                          </ng-container>
+                          <ng-container *ngIf="singleImage.get('imageUrlOnUI')?.value">
+                            <img style="padding: 5px; object-fit: cover; width: 100%"
+                                 [src]="singleImage.get('imageUrlOnUI')?.value ?
+                                                         singleImage.get('imageUrlOnUI')?.value : noImageIcon"
+                                 alt="Business Image">
+                          </ng-container>
+                          <ng-container *ngIf="!singleImage.get('imageBase64')?.value && !singleImage.get('imageUrlOnUI')?.value">
+                            <img style="padding: 5px; object-fit: cover; width: 100%"
+                                 [src]="noImageIcon"
+                                 alt="Business Image">
+                          </ng-container>
+                        </div>
+                      </div>
+<!--                      <div class="avatar-remove">-->
+<!--                        <label (click)="onRemoveConfirm(i)"-->
+<!--                               [ngClass]="['custom-label', 'remove-image']">-->
+<!--                          <i class="fa fa-times"></i>-->
+<!--                        </label>-->
+<!--                      </div>-->
+                    </div>
+                  </div>
+                </ng-container>
+                <div style="margin-bottom: 30px; position: relative"
+                     class="col-lg-4 d-flex justify-content-start align-items-center">
+                  <mat-card class="image-card">
+                    <input style="display: none" type='file' id="addPortFolio"
+                           accept=".png, .jpg, .jpeg" #portfolioImageUpload
+                           (change)="portfolioMultipleImagesAction($event)" multiple/>
+                    <label for="addPortFolio" style="width: 100%; height: 100%; cursor: pointer"
+                           class="d-flex justify-content-center align-items-center">
+                      <i style="font-size: 45px; color: #80808054;" class="fa fa-plus"></i>
+                    </label>
+                  </mat-card>
+                </div>
+              </div>
+
+            </div>
+            <div>
+
+            </div>
+            <!-- Add more form fields here -->
+          </form>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

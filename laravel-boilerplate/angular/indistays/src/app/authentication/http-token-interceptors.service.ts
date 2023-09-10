@@ -43,6 +43,8 @@ export class HttpTokenInterceptorsService {
             switch (err.status) {
               case 400:
                 return this.handle400Errors(err);
+              case 404:
+                return this.handle400Errors(err);
               case 401:
                 return this.handle401Error(request, next);
               default:

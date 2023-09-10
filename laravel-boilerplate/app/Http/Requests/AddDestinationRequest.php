@@ -24,6 +24,8 @@ class AddDestinationRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
+            'images' => 'array', // Make sure 'images' is set to an array
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|required', // Make sure 'images' is set to an array
         ];
     }
 }

@@ -11,6 +11,7 @@ class UserController extends Controller
     public function getUserRoles()
     {
         $userRoles = UserRole::all(); // Only use `all()` method
+        // same as DB::table('user_roles')->get()
         return response()->json($userRoles, 200);
     }
 
@@ -85,6 +86,8 @@ class UserController extends Controller
             $query->where('email', 'LIKE', "%{$emailFilter}%");
         }
 
+        // Eager load the 'userRole' relationship
+        $query->with('userRole');
         $users = $query->get();
         return response()->json(['data' => $users]);
     }

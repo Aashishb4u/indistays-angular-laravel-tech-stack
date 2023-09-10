@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
@@ -68,9 +69,15 @@ class AuthController extends Controller
        return response()->json(auth()->user());
    }
 
-   public function refresh() {
-       return $this->respondWithToken(auth()->refresh());
-   }
+    public function refresh() {
+        try {
+            $newToken = JWTAuth::refresh(JWTAuth::getToken());
+
+            return $this->respondWithToken($newToken);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Token Expired'], 404);
+        }
+    }
 
     public function logout(Request $request) {
         if(auth()->check()) { // Check if the user is authenticated

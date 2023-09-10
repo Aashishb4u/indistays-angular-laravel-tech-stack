@@ -41,6 +41,10 @@ import { AddEditUsersComponent } from './pages/dashboard/add-edit-users/add-edit
 import { ConfirmationPopupComponent } from './shared-components/confirmation-popup/confirmation-popup.component';
 import { DebounceKeyUpDirective } from './custom-directives/debounce-key-up.directive';
 import { AbstractDebounceDirective } from './custom-directives/abstract-debounce.directive';
+import { DestinationsComponent } from './pages/dashboard/destinations/destinations.component';
+import { AddEditDestinationComponent } from './pages/dashboard/add-edit-destination/add-edit-destination.component';
+import {NgxImageCompressService} from "ngx-image-compress";
+import {NgxEditorModule} from "ngx-editor";
 
 @NgModule({
   declarations: [
@@ -54,13 +58,16 @@ import { AbstractDebounceDirective } from './custom-directives/abstract-debounce
     UsersComponent,
     AddEditUsersComponent,
     ConfirmationPopupComponent,
-    DebounceKeyUpDirective
+    DebounceKeyUpDirective,
+    DestinationsComponent,
+    AddEditDestinationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxEditorModule,
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
@@ -88,6 +95,7 @@ import { AbstractDebounceDirective } from './custom-directives/abstract-debounce
     NgbModule,
   ],
   providers: [
+    NgxImageCompressService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     {provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptorsService, multi: true},
   ],

@@ -13,13 +13,9 @@ class Destination extends Model
         return $this->hasMany(Camping::class);
     }
 
-    public function profileImage()
-    {
-        return $this->images()->profileImage()->first();
-    }
-
     public function images()
     {
+        // Destination has many morph values in images table rows
         return $this->morphMany(Image::class, 'imageable');
     }
 }

@@ -55,7 +55,7 @@
 }
 
 .color-primary {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 
 .mr-1 {
@@ -68,4 +68,9 @@
 
 .width-300 {
   width: 300px;
+}
+
+.NgxEditor__MenuBar {
+  border: 1px solid lightgray;
+  border-bottom: none;
 }
