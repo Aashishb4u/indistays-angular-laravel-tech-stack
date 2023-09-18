@@ -1,0 +1,42 @@
+
+$text: ('name', 'description', 'gallery', 'action');
+
+@each $item in $text {
+  $index: index($text, $item);
+  $size: 100; // Define your desired size here
+
+  .mat-column-#{$item} {
+    // flex: 0 1 #{$size}px;
+    border-right: 1px solid lightgray;
+  }
+}
+
+
+.search-input-box {
+  padding: 0 20px;
+  input {
+    border: 1px solid var(--primary-color);
+    color: #666;
+    font-size: 14px;
+    &:focus {
+      //border: 2px solid var(--primary-color);
+      box-shadow: none !important;
+    }
+  }
+  button.btn {
+    background: var(--primary-color) !important;
+    color: var(--color-white) !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}
+
+.no-data {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+.table-column-200 {
+  width: 200px;
+}

@@ -146,12 +146,48 @@ export class ApiService {
     return this.http.post(`${this.baseURL}destinations/all`, data, {});
   }
 
-  getDestinations(params) {
+  getDestinations(params = {}) {
     return this.http.get(`${this.baseURL}destinations`, {params});
+  }
+
+  getAllDestinations(params = {}) {
+    return this.http.post(`${this.baseURL}destinations/all`, {params});
   }
 
   deleteDestination(id) {
     return this.http.delete(`${this.baseURL}destinations/${id}`, {});
+  }
+
+  addCamping(data) {
+    return this.http.post(`${this.baseURL}campings`, data, {});
+  }
+
+  updateCampingById(data, id) {
+    return this.http.post(`${this.baseURL}campings/edit/${id}`, data, {});
+  }
+
+  getCampingById(data) {
+    return this.http.post(`${this.baseURL}campings/all`, data, {});
+  }
+
+  getCampings(params) {
+    return this.http.get(`${this.baseURL}campings`, {params});
+  }
+
+  deleteCamping(id) {
+    return this.http.delete(`${this.baseURL}campings/${id}`, {});
+  }
+
+  addAccommodation(data) {
+    return this.http.post(`${this.baseURL}accommodations`, data, {});
+  }
+
+  getAccommodations(params) {
+    return this.http.get(`${this.baseURL}accommodations/all`, {params});
+  }
+
+  getAllAmenities(params = {}) {
+    return this.http.post(`${this.baseURL}amenities/all`, {params});
   }
 
   commonError(err: any) {

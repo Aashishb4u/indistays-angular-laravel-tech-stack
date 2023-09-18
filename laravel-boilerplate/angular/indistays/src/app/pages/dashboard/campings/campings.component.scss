@@ -1,5 +1,5 @@
 
-$text: ('name', 'description', 'gallery', 'action');
+$text: ('name', 'mapLink', 'destinationName', 'address', 'gallery', 'action');
 
 @each $item in $text {
   $index: index($text, $item);
@@ -39,21 +39,6 @@ $text: ('name', 'description', 'gallery', 'action');
 
 .table-column-200 {
   width: 200px;
-}
-
-.truncate-text {
-  max-height: 150px; /* Set a maximum height for the container */
-  overflow: hidden; /* Hide any overflowing content */
-  position: relative; /* Required for the pseudo-element */
-}
-
-.truncate-text::after {
-  content: '...'; /* Display an ellipsis */
-  position: absolute; /* Position it absolutely within the container */
-  bottom: 0; /* Position it at the bottom of the container */
-  right: 0; /* Position it at the right side of the container */
-  background-color: white; /* Match the background color of the container */
-  padding-left: 8px; /* Adjust as needed to create space between ellipsis and content */
 }
 
 .single-gallery-image {

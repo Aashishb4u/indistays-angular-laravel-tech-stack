@@ -8,8 +8,8 @@ class Amenity extends Model
 {
     protected $fillable = ['name'];
 
-    public function accommodation()
+    public function accommodations()
     {
-        return $this->belongsTo(Accommodation::class);
+        return $this->belongsToMany(Accommodation::class, 'accommodation_amenity', 'amenity_id', 'accommodation_id');
     }
 }

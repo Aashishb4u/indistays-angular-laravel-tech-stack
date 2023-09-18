@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Camping extends Model
 {
-    protected $fillable = ['name', 'description', 'address', 'location_map_link'];
+    protected $fillable = ['name', 'description', 'address', 'location_map_link', 'destination_id'];
 
     public function destination()
     {

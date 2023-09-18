@@ -15,12 +15,7 @@ class Accommodation extends Model
 
     public function amenities()
     {
-        return $this->hasMany(Amenity::class);
-    }
-
-    public function profileImage()
-    {
-        return $this->images()->profileImage()->first();
+        return $this->belongsToMany(Amenity::class, 'accommodation_amenity', 'accommodation_id', 'amenity_id');
     }
 
     public function images()

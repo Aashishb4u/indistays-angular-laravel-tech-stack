@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CampingController;
+use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\CustomPricingController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
@@ -62,12 +63,12 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::post('destinations/all', [DestinationController::class, 'index']);
 
     // Campings API
-    Route::get('campings', [CampingController::class, 'getCampingsData']);
+    Route::get('campings', [CampingController::class, 'paginate']);
     Route::post('campings', [CampingController::class, 'addCamping']);
-    Route::put('campings/{id}', [CampingController::class, 'editCamping'])
+    Route::post('campings/edit/{id}', [CampingController::class, 'editCamping'])
         ->where('id', '[0-9]+');
     Route::delete('campings/{id}', [CampingController::class, 'deleteCamping']);
-    Route::get('campings/all', [CampingController::class, 'getAllCampingsData']);
+    Route::post('campings/all', [CampingController::class, 'index']);
 
     // Accommodations API
     Route::get('accommodations', [AccommodationController::class, 'getAccommodationsData']);
@@ -91,6 +92,10 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::post('bookings', [BookingController::class, 'addBooking']);
     Route::put('bookings/{id}', [BookingController::class, 'editBooking']);
     Route::delete('bookings/{id}', [BookingController::class, 'deleteBooking']);
+
+
+    // Amenities APIs
+    Route::post('amenities/all', [AmenityController::class, 'index']);
 
     // upload Images
     Route::post('upload-images/{entity}', [ImageController::class, 'uploadImages']);

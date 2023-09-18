@@ -3,12 +3,12 @@
     <mat-card>
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-center" style="padding: 1rem">
-          <div style="font-size: 16px; font-weight: bold">Destinations</div>
+          <div style="font-size: 16px; font-weight: bold">Camping</div>
         </div>
         <div class="d-flex align-items-center">
           <div class="search-input-box width-300 input-group">
             <input appDebounceKeyUp [debounceTime]="1000"
-                   (onEvent)="handleDebouncedKeyUp($event)" type="text" class="form-control" placeholder="Search Destination">
+                   (onEvent)="handleDebouncedKeyUp($event)" type="text" class="form-control" placeholder="Search Camping">
             <div class="input-group-append">
               <button class="btn" type="button">
                 <i class="fa fa-search"></i>
@@ -23,7 +23,7 @@
             [length]="totalLength">
           </mat-paginator>
           <div style="padding: 0 20px">
-            <button (click)="onAddDestination()" class="color-white" mat-raised-button color="accent"> Add Destination &nbsp; <mat-icon>add</mat-icon></button>
+            <button (click)="onAddCamping()" class="color-white" mat-raised-button color="accent"> Add Camping &nbsp; <mat-icon>add</mat-icon></button>
           </div>
         </div>
       </div>
@@ -39,27 +39,46 @@
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Destination </th>
+            <th mat-header-cell *matHeaderCellDef> Camping </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 350px" class="d-flex flex-column p-3 justify-content-center align-items-center">
+              <div style="min-width: 300px" class="d-flex flex-column p-3 justify-content-center align-items-center">
                 <div style="margin-left: 1rem; margin-bottom: 5px">
-                 <div style="font-size: 18px"> {{element.name}} </div>
+                  <div style="font-size: 18px"> {{element.name}} </div>
                 </div>
                 <div class="d-flex p-1 justify-content-center">
-                  <img style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); max-width: 250px; height: 170px; border-radius: 5px;"
+                  <img style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); max-width: 95%; height: auto; border-radius: 5px;"
                        src="{{element.profile_image_url}}" alt="">
                 </div>
               </div>
             </td>
           </ng-container>
 
+          <!-- Weight Column -->
+          <ng-container matColumnDef="mapLink">
+            <th mat-header-cell *matHeaderCellDef> Google Map </th>
+            <td mat-cell *matCellDef="let element">
+              <div [innerHTML]="element?.mapLink" class="truncate-text camping-map">
+              </div>
+            </td>
+          </ng-container>
 
           <!-- Weight Column -->
-          <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
+          <ng-container matColumnDef="destinationName">
+            <th mat-header-cell *matHeaderCellDef> Destination </th>
             <td mat-cell *matCellDef="let element">
-             <div style="min-width: 400px; padding: 15px" class="truncate-text" [innerHTML]="element.description">
-             </div>
+              <div class="d-flex justify-content-center truncate-text" style="min-width: 170px; padding: 15px">
+                {{element?.destinationName}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> Address </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 350px; padding: 15px" class="truncate-text">
+                {{element?.address}}
+              </div>
             </td>
           </ng-container>
 

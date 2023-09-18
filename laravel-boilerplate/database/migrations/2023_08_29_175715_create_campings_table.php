@@ -17,7 +17,8 @@ class CreateCampingsTable extends Migration
             $table->text('description');
             $table->text('address');
             $table->text('location_map_link');
-            $table->unsignedBigInteger('destination_id'); // Foreign key
+            $table->string('profile_image_url')->nullable();
+            $table->unsignedBigInteger('destination_id')->nullable(); // Foreign key
             $table->foreign('destination_id')->references('id')->on('destinations');
             $table->timestamps();
         });

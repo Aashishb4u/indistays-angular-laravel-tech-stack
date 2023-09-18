@@ -45,6 +45,11 @@ import { DestinationsComponent } from './pages/dashboard/destinations/destinatio
 import { AddEditDestinationComponent } from './pages/dashboard/destinations/add-edit-destination/add-edit-destination.component';
 import {NgxImageCompressService} from "ngx-image-compress";
 import {NgxEditorModule} from "ngx-editor";
+import {CampingsComponent} from "./pages/dashboard/campings/campings.component";
+import {AddEditCampingComponent} from "./pages/dashboard/campings/add-edit-camping/add-edit-camping.component";
+import { AccommodationComponent } from './pages/dashboard/accommodation/accommodation.component';
+import {AddEditAccommodationComponent} from "./pages/dashboard/accommodation/add-edit-accommodation/add-edit-accommodation.component";
+import {GoogleMapsModule} from "@angular/google-maps";
 
 @NgModule({
   declarations: [
@@ -60,7 +65,11 @@ import {NgxEditorModule} from "ngx-editor";
     ConfirmationPopupComponent,
     DebounceKeyUpDirective,
     DestinationsComponent,
-    AddEditDestinationComponent
+    AddEditDestinationComponent,
+    CampingsComponent,
+    AddEditCampingComponent,
+    AccommodationComponent,
+    AddEditAccommodationComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +102,7 @@ import {NgxEditorModule} from "ngx-editor";
     MatTabsModule, // SwiperModule
     ReactiveFormsModule,
     NgbModule,
+    GoogleMapsModule
   ],
   providers: [
     NgxImageCompressService,

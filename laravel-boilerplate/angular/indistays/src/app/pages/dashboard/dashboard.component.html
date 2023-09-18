@@ -17,10 +17,12 @@
           </button>
         </div>
         <div class="pb-3 d-flex pl-1 cursor-pointer">
-          <button mat-button class="nav-list"><mat-icon>nature_people</mat-icon> &nbsp; Camping</button>
+          <button mat-button class="nav-list" routerLinkActive="active-link" [routerLink]="['/dashboard/camping']">
+            <mat-icon>nature_people</mat-icon> &nbsp; Camping</button>
         </div>
         <div class="pb-3 d-flex pl-1 cursor-pointer">
-          <button mat-button class="nav-list"><mat-icon>hotel</mat-icon> &nbsp; Accommodation</button>
+          <button mat-button class="nav-list" routerLinkActive="active-link" [routerLink]="['/dashboard/accommodation']">
+            <mat-icon>hotel</mat-icon> &nbsp; Accommodation</button>
         </div>
         <div class="pb-3 d-flex pl-1 cursor-pointer">
           <button mat-button class="nav-list"><mat-icon>attach_money</mat-icon> &nbsp; Custom Pricing</button>

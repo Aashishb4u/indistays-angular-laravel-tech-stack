@@ -10,6 +10,10 @@ import {UsersComponent} from "./pages/dashboard/users/users.component";
 import {AddEditUsersComponent} from "./pages/dashboard/users/add-edit-users/add-edit-users.component";
 import {DestinationsComponent} from "./pages/dashboard/destinations/destinations.component";
 import {AddEditDestinationComponent} from "./pages/dashboard/destinations/add-edit-destination/add-edit-destination.component";
+import {CampingsComponent} from "./pages/dashboard/campings/campings.component";
+import {AddEditCampingComponent} from "./pages/dashboard/campings/add-edit-camping/add-edit-camping.component";
+import {AccommodationComponent} from "./pages/dashboard/accommodation/accommodation.component";
+import {AddEditAccommodationComponent} from "./pages/dashboard/accommodation/add-edit-accommodation/add-edit-accommodation.component";
 
 const routes: Routes = [
   { path:  '', component:  LandingComponent, data: { title: 'Home | Indistays' }},
@@ -26,6 +30,13 @@ const routes: Routes = [
       { path: 'edit-user/:id', component: AddEditUsersComponent }, // Define a route with an 'id' parameter
       { path: 'destinations', component: DestinationsComponent }, // Users component under dashboard
       { path: 'add-destination', component: AddEditDestinationComponent },
+      { path: 'edit-destination/:id', component: AddEditDestinationComponent }, // Define a route with an 'id' parameter
+      { path: 'camping', component: CampingsComponent }, // Users component under dashboard
+      { path: 'add-camping', component: AddEditCampingComponent },
+      { path: 'edit-camping/:id', component: AddEditCampingComponent }, // Define a route with an 'id' parameter
+      { path: 'add-camping', component: AddEditCampingComponent },
+      { path: 'accommodation', component: AccommodationComponent }, // Users component under dashboard
+      { path: 'add-accommodation', component: AddEditAccommodationComponent },
       { path: 'edit-destination/:id', component: AddEditDestinationComponent }, // Define a route with an 'id' parameter
     ],
   },

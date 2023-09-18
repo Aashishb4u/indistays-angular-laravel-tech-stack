@@ -70,7 +70,19 @@
   width: 300px;
 }
 
+.width-250 {
+  width: 250px;
+}
+
 .NgxEditor__MenuBar {
   border: 1px solid lightgray;
   border-bottom: none;
+}
+
+.NgxEditor__Content {
+  min-height: 200px;
+}
+
+.max-230 {
+  max-width: 230px;
 }
