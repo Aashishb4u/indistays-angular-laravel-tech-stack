@@ -79,8 +79,67 @@ laravel-boilerplate/
 </pre>
 
 
+## Installation of Pre-requisites: 
+
+- Install PHP 
+`sudo apt install php8.1-cli`
+
+- Install PHP XML
+`sudo apt-get install php-xml`
+
+- Install PHP Curl
+`sudo apt-get install php-curl`
+
+- Install Composer to run Php Laravel
+`sudo apt install composer`
+
+## Install Database (MySql)
+
+- Install mysql (Ubuntu)
+`sudo apt update && sudo apt install mysql-server`
+
+- Start the Server
+`sudo systemctl start mysql`
+
+- Enable My Sql 
+`sudo systemctl enable mysql`
+
+- Verify Mysql is installed and running
+`sudo systemctl status mysql`
+
+##### After Installation of My Sql, We need to create a database for our application
+
+- Enter in MySQL Command
+`sudo mysql`
+
+- Setup My Sql Password 
+`mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'new_password'`
+[Remember to add your own password]
+
+- Always login with password
+`mysql -u root -p`
+
+- Create Your Database 
+`create database indistays;`
+
+- then hit `exit` to come of out mysql & install mysql drivers
+`sudo apt-get install php-mysql`
+
+- Copy .env.exaple -> .env file, Add password of your data base.
+
+
 - Install packages using following command
   `composer install`
+  
+### Generate Laravel Secret Keys & JWT Secrets 
+
+- Generate PHP Laravel Secrets
+    `php artisan key:generate`
+    
+- Generate JWT Secrets
+    `php artisan jwt:secret`
+    
+### Run PHP Laravel Application (Serve)
 
 - Run Application
   `php artisan serve`
@@ -90,8 +149,7 @@ laravel-boilerplate/
     `php artisan migrate --path=database/migrations/<migration_file>.php`
   
 - Run Seeders
-    `php artisan db:seed`
-    `php artisan db:seed --class=UserRolesSeeder`
+    `php artisan db:seed --class=UserRolesSeeder && php artisan db:seed --class=UserSeeder && php artisan db:seed --class=AmenitiesSeeder`
   
 - Create storage link, so that we can access stored images
 `php artisan storage:link`

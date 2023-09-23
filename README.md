@@ -1,1 +1,0 @@
-# laravel-10-boilerplate

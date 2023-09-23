@@ -14,6 +14,8 @@ class CreateAccommodationsTable extends Migration
             $table->text('description');
             $table->unsignedBigInteger('camping_id')->nullable();
             $table->json('amenity_ids'); // Storing array of amenity IDs
+            $table->decimal('beds_available', 10, 2); // Adjust precision and scale as needed
+            $table->decimal('discount_price', 10, 2); // Adjust precision and scale as needed
             $table->timestamps();
             $table->foreign('camping_id')->references('id')->on('campings');
         });
