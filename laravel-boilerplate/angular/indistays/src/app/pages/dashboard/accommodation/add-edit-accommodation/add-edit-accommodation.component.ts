@@ -17,7 +17,7 @@ export class AddEditAccommodationComponent {
   roles: any = [];
   camping: any = [];
   amenities: any = [];
-  campingId: any = null;
+  accommodationId: any = null;
   noImageIcon: any = 'assets/images/no-image.jpeg';
   campingFormData: any;
   mapSrc: SafeHtml;
@@ -52,20 +52,21 @@ export class AddEditAccommodationComponent {
     this.componentForm = this.fb.group({
       name: ['', Validators.required],
       camping: ['', Validators.required],
-      amenities: [''],
+      beds: [0, Validators.required],
+      amenities: [[], Validators.required],
       galleryImages:  this.fb.array([]),
       profileImage: [null],
       accommodation: [null],
       profileImageUrl: [''],
       profileImageBase64: [null],
-      price: [null],
-      discount_price: [null]
+      price: [0],
+      discount_price: [0]
       // Add more form controls as needed
     });
-    this.campingId = this.route.snapshot.paramMap.get('id');
+    this.accommodationId = this.route.snapshot.paramMap.get('id');
     this.profileImageUrlControl.setValue(this.defaultBusinessImage);
-    if (this.campingId) {
-      this.getCampingById();
+    if (this.accommodationId) {
+      this.getAccommodationById();
     }
   }
 
@@ -146,19 +147,19 @@ export class AddEditAccommodationComponent {
     this.amenities = res.data;
   }
 
-  getCampingById() {
+  getAccommodationById() {
     const data = {
-      campingId: this.campingId
+      accommodationId: this.accommodationId
     }
-    this.apiService.getCampingById(data).subscribe(
-      res => this.getCampingByIdSuccess(res),
+    this.apiService.getAccommodationById(data).subscribe(
+      res => this.getAccommodationByIdSuccess(res),
       error => {
         this.apiService.commonError(error);
       }
     );
   }
 
-  getCampingByIdSuccess(res) {
+  getAccommodationByIdSuccess(res) {
     const responseData: any = res.data && res.data[0] ? res.data[0] : null;
     const profileImage: any = responseData.profile_image_url ?
       this.sharedService.generateImageUrl(responseData.profile_image_url) : null;
@@ -167,8 +168,14 @@ export class AddEditAccommodationComponent {
       responseData.images : [];
     if (profileImage) { this.componentForm.get('profileImageUrl').setValue(profileImage)}
     this.componentForm.get('name').setValue(responseData.name);
-    this.componentForm.get('accommodation').setValue(responseData.accommodation_id);
-    this.mapSrc = this.sanitizer.bypassSecurityTrustHtml(responseData.location_map_link);
+    const amenitiesArray = responseData.amenities.map(v => v.id);
+    if(amenitiesArray && amenitiesArray.length) {
+      this.componentForm.get('amenities').setValue(amenitiesArray);
+    }
+    this.componentForm.get('camping').setValue(responseData.camping.id);
+    this.componentForm.get('price').setValue(responseData.price);
+    this.componentForm.get('beds').setValue(responseData.beds_available);
+    this.componentForm.get('discount_price').setValue(responseData.discount_price);
 
     this.clearGalleryImages();
     if (galleryImages) {
@@ -192,15 +199,17 @@ export class AddEditAccommodationComponent {
 
   userAction() {
     if (this.componentForm.valid) {
-      console.log(this.componentForm.value);
       const galleryImagesArray: any = this.galleryImages.value;
       let galleryImagesStatus: any = [];
       this.campingFormData = new FormData();
       this.campingFormData.append('name', this.componentForm.get('name').value)
-      this.campingFormData.append('accommodation_id', this.componentForm.get('accommodation').value)
+      this.campingFormData.append('camping_id', this.componentForm.get('camping').value)
+      this.campingFormData.append('amenity_ids', this.componentForm.get('amenities').value)
+      this.campingFormData.append('beds_available', this.componentForm.get('beds').value);
+      this.campingFormData.append('price', this.componentForm.get('price').value);
+      this.campingFormData.append('discount_price', this.componentForm.get('discount_price').value)
       this.campingFormData.delete("images[]");
-
-      if(this.campingId) {
+      if(this.accommodationId) {
 
         if(!this.componentForm.get('profileImage').value) {
           this.campingFormData.delete("profile_image");
@@ -217,8 +226,8 @@ export class AddEditAccommodationComponent {
           galleryImagesStatus.push(val.imageUrl ? 'pristine' : 'dirty');
         });
         this.campingFormData.append('image_ids_to_update', JSON.stringify(galleryImagesStatus));
-
-        this.apiService.updateCampingById(this.campingFormData, this.campingId).subscribe(
+        console.log(this.campingFormData);
+        this.apiService.updateAccommodationById(this.campingFormData, this.accommodationId).subscribe(
           res => this.userActionSuccess(res),
           error => {
             this.apiService.commonError(error);

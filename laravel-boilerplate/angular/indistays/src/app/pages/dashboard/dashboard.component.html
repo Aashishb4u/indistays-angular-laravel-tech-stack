@@ -1,6 +1,6 @@
 <mat-drawer-container class="dashboard-sidenav-container" autosize>
   <mat-drawer #drawer class="dashboard-sidenav" mode="side">
-    <div>
+    <div (mouseleave)="drawer.toggle()">
       <div class="logo-container p-3">
         <img [src]="sharedService.companyLogo" alt="Company Logo" class="logo-image">
         <mat-divider class="mat-divider-white"></mat-divider>
@@ -25,10 +25,13 @@
             <mat-icon>hotel</mat-icon> &nbsp; Accommodation</button>
         </div>
         <div class="pb-3 d-flex pl-1 cursor-pointer">
-          <button mat-button class="nav-list"><mat-icon>attach_money</mat-icon> &nbsp; Custom Pricing</button>
+          <button mat-button class="nav-list" routerLinkActive="active-link" [routerLink]="['/dashboard/custom-pricing']">
+            <mat-icon>attach_money</mat-icon> &nbsp; Custom Pricing</button>
         </div>
         <div class="pb-3 d-flex pl-1 cursor-pointer">
-          <button mat-button class="nav-list"><mat-icon>book</mat-icon> &nbsp; Manual Booking</button>
+          <button mat-button class="nav-list" routerLinkActive="active-link" [routerLink]="['/dashboard/custom-booking']">
+            <mat-icon>book</mat-icon> &nbsp; Manual Booking
+          </button>
         </div>
       </div>
     </div>
@@ -36,7 +39,7 @@
 
   <div class="main-page-container">
     <mat-toolbar class="dashboard-toolbar">
-      <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <button (mouseenter)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
       &nbsp;

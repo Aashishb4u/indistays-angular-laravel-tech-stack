@@ -3,51 +3,76 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddAccommodationRequest;
-use App\Models\Camping;
-use Illuminate\Http\Request;
 use App\Models\Accommodation;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AccommodationController extends Controller
 {
-    public function getAccommodationsData(Request $request)
+    public function paginate(Request $request)
     {
-        $query = Accommodation::with('camping.destination', 'amenities');
 
-        if ($request->has('name')) {
-            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        $pageSize = $request->input('pageSize', 10);
+        $page = $request->input('currentPage', 1); // Get the 'page' query parameter
+        $query = Accommodation::query();
+
+        // Add a filter by 'id' if 'user_id' is provided in the request
+        if ($request->has('accommodationId')) {
+            $idFilter = $request->input('accommodationId');
+            $query->where('id', $idFilter);
         }
 
-        $accommodations = $query->paginate(10);
-
-        return response()->json($accommodations);
-    }
-
-    public function getAllAccommodationsData(Request $request)
-    {
-        $query = Accommodation::with('camping.destination', 'amenities');
-
+        // Add a filter by 'name' if 'name' is provided in the request
         if ($request->has('name')) {
-            $query->where('name', 'like', '%' . $request->input('name') . '%');
+            $nameFilter = $request->input('name');
+            $query->where('name', 'LIKE', "%{$nameFilter}%");
         }
 
-        $accommodations = $query->get();
+        // Eager load the 'userRole' relationship
+        //   $query->with('images');
 
-        return response()->json($accommodations);
+        // Eager load the required relationships
+        $query->with([
+            'images' => function ($que) {
+                $que->where('is_profile_image', false);
+            },
+            'camping' => function ($que) {
+                $que->with('destination'); // Eager load the 'destination' relationship of 'camping'
+            },
+            'amenities' // Eager load the amenities relationship
+        ]);
+
+        $destinations = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
+
+        return response()->json(['data' => $destinations]);
     }
 
-    public function addAccommodation(AddAccommodationRequest $request) {
+    public function addAccommodation(AddAccommodationRequest $request)
+    {
 
-        $queryData = $request->except(['images', 'profile_image']); // Exclude images from destination data
+        $queryData = $request->except(['images', 'profile_image', 'amenity_ids', 'profile_image_url']); // Exclude images from destination data
 
         // Start a database transaction
         DB::beginTransaction();
 
         try {
+
             $accommodation = Accommodation::create($queryData);
             $id = $accommodation->id;
             $profileImageUrl = null;
+
+            $amenityIds = $request->input('amenity_ids', []);
+
+            // Check if amenityIds is a string and convert it to an array
+            if (is_string($amenityIds)) {
+                $amenityIds = explode(',', $amenityIds);
+            }
+
+            // Attach amenities to the accommodation one by one
+            foreach ($amenityIds as $amenityId) {
+                $accommodation->amenities()->attach((int)$amenityId);
+            }
 
             // Handle and store profile image in the public/profile-images directory
             if ($request->hasFile('profile_image')) {
@@ -64,47 +89,114 @@ class AccommodationController extends Controller
                     $customName = 'accommodation-' . $id . '-' . $index . '.' . $image->getClientOriginalExtension();
                     $path = $image->storeAs('public/images', $customName);
                     $url = Storage::url($path);
-
-                    // Create image records for accommodation
-                    $accommodation->images()->create([
+                    $accommodation->images()->create  ([
                         'url' => $url,
                     ]);
                 }
             }
 
-            // Attach amenities (if provided)
-            if ($request->has('amenity_ids')) {
-                $amenities = $request->input('amenity_ids');
-                $accommodation->amenities()->attach($amenities);
-            }
-
             // Commit the transaction
             DB::commit();
 
-            return response()->json(['message' => 'Camping created successfully', 'data' => $accommodation], 201);
+            return response()->json(['message' => 'Accommodation created successfully', 'data' => $accommodation], 201);
         } catch (\Exception $e) {
             // Handle any exceptions and rollback the transaction
             DB::rollBack();
-            return response()->json(['message' => 'An error occurred while updating camping images.', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'An error occurred while updating accommodation images.', 'error' => $e->getMessage()], 500);
         }
     }
 
     public function editAccommodation(Request $request, $id)
     {
         $accommodation = Accommodation::findOrFail($id);
+        $name = $request->input('name');
+        $discountPrice = $request->input('discount_price');
+        $price = $request->input('price');
+        $beds_available = $request->input('beds_available');
+        $imageArray = $request->file('images');
+        $campingId = $request->input('camping_id');
+        $imageIdsToUpdate = $request->input('image_ids_to_update');
+        $profileImage = $request->file('profile_image');
+        $imageIdsToUpdateArray = json_decode($imageIdsToUpdate, true);
+        $dirtyArray = array_filter($imageIdsToUpdateArray, function ($val) {
+            return trim($val) === 'dirty';
+        });
 
-        $accommodationData = $request->validate([
-            'name' => 'required|string',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'camping_id' => 'required|exists:campings,id',
-            'amenity_ids' => 'nullable|array',
-            'amenity_ids.*' => 'exists:amenities,id',
-        ]);
+        $amenityIds = $request->input('amenity_ids', []);
 
-        $accommodation->update($accommodationData);
+        // Check if amenityIds is a string and convert it to an array
+        if (is_string($amenityIds)) {
+            $amenityIds = explode(',', $amenityIds);
+        }
 
-        return response()->json(['message' => 'Accommodation updated successfully', 'data' => $accommodation]);
+        // Start a database transaction
+        DB::beginTransaction();
+
+        try {
+            if ($profileImage) {
+                $customName = 'accommodation-profile-' . $id . '.' . $profileImage->getClientOriginalExtension();
+                $path = $profileImage->storeAs('public/profile-images', $customName);
+                $profileImageUrl = Storage::url($path);
+                $accommodation->profile_image_url = $profileImageUrl;
+            }
+
+            if (in_array('dirty', $imageIdsToUpdateArray)
+                && count($imageArray) !== count($dirtyArray)) {
+                DB::rollBack();
+                return response()->json(['message' => 'Invalid input. The number of edited images and identifiers must match.'], 500);
+            }
+
+            // Update destination information including the 'camping_id'
+            $accommodation->update([
+                'name' => $name,
+                'price' => $price,
+                'discount_price' => $discountPrice,
+                'beds_available' => $beds_available,
+                'camping_id' => (int)$campingId,
+            ]);
+
+            $imageIndex = 0;
+
+            if (in_array('dirty', $imageIdsToUpdateArray) && $imageArray) {
+                foreach ($imageIdsToUpdateArray as $index => $updateLocation) {
+                    if (trim($updateLocation) == 'dirty') {
+                        $image = $imageArray[$imageIndex];
+                        $customName = 'accommodation-' . $id . '-' . $index . '.' . $image->getClientOriginalExtension();
+                        $path = $image->storeAs('public/images', $customName);
+                        $url = Storage::url($path);
+                        // Check if an image with the same URL already exists
+                        $existingImage = $accommodation->images()->where('url', $url)->first();
+                        $imageIndex++;
+
+                        if ($existingImage) {
+                            // If the image with the same URL exists, update its properties
+                            $existingImage->update([
+                                'url' => $url,
+                                // Add other fields that you want to update
+                            ]);
+                        } else {
+                            // If the image doesn't exist, create a new record
+                            $accommodation->images()->create([
+                                'url' => $url,
+                                // Add other fields that you want to create
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Synchronize the amenities associated with the accommodation
+            $accommodation->amenities()->sync($amenityIds);
+
+            // Commit the transaction
+            DB::commit();
+
+            return response()->json(['message' => 'Accommodation information updated successfully', 'data' => $accommodation]);
+        } catch (\Exception $e) {
+            // Handle any exceptions and rollback the transaction
+            DB::rollBack();
+            return response()->json(['message' => 'An error occurred while updating Accommodation information.', 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function deleteAccommodation($id)
@@ -113,5 +205,33 @@ class AccommodationController extends Controller
         $accommodation->delete();
 
         return response()->json(['message' => 'Accommodation deleted successfully']);
+    }
+
+    public function index(Request $request)
+    {
+        $query = Accommodation::query();
+
+        // Add a filter by 'id' if 'user_id' is provided in the request
+        if ($request->has('accommodationId')) {
+            $idFilter = $request->input('accommodationId');
+            $query->where('id', $idFilter);
+        }
+
+        // Add a filter by 'name' if 'name' is provided in the request
+        if ($request->has('name')) {
+            $nameFilter = $request->input('name');
+            $query->where('name', 'LIKE', "%{$nameFilter}%");
+        }
+
+        // Eager load the 'userRole' relationship
+        $query->with([
+            'images',
+            'camping' => function ($que) {
+                $que->with('destination'); // Eager load the 'destination' relationship of 'camping'
+            },
+            'amenities' // Eager load the amenities relationship
+        ]);
+        $destinations = $query->get();
+        return response()->json(['data' => $destinations]);
     }
 }

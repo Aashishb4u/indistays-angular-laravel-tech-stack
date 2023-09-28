@@ -1,0 +1,157 @@
+<div class="dashboard-container p-3">
+  <div class="pb-3">
+    <mat-card>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center" style="padding: 1rem">
+          <div style="font-size: 16px; font-weight: bold">Custom Pricings</div>
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="search-input-box width-250 input-group">
+            <input appDebounceKeyUp [debounceTime]="1000"
+                   (onEvent)="handleDebouncedKeyUp($event)" type="text" class="form-control" placeholder="Search Accommodation">
+            <div class="input-group-append">
+              <button class="btn" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+
+          <mat-paginator
+            [pageSize]="pageSize"
+            #paginator
+            (page)="onPageChange($event)"
+            [length]="totalLength">
+          </mat-paginator>
+          <div style="padding: 0 20px">
+            <button (click)="onAddCustomPricing()" class="color-white" mat-raised-button color="accent"> Add Pricing &nbsp; <mat-icon>add</mat-icon></button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="pb-3">
+    <mat-card>
+      <div class="overflow-x-auto" *ngIf="dataSource && dataSource.length > 0">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="accommodation_name">
+            <th mat-header-cell *matHeaderCellDef> Accommodation Name</th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 200px" class="p-3">
+                <div style="min-width: 250px;" class="p-3 d-flex align-items-center flex-column">
+                  <div>
+                    <img style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); width: 100%" [src]="element.accommodation_img" alt="">
+                  </div>
+                  <div class="full-width"
+                       style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); background: var(--primary-color);padding: 10px;color: white;text-align: center;border-bottom-left-radius: 15px;">
+                    {{element.accommodation_name}}
+                  </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="camping_name">
+            <th mat-header-cell *matHeaderCellDef> Camping & Destination </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 200px"  class="p-3">
+                <div> {{element.camping_name}} </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="start_date">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 150px" class="p-3">
+                <div> {{element.start_date | date:'d MMM yyyy'}} </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="end_date">
+            <th mat-header-cell *matHeaderCellDef> End Date </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 150px" class="p-3">
+                <div> {{element.end_date | date:'d MMM yyyy'}} </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> New Price </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 150px" class="p-3">
+                <div style="display: inline;background: #df691e; padding: 5px 10px;border-radius: 5px;color: white;font-size: 14px;">
+                  {{element.price}}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="actual_price">
+            <th mat-header-cell *matHeaderCellDef> Actual Price </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 150px" class="p-3">
+                {{element.actual_price}}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="discount_price">
+            <th mat-header-cell *matHeaderCellDef>New Discount Price </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 150px" class="p-3">
+                <div style="display: inline;background: green;padding: 5px 10px;border-radius: 5px;color: white;font-size: 14px;">
+                  {{element.discount_price}}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="actual_discount_price">
+            <th mat-header-cell *matHeaderCellDef> Actual Discount Price </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="min-width: 150px" class="p-3">
+                  {{element.actual_discount_price}}
+              </div>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="action" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td style="width: 60px" [matMenuTriggerData]="element" [matMenuTriggerFor]="userFeedbackMenu" #menuTrigger mat-cell *matCellDef="let element">
+              <div style="cursor: pointer; text-align: center"><mat-icon>more_vert</mat-icon></div>
+            </td>
+          </ng-container>
+
+          <mat-menu #userFeedbackMenu="matMenu">
+            <ng-template matMenuContent let-status="status" let-id="id">
+              <button (click)="onEditUser(id)" mat-menu-item>Edit
+                <mat-icon color="primary">edit</mat-icon>
+              </button>
+              <button (click)="onDeleteUser(id)" mat-menu-item>Delete
+                <mat-icon color="primary">delete</mat-icon>
+              </button>
+            </ng-template>
+          </mat-menu>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <div class="no-data" *ngIf="dataSource.length === 0">
+        No Data Available
+      </div>
+    </mat-card>
+  </div>
+</div>

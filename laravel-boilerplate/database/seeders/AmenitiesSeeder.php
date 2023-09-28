@@ -18,18 +18,18 @@ class AmenitiesSeeder extends Seeder
     {
         $now = Carbon::now();
         $amenities = [
-            ['id' => 1, 'name' => 'Wi-Fi', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 2, 'name' => 'Air conditioner', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 3, 'name' => 'TV', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 4, 'name' => 'Fan', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 5, 'name' => 'Daily housekeeping', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 6, 'name' => 'Pillow', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 7, 'name' => 'Single bed', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 8, 'name' => 'Double bed', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 9, 'name' => 'Blanket', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 10, 'name' => 'Coffee maker', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 11, 'name' => 'Linen', 'created_at' => $now, 'updated_at' => $now],
-            ['id' => 12, 'name' => 'Electric kettle', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 1, 'name' => 'Wi-Fi', 'icon' => 'fa-wifi', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 2, 'name' => 'Air conditioner', 'icon' => 'fa-snowflake', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 3, 'name' => 'TV', 'icon' => 'fa-tv', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 4, 'name' => 'Fan', 'icon' => 'fa-fan', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 5, 'name' => 'Daily housekeeping', 'icon' => 'fa-broom', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 6, 'name' => 'Pillow', 'icon' => 'fa-bed', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 7, 'name' => 'Single bed', 'icon' => 'fa-bed', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 8, 'name' => 'Double bed', 'icon' => 'fa-bed', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 9, 'name' => 'Blanket', 'icon' => 'fa-bed', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 10, 'name' => 'Coffee maker', 'icon' => 'fa-coffee', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 11, 'name' => 'Linen', 'icon' => 'fa-bed', 'created_at' => $now, 'updated_at' => $now],
+            ['id' => 12, 'name' => 'Electric kettle', 'icon' => 'fa-bolt', 'created_at' => $now, 'updated_at' => $now],
         ];
 
         DB::table('amenities')->insert($amenities);

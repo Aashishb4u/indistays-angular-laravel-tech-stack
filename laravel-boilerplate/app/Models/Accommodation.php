@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accommodation extends Model
 {
-    protected $fillable = ['name', 'price', 'description', 'camping_id', 'amenity_ids'];
+    protected $fillable = ['name', 'price', 'description', 'discount_price', 'beds_available', 'profile_image_url', 'camping_id', 'amenity_ids'];
 
     public function camping()
     {
@@ -22,4 +22,15 @@ class Accommodation extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function customPricing()
+    {
+        return $this->hasMany(CustomPricing::class);
+    }
+
+    public function customBooking()
+    {
+        return $this->hasMany(CustomBooking::class);
+    }
+
 }

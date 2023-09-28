@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomBooking extends Model
 {
-    protected $fillable = ['camping_id', 'start_date', 'end_date'];
+    protected $fillable = ['accommodation_id', 'booking_price', 'beds', 'start_date', 'end_date'];
 
-    // Relationship with Camping
-    public function camping()
+    // You can add additional methods or relationships here as needed44
+    public function accommodation()
     {
-        return $this->belongsTo(Camping::class);
+        return $this->belongsTo(Accommodation::class);
     }
 }

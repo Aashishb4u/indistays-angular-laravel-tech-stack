@@ -153,7 +153,18 @@ laravel-boilerplate/
   
 - Create storage link, so that we can access stored images
 `php artisan storage:link`
-  
 
+## Image Storing Pre-Requisites
+
+In laravel, images will be stored in public folder. As per our logic written inj the source code, we have added 2 folders for images.
+<pre>
+public/
+  ├── images/            // All images 
+  ├── profile-images/   //  All Profile Images
+</pre> 
+  
+- We need to create image folders under public
+- After that run `php artisan optimize`
+- Then, serve application again - `php artisan serve`
 
 

@@ -19,7 +19,7 @@ export class AccommodationComponent {
   currentPage = 1;
   users: [];
   dataSource: any = [];
-  displayedColumns: string[] = ['name', 'description', 'gallery', 'action'];
+  displayedColumns: string[] = ['name', 'camping', 'price', 'discount_price', 'amenities', 'gallery', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public fb: FormBuilder, public sharedService: SharedService, public router: Router, public apiService: ApiService, public storageService: StorageService) {
@@ -82,17 +82,17 @@ export class AccommodationComponent {
 
   onDeleteUser(id) {
     const data = {
-      title: 'Delete Destination',
+      title: 'Delete Accommodation',
       confirmLabel: 'Ok',
-      message: 'Are you sure you want to delete Destination',
-
+      message: 'Are you sure you want to delete Accommodation',
     }
+
     this.sharedService.openDialogPrompt(
       data.title,
       data.confirmLabel,
       data.message,
       this.onDeleteUserConfirmation.bind(this),
-      id)
+      id);
   }
 
   onDeleteUserConfirmation(data) {
@@ -100,15 +100,15 @@ export class AccommodationComponent {
   }
 
   deleteDestinationById(id) {
-    this.apiService.deleteDestination(id).subscribe(
-      res => this.deleteDestinationByIdSuccess(res),
+    this.apiService.deleteAccommodation(id).subscribe(
+      res => this.deleteAccommodationByIdSuccess(res),
       error => {
         this.apiService.commonError(error);
       }
     );
   }
 
-  deleteDestinationByIdSuccess(res) {
+  deleteAccommodationByIdSuccess(res) {
     this.getAccommodations();
   }
 

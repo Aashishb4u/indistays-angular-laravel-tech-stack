@@ -142,6 +142,11 @@ export class AddEditCampingComponent {
     );
   }
 
+  renderMap() {
+    const mapLink = this.componentForm.get('mapLink').value;
+    this.mapSrc = this.sanitizer.bypassSecurityTrustHtml(mapLink);
+  }
+
   getCampingByIdSuccess(res) {
     const responseData: any = res.data && res.data[0] ? res.data[0] : null;
     const profileImage: any = responseData.profile_image_url ?

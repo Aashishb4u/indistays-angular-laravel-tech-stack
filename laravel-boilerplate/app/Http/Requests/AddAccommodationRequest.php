@@ -23,8 +23,10 @@ class AddAccommodationRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'amenity_ids' => 'required',
             'price' => 'required|numeric',
-            'description' => 'required|string',
+            'beds_available' => 'required|numeric',
+            'discount_price' => 'required|numeric',
             'camping_id' => 'required|exists:campings,id',
         ];
     }

@@ -50,6 +50,10 @@ import {AddEditCampingComponent} from "./pages/dashboard/campings/add-edit-campi
 import { AccommodationComponent } from './pages/dashboard/accommodation/accommodation.component';
 import {AddEditAccommodationComponent} from "./pages/dashboard/accommodation/add-edit-accommodation/add-edit-accommodation.component";
 import {GoogleMapsModule} from "@angular/google-maps";
+import { CustomPricingComponent } from './pages/dashboard/custom-pricing/custom-pricing.component';
+import { AddEditCustomPricingComponent } from './pages/dashboard/custom-pricing/add-edit-custom-pricing/add-edit-custom-pricing.component';
+import { CustomBookingsComponent } from './pages/dashboard/custom-bookings/custom-bookings.component';
+import { AddEditCustomBookingComponent } from './pages/dashboard/custom-bookings/add-edit-custom-booking/add-edit-custom-booking.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +73,11 @@ import {GoogleMapsModule} from "@angular/google-maps";
     CampingsComponent,
     AddEditCampingComponent,
     AccommodationComponent,
-    AddEditAccommodationComponent
+    AddEditAccommodationComponent,
+    CustomPricingComponent,
+    AddEditCustomPricingComponent,
+    CustomBookingsComponent,
+    AddEditCustomBookingComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +110,7 @@ import {GoogleMapsModule} from "@angular/google-maps";
     MatTabsModule, // SwiperModule
     ReactiveFormsModule,
     NgbModule,
-    GoogleMapsModule
+    GoogleMapsModule,
   ],
   providers: [
     NgxImageCompressService,

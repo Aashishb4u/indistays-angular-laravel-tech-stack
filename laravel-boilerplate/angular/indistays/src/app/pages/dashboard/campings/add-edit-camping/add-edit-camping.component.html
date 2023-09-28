@@ -22,7 +22,7 @@
     <mat-card>
       <div class="component-container p-5">
         <div class="container">
-          <form [formGroup]="componentForm" (ngSubmit)="userAction()">
+          <form [formGroup]="componentForm">
             <div class="row">
               <div class="col-md-12 col-lg-7 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
@@ -78,7 +78,7 @@
                 </mat-form-field>
               </div>
               <div class="col-lg-3 d-flex mt-2">
-                <button (click)="userAction()" class="color-white max-230" mat-raised-button color="primary">
+                <button type="button" (click)="renderMap()" class="color-white max-230" mat-raised-button color="primary">
                   <mat-icon>pin_drop</mat-icon>
                   Render Map</button>
               </div>

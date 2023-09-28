@@ -41,13 +41,13 @@
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Destination </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 350px" class="d-flex flex-column p-3 justify-content-center align-items-center">
-                <div style="margin-left: 1rem; margin-bottom: 5px">
-                 <div style="font-size: 18px"> {{element.name}} </div>
+              <div style="min-width: 250px;" class="p-3 d-flex align-items-center flex-column">
+                <div>
+                  <img style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); width: 100%" [src]="element.profile_image_url" alt="">
                 </div>
-                <div class="d-flex p-1 justify-content-center">
-                  <img style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); max-width: 250px; height: 170px; border-radius: 5px;"
-                       src="{{element.profile_image_url}}" alt="">
+                <div class="full-width"
+                     style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); background: var(--primary-color);padding: 10px;color: white;text-align: center;border-bottom-left-radius: 15px;">
+                  {{element.name}}
                 </div>
               </div>
             </td>

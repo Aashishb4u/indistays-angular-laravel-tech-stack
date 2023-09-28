@@ -9,11 +9,11 @@
             </button>
           </div>
           <div class="ml-1 d-flex align-items-center">
-            <div style="font-size: 18px; font-weight: bold">{{this.campingId ? 'Update' : 'Add'}} Accommodation</div>
+            <div style="font-size: 18px; font-weight: bold">{{this.accommodationId ? 'Update' : 'Add'}} Accommodation</div>
           </div>
         </div>
         <div>
-          <button (click)="userAction()" class="color-white" mat-raised-button color="accent">{{this.campingId ? 'Update' : 'Add'}} Accommodation</button>
+          <button (click)="userAction()" class="color-white" mat-raised-button color="accent">{{this.accommodationId ? 'Update' : 'Add'}} Accommodation</button>
         </div>
       </div>
     </mat-card>
@@ -24,7 +24,7 @@
         <div class="container">
           <form [formGroup]="componentForm" (ngSubmit)="userAction()">
             <div class="row">
-              <div class="col-md-12 col-lg-8 col-sm-12 col-xs-12 mb-3">
+              <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Name</mat-label>
                   <input tabindex="1" #name maxlength="40" matInput formControlName="name" type="text" placeholder="Enter Camping Name">
@@ -41,7 +41,14 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-2">
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Beds Available</mat-label>
+                  <input tabindex="3" min="0" #beds max="100" matInput formControlName="beds" type="number" placeholder="Enter Beds">
+                  <mat-error *ngIf="componentForm.get('beds')?.invalid && componentForm.get('beds')?.touched">Please enter a valid email</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 col-lg-8 col-sm-12 col-xs-12 mb-2">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Amenities</mat-label>
                   <mat-select tabindex="2" formControlName="amenities" multiple>
@@ -50,20 +57,18 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12 mb-3">
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Price</mat-label>
-                  <input tabindex="1" #name maxlength="40" matInput formControlName="price" type="text" placeholder="Enter Camping Name">
-                  <mat-hint align="end">{{name.value.length}} / 40</mat-hint>
-                  <mat-error *ngIf="componentForm.get('name')?.invalid && componentForm.get('name')?.touched">Please enter a valid email</mat-error>
+                  <input tabindex="1" #price min="0" max="1000000" matInput formControlName="price" type="number" placeholder="Enter Price">
+                  <mat-error *ngIf="componentForm.get('price')?.invalid && componentForm.get('price')?.touched">Please enter a valid Price</mat-error>
                 </mat-form-field>
               </div>
-              <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12 mb-3">
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Discount Price</mat-label>
-                  <input tabindex="1" #name maxlength="40" matInput formControlName="discount_price" type="text" placeholder="Enter Camping Name">
-                  <mat-hint align="end">{{name.value.length}} / 40</mat-hint>
-                  <mat-error *ngIf="componentForm.get('name')?.invalid && componentForm.get('name')?.touched">Please enter a valid email</mat-error>
+                  <input tabindex="1" #discount_price min="0" max="1000000" matInput formControlName="discount_price" type="number" placeholder="Enter Discount">
+                  <mat-error *ngIf="componentForm.get('discount_price')?.invalid && componentForm.get('discount_price')?.touched">Please enter a valid Discount</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-lg-12">

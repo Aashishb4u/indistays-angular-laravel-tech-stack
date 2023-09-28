@@ -14,6 +14,10 @@ import {CampingsComponent} from "./pages/dashboard/campings/campings.component";
 import {AddEditCampingComponent} from "./pages/dashboard/campings/add-edit-camping/add-edit-camping.component";
 import {AccommodationComponent} from "./pages/dashboard/accommodation/accommodation.component";
 import {AddEditAccommodationComponent} from "./pages/dashboard/accommodation/add-edit-accommodation/add-edit-accommodation.component";
+import {CustomPricingComponent} from "./pages/dashboard/custom-pricing/custom-pricing.component";
+import {AddEditCustomPricingComponent} from "./pages/dashboard/custom-pricing/add-edit-custom-pricing/add-edit-custom-pricing.component";
+import {CustomBookingsComponent} from "./pages/dashboard/custom-bookings/custom-bookings.component";
+import {AddEditCustomBookingComponent} from "./pages/dashboard/custom-bookings/add-edit-custom-booking/add-edit-custom-booking.component";
 
 const routes: Routes = [
   { path:  '', component:  LandingComponent, data: { title: 'Home | Indistays' }},
@@ -34,10 +38,15 @@ const routes: Routes = [
       { path: 'camping', component: CampingsComponent }, // Users component under dashboard
       { path: 'add-camping', component: AddEditCampingComponent },
       { path: 'edit-camping/:id', component: AddEditCampingComponent }, // Define a route with an 'id' parameter
-      { path: 'add-camping', component: AddEditCampingComponent },
       { path: 'accommodation', component: AccommodationComponent }, // Users component under dashboard
       { path: 'add-accommodation', component: AddEditAccommodationComponent },
-      { path: 'edit-destination/:id', component: AddEditDestinationComponent }, // Define a route with an 'id' parameter
+      { path: 'edit-accommodation/:id', component: AddEditAccommodationComponent },
+      { path: 'custom-pricing', component: CustomPricingComponent }, // Users component under dashboard
+      { path: 'add-custom-pricing', component: AddEditCustomPricingComponent },
+      { path: 'edit-custom-pricing/:id', component: AddEditCustomPricingComponent },
+      { path: 'custom-booking', component: CustomBookingsComponent }, // Users component under dashboard
+      { path: 'add-custom-booking', component: AddEditCustomBookingComponent },
+      { path: 'edit-custom-booking/:id', component: AddEditCustomBookingComponent },
     ],
   },
   { path:  'change-password', component:  ChangePasswordComponent, canActivate: [async () => await inject(AuthService).isUserLoggedIn()] },

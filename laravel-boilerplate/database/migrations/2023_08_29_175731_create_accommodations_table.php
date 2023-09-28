@@ -10,12 +10,12 @@ class CreateAccommodationsTable extends Migration
         Schema::create('accommodations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price', 10, 2); // Adjust precision and scale as needed
-            $table->text('description');
+            $table->decimal('price', 10, 2)->nullable()->default(0); // Adjust precision and scale as needed
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('camping_id')->nullable();
-            $table->json('amenity_ids'); // Storing array of amenity IDs
-            $table->decimal('beds_available', 10, 2); // Adjust precision and scale as needed
-            $table->decimal('discount_price', 10, 2); // Adjust precision and scale as needed
+            $table->decimal('beds_available', 10, 2)->nullable()->default(0); // Adjust precision and scale as needed
+            $table->decimal('discount_price', 10, 2)->nullable()->default(0); // Adjust precision and scale as needed
+            $table->string('profile_image_url')->nullable();
             $table->timestamps();
             $table->foreign('camping_id')->references('id')->on('campings');
         });

@@ -1,0 +1,115 @@
+<div class="dashboard-container p-3">
+  <div class="pb-3">
+    <mat-card>
+      <div class="d-flex justify-content-between p-3">
+        <div class="d-flex">
+          <div class="d-flex align-items-center">
+            <button (click)="goGridPage()" mat-mini-fab color="primary"
+                    aria-label="Example icon button with a menu icon">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+          </div>
+          <div class="ml-1 d-flex align-items-center">
+            <div style="font-size: 18px; font-weight: bold">{{this.customPricingId ? 'Update' : 'Add'}} Custom Price
+            </div>
+          </div>
+        </div>
+        <div>
+          <button (click)="userAction()" class="color-white" mat-raised-button
+                  color="accent">{{this.customPricingId ? 'Update' : 'Add'}} Custom Price
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="pb-3">
+    <mat-card>
+      <div class="component-container p-5">
+        <div class="container">
+          <form [formGroup]="componentForm">
+            <div class="row">
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Accommodation</mat-label>
+                  <mat-select tabindex="2" formControlName="accommodation_id">
+                    <mat-option *ngFor="let acco of accommodations"
+                                [value]="acco.id">{{ acco.name }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Camping & Destination</mat-label>
+                  <input matInput formControlName="camping" type="text" placeholder="Enter Camping">
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width example-form-field">
+                  <mat-label>Date Range</mat-label>
+                  <mat-date-range-input
+                    [rangePicker]="campaignOnePicker">
+                    <input matStartDate placeholder="Start date" formControlName="start_date">
+                    <input matEndDate placeholder="End date" formControlName="end_date">
+                  </mat-date-range-input>
+                  <mat-hint>Start Date (MM/DD/YYYY) – End Date (MM/DD/YYYY)</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Actual Price</mat-label>
+                  <input tabindex="1" #actual_price min="0" max="1000000" matInput formControlName="actual_price" type="number"
+                         placeholder="Enter Price">
+                  <mat-error
+                    *ngIf="componentForm.get('actual_price')?.invalid && componentForm.get('actual_price')?.touched">
+                    Please enter a valid Price
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>New Price</mat-label>
+                  <input tabindex="1" #price min="0" max="1000000" matInput formControlName="price" type="number"
+                         placeholder="Enter Price">
+                  <mat-error *ngIf="componentForm.get('price')?.invalid && componentForm.get('price')?.touched">Please
+                    enter a valid Price
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Actual Discount Price</mat-label>
+                  <input tabindex="1" #actual_discount_price min="0" max="1000000" matInput formControlName="actual_discount_price"
+                         type="number" placeholder="Enter Discount">
+                  <mat-error
+                    *ngIf="componentForm.get('actual_discount_price')?.invalid && componentForm.get('actual_discount_price')?.touched">
+                    Please enter a valid Discount
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Discount Price</mat-label>
+                  <input tabindex="1" #discount_price min="0" max="1000000" matInput formControlName="discount_price"
+                         type="number" placeholder="Enter Discount">
+                  <mat-error
+                    *ngIf="componentForm.get('discount_price')?.invalid && componentForm.get('discount_price')?.touched">
+                    Please enter a valid Discount
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- Add more form fields here -->
+          </form>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

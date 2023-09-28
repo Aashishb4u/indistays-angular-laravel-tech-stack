@@ -182,9 +182,66 @@ export class ApiService {
     return this.http.post(`${this.baseURL}accommodations`, data, {});
   }
 
-  getAccommodations(params) {
-    return this.http.get(`${this.baseURL}accommodations/all`, {params});
+  getAccommodationById(data) {
+    return this.http.post(`${this.baseURL}accommodations/all`, data, {});
   }
+
+  getAllAccommodation() {
+    return this.http.post(`${this.baseURL}accommodations/all`, {}, {});
+  }
+
+  getAccommodations(params) {
+    return this.http.get(`${this.baseURL}accommodations`, {params});
+  }
+
+  deleteAccommodation(id) {
+    return this.http.delete(`${this.baseURL}accommodations/${id}`, {});
+  }
+
+  updateAccommodationById(data, id) {
+    return this.http.post(`${this.baseURL}accommodations/edit/${id}`, data, {});
+  }
+
+  addCustomPricing(data) {
+    return this.http.post(`${this.baseURL}custom-pricing`, data, {});
+  }
+
+  getCustomPricingById(data) {
+    return this.http.post(`${this.baseURL}custom-pricing/all`, data, {});
+  }
+
+  getCustomPricings(params) {
+    return this.http.get(`${this.baseURL}custom-pricing`, {params});
+  }
+
+  deleteCustomPricing(id) {
+    return this.http.delete(`${this.baseURL}custom-pricing/${id}`, {});
+  }
+
+  updateCustomPricingById(data, id) {
+    return this.http.post(`${this.baseURL}custom-pricing/edit/${id}`, data, {});
+  }
+
+  addCustomBooking(data) {
+    return this.http.post(`${this.baseURL}custom-booking`, data, {});
+  }
+
+  getCustomBookingById(data) {
+    return this.http.post(`${this.baseURL}custom-booking/all`, data, {});
+  }
+
+  getCustomBookings(params) {
+    return this.http.get(`${this.baseURL}custom-booking`, {params});
+  }
+
+  deleteCustomBooking(id) {
+    return this.http.delete(`${this.baseURL}custom-booking/${id}`, {});
+  }
+
+  updateCustomBookingById(data, id) {
+    return this.http.post(`${this.baseURL}custom-booking/edit/${id}`, data, {});
+  }
+
 
   getAllAmenities(params = {}) {
     return this.http.post(`${this.baseURL}amenities/all`, {params});

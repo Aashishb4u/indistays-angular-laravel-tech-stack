@@ -37,3 +37,29 @@ body { margin: 0;
     height: 170px !important;
   }
 }
+
+.mdc-text-field--disabled .mdc-floating-label, .mdc-text-field--disabled .mdc-text-field__input  {
+  color: #666 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #666 !important;
+}
+
+.mdc-text-field--disabled .mdc-notched-outline__leading {
+  border-color: #666 !important;
+  border-right: none !important;
+}
+
+.mdc-text-field--disabled .mdc-notched-outline__notch, .mdc-text-field--disabled .mdc-notched-outline__trailing {
+  border-color: #666 !important;
+}
+
+.mat-form-field-disabled {
+  cursor: not-allowed !important;
+}
+
+.mdc-text-field--disabled {
+  cursor: not-allowed !important;
+  background: #d3d3d342;
+}

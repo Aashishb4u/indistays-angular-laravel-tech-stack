@@ -71,28 +71,28 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::post('campings/all', [CampingController::class, 'index']);
 
     // Accommodations API
-    Route::get('accommodations', [AccommodationController::class, 'getAccommodationsData']);
+    Route::get('accommodations', [AccommodationController::class, 'paginate']);
     Route::post('accommodations', [AccommodationController::class, 'addAccommodation']);
-    Route::put('accommodations/{id}', [AccommodationController::class, 'editAccommodation'])
+    Route::post('accommodations/edit/{id}', [AccommodationController::class, 'editAccommodation'])
         ->where('id', '[0-9]+');
     Route::delete('accommodations/{id}', [AccommodationController::class, 'deleteAccommodation']);
-    Route::get('accommodations/all', [AccommodationController::class, 'getAllAccommodationsData']);
+    Route::post('accommodations/all', [AccommodationController::class, 'index']);
 
     // Custom Pricings API
-    Route::get('custom-pricing', [CustomPricingController::class, 'getCustomPricings']);
+    Route::get('custom-pricing', [CustomPricingController::class, 'paginate']);
     Route::post('custom-pricing', [CustomPricingController::class, 'addCustomPricing']);
     Route::put('custom-pricing/{id}', [CustomPricingController::class, 'editCustomPricing'])
         ->where('id', '[0-9]+');
     Route::delete('custom-pricing/{id}', [CustomPricingController::class, 'deleteCustomPricing']);
-    Route::get('custom-pricing/all', [CustomPricingController::class, 'getAllCustomPricings']);
+    Route::post('custom-pricing/all', [CustomPricingController::class, 'index']);
 
     // Custom Bookings API
-    Route::get('bookings', [BookingController::class, 'getAllBookings']);
-    Route::get('bookings-paginate', [BookingController::class, 'getBookings']);
-    Route::post('bookings', [BookingController::class, 'addBooking']);
-    Route::put('bookings/{id}', [BookingController::class, 'editBooking']);
-    Route::delete('bookings/{id}', [BookingController::class, 'deleteBooking']);
-
+    Route::get('custom-booking', [BookingController::class, 'paginate']);
+    Route::post('custom-booking', [BookingController::class, 'addCustomPricing']);
+    Route::put('custom-booking/{id}', [BookingController::class, 'editCustomPricing'])
+        ->where('id', '[0-9]+');
+    Route::delete('custom-booking/{id}', [BookingController::class, 'deleteCustomPricing']);
+    Route::post('custom-booking/all', [BookingController::class, 'index']);
 
     // Amenities APIs
     Route::post('amenities/all', [AmenityController::class, 'index']);

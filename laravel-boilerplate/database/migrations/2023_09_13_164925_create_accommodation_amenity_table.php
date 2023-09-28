@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('accommodation_id');
             $table->unsignedBigInteger('amenity_id');
-            $table->timestamps();
             $table->unique(['accommodation_id', 'amenity_id']);
             $table->foreign('accommodation_id')->references('id')->on('accommodations')->onDelete('cascade');
             $table->foreign('amenity_id')->references('id')->on('amenities')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

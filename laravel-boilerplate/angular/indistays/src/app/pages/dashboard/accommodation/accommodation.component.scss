@@ -1,5 +1,5 @@
 
-$text: ('name', 'description', 'gallery', 'action');
+$text: ('name','camping', 'price', 'discount_price', 'amenities', 'gallery', 'action');
 
 @each $item in $text {
   $index: index($text, $item);
@@ -10,6 +10,7 @@ $text: ('name', 'description', 'gallery', 'action');
     border-right: 1px solid lightgray;
   }
 }
+
 
 
 .search-input-box {
@@ -39,4 +40,8 @@ $text: ('name', 'description', 'gallery', 'action');
 
 .table-column-200 {
   width: 200px;
+}
+
+.single-gallery-image {
+  border-radius: 5px; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); object-fit: cover; width: 150px; height: 100px; padding: 10px; margin: 10px;
 }

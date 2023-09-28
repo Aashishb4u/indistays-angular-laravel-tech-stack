@@ -30,19 +30,18 @@ class CampingController extends Controller
             $query->where('name', 'LIKE', "%{$nameFilter}%");
         }
 
-        // Eager load the 'userRole' relationship
-        //   $query->with('images');
 
-        $query->with(['images' => function($que) {
-            $que->where('is_profile_image', false);
-        }]);
+        $query->with([
+            'images' => function ($que) {
+                $que->where('is_profile_image', false);
+            },
+            'destination'
+        ]);
 
-        // Eager load the 'userRole' relationship
-        $query->with('destination');
 
-        $destinations = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
+        $campings = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
 
-        return response()->json(['data' => $destinations]);
+        return response()->json(['data' => $campings]);
     }
 
     public function addCamping(AddCampingRequest $request)
@@ -100,7 +99,7 @@ class CampingController extends Controller
 
     public function editCamping(Request $request, $id)
     {
-        $destination = Camping::findOrFail($id);
+        $camping = Camping::findOrFail($id);
         $name = $request->input('name');
         $description = $request->input('description');
         $imageArray = $request->file('images');
@@ -122,10 +121,10 @@ class CampingController extends Controller
         try {
             if ($request->hasFile('profile_image')) {
                 $profileImage = $request->file('profile_image'); // Change 'images' to 'profile_image'
-                $customName = 'destination-profile-' . $id . '.' . $profileImage->getClientOriginalExtension();
+                $customName = 'camping-profile-' . $id . '.' . $profileImage->getClientOriginalExtension();
                 $path = $profileImage->storeAs('public/profile-images', $customName);
                 $profileImageUrl = Storage::url($path);
-                $destination->profile_image_url = $profileImageUrl;
+                $camping->profile_image_url = $profileImageUrl;
             }
 
             if (in_array('dirty', $imageIdsToUpdateArray)
@@ -136,7 +135,7 @@ class CampingController extends Controller
 
 
             // Update destination information
-            $destination->update([
+            $camping->update([
                 'name' => $name,
                 'description' => $description,
                 'location_map_link' => $mapLink,
@@ -151,11 +150,11 @@ class CampingController extends Controller
                 foreach ($imageIdsToUpdateArray as $index => $updateLocation) {
                     if (trim($updateLocation) == 'dirty') {
                         $image = $request->file('images')[$imageIndex];
-                        $customName = 'destination-' . $id . '-' . $index . '.' . $image->getClientOriginalExtension();
+                        $customName = 'camping-' . $id . '-' . $index . '.' . $image->getClientOriginalExtension();
                         $path = $image->storeAs('public/images', $customName);
                         $url = Storage::url($path);
                         // Check if an image with the same URL already exists
-                        $existingImage = $destination->images()->where('url', $url)->first();
+                        $existingImage = $camping->images()->where('url', $url)->first();
                         $imageIndex++;
 
                         if ($existingImage) {
@@ -166,7 +165,7 @@ class CampingController extends Controller
                             ]);
                         } else {
                             // If the image doesn't exist, create a new record
-                            $destination->images()->create([
+                            $camping->images()->create([
                                 'url' => $url,
                                 // Add other fields that you want to create
                             ]);
@@ -178,7 +177,7 @@ class CampingController extends Controller
             // Commit the transaction
             DB::commit();
 
-            return response()->json(['message' => 'Destination images updated successfully', 'data' => $destination]);
+            return response()->json(['message' => 'Destination images updated successfully', 'data' => $camping]);
         } catch (\Exception $e) {
             // Handle any exceptions and rollback the transaction
             DB::rollBack();
@@ -212,8 +211,8 @@ class CampingController extends Controller
 
         // Eager load the 'userRole' relationship
         $query->with('images');
-        $destinations = $query->get();
-        return response()->json(['data' => $destinations]);
+        $campings = $query->get();
+        return response()->json(['data' => $campings]);
     }
 
 }
