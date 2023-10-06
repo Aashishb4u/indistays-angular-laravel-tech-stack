@@ -8,7 +8,8 @@
 }
 
 .nav-background {
-  background: var(--primary-color) !important;
+  //background: var(--primary-color) !important;
+  background: transparent !important;
   //  Logo Font - Cinzel Decorative
 }
 
@@ -29,17 +30,22 @@
 .nav-menu {
   margin: 0 20px;
   color: var(--color-white);
-  border-bottom: 3px solid var(--primary-color);
+  border-bottom: 3px solid transparent;
   font-family: Lato-bold !important;
   &:hover {
     cursor: pointer;
     border-bottom: 3px solid var(--secondary-color);
   }
   a {
-    color: var(--color-white);
+    color: var(--primary-color);
+    font-size: 16px;
   }
 }
 
 .user-name-box {
   line-height: 1.4;
+}
+
+.height-75 {
+  height: 75px;
 }

@@ -64,6 +64,9 @@
           </div>
           <mat-menu #userMenu="matMenu">
             <ng-template matMenuContent let-id="id">
+              <button (click)="onWebsite()" mat-menu-item>Website
+                <mat-icon color="primary">website</mat-icon>
+              </button>
               <button (click)="onChangePassword()" mat-menu-item>Change Password
                 <mat-icon color="primary">lock</mat-icon>
               </button>

@@ -14,6 +14,7 @@ import {of, switchMap} from "rxjs";
 export class ApiService {
   baseURL: string = appConstants.baseURLAdminAPIs;
   baseAuthUrl: string = appConstants.baseAuthUrl;
+  domainUrlApi: string = appConstants.domainUrlApi;
   currentAccessToken: any = null;
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   onLoadToken = new BehaviorSubject<any>('');
@@ -245,6 +246,26 @@ export class ApiService {
 
   getAllAmenities(params = {}) {
     return this.http.post(`${this.baseURL}amenities/all`, {params});
+  }
+
+  getAllDestinationsForWebsite(params = {}) {
+    return this.http.post(`${this.domainUrlApi}all/destinations`, {params});
+  }
+
+  getAllAccommodationsForWebsite(params = {}) {
+    return this.http.post(`${this.domainUrlApi}all/accommodations`, {params});
+  }
+
+  getAllAmenitiesForWebsite(params = {}) {
+    return this.http.post(`${this.domainUrlApi}all/amenities`, {params});
+  }
+
+  getAllCampingForWebsite(params = {}) {
+    return this.http.post(`${this.domainUrlApi}all/camping`, {params});
+  }
+
+  getAllCustomPricingForWebsite(params = {}) {
+    return this.http.post(`${this.domainUrlApi}all/custom-pricing`, {params});
   }
 
   commonError(err: any) {

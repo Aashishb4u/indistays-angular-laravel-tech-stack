@@ -1,0 +1,54 @@
+.picsum-img-wrapper {
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.carousal-text {
+  top: 20vh;
+  animation-name: fadeInUp;
+  animation-delay: 0.1s;
+  animation-duration: 1.25s;
+  .header {
+    font-size: 45px;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    font-family: Lato-bold !important;
+  }
+
+  .text {
+    color: var(--secondary-color);
+    font-size: 25px;
+    font-family: Lato-Reg, serif;
+    line-height: 1.4;
+  }
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0,100%,0)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+.filter-tab {
+  font-size: 15px; margin-right: 10px; color: white;
+  cursor: pointer;
+  opacity: 0.7;
+  color: var(--color-white);
+  &.active {
+    opacity: 1;
+    font-size: 18px;
+    font-family: Lato-bold !important;
+    color: var(--color-white);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 5px;
+  }
+}

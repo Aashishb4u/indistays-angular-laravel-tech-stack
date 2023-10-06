@@ -1,1 +1,116 @@
-<app-app-header></app-app-header>
+<div class="full-width position-absolute">
+  <app-app-header></app-app-header>
+</div>
+
+<div>
+  <ngb-carousel [interval]="4000" [pauseOnHover]="false">
+    <ng-template *ngFor="let image of images" ngbSlide>
+      <div style="max-height: 100vh">
+        <div class="picsum-img-wrapper">
+          <img [src]="image" alt="Random first slide" />
+        </div>
+<!--        <div class="carousel-caption carousal-text">-->
+<!--          <div class="header">Serenity by the Poolside</div>-->
+<!--          <div class="text">Poolside tranquility, where relaxation finds its reflection.</div>-->
+<!--        </div>-->
+      </div>
+    </ng-template>
+<!--    <ng-template ngbSlide>-->
+<!--      <div style="max-height: 100vh">-->
+<!--        <div class="picsum-img-wrapper">-->
+<!--          <img [src]="images[1]" alt="Random second slide" />-->
+<!--        </div>-->
+<!--        <div class="carousel-caption carousal-text">-->
+<!--          <div class="header">Dining Amidst Nature's Beauty</div>-->
+<!--          <div class="text">Culinary delight meets breathtaking natural vistas. Unforgettable feasts await.</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--    <ng-template ngbSlide>-->
+<!--      <div style="max-height: 100vh">-->
+<!--        <div class="picsum-img-wrapper">-->
+<!--          <img [src]="images[2]" alt="Random third slide" />-->
+<!--        </div>-->
+<!--        <div class="carousel-caption carousal-text">-->
+<!--          <div class="header">Embrace Nature's Canvas</div>-->
+<!--          <div class="text">Experience the thrill of adventure while enjoying the comfort and luxury of Indistays accommodations.</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-template>-->
+  </ngb-carousel>
+  <div class="d-flex justify-content-center full-width position-absolute" style="z-index: 999; top: 60%">
+      <form class="d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
+        <div style="padding: 2rem 1rem 1rem; border-radius: 15px; backdrop-filter: blur(10px); background: #001c277a;" class="row col-md-12 col-lg-10">
+          <div class="m-1 col-lg-12">
+            <div class="d-flex">
+              <div [class.active]="selectedTab === 'destination'" (click)="onChangeTab('destination')" class="filter-tab">Destination</div>
+              <div [class.active]="selectedTab === 'camping'" (click)="onChangeTab('camping')" class="filter-tab">Camping</div>
+            </div>
+            <hr style="border-top: 2px solid; color: white">
+          </div>
+          <div *ngIf="selectedTab === 'destination'" class="col-lg-3">
+            <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+              <mat-label>Destination</mat-label>
+              <mat-select formControlName="destination">
+                <mat-option *ngFor="let dest of destinations"
+                            [value]="dest.id">{{ dest.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="selectedTab === 'camping'" class="col-lg-3">
+            <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+              <mat-label>Camping</mat-label>
+              <mat-select formControlName="destination">
+                <mat-option *ngFor="let camp of campings"
+                            [value]="camp.id">{{ camp.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-5">
+            <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
+              <mat-label>Date Range</mat-label>
+              <mat-date-range-input
+                [rangePicker]="campaignOnePicker">
+                <input matStartDate placeholder="Start date" formControlName="start_date">
+                <input matEndDate placeholder="End date" formControlName="end_date">
+              </mat-date-range-input>
+              <mat-hint>Select Check In Date & Check Out Date</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+              <mat-error *ngIf="(filterForm.get('start_date')?.invalid && filterForm.get('start_date')?.touched) ||
+                  (filterForm.get('end_date')?.invalid && filterForm.get('end_date')?.touched)">
+                Please select Check In Date & Check Out Date
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+            <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+              <mat-label>People</mat-label>
+              <mat-select formControlName="destination">
+                <mat-option *ngFor="let bed of beds"
+                            [value]="bed">{{ bed }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-2">
+            <button class="mt-2 color-white" mat-raised-button
+                    color="accent">
+              <mat-icon>search</mat-icon>
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+
+<div class="m-4 p-4 d-flex justify-content-center align-items-center flex-column">
+  <div class="d-flex justify-content-between align-items-center full-width">
+    <div style="font-size: 35px; color: var(--primary-color); text-transform: uppercase; padding: 10px 0; display: inline;">
+      Destination
+    </div>
+    <div>
+      Check All Destinations
+    </div>
+  </div>
+</div>

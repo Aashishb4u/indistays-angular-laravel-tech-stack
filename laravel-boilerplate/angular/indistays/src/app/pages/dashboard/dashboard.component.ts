@@ -28,4 +28,8 @@ export class DashboardComponent implements OnInit {
   onChangePassword() {
     this.router.navigate(['/change-password']);
   }
+
+  onWebsite() {
+    this.router.navigate(['']);
+  }
 }

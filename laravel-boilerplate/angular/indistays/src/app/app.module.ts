@@ -31,7 +31,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpTokenInterceptorsService} from "./authentication/http-token-interceptors.service";
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AppHeaderComponent } from './shared-components/app-header/app-header.component';
@@ -111,6 +111,7 @@ import { AddEditCustomBookingComponent } from './pages/dashboard/custom-bookings
     ReactiveFormsModule,
     NgbModule,
     GoogleMapsModule,
+    NgbCarouselModule
   ],
   providers: [
     NgxImageCompressService,

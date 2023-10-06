@@ -26,6 +26,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'all' // Adding the 'auth' prefix
+], function ($router) {
+    Route::post('destinations', [DestinationController::class, 'index']);
+    Route::post('camping', [CampingController::class, 'index']);
+    Route::post('accommodations', [AccommodationController::class, 'index']);
+    Route::post('custom-pricing', [CustomPricingController::class, 'index']);
+    Route::post('amenities', [AmenityController::class, 'index']);
+});
+
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth' // Adding the 'auth' prefix
@@ -36,6 +49,7 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('reset-password', [AuthController::class, 'changePassword']);
 });
+
 
 Route::prefix('v1')->middleware('auth.check')->group(function () {
 

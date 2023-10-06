@@ -43,4 +43,8 @@ export class AppHeaderComponent implements OnInit {
   onLogin() {
     this.router.navigate(['/login']);
   }
+
+  onAdminPanel() {
+    this.router.navigate(['/dashboard']);
+  }
 }

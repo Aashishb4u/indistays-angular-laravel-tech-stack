@@ -63,3 +63,22 @@ body { margin: 0;
   cursor: not-allowed !important;
   background: #d3d3d342;
 }
+
+.filter-control {
+  .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: white !important;
+  }
+  .mat-mdc-select-arrow {
+    color: white !important;
+  }
+  .mat-mdc-select-value, .mat-datepicker-toggle-default-icon {
+    color: white !important;
+  }
+  .mat-date-range-input-mirror, .mat-date-range-input-container, .mat-mdc-form-field-hint, .mat-date-range-input-separator {
+    color: white !important;
+  }
+  .mdc-text-field--outlined {
+    background: #3842488a;
+    border-radius: 5px;
+  }
+}
