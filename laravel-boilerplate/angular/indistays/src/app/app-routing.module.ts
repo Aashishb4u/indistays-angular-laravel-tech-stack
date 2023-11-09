@@ -20,8 +20,9 @@ import {CustomBookingsComponent} from "./pages/dashboard/custom-bookings/custom-
 import {AddEditCustomBookingComponent} from "./pages/dashboard/custom-bookings/add-edit-custom-booking/add-edit-custom-booking.component";
 
 const routes: Routes = [
-  { path:  '', component:  LandingComponent, data: { title: 'Home | Indistays' }},
-  { path:  'landing', component:  LandingComponent, data: { title: 'Home | Indistays' }},
+  { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirect to 'users' by default
+  // { path:  '', component:  LandingComponent, data: { title: 'Home | Indistays' }},
+  { path:  'home', component:  LandingComponent, data: { title: 'Home | Indistays' }},
   { path:  'login', component:  LoginComponent, canActivate: [async () => await inject(AuthService).userBeforeLoggedIn()]},
   {
     path: 'dashboard',

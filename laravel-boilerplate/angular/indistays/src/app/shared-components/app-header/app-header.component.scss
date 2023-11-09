@@ -9,7 +9,7 @@
 
 .nav-background {
   //background: var(--primary-color) !important;
-  background: transparent !important;
+  background: #fff !important;
   //  Logo Font - Cinzel Decorative
 }
 
@@ -32,7 +32,7 @@
   color: var(--color-white);
   border-bottom: 3px solid transparent;
   font-family: Lato-bold !important;
-  &:hover {
+  &:hover, &.active {
     cursor: pointer;
     border-bottom: 3px solid var(--secondary-color);
   }

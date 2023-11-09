@@ -1,52 +1,34 @@
-<div class="full-width position-absolute">
-  <app-app-header></app-app-header>
+<div class="full-width">
 </div>
-
-<div>
-  <ngb-carousel [interval]="4000" [pauseOnHover]="false">
-    <ng-template *ngFor="let image of images" ngbSlide>
-      <div style="max-height: 100vh">
-        <div class="picsum-img-wrapper">
-          <img [src]="image" alt="Random first slide" />
+<app-app-header></app-app-header>
+<div style="background: #3f51b524">
+  <div class="carousal-container">
+    <ngb-carousel style="max-height: 100vh" [interval]="4000" [pauseOnHover]="false">
+      <ng-template *ngFor="let image of images" ngbSlide>
+        <div>
+          <div class="picsum-img-wrapper">
+            <img [src]="image" alt="Random first slide" />
+          </div>
+          <div class="carousel-caption carousal-text">
+            <div class="header">
+              Plan your next <br>
+              vacation with us
+            </div>
+            <div class="text">
+              Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
+            </div>
+          </div>
         </div>
-<!--        <div class="carousel-caption carousal-text">-->
-<!--          <div class="header">Serenity by the Poolside</div>-->
-<!--          <div class="text">Poolside tranquility, where relaxation finds its reflection.</div>-->
-<!--        </div>-->
-      </div>
-    </ng-template>
-<!--    <ng-template ngbSlide>-->
-<!--      <div style="max-height: 100vh">-->
-<!--        <div class="picsum-img-wrapper">-->
-<!--          <img [src]="images[1]" alt="Random second slide" />-->
-<!--        </div>-->
-<!--        <div class="carousel-caption carousal-text">-->
-<!--          <div class="header">Dining Amidst Nature's Beauty</div>-->
-<!--          <div class="text">Culinary delight meets breathtaking natural vistas. Unforgettable feasts await.</div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--    <ng-template ngbSlide>-->
-<!--      <div style="max-height: 100vh">-->
-<!--        <div class="picsum-img-wrapper">-->
-<!--          <img [src]="images[2]" alt="Random third slide" />-->
-<!--        </div>-->
-<!--        <div class="carousel-caption carousal-text">-->
-<!--          <div class="header">Embrace Nature's Canvas</div>-->
-<!--          <div class="text">Experience the thrill of adventure while enjoying the comfort and luxury of Indistays accommodations.</div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-  </ngb-carousel>
-  <div class="d-flex justify-content-center full-width position-absolute" style="z-index: 999; top: 60%">
+      </ng-template>
+    </ngb-carousel>
+    <div class="landing-filters d-flex justify-content-center full-width position-absolute">
       <form class="d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
-        <div style="padding: 2rem 1rem 1rem; border-radius: 15px; backdrop-filter: blur(10px); background: #001c277a;" class="row col-md-12 col-lg-10">
-          <div class="m-1 col-lg-12">
+        <div class="row col-md-12 col-lg-10 filter-tab-container">
+          <div class="m-1 mb-3 col-lg-12">
             <div class="d-flex">
               <div [class.active]="selectedTab === 'destination'" (click)="onChangeTab('destination')" class="filter-tab">Destination</div>
               <div [class.active]="selectedTab === 'camping'" (click)="onChangeTab('camping')" class="filter-tab">Camping</div>
             </div>
-            <hr style="border-top: 2px solid; color: white">
           </div>
           <div *ngIf="selectedTab === 'destination'" class="col-lg-3">
             <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
@@ -74,16 +56,11 @@
                 <input matStartDate placeholder="Start date" formControlName="start_date">
                 <input matEndDate placeholder="End date" formControlName="end_date">
               </mat-date-range-input>
-              <mat-hint>Select Check In Date & Check Out Date</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
               <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-              <mat-error *ngIf="(filterForm.get('start_date')?.invalid && filterForm.get('start_date')?.touched) ||
-                  (filterForm.get('end_date')?.invalid && filterForm.get('end_date')?.touched)">
-                Please select Check In Date & Check Out Date
-              </mat-error>
             </mat-form-field>
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-3">
             <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
               <mat-label>People</mat-label>
               <mat-select formControlName="destination">
@@ -92,25 +69,197 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-lg-2">
-            <button class="mt-2 color-white" mat-raised-button
-                    color="accent">
+          <div class="col-lg-1 d-flex">
+            <button class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
               <mat-icon>search</mat-icon>
-              Search
             </button>
           </div>
         </div>
       </form>
+    </div>
+  </div>
+  <div class="landing-container">
+    <div>
+      <div class=" section-title mb-1-5rem mt-6rem align-items-start d-flex flex-column justify-content-start">
+        <div class="section-category">
+          CATEGORY
+        </div>
+        <div class="section-name">
+          We Offer Best Services
+        </div>
+      </div>
+      <div class="content-tabs-container">
+        <div *ngFor="let category of categories" class="single-content-tab">
+          <div class="image">
+            <img [src]="category?.img" alt="">
+          </div>
+          <div class="title text-center">
+            {{category?.name}}
+          </div>
+          <div class="content">
+            {{category?.description}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-1-5rem mt-6rem d-flex justify-content-between align-items-center">
+      <div class=" section-title align-items-start d-flex flex-column justify-content-start">
+        <div class="section-category">
+          Top Selling
+        </div>
+        <div class="section-name">
+          Destinations
+        </div>
+      </div>
+      <div class="see-more cursor-pointer">
+        see more
+      </div>
+    </div>
+
+    <div class="image-tiles">
+      <ng-container *ngFor="let image of imageTiles">
+        <div class="single-image-tile" [style.background-image]="'url(' + image?.img + ')'">
+          <div class="image-title">
+            {{ image?.name }}
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+
+    <div class="mb-1-5rem mt-6rem section-title align-items-start d-flex flex-column justify-content-start">
+      <div class="section-category">
+        Top Selling
+      </div>
+      <div class="section-name">
+        Camping Accommodations
+      </div>
+    </div>
+
+    <div class="image-price-card-container">
+      <ng-container *ngFor="let acc of accommodations">
+        <div class="img-price-card p-4">
+          <div class="img"  >
+            <img [src]="acc?.img" alt="">
+          </div>
+          <div class="row-1 my-3 d-flex justify-content-between">
+            <div class="title">{{acc?.name}}</div>
+            <div class="rating"> <i class="fa fa-star"></i> &nbsp;
+              <span class="rate">{{acc?.ratings}}</span>
+            </div>
+          </div>
+          <div class="row-2 d-flex align-items-center justify-content-between">
+            <div class="place">
+              <i class="fa fa-map-marker"></i> &ngsp; {{acc?.destination}}
+            </div>
+            <div class="price d-flex gap-1 align-items-center">
+              <div class="actual-price me-3">{{acc?.actualPrice}}</div>
+              <div class="discount-price">{{acc?.discountPrice}}</div>
+            </div>
+          </div>
+          <div class="row-3">
+            <div class="duration">
+              {{acc?.daysCount}} Days Trip
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+<!--    <div class="row">-->
+<!--      <div class="d-flex align-items-center col-1">-->
+<!--        <a class="btn-outline-secondary btn mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">-->
+<!--          <i class="fa fa-chevron-left"></i>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="col-10">-->
+<!--        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">-->
+<!--          <div class="carousel-inner">-->
+<!--            <div class="carousel-item active">-->
+<!--              <div class="row">-->
+<!--                <div class="col-md-4 mb-3">-->
+<!--                  <div class="card overflow-hidden">-->
+<!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">-->
+<!--                    <div class="card-body">-->
+<!--                      <h4 class="card-title">Special title treatment</h4>-->
+<!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+
+<!--                    </div>-->
+
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-4 mb-3">-->
+<!--                  <div class="card overflow-hidden">-->
+<!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">-->
+<!--                    <div class="card-body">-->
+<!--                      <h4 class="card-title">Special title treatment</h4>-->
+<!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-4 mb-3">-->
+<!--                  <div class="card overflow-hidden">-->
+<!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">-->
+<!--                    <div class="card-body">-->
+<!--                      <h4 class="card-title">Special title treatment</h4>-->
+<!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="d-flex align-items-center col-1">-->
+<!--        <a class="btn-outline-secondary btn mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">-->
+<!--          <i class="fa fa-chevron-right"></i>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="mb-1-5rem mt-6rem section-title align-items-start d-flex flex-column justify-content-start">
+      <div class="section-category">
+        Top Selling
+      </div>
+      <div class="section-name">
+        Camping Accommodations
+      </div>
+    </div>
+
+    <ngx-slick-carousel class="carousel"
+                        #slickModal="slick-carousel"
+                        [config]="slideConfig"
+                        (init)="slickInit($event)"
+                        (breakpoint)="breakpoint($event)"
+                        (afterChange)="afterChange($event)"
+                        (beforeChange)="beforeChange($event)">
+      <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+        <div style="margin: 1rem" class="card feedback-card overflow-hidden">
+          <div class="card-body">
+            <p class="feedback-content card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <div class="d-flex justify-content-center align-items-center">
+              <img style="max-width: 45px" src="assets/icons/man.png" alt="">
+              <div class="ms-2">
+                <div class="feedback-title">Willson Erickson </div>
+                <div class="d-flex fd-rating">
+                  <div>4.8</div>
+                  <div class="stars ms-1">
+                    <div class="str" *ngFor="let star of [1,2,3,4]">
+                      <i class="fa fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
   </div>
 </div>
 
-<div class="m-4 p-4 d-flex justify-content-center align-items-center flex-column">
-  <div class="d-flex justify-content-between align-items-center full-width">
-    <div style="font-size: 35px; color: var(--primary-color); text-transform: uppercase; padding: 10px 0; display: inline;">
-      Destination
-    </div>
-    <div>
-      Check All Destinations
-    </div>
-  </div>
-</div>
+<app-footer></app-footer>

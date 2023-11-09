@@ -1,0 +1,124 @@
+.footer-container {
+  .top-footer {
+    gap: 16px;
+    padding: 2rem 5rem;
+    background: #68941C;
+    .main-title {
+      color: #FFF;
+      font-size: 38px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 110%; /* 52.8px */
+      font-family: Lato-bold;
+    }
+    .sub-title {
+      color: #FFF;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%; /* 32px */
+    }
+    .white-btn {
+      background: #fff;
+      color: #68941C;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px; /* 120% */
+      letter-spacing: 0.5px;
+      padding: 15px 22px;
+      display: flex;
+      border-radius: 8px;
+      width: 200px;
+      justify-content: center;
+    }
+  }
+
+  .botton-footer {
+    gap: 16px;
+    padding: 4rem 5rem;
+    background: #171715;
+    .main-title {
+      color: #FFF;
+      font-size: 29px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.4; /* 52.8px */
+    }
+    .sub-title {
+      color: #FFF;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%; /* 32px */
+    }
+    .green-btn {
+      background: #68941C;
+      color: #fff;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 24px; /* 120% */
+      letter-spacing: 0.5px;
+      padding: 10px 15px;
+      display: flex;
+      border-radius: 8px;
+      width: 150px;
+      justify-content: center;
+    }
+
+    .footer-menu {
+      padding: 4rem 0 0;
+      .menu-container {
+        display: flex;
+        flex-direction: column;
+        .menu-header {
+          color: #FFF;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px; /* 150% */
+          letter-spacing: 0.1px;
+          margin-bottom: 16px;
+          text-transform: uppercase;
+        }
+        .menu {
+          color: #FFF;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 142.857% */
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+
+.send-input {
+  height: 40px;
+  input {
+    background: #272727;
+    border: none;
+    color: #d3d3d3;
+    font-size: 12px;
+    &:focus {
+      border: 1px solid #272727 !important;
+    }
+  }
+  .send-btn {
+    background: #272727;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.icons-container {
+  i {
+    color: #fff;
+    font-size: 20px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+  }
+}

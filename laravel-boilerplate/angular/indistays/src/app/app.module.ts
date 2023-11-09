@@ -54,6 +54,9 @@ import { CustomPricingComponent } from './pages/dashboard/custom-pricing/custom-
 import { AddEditCustomPricingComponent } from './pages/dashboard/custom-pricing/add-edit-custom-pricing/add-edit-custom-pricing.component';
 import { CustomBookingsComponent } from './pages/dashboard/custom-bookings/custom-bookings.component';
 import { AddEditCustomBookingComponent } from './pages/dashboard/custom-bookings/add-edit-custom-booking/add-edit-custom-booking.component';
+// Import your library
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { FooterComponent } from './shared-components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,7 @@ import { AddEditCustomBookingComponent } from './pages/dashboard/custom-bookings
     AddEditCustomPricingComponent,
     CustomBookingsComponent,
     AddEditCustomBookingComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,7 +115,8 @@ import { AddEditCustomBookingComponent } from './pages/dashboard/custom-bookings
     ReactiveFormsModule,
     NgbModule,
     GoogleMapsModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    SlickCarouselModule
   ],
   providers: [
     NgxImageCompressService,
