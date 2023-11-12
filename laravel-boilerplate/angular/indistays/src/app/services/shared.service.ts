@@ -6,7 +6,7 @@ import {ConfirmationPopupComponent} from "../shared-components/confirmation-popu
 import {MatDialog} from "@angular/material/dialog";
 import {NgxImageCompressService} from "ngx-image-compress";
 import {isPlatformBrowser} from "@angular/common";
-
+import {MatSnackBar} from "@angular/material/snack-bar";
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +24,7 @@ export class SharedService {
   companyLogoAnimation: any = appConstants.creativeHandLogoAnimation;
   businessLogoName: any = '';
   businessLogoImageLink: any = '';
-  constructor(@Inject(PLATFORM_ID) private platformId: object, public dialog: MatDialog, public imageCompress: NgxImageCompressService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: object, public dialog: MatDialog, public imageCompress: NgxImageCompressService, public snackBar: MatSnackBar) { }
 
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password').value;
@@ -64,7 +64,7 @@ export class SharedService {
       var orientation = -1;
       const sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
       console.log('Image Original Size', sizeOfOriginalImage);
-      this.imageCompress.compressFile(image, orientation, 50, 50).then(
+      this.imageCompress.compressFile(image, orientation, 70, 100).then(
         result => {
           const imgResultAfterCompress = result;
           const base64 = result;
@@ -103,6 +103,13 @@ export class SharedService {
 
   generateImageUrl(path) {
     return `${appConstants.baseUrl}${path}?${new Date().getTime()}`
+  }
+
+  showToast(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+    });
   }
 
 }

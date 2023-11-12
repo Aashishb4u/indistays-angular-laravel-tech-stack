@@ -1,0 +1,32 @@
+<div class="image-price-card-container">
+  <ng-container *ngFor="let acc of cardData">
+    <div [routerLink]="acc.url" (click)="onSelectPriceCard(acc)" class="cursor-pointer img-price-card p-4">
+      <div class="img"  >
+        <img [src]="acc?.img" alt="">
+      </div>
+      <div class="row-1 my-3 d-flex justify-content-between">
+        <div class="title">
+          <span style="color: #999; font-size: 18px">{{acc?.name}}</span> <br>
+          {{acc?.camping?.name}}
+        </div>
+<!--        <div class="rating"> <i class="fa fa-star"></i> &nbsp;-->
+<!--          <span class="rate">{{acc?.ratings}}</span>-->
+<!--        </div>-->
+      </div>
+      <div class="row-2 d-flex align-items-center justify-content-between">
+        <div class="place">
+          <i class="fa fa-map-marker"></i> &ngsp; {{acc?.camping?.destination?.name}}
+        </div>
+        <div class="price d-flex gap-1 align-items-center">
+          <div class="actual-price me-3">{{acc?.price}}</div>
+          <div class="discount-price">{{acc?.discount_price}}</div>
+        </div>
+      </div>
+<!--      <div class="row-3">-->
+<!--        <div class="duration">-->
+<!--          Know More <i class="fa fa-chevron-right "></i>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </ng-container>
+</div>

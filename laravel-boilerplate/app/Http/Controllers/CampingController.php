@@ -210,7 +210,8 @@ class CampingController extends Controller
         }
 
         // Eager load the 'userRole' relationship
-        $query->with('images');
+        $query->with(['images', 'destination', 'accommodations', 'accommodations.amenities']);
+
         $campings = $query->get();
         return response()->json(['data' => $campings]);
     }

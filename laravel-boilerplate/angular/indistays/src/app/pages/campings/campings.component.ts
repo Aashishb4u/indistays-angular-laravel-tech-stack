@@ -1,0 +1,24 @@
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from "../../services/api.service";
+import {SharedService} from "../../services/shared.service";
+
+@Component({
+  selector: 'app-campings',
+  templateUrl: './campings.component.html',
+  styleUrls: ['./campings.component.scss']
+})
+export class CampingsListingComponent implements OnInit {
+  accommodations: any = [];
+  constructor(public apiService: ApiService, public sharedService: SharedService) {}
+  ngOnInit() {
+    this.apiService.getDataStream();
+    this.apiService.dataStream.subscribe((res) => {
+      this.accommodations = [...res.accommodations].map((val) => {
+        return {
+          ...val,
+          img: this.sharedService.generateImageUrl(val.profile_image_url)
+        }
+      });
+    });
+  }
+}

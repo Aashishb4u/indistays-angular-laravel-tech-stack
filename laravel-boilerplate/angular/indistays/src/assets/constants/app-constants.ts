@@ -12,9 +12,9 @@ export const appConstants = {
     creativeHandLogoAnimation: 'assets/company-logo/creative_hand_logo_animation.gif',
 
   // Base Url
-    baseUrl: 'http://127.0.0.1:8001',
-    baseAuthUrl: 'http://127.0.0.1:8001/api/auth/',
-    baseURLAdminAPIs: 'http://127.0.0.1:8001/api/v1/',
-    domainUrlApi: 'http://127.0.0.1:8001/api/',
+    baseUrl: 'http://127.0.0.1:8000',
+    baseAuthUrl: 'http://127.0.0.1:8000/api/auth/',
+    baseURLAdminAPIs: 'http://127.0.0.1:8000/api/v1/',
+    domainUrlApi: 'http://127.0.0.1:8000/api/',
 };
 

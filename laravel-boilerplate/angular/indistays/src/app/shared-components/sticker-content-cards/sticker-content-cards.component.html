@@ -1,0 +1,13 @@
+<div class="content-tabs-container">
+  <div *ngFor="let category of categories" class="single-content-tab">
+    <div class="image">
+      <img [src]="category?.img" alt="">
+    </div>
+    <div class="title text-center">
+      {{category?.name}}
+    </div>
+    <div class="content">
+      {{category?.description}}
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, from} from "rxjs";
+import {Injectable, OnInit} from '@angular/core';
+import {BehaviorSubject, forkJoin, from} from "rxjs";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {StorageService} from "./storage.service";
@@ -18,9 +18,44 @@ export class ApiService {
   currentAccessToken: any = null;
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   onLoadToken = new BehaviorSubject<any>('');
+  dataStream = new BehaviorSubject<any>({
+    destinations: [],
+    camping: [],
+    accommodations: []
+  });
   constructor(private router: Router, private http: HttpClient, public storageService: StorageService, public snackBar: MatSnackBar) {
     this.loadToken();
   }
+
+  getDataStream(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const destinations$ = this.getAllDestinationsForWebsite();
+      const camping$ = this.getAllCampingForWebsite();
+      const accommodations$ = this.getAllAccommodationsForWebsite();
+
+      forkJoin([destinations$, camping$, accommodations$]).subscribe(
+          (res: any) => {
+            const destinations = res[0].data;
+            const campings = res[1].data;
+            const accommodations = res[2].data;
+
+            const result = {
+              destinations: destinations,
+              camping: campings,
+              accommodations: accommodations,
+            };
+
+            this.dataStream.next(result);
+            resolve(result); // Resolve the promise with the result
+          },
+          error => {
+            this.commonError(error);
+            reject(error); // Reject the promise with the error
+          }
+      );
+    });
+  }
+
 
   loadToken() {
     const token = this.storageService.getStorageValue(appConstants.ACCESS_TOKEN_KEY);

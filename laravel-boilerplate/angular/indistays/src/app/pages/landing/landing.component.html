@@ -1,5 +1,3 @@
-<div class="full-width">
-</div>
 <app-app-header></app-app-header>
 <div style="background: #3f51b524">
   <div class="carousal-container">
@@ -42,7 +40,7 @@
           <div *ngIf="selectedTab === 'camping'" class="col-lg-3">
             <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
               <mat-label>Camping</mat-label>
-              <mat-select formControlName="destination">
+              <mat-select formControlName="camping">
                 <mat-option *ngFor="let camp of campings"
                             [value]="camp.id">{{ camp.name }}</mat-option>
               </mat-select>
@@ -63,14 +61,14 @@
           <div class="col-lg-3">
             <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
               <mat-label>People</mat-label>
-              <mat-select formControlName="destination">
+              <mat-select formControlName="people">
                 <mat-option *ngFor="let bed of beds"
                             [value]="bed">{{ bed }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="col-lg-1 d-flex">
-            <button class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
+            <button (click)="onSearch()" class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
               <mat-icon>search</mat-icon>
             </button>
           </div>
@@ -78,94 +76,30 @@
       </form>
     </div>
   </div>
+
+
   <div class="landing-container">
     <div>
-      <div class=" section-title mb-1-5rem mt-6rem align-items-start d-flex flex-column justify-content-start">
-        <div class="section-category">
-          CATEGORY
-        </div>
-        <div class="section-name">
-          We Offer Best Services
-        </div>
-      </div>
-      <div class="content-tabs-container">
-        <div *ngFor="let category of categories" class="single-content-tab">
-          <div class="image">
-            <img [src]="category?.img" alt="">
-          </div>
-          <div class="title text-center">
-            {{category?.name}}
-          </div>
-          <div class="content">
-            {{category?.description}}
-          </div>
-        </div>
-      </div>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'We Offer Best Services'"
+                          [subTitle]="'CATEGORY'">
+      </app-section-header>
+      <app-sticker-content-cards></app-sticker-content-cards>
     </div>
 
-    <div class="mb-1-5rem mt-6rem d-flex justify-content-between align-items-center">
-      <div class=" section-title align-items-start d-flex flex-column justify-content-start">
-        <div class="section-category">
-          Top Selling
-        </div>
-        <div class="section-name">
-          Destinations
-        </div>
-      </div>
-      <div class="see-more cursor-pointer">
-        see more
-      </div>
-    </div>
+    <app-section-header [showMore]="true"
+                        [mainTitle]="'Top destinations'"
+                        [subTitle]="'Top Selling'">
+    </app-section-header>
 
-    <div class="image-tiles">
-      <ng-container *ngFor="let image of imageTiles">
-        <div class="single-image-tile" [style.background-image]="'url(' + image?.img + ')'">
-          <div class="image-title">
-            {{ image?.name }}
-          </div>
-        </div>
-      </ng-container>
+    <app-image-tiles [tilesData]="tilesData"></app-image-tiles>
 
-    </div>
+    <app-section-header [showMore]="false"
+                        [mainTitle]="'Camping Accommodations'"
+                        [subTitle]="'Top Selling'">
+    </app-section-header>
 
-    <div class="mb-1-5rem mt-6rem section-title align-items-start d-flex flex-column justify-content-start">
-      <div class="section-category">
-        Top Selling
-      </div>
-      <div class="section-name">
-        Camping Accommodations
-      </div>
-    </div>
-
-    <div class="image-price-card-container">
-      <ng-container *ngFor="let acc of accommodations">
-        <div class="img-price-card p-4">
-          <div class="img"  >
-            <img [src]="acc?.img" alt="">
-          </div>
-          <div class="row-1 my-3 d-flex justify-content-between">
-            <div class="title">{{acc?.name}}</div>
-            <div class="rating"> <i class="fa fa-star"></i> &nbsp;
-              <span class="rate">{{acc?.ratings}}</span>
-            </div>
-          </div>
-          <div class="row-2 d-flex align-items-center justify-content-between">
-            <div class="place">
-              <i class="fa fa-map-marker"></i> &ngsp; {{acc?.destination}}
-            </div>
-            <div class="price d-flex gap-1 align-items-center">
-              <div class="actual-price me-3">{{acc?.actualPrice}}</div>
-              <div class="discount-price">{{acc?.discountPrice}}</div>
-            </div>
-          </div>
-          <div class="row-3">
-            <div class="duration">
-              {{acc?.daysCount}} Days Trip
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </div>
+    <app-price-ui-cards (onSelect)="onSelectAccommodation($event)" [cardData]="accommodations"></app-price-ui-cards>
 
 <!--    <div class="row">-->
 <!--      <div class="d-flex align-items-center col-1">-->
@@ -221,44 +155,12 @@
 <!--      </div>-->
 <!--    </div>-->
 
-    <div class="mb-1-5rem mt-6rem section-title align-items-start d-flex flex-column justify-content-start">
-      <div class="section-category">
-        Top Selling
-      </div>
-      <div class="section-name">
-        Camping Accommodations
-      </div>
-    </div>
 
-    <ngx-slick-carousel class="carousel"
-                        #slickModal="slick-carousel"
-                        [config]="slideConfig"
-                        (init)="slickInit($event)"
-                        (breakpoint)="breakpoint($event)"
-                        (afterChange)="afterChange($event)"
-                        (beforeChange)="beforeChange($event)">
-      <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-        <div style="margin: 1rem" class="card feedback-card overflow-hidden">
-          <div class="card-body">
-            <p class="feedback-content card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <div class="d-flex justify-content-center align-items-center">
-              <img style="max-width: 45px" src="assets/icons/man.png" alt="">
-              <div class="ms-2">
-                <div class="feedback-title">Willson Erickson </div>
-                <div class="d-flex fd-rating">
-                  <div>4.8</div>
-                  <div class="stars ms-1">
-                    <div class="str" *ngFor="let star of [1,2,3,4]">
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ngx-slick-carousel>
+    <app-section-header [showMore]="false"
+                        [mainTitle]="'Camping Accommodations'"
+                        [subTitle]="'Top Selling'">
+    </app-section-header>
+    <app-testimonial-cards></app-testimonial-cards>
   </div>
 </div>
 

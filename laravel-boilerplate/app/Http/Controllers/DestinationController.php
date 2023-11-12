@@ -196,8 +196,7 @@ class DestinationController extends Controller
     }
 
     // Get all users
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $query = Destination::query();
 
         // Add a filter by 'id' if 'user_id' is provided in the request
@@ -212,8 +211,9 @@ class DestinationController extends Controller
             $query->where('name', 'LIKE', "%{$nameFilter}%");
         }
 
-        // Eager load the 'userRole' relationship
-        $query->with('images');
+        // Eager load the 'images' and 'campings' relationships
+        $query->with(['images', 'campings', 'campings.accommodations', 'campings.accommodations.amenities']);
+
         $destinations = $query->get();
         return response()->json(['data' => $destinations]);
     }

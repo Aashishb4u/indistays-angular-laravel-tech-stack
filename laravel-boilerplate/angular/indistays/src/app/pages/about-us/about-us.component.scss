@@ -1,0 +1,103 @@
+.about-us-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-us-banner {
+  width: 100%;
+  img {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+  }
+}
+
+.about-us-content {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 4rem 0 0;
+  justify-content: center;
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    .image-tile {
+      background-color: #ddd; /* Placeholder color */
+      height: 100px; /* Adjust as needed */
+    }
+  }
+
+  .left-image {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    .image-tile {
+      width: 50%;
+      padding: 0 2rem;
+      img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 39px;
+        box-shadow: 0 0 2.65682px 0 rgba(0, 0, 0, 0.07), 0 2.65682px 3.98523px -0.66421px rgba(0, 0, 0, 0.10);
+      }
+      /* Styles specific to left-image image-tile */
+    }
+
+    .image-content {
+      padding: 2rem;
+      flex-basis: 50%;
+    }
+  }
+
+  .right-image {
+    margin-bottom: 56px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    .image-tile {
+      flex-basis: 50%;
+      padding: 0 2rem;
+
+      img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 39px;
+        box-shadow: 0 0 2.65682px 0 rgba(0, 0, 0, 0.07), 0 2.65682px 3.98523px -0.66421px rgba(0, 0, 0, 0.10);
+      }
+      /* Styles specific to right-image image-tile */
+    }
+
+    .image-content {
+      padding: 2rem;
+      flex-basis: 50%;
+    }
+  }
+
+  .image-content {
+    .title {
+      color: #1A2B0D;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: capitalize;
+      margin-bottom: 2rem;
+    }
+    .content {
+      color: rgba(5, 59, 49, 0.50);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 164.5%; /* 23.03px */
+    }
+  }
+}
+

@@ -229,6 +229,7 @@ class AccommodationController extends Controller
             'camping' => function ($que) {
                 $que->with('destination'); // Eager load the 'destination' relationship of 'camping'
             },
+            'camping.destination',
             'amenities' // Eager load the amenities relationship
         ]);
         $destinations = $query->get();

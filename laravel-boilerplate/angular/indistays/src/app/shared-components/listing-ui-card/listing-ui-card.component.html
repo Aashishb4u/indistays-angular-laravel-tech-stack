@@ -1,0 +1,35 @@
+<div class="listing-list-container d-flex flex-column gap-5">
+  <ng-container *ngFor="let list of listing">
+    <div [routerLink]="list?.url" class="single-list p-3">
+      <img [src]="list?.img" alt="">
+      <div class="details-container">
+        <div class="listing-t-c">
+          <div class="title">{{list?.name}}</div>
+          <div class="description" [innerHTML]="list?.description">
+          </div>
+          <div class="d-flex gap-3 amenity-icons">
+            <i  class="color-secondary fa {{amenity?.icon}}" *ngFor="let amenity of amenities"></i>
+          </div>
+        </div>
+        <!--      <div class="amenities">-->
+        <!--        <div *ngFor="let amenity of amenities" class="amenity">-->
+        <!--          <i class="fa {{amenity?.icon}}"></i>-->
+        <!--          <div class="amen-name">{{amenity?.name}}</div>-->
+        <!--        </div>-->
+        <!--      </div>-->
+        <div class="bottom-listing-footer align-items-center d-flex justify-content-between">
+          <div>
+            <div class="footer-label">Starting At</div>
+            <div>
+              <span class="currency">$30</span>
+              <span class="n-l">/night</span>
+            </div>
+          </div>
+          <div>
+            <button class="booking-btn btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

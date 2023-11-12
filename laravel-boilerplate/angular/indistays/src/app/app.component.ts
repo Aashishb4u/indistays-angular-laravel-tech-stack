@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {appConstants} from "../assets/constants/app-constants";
 import {StorageService} from "./services/storage.service";
 import {ApiService} from "./services/api.service";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit{
   constructor(private storageService: StorageService, public apiService: ApiService) {
 
   }
+
 
   ngOnInit(): void {
     this.storageService.getStoredValue(appConstants.ACCESS_TOKEN_KEY).then((token) => {

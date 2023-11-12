@@ -57,6 +57,19 @@ import { AddEditCustomBookingComponent } from './pages/dashboard/custom-bookings
 // Import your library
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FooterComponent } from './shared-components/footer/footer.component';
+import { SectionHeaderComponent } from './shared-components/section-header/section-header.component';
+import { StickerContentCardsComponent } from './shared-components/sticker-content-cards/sticker-content-cards.component';
+import { ImageTilesComponent } from './shared-components/image-tiles/image-tiles.component';
+import { PriceUiCardsComponent } from './shared-components/price-ui-cards/price-ui-cards.component';
+import { TestimonialCardsComponent } from './shared-components/testimonial-cards/testimonial-cards.component';
+import { DestinationDetailsComponent } from './pages/destination-details/destination-details.component';
+import { ListingUiCardComponent } from './shared-components/listing-ui-card/listing-ui-card.component';
+import { CampingDetailsComponent } from './pages/camping-details/camping-details.component';
+import {NgxGalleryModule} from "@kolkov/ngx-gallery";
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import {DestinationsListingComponent} from "./pages/destinations/destinations.component";
+import {CampingsListingComponent} from "./pages/campings/campings.component";
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +85,7 @@ import { FooterComponent } from './shared-components/footer/footer.component';
     ConfirmationPopupComponent,
     DebounceKeyUpDirective,
     DestinationsComponent,
+    DestinationsListingComponent,
     AddEditDestinationComponent,
     CampingsComponent,
     AddEditCampingComponent,
@@ -82,6 +96,17 @@ import { FooterComponent } from './shared-components/footer/footer.component';
     CustomBookingsComponent,
     AddEditCustomBookingComponent,
     FooterComponent,
+    SectionHeaderComponent,
+    StickerContentCardsComponent,
+    ImageTilesComponent,
+    PriceUiCardsComponent,
+    TestimonialCardsComponent,
+    DestinationDetailsComponent,
+    ListingUiCardComponent,
+    CampingDetailsComponent,
+    ContactUsComponent,
+    CampingsListingComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +141,8 @@ import { FooterComponent } from './shared-components/footer/footer.component';
     NgbModule,
     GoogleMapsModule,
     NgbCarouselModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    NgxGalleryModule
   ],
   providers: [
     NgxImageCompressService,

@@ -1,0 +1,257 @@
+.camping-details {
+  min-height: 100vh;
+  padding: 0 4rem 2rem;
+
+  .camp-header-section {
+    .camp-name {
+      color: #1A2B0D;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 132.5%; /* 63.6px */
+      text-transform: capitalize;
+    }
+
+    .camp-description {
+      color: rgba(26, 43, 13, 0.50);
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 164.5%; /* 32.9px */
+    }
+
+    .section-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+
+      ngx-gallery {
+        height: 90% !important;
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+.section-sub-title {
+  color: #1A2B0D;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 132.5%; /* 42.4px */
+  text-transform: capitalize;
+  margin: 3rem 0 1.5rem;
+}
+
+.amenities {
+  display: flex;
+  gap: 3rem;
+
+  .amenity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: #fff;
+    min-width: 100px;
+    box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
+  }
+
+
+  .amenity i {
+    font-size: 24px; /* Adjust the icon size as needed */
+    margin-bottom: 5px;
+    color: #7CB518;
+  }
+
+  .amen-name {
+    font-size: 12px; /* Adjust the title font size as needed */
+    color: #1A2B0D;
+    font-weight: bold;
+  }
+}
+
+.location {
+  .loc-tile {
+    min-height: 350px;
+    //background: #1A2B0D;
+    border-radius: 20px;
+    box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
+    iframe {
+      width: 100%;
+    }
+  }
+}
+
+.address-text {
+  color: rgba(26, 43, 13, 0.5);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 164.5%; /* 32.9px */
+}
+
+.accommodation-listing-container {
+  display: flex;
+  gap: 34px;
+  justify-content: space-between;
+  padding: 3rem 0 0;
+  .accommodation-list-title {
+    color: #1A2B0D;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 132.5%;
+    text-transform: capitalize;
+    flex-basis: 50%;
+    height: 80px;
+  }
+  .summary {
+    flex-basis: 50%;
+    min-width: 25%;
+    .summary-tile {
+      border-radius: 24px;
+      background: #FFF;
+      box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
+      //border-radius: 20px;
+    }
+    .summary-row {
+      border-bottom: 1px solid lightgray;
+      .trash-icon {
+        color: red;
+        cursor: pointer;
+      }
+    }
+    .price-label {
+      color: #828282;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+    }
+  }
+
+  .accommodation-listing {
+    .height-80 {
+      height: 80px;
+    }
+    .custom-date-picker {
+      width: 300px;
+    }
+    .single-list {
+      display: flex;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
+      justify-content: space-between;
+      .single-list-img {
+        flex-basis: 30%;
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          border-radius: 15px;
+        }
+      }
+    }
+
+
+    .details-container {
+      flex: 1;
+      padding: 16px;
+      flex-direction: column;
+    }
+
+    .listing-t-c {
+      gap: 5px;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #d3d3d369;
+      padding: 0 0 10px 0;
+      .amenity-icons i {
+        font-size: 20px;
+      }
+    }
+
+    .title {
+      color: #1A2B0D;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 132.5%; /* 31.8px */
+      text-transform: capitalize;
+    }
+  }
+}
+
+.round-btn {
+  background: #7CB518 !important;
+  border-radius: 45px;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.counter-btn-container {
+  .counter-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid #D6D6D6;
+    background-color: #fff;
+    color: #191919;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 132.5%; /* 31.8px */
+    text-transform: capitalize;
+  }
+  .button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  .value {
+    min-width: 30px;
+    text-align: center;
+    padding: 0 10px;
+  }
+}
+
+.price-container {
+  .actual-price {
+    color: #28381C;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 132.5%; /* 31.8px */
+    text-transform: capitalize;
+  }
+  .discount-price {
+    color: #5E6282;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 132.5%; /* 21.2px */
+    text-transform: capitalize;
+    text-decoration: line-through
+  }
+}
+
+.footer-label {
+  color: #5E6282;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 132.5%; /* 18.55px */
+  text-transform: capitalize;
+}

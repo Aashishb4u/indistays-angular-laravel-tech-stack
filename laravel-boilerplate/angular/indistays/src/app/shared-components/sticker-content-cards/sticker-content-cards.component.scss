@@ -1,0 +1,37 @@
+.content-tabs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22%, 1fr));
+  gap: 1rem;
+  flex: 1 1 auto;
+  img {
+    max-width: 40px;
+  }
+  .single-content-tab {
+    cursor: pointer;
+    border-radius: 48px;
+    box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
+    border: 1px solid #D9D9D9;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    .content {
+      text-align: center;
+      color: #5E6282;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 18px;
+    }
+    .title {
+      color: #1A2B0D;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+}

@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../../services/api.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SharedService} from "../../services/shared.service";
+import {Router} from "@angular/router";
+import * as moment from "moment";
 declare var $: any;
 
 @Component({
@@ -10,7 +13,12 @@ declare var $: any;
 })
 export class LandingComponent  implements OnInit {
 
-  constructor(public apiService: ApiService, public formBuilder: FormBuilder) {
+  constructor(
+    public sharedService: SharedService,
+    public apiService: ApiService,
+    public router: Router,
+    public formBuilder: FormBuilder
+  ) {
 
   }
   images: any = [1,2,3].map((n) => `assets/images/banner_${n}.png`);
@@ -19,147 +27,68 @@ export class LandingComponent  implements OnInit {
   beds: any = [1, 2, 3, 4, 5];
   filterForm: FormGroup;
   selectedTab: any = 'destination';
-  destinationList: any = ['Himachal', 'Pune', 'Mumbai', 'Hydrabad', 'Mumbai', 'Hydrabad']
-  imageTiles: any = [1,2,3,4].map((tile: any, index) => {
-    return {
-      name: this.destinationList[index],
-      img: 'assets/images/tile_' + tile + '.png'
-    }
-  });
-
   categories: any = [];
   accommodations: any = [];
-
-  slides = [
-    {img: "http://placehold.it/350x150/000000"},
-    {img: "http://placehold.it/350x150/111111"},
-    {img: "http://placehold.it/350x150/333333"},
-    {img: "http://placehold.it/350x150/666666"}
-  ];
-  slideConfig = {
-    // centerMode: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 1
-        }
-      }
-    ]
-  };
-
+  tilesData: any = [];
+  twoDaysBefore: any;
+  twoDaysAfter: any;
   ngOnInit() {
-    this.accommodations = [
-        {
-          name: 'Hotel Ranwara',
-          ratings: 4,
-          destination: 'Pune',
-          actualPrice: '$2000',
-          discountPrice: '$1800',
-          daysCount: 10,
-          img: 'assets/images/banner_4.png'
-        },
-      {
-          name: 'Hotel Bhandardara',
-          ratings: 3,
-          destination: 'Rajasthan',
-          actualPrice: '$2500',
-          discountPrice: '$2000',
-          daysCount: 10,
-          img: 'assets/images/tile_1.png'
-        },
-      {
-          name: 'Hotel Nile',
-          ratings: 3,
-          destination: 'Karjat',
-          actualPrice: '$2500',
-          discountPrice: '$2000',
-          daysCount: 10,
-          img: 'assets/images/tile_2.png'
-        },
-    ]
-    this.categories =  [{
-      name: 'Galmping',
-      description: 'Glamorous camping that combines the comforts of home with the outdoor experience',
-      img: 'assets/images/galmping.png'
-    },
-      {
-      name: 'Camping Resorts',
-      description: 'Campgrounds with extensive amenities and recreational facilities.',
-      img: 'assets/images/camping.png'
-    },
-      {
-      name: 'Backcountry Camping',
-      description: 'Camping in remote wilderness areas away from established campgrounds',
-      img: 'assets/images/tent.png'
-    },
-      {
-      name: 'Group Camping',
-      description: 'Campgrounds or sites designed for large groups, such as scout troops or family reunions',
-      img: 'assets/images/tent_people.png'
-    }];
-    this.getAllDestinations();
-    this.getAllCamping();
+    const currentDate = moment(); // You can replace this with your actual date=
+    this.twoDaysBefore = currentDate.clone().subtract(2, 'days');
+    this.twoDaysAfter = currentDate.clone().add(2, 'days');
+    console.log(typeof this.twoDaysAfter);
+    this.apiService.getDataStream();
     this.filterForm = this.formBuilder.group({
       destination: ['', Validators.required],
-      start_date: ['', Validators.required],
-      end_date: ['', Validators.required],
+      camping: ['', Validators.required],
+      people: [1, Validators.required],
+      start_date: [this.twoDaysBefore.format('YYYY-MM-DD'), Validators.required],
+      end_date: [this.twoDaysAfter.format('YYYY-MM-DD'), Validators.required],
       // password: ['', Validators.required]
+    });
+    this.apiService.dataStream.subscribe((res) => {
+      this.destinations = res.destinations;
+      this.tilesData = [...res.destinations].map((val) => {
+        return {
+          name: val.name,
+          url: `/destination-details/${val.id}`,
+          img: this.sharedService.generateImageUrl(val.profile_image_url)
+        }
+      });
+      this.campings = res.camping;
+      this.accommodations = [...res.accommodations].map((val) => {
+        return {
+          ...val,
+          url: `/camping-details/${val.id}`,
+          img: this.sharedService.generateImageUrl(val.profile_image_url)
+        }
+      });
     });
   }
 
-  getAllDestinations() {
-    this.apiService.getAllDestinationsForWebsite().subscribe((res: any) => {
-      this.destinations = res.data;
-    })
+  onSelectAccommodation(event) {
+    console.log(event);
   }
 
-  getAllCamping() {
-    this.apiService.getAllCampingForWebsite().subscribe((res: any) => {
-      this.campings = res.data;
-    })
+  onSearch() {
+    const dest = this.filterForm.get('destination').value;
+    const camp = this.filterForm.get('camping').value;
+    if(dest === '' && camp === '') {
+      this.filterForm.markAllAsTouched();
+      this.apiService.showToast('Please select Destination/Camping')
+      return;
+    }
+
+    if(this.selectedTab === 'destination') {
+      const id =  this.filterForm.get('destination').value;
+      this.router.navigate([`/destination-details/${id}`]);
+    } else if (this.selectedTab === 'camping') {
+      const id =  this.filterForm.get('camping').value;
+      this.router.navigate([`/camping-details/${id}`]);
+    }
   }
 
   onChangeTab(tab) {
     this.selectedTab = tab;
   }
-
-  addSlide() {
-    this.slides.push({img: "http://placehold.it/350x150/777777"})
-  }
-
-  removeSlide() {
-    this.slides.length = this.slides.length - 1;
-  }
-
-  slickInit(e) {
-    console.log('slick initialized');
-  }
-
-  breakpoint(e) {
-    console.log('breakpoint');
-  }
-
-  afterChange(e) {
-    console.log('afterChange');
-  }
-
-  beforeChange(e) {
-    console.log('beforeChange');
-  }
-
 }

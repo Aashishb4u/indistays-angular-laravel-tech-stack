@@ -1,0 +1,9 @@
+<div class="image-tiles">
+  <ng-container *ngFor="let image of tilesData">
+    <div [routerLink]="image.url" class="single-image-tile" [style.background-image]="'url(' + image?.img + ')'">
+      <div class="image-title">
+        {{ image?.name }}
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -18,12 +18,24 @@ import {CustomPricingComponent} from "./pages/dashboard/custom-pricing/custom-pr
 import {AddEditCustomPricingComponent} from "./pages/dashboard/custom-pricing/add-edit-custom-pricing/add-edit-custom-pricing.component";
 import {CustomBookingsComponent} from "./pages/dashboard/custom-bookings/custom-bookings.component";
 import {AddEditCustomBookingComponent} from "./pages/dashboard/custom-bookings/add-edit-custom-booking/add-edit-custom-booking.component";
+import {DestinationDetailsComponent} from "./pages/destination-details/destination-details.component";
+import {CampingDetailsComponent} from "./pages/camping-details/camping-details.component";
+import {ContactUsComponent} from "./pages/contact-us/contact-us.component";
+import {DestinationsListingComponent} from "./pages/destinations/destinations.component";
+import {CampingsListingComponent} from "./pages/campings/campings.component";
+import {AboutUsComponent} from "./pages/about-us/about-us.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirect to 'users' by default
   // { path:  '', component:  LandingComponent, data: { title: 'Home | Indistays' }},
   { path:  'home', component:  LandingComponent, data: { title: 'Home | Indistays' }},
   { path:  'login', component:  LoginComponent, canActivate: [async () => await inject(AuthService).userBeforeLoggedIn()]},
+  { path: 'destination-details/:id', component: DestinationDetailsComponent },
+  { path: 'camping-details/:id', component: CampingDetailsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'destinations', component: DestinationsListingComponent },
+  { path: 'campings', component: CampingsListingComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
