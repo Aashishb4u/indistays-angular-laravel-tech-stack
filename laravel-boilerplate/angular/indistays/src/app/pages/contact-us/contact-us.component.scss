@@ -1,3 +1,101 @@
-.contactus-container {
-  padding: 15px 3rem;
+.contact-us-container {
+  height: 100vh;
+  background: #3f51b524;
+  /* Add additional styling as needed */
+  padding: 2rem 4rem;
+  .contact-us-title {
+
+    .main-title {
+      color: #1A2B0D;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.2; /* 133.3% */
+    }
+
+    .sub-text {
+      width: 60%;
+      color: #8C9586;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.3; /* 26.24px */
+    }
+  }
+
+  .form-container {
+
+    .contact-info {
+      .contact-title {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: capitalize;
+      }
+      position: relative;
+      border-radius: 28px 0 0 28px;
+      padding: 2rem 0 2rem 4rem;
+      background: #383838;
+      color: #fff;
+      flex-basis: 30%;
+      .icons-container {
+        position: absolute;
+        bottom: 1rem;
+        i {
+          color: #fff;
+          font-size: 20px;
+          height: 30px;
+          width: 30px;
+          cursor: pointer;
+        }
+      }
+      .menu-container {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        .menu-header {
+          color: #FFF;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24px; /* 150% */
+          letter-spacing: 0.1px;
+          margin-bottom: 16px;
+          text-transform: uppercase;
+        }
+        .menu {
+          color: #999;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 20px; /* 142.857% */
+          margin-bottom: 8px;
+        }
+      }
+    }
+
+    .contact-form {
+      border-radius: 0 28px 28px 0;
+      flex-basis: 70%;
+      padding: 2rem 3rem;
+      box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
+      background: #fff;
+      .form-title {
+        color: #1A2B0D;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+      .form-sub-title {
+        color: #8C9586;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; /* 150% */
+        letter-spacing: 0.16px;
+      }
+    }
+  }
 }

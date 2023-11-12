@@ -1,5 +1,81 @@
 <app-app-header></app-app-header>
-<div class="contactus-container">
-
+<div class="contact-us-container">
+  <div class="contact-us-title">
+<!--    <div class="main-title mb-3">Contact us</div>-->
+<!--    <div class="sub-text">-->
+<!--      Leave an inquiry or contact us via email and phone. We will contact you within 24 hours during work days-->
+<!--    </div>-->
+  </div>
+  <div class="form-container d-flex">
+    <div class="contact-info">
+      <div class="contact-title">Contact Information</div>
+      <div class="menu-container py-5">
+        <div class="menu mb-3 d-flex align-items-start gap-3">
+          <i class="pt-1 fa fa-mobile"></i>
+          +1012 3456 789</div>
+        <div class="menu mb-3 d-flex align-items-start gap-3">
+          <i class="pt-1 fa fa-envelope"></i>
+          demo@gmail.com</div>
+        <div class="menu mb-3 d-flex align-items-start gap-3">
+          <i class="pt-1 fa fa-map"></i>
+          132 Dartmouth Street Boston, Massachusetts 02156 United States</div>
+      </div>
+      <div class="icons-container d-flex gap-3">
+        <i class="fa fa-whatsapp"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-youtube"></i>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="d-flex gap-2 flex-column">
+        <div class="form-title">Get in Touch</div>
+        <div  class="form-sub-title">Enim tempor eget pharetra facilisis sed maecenas adipiscing. Eu leo molestie vel, ornare non id blandit netus.</div>
+      </div>
+      <div class="py-4 full-width">
+        <form [formGroup]="contactUsForm">
+          <div class="row">
+            <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Name</mat-label>
+                <input tabindex="1" #name maxlength="40" matInput formControlName="name" type="text" placeholder="Enter Camping Name">
+                <mat-hint align="end">{{name.value.length}} / 40</mat-hint>
+                <mat-error *ngIf="contactUsForm.get('name')?.invalid && contactUsForm.get('name')?.touched">Please enter a valid Name</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input tabindex="1" #email maxlength="40" matInput formControlName="email" type="email" placeholder="Enter Email">
+                <mat-hint align="end">{{email.value.length}} / 40</mat-hint>
+                <mat-error *ngIf="contactUsForm.get('email')?.invalid && contactUsForm.get('email')?.touched">Please enter a valid Email</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Phone Number</mat-label>
+                <input tabindex="1" #phoneNumber maxlength="40" matInput formControlName="phoneNumber" type="text" placeholder="Enter Contact Number">
+                <mat-error *ngIf="contactUsForm.get('phoneNumber')?.invalid && contactUsForm.get('phoneNumber')?.touched">Please enter a valid Contact Number</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>How did you find us?</mat-label>
+                <mat-select formControlName="finding">
+                  <mat-option *ngFor="let item of findings"
+                              [value]="item">{{ item }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
+              <button class="color-white" mat-raised-button color="accent">
+                Send Message
+              </button>
+            </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <app-footer></app-footer>
