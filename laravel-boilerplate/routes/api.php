@@ -102,10 +102,10 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
 
     // Custom Bookings API
     Route::get('custom-booking', [BookingController::class, 'paginate']);
-    Route::post('custom-booking', [BookingController::class, 'addCustomPricing']);
-    Route::put('custom-booking/{id}', [BookingController::class, 'editCustomPricing'])
+    Route::post('custom-booking', [BookingController::class, 'addCustomBooking']);
+    Route::put('custom-booking/{id}', [BookingController::class, 'editCustomBooking'])
         ->where('id', '[0-9]+');
-    Route::delete('custom-booking/{id}', [BookingController::class, 'deleteCustomPricing']);
+    Route::delete('custom-booking/{id}', [BookingController::class, 'deleteCustomBooking']);
     Route::post('custom-booking/all', [BookingController::class, 'index']);
 
     // Amenities APIs

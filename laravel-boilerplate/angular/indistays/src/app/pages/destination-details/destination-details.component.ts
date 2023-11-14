@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ApiService} from "../../services/api.service";
 import {SharedService} from "../../services/shared.service";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-destination-details',
@@ -15,19 +16,18 @@ export class DestinationDetailsComponent implements OnInit {
   destinations: any = [];
   featuredImages: any = [];
   camping: any = [];
-  constructor(public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {
+  constructor(public router: Router, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {
     this.destinationId = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
     // Assuming currentDate is the date for which you want to calculate
-
-
     this.apiService.getDataStream().then((res) => {
       this.apiService.dataStream.subscribe((val) => {
         this.destinations = [...val.destinations].map((val) => {
           return {
             ...val,
+            url: `/destination-details/${val.id}`,
             name: val.name,
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }

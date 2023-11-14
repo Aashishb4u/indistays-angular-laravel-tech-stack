@@ -16,6 +16,7 @@ export class CampingsListingComponent implements OnInit {
       this.accommodations = [...res.accommodations].map((val) => {
         return {
           ...val,
+          url: `/camping-details/${val.id}`,
           img: this.sharedService.generateImageUrl(val.profile_image_url)
         }
       });

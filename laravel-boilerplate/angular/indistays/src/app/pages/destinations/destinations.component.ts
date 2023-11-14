@@ -16,6 +16,7 @@ export class DestinationsListingComponent implements OnInit {
         this.destinations = [...val.destinations].map((val) => {
           return {
             ...val,
+            url: `/destination-details/${val.id}`,
             name: val.name,
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }
