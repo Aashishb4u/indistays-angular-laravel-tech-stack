@@ -46,6 +46,18 @@
   line-height: 1.4;
 }
 
-.height-75 {
+.app-header-nav {
   height: 75px;
+}
+
+@media only screen and (max-width: 600px) {
+  .menu-bar {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 15px;
+  }
+
+  .app-header-nav {
+    height: 95px;
+  }
 }

@@ -1,7 +1,7 @@
 <app-app-header></app-app-header>
 <div style="background: #3f51b524">
   <div class="carousal-container">
-    <ngb-carousel style="max-height: 100vh" [interval]="4000" [pauseOnHover]="false">
+    <ngb-carousel *ngIf="screenWidth > 500" [interval]="4000" [pauseOnHover]="false">
       <ng-template *ngFor="let image of images" ngbSlide>
         <div>
           <div class="picsum-img-wrapper">
@@ -19,7 +19,25 @@
         </div>
       </ng-template>
     </ngb-carousel>
-    <div class="landing-filters d-flex justify-content-center full-width position-absolute">
+    <ngb-carousel *ngIf="screenWidth < 500" [interval]="4000" [pauseOnHover]="false">
+      <ng-template *ngFor="let image of mobileBannerImages" ngbSlide>
+        <div>
+          <div class="picsum-img-wrapper">
+            <img [src]="image" alt="Random first slide" />
+          </div>
+          <div class="carousel-caption carousal-text">
+            <div class="header">
+              Plan your next <br>
+              vacation with us
+            </div>
+            <div class="text">
+              Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+    <div class="landing-filters d-flex justify-content-center full-width">
       <form class="d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
         <div class="row col-md-12 col-lg-10 filter-tab-container">
           <div class="m-1 mb-3 col-lg-12">
@@ -67,9 +85,14 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-lg-1 d-flex">
+          <div *ngIf="screenWidth > 500" class="col-lg-1 d-flex">
             <button (click)="onSearch()" class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
               <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="screenWidth < 500" class="col-12 d-flex">
+            <button (click)="onSearch()" class="btn p-1 btn-primary align-items-center primary-button d-flex justify-content-center search-btn color-white">
+              Search
             </button>
           </div>
         </div>

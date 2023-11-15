@@ -35,3 +35,9 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .content-tabs-container {
+    grid-template-columns: 1fr;
+  }
+}

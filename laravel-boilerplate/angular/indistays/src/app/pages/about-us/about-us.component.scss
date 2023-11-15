@@ -101,3 +101,61 @@
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .about-us-banner {
+    img {
+      height: 40vh;
+    }
+  }
+
+  .about-us-content {
+    padding: 2rem 0;
+    width: 85%;
+  }
+
+  .about-us-content {
+
+    .grid {
+      .image-tile {
+      }
+    }
+
+    .left-image {
+      flex-direction: column;
+      gap: 2rem;
+      .image-tile {
+        width: 100%;
+        padding: 0;
+      }
+      .image-content {
+        padding: 0;
+        .title {
+          text-align: center;
+          margin-bottom: 1rem;
+        }
+        .content {
+          text-align: justify;
+        }
+      }
+    }
+
+    .right-image {
+      flex-direction: column-reverse;
+      gap: 2rem;
+      .image-tile {
+        width: 100%;
+        padding: 0;
+      }
+      .image-content {
+        padding: 0;
+        .title {
+          text-align: center;
+          margin-bottom: 1rem;
+        }
+        .content {
+          text-align: justify;
+        }
+      }
+    }
+  }
+}

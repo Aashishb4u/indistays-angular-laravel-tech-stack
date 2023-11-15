@@ -134,7 +134,7 @@
   }
 
   .accommodation-listing {
-    .height-80 {
+    .accommodation-listing-fst {
       height: 80px;
     }
     .custom-date-picker {
@@ -164,6 +164,9 @@
       flex: 1;
       padding: 16px;
       flex-direction: column;
+      .details-content-container {
+        flex-direction: column;
+      }
     }
 
     .listing-t-c {
@@ -254,4 +257,81 @@
   font-weight: 400;
   line-height: 132.5%; /* 18.55px */
   text-transform: capitalize;
+}
+
+@media only screen and (max-width: 600px) {
+  .accommodation-listing {
+    .accommodation-listing-fst {
+      height: inherit !important;
+    }
+  }
+  .listing-t-c {
+    padding: 0 0 20px 0 !important;
+  }
+  .camping-details {
+    padding: 0 1rem 1rem;
+  }
+  .accommodation-listing-container {
+    flex-direction: column;
+  }
+
+  .accommodation-listing {
+    .accommodation-listing-fst {
+      flex-direction: column;
+    }
+    .single-list {
+      flex-direction: column;
+    }
+  }
+
+  .price {
+    padding: 1rem 0;
+  }
+
+  .bottom-listing-footer {
+    padding-top: 0rem !important;
+    gap: 1rem !important;
+  }
+
+  .camping-details .camp-header-section {
+    .camp-name {
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .camp-description {
+      font-size: 16px;
+      text-align: justify;
+    }
+  }
+
+  .address-text {
+    font-size: 16px;
+  }
+
+  .footer-label {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .accommodation-listing-container .accommodation-list-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+    height: inherit !important;
+  }
+
+  .section-sub-title {
+    font-size: 24px;
+    margin: 2rem 0 1rem;
+    text-align: center;
+  }
+
+  .amenities {
+    gap: 1rem;
+    flex-wrap: wrap;
+    .amenity {
+      flex: 1;
+    }
+  }
 }

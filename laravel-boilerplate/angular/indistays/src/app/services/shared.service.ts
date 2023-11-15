@@ -64,7 +64,7 @@ export class SharedService {
       var orientation = -1;
       const sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
       console.log('Image Original Size', sizeOfOriginalImage);
-      this.imageCompress.compressFile(image, orientation, 70, 100).then(
+      this.imageCompress.compressFile(image, -1, 30, 50).then(
         result => {
           const imgResultAfterCompress = result;
           const base64 = result;

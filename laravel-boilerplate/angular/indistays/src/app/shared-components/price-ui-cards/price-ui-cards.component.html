@@ -1,6 +1,7 @@
 <div class="image-price-card-container">
   <ng-container *ngFor="let acc of cardData">
-    <div [routerLink]="acc.url" (click)="onSelectPriceCard(acc)" class="cursor-pointer img-price-card p-4">
+    <div [routerLink]="acc.url" (click)="onSelectPriceCard(acc)" class="cursor-pointer
+    img-price-card">
       <div class="img"  >
         <img [src]="acc?.img" alt="">
       </div>

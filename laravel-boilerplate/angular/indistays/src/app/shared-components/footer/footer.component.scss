@@ -17,6 +17,7 @@
       font-style: normal;
       font-weight: 400;
       line-height: 160%; /* 32px */
+      margin-bottom: 1.5rem;
     }
     .white-btn {
       background: #fff;
@@ -38,6 +39,22 @@
     gap: 16px;
     padding: 4rem 5rem;
     background: #171715;
+    .fst-btm-footer {
+      display: flex;
+      justify-content: space-between;
+      .logo-ctnr {
+        max-width: 300px;
+      }
+      .icons-container {
+        i {
+          color: #fff;
+          font-size: 20px;
+          height: 30px;
+          width: 30px;
+          cursor: pointer;
+        }
+      }
+    }
     .main-title {
       color: #FFF;
       font-size: 29px;
@@ -77,6 +94,7 @@
       .menu-container {
         display: flex;
         flex-direction: column;
+        padding-right: 3rem;
         .menu-header {
           color: #FFF;
           font-size: 16px;
@@ -118,12 +136,58 @@
   }
 }
 
-.icons-container {
-  i {
-    color: #fff;
-    font-size: 20px;
-    height: 30px;
-    width: 30px;
-    cursor: pointer;
+.copy-right {
+  color: #666;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .footer-container {
+    .botton-footer {
+      padding: 2rem;
+      .fst-btm-footer {
+        flex-direction: column;
+        .logo-ctnr {
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .icons-container {
+          display: flex;
+          justify-content: center;
+          padding-top: 2rem;
+        }
+      }
+      .footer-menu {
+        .menu-container {
+          padding-right: 0 !important;
+          .menu-header, .menu {
+            //text-align: center;
+          }
+        }
+        .send-input {
+          margin-top: 1rem;
+        }
+      }
+      .copy-right {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .top-footer {
+      padding: 2rem;
+      .main-title {
+        font-size: 24px;
+      }
+      .sub-title {
+        font-size: 14px;
+        margin-bottom: 1rem;
+      }
+    }
   }
 }

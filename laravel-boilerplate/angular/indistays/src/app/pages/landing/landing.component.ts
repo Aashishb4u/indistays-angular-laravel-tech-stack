@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../../services/api.service";
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SharedService} from "../../services/shared.service";
@@ -12,16 +12,23 @@ declare var $: any;
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent  implements OnInit {
+  screenWidth: number;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    console.log(event);
+    this.screenWidth = window.innerWidth;
+  }
   constructor(
     public sharedService: SharedService,
     public apiService: ApiService,
     public router: Router,
     public formBuilder: FormBuilder
   ) {
-
+    this.screenWidth = window.innerWidth;
   }
   images: any = [1,2,3].map((n) => `assets/images/banner_${n}.png`);
+  mobileBannerImages: any = [1,2,3].map((n) => `assets/images/mobile_banner_${n}.png`);
   destinations: any = [];
   campings: any = [];
   beds: any = [1, 2, 3, 4, 5];

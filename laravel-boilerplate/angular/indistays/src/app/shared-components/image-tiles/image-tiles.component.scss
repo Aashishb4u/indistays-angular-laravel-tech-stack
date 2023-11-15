@@ -35,13 +35,20 @@
 }
 
 @media (max-width: 768px) {
+  .image-tiles {
+    grid-template-columns: 1fr;
+  }
   .single-image-tile {
     flex-basis: 45%;
   }
 }
 
 @media (max-width: 576px) {
+  .image-tiles {
+    grid-template-columns: 1fr;
+  }
   .single-image-tile {
     flex-basis: 100%;
   }
 }
+

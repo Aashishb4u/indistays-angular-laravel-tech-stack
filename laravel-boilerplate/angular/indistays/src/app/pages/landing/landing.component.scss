@@ -21,6 +21,9 @@
 .carousal-container {
   height: 80vh;
   position: relative;
+  ngb-carousel {
+    max-height: 100vh;
+  }
   //margin-bottom: 60px;
 }
 
@@ -31,6 +34,7 @@
 .landing-filters {
   z-index: 999;
   top: 70%;
+  position: absolute;
   .filter-tab-container {
     box-shadow: 0 4px 43px 0 rgba(129, 138, 184, 0.25);
     padding: 1rem;
@@ -54,3 +58,26 @@
   font-weight: bold;
 }
 
+@media only screen and (max-width: 600px){
+  .landing-filters {
+    position: relative !important;
+    top: 0;
+  }
+
+  .carousal-container {
+    height: inherit;
+    ngb-carousel {
+      height: 255px;
+    }
+  }
+
+  .search-btn {
+    width: 100% !important;
+    font-size: 16px;
+    height: 48px !important;
+  }
+
+  .landing-container {
+    padding: 10px 2rem;
+  }
+}

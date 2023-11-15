@@ -17,23 +17,19 @@ export class TestimonialCardsComponent {
     // centerMode: true,
     centerPadding: '60px',
     slidesToShow: 3,
+    speed: 300,
+    infinite: true,
+    autoplay: true,
+    dots: true,
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 600,
         settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 1
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+          autoplay: true
         }
       }
     ]
