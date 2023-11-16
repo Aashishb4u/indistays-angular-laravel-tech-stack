@@ -49,6 +49,9 @@ export class AddEditCustomBookingComponent {
     // this.getCampings();
     // this.getDestinations();
     this.componentForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      contact_number: ['', Validators.required],
       accommodation_id: ['', Validators.required],
       start_date: [Date.now(), Validators.required],
       end_date: [Date.now(), Validators.required],
@@ -149,6 +152,9 @@ export class AddEditCustomBookingComponent {
       this.componentForm.get('booking_price').setValue(+responseData.booking_price);
       this.componentForm.get('beds').setValue(+responseData.beds);
       this.componentForm.get('beds_available').setValue(responseData.beds_available);
+      this.componentForm.get('name').setValue(responseData.name);
+      this.componentForm.get('email').setValue(responseData.email);
+      this.componentForm.get('contact_number').setValue(responseData.contact_number);
     }
   }
 

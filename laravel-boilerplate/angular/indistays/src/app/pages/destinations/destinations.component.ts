@@ -9,6 +9,7 @@ import {SharedService} from "../../services/shared.service";
 })
 export class DestinationsListingComponent implements OnInit {
   destinations: any = [];
+  showSpinner: any = true;
   constructor(public apiService: ApiService, public sharedService: SharedService) {}
   ngOnInit() {
     this.apiService.getDataStream().then((res) => {
@@ -21,7 +22,8 @@ export class DestinationsListingComponent implements OnInit {
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }
         });
-      })
+      });
+      this.showSpinner = false;
     })
   }
 }

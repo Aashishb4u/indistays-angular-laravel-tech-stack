@@ -9,6 +9,7 @@ import {SharedService} from "../../services/shared.service";
 })
 export class CampingsListingComponent implements OnInit {
   accommodations: any = [];
+  showSpinner: any = true;
   constructor(public apiService: ApiService, public sharedService: SharedService) {}
   ngOnInit() {
     this.apiService.getDataStream();
@@ -20,6 +21,7 @@ export class CampingsListingComponent implements OnInit {
           img: this.sharedService.generateImageUrl(val.profile_image_url)
         }
       });
+      this.showSpinner = false;
     });
   }
 }

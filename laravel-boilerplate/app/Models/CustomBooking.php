@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomBooking extends Model
 {
-    protected $fillable = ['accommodation_id', 'booking_price', 'beds', 'start_date', 'end_date'];
+    protected $fillable = ['name', 'contact_number', 'email', 'accommodation_id', 'booking_price', 'beds', 'start_date', 'end_date'];
 
     // You can add additional methods or relationships here as needed44
     public function accommodation()

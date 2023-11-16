@@ -28,7 +28,25 @@
         <div class="container">
           <form [formGroup]="componentForm">
             <div class="row">
-              <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12 mb-3">
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" type="text" placeholder="Enter Name">
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" type="text" placeholder="Enter Email">
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="contact_number" type="number" placeholder="Enter Phone Number">
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Accommodation</mat-label>
                   <mat-select tabindex="2" formControlName="accommodation_id">
@@ -40,14 +58,13 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-
               <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Camping & Destination</mat-label>
                   <input matInput formControlName="camping" type="text" placeholder="Enter Camping">
                 </mat-form-field>
               </div>
-              <div class="col-md-12 col-lg-5 col-sm-12 col-xs-12 mb-3">
+              <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width example-form-field">
                   <mat-label>Date Range</mat-label>
                   <mat-date-range-input
@@ -64,7 +81,6 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-
               <div class="col-md-12 col-lg-3 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Booking Price</mat-label>
@@ -75,7 +91,6 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-
               <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Beds</mat-label>

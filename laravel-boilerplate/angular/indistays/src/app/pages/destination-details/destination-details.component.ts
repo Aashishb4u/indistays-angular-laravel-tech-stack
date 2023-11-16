@@ -13,6 +13,7 @@ export class DestinationDetailsComponent implements OnInit {
   destinationId: any = null;
   destinationDetails: any = null;
   destinationBanner: any = null;
+  showSpinner: any = true;
   destinations: any = [];
   featuredImages: any = [];
   camping: any = [];
@@ -47,7 +48,8 @@ export class DestinationDetailsComponent implements OnInit {
             img: this.sharedService.generateImageUrl(img.url)
           }
         });
-        this.destinationBanner = this.sharedService.generateImageUrl(this.destinationDetails.profile_image_url)
+        this.destinationBanner = this.sharedService.generateImageUrl(this.destinationDetails.profile_image_url);
+        this.showSpinner = false;
       });
     });
   }

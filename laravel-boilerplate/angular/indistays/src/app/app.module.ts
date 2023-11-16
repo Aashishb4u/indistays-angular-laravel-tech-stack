@@ -70,6 +70,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import {DestinationsListingComponent} from "./pages/destinations/destinations.component";
 import {CampingsListingComponent} from "./pages/campings/campings.component";
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @NgModule({
   declarations: [
@@ -142,7 +143,8 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     GoogleMapsModule,
     NgbCarouselModule,
     SlickCarouselModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    NgxSkeletonLoaderModule.forRoot()
   ],
   providers: [
     NgxImageCompressService,

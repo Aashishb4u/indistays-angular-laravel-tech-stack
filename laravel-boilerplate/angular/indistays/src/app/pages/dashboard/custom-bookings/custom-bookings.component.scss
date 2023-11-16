@@ -1,5 +1,5 @@
 
-$text: ('accommodation_name', 'camping_name', 'beds', 'actual_price', 'booking_price', 'start_date', 'end_date', 'action');
+$text: ('accommodation_name', 'camping_name', 'name', 'beds', 'actual_price', 'booking_price', 'start_date', 'end_date', 'action');
 
 @each $item in $text {
   $index: index($text, $item);

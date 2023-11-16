@@ -1,180 +1,248 @@
-<app-app-header></app-app-header>
-<div style="background: #3f51b524" class="camping-details">
-  <div class="mb-5 camp-header-section d-flex gap-3 flex-column">
-    <div class="section-content">
-      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-    </div>
-    <div class="camp-name">
-      {{campingDetails?.name}}
-    </div>
-    <div [innerHTML]="campingDetails?.description" class="camp-description">
-    </div>
-  </div>
-
-  <div>
-    <div class="section-sub-title">
-      amenities
-    </div>
-    <div class="amenities">
-      <div *ngFor="let amenity of amenities" class="amenity">
-        <i class="fa {{amenity?.icon}}"></i>
-        <div class="amen-name">{{amenity?.name}}</div>
+<ng-container *ngIf="showSpinner">
+  <div class="item p-3">
+    <ngx-skeleton-loader [theme]="{height: '10vh'}" count="1" ></ngx-skeleton-loader>
+    <ngx-skeleton-loader [theme]="{height: '40vh'}" count="1" ></ngx-skeleton-loader>
+    <div>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(1, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+      </div>
+      <ngx-skeleton-loader [theme]="{height: '11vh'}" count="1" ></ngx-skeleton-loader>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(4, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
       </div>
     </div>
   </div>
+</ng-container>
 
-  <div class="accommodation-listing-container">
-    <div class="accommodation-listing">
-      <div class="accommodation-listing-fst d-flex align-items-center">
-        <div class="accommodation-list-title">
-          availability
-        </div>
-        <div class="ml-auto custom-date-picker text-center">
-          <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
-            <mat-label>Date Range</mat-label>
-            <mat-date-range-input [rangePicker]="campaignOnePicker">
-              <input matStartDate placeholder="Start date">
-              <input matEndDate placeholder="End date">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-          </mat-form-field>
+<ng-container *ngIf="!showSpinner">
+  <app-app-header></app-app-header>
+  <div style="background: #3f51b524" class="camping-details">
+    <div class="mb-5 camp-header-section d-flex gap-3 flex-column">
+      <div class="section-content">
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+      </div>
+      <div class="camp-name">
+        {{campingDetails?.name}}
+      </div>
+      <div [innerHTML]="campingDetails?.description" class="camp-description">
+      </div>
+    </div>
+
+    <div>
+      <div class="section-sub-title">
+        amenities
+      </div>
+      <div class="amenities">
+        <div *ngFor="let amenity of amenities" class="amenity">
+          <i class="fa {{amenity?.icon}}"></i>
+          <div class="amen-name">{{amenity?.name}}</div>
         </div>
       </div>
-      <div class="single-accommodation">
-        <div *ngFor="let acc of campAccommodations" class="single-list p-3 mb-3">
-          <div class="single-list-img">
-            <img [src]="acc?.img" alt="">
+    </div>
+
+    <div class="accommodation-listing-container">
+      <div class="accommodation-listing">
+        <div class="accommodation-listing-fst d-flex align-items-center">
+          <div class="accommodation-list-title">
+            availability
           </div>
-          <div class="details-container">
-            <div class="details-content-container d-flex justify-content-between">
-              <div class="listing-t-c">
-                <div class="title">{{acc?.name}}</div>
-                <div class="d-flex align-items-center description">
-                  <i class="fa fa-user-circle-o pe-2"></i>
-                  <span class="footer-label">X 1</span>
+          <div class="ml-auto custom-date-picker text-center">
+            <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
+              <mat-label>Date Range</mat-label>
+              <mat-date-range-input [rangePicker]="campaignOnePicker">
+                <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+              <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="single-accommodation">
+          <div *ngFor="let acc of campAccommodations" class="single-list p-3 mb-3">
+            <div class="single-list-img">
+              <img [src]="acc?.img" alt="">
+            </div>
+            <div class="details-container">
+              <div class="details-content-container d-flex justify-content-between">
+                <div class="listing-t-c">
+                  <div class="title">{{acc?.name}}</div>
+                  <div class="d-flex align-items-center description">
+                    <i class="fa fa-user-circle-o pe-2"></i>
+                    <span class="footer-label">X 1</span>
+                  </div>
+                  <div *ngIf="acc?.amenities && acc?.amenities?.length" class="mt-3 d-flex gap-3 amenity-icons">
+                    <ng-container *ngFor="let amenity of acc?.amenities">
+                      <i class="color-secondary fa {{amenity?.icon}}"></i>
+                    </ng-container>
+                  </div>
                 </div>
-                <div *ngIf="acc?.amenities && acc?.amenities?.length" class="mt-3 d-flex gap-3 amenity-icons">
-                  <ng-container *ngFor="let amenity of acc?.amenities">
-                    <i class="color-secondary fa {{amenity?.icon}}"></i>
-                  </ng-container>
+                <div class="d-flex flex-column price-container">
+                  <div class="price d-flex flex-column">
+                    <div>
+                      <span class="actual-price pe-2">₹{{acc?.discount_price}}</span>
+                      <span class="discount-price">{{acc?.price}}</span>
+                    </div>
+                    <div class="footer-label">1 night</div>
+                  </div>
+                  <div class="counter-btn-container">
+                  </div>
                 </div>
               </div>
-              <div class="d-flex flex-column price-container">
-                <div class="price d-flex flex-column">
-                  <div>
-                    <span class="actual-price pe-2">₹{{acc?.discount_price}}</span>
-                    <span class="discount-price">{{acc?.price}}</span>
-                  </div>
-                  <div class="footer-label">1 night</div>
+              <div class="bottom-listing-footer align-items-center d-flex justify-content-between">
+                <div>
+                  <div class="py-2 footer-label">{{acc?.beds_available}} Beds Available</div>
                 </div>
                 <div class="counter-btn-container">
-                </div>
-              </div>
-            </div>
-            <div class="bottom-listing-footer align-items-center d-flex justify-content-between">
-              <div>
-                <div class="py-2 footer-label">{{acc?.beds_available}} Beds Available</div>
-              </div>
-              <div class="counter-btn-container">
-                <div class="counter-container">
-                  <div class="button" (click)="acc.booking = acc.booking > 0 ? acc.booking - 1 : acc.booking; calculate()">-</div>
-                  <div class="value" id="counterValue">{{acc.booking}}</div>
-                  <div class="button" (click)="onAddition(acc)">+</div>
+                  <div class="counter-container">
+                    <div class="button" (click)="acc.booking = acc.booking > 0 ? acc.booking - 1 : acc.booking; calculate()">-</div>
+                    <div class="value" id="counterValue">{{acc.booking}}</div>
+                    <div class="button" (click)="onAddition(acc)">+</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="summary">
-      <div class="accommodation-list-title">
-        Summary
-      </div>
-      <div class="summary-tile block p-5 bg-white min-w-full">
-        <div *ngIf="summaryData && summaryData.length">
-          <div *ngFor="let booking of summaryData" class="py-2 summary-row">
-            <div class="pb-3 d-flex justify-content-between py-1 gap-5">
-              <div class="d-flex justify-content-between items-end">
-                <div class="text-black mb-0 font-semibold text-lg font-poppins pr-3">
-                  {{booking?.name}}
+      <div class="summary">
+        <div class="accommodation-list-title">
+          Summary
+        </div>
+        <div class="summary-tile block p-5 bg-white min-w-full">
+          <div *ngIf="summaryData && summaryData.length">
+            <div *ngFor="let booking of summaryData" class="py-2 summary-row">
+              <div class="pb-3 d-flex justify-content-between py-1 gap-5">
+                <div class="d-flex justify-content-between items-end">
+                  <div class="text-black mb-0 font-semibold text-lg font-poppins pr-3">
+                    {{booking?.name}}
+                  </div>
+                </div>
+                <div class="col-1 ml-auto d-flex align-items-center">
+                  <i class="trash-icon fa fa-trash"></i>
                 </div>
               </div>
-              <div class="col-1 ml-auto d-flex align-items-center">
-                <i class="trash-icon fa fa-trash"></i>
+              <div class="d-flex justify-content-between">
+                <div class="price-label d-flex justify-content-between font-bold">
+                  <div class="font-roboto font-medium">₹</div>
+                  538.23 x 1 night x {{booking?.booking}}
+                </div>
+                <div class="text-black ml-auto font-mulish text-md font-bold">
+                  <span class="text-md font-roboto">₹</span>{{booking?.discount_price * booking?.booking}}
+                </div>
               </div>
             </div>
-            <div class="d-flex justify-content-between">
-              <div class="price-label d-flex justify-content-between font-bold">
-                <div class="font-roboto font-medium">₹</div>
-                538.23 x 1 night x {{booking?.booking}}
-              </div>
-              <div class="text-black ml-auto font-mulish text-md font-bold">
-                <span class="text-md font-roboto">₹</span>{{booking?.discount_price * booking?.booking}}
-              </div>
-            </div>
-          </div>
-          <div class="py-3 summary-row">
-            <div class="d-flex justify-content-between gap-5">
-              <p class="font-semibold text-lg font-poppins">Total Room Charges</p>
-              <p class="ml-auto font-bold font-roboto">₹<span class="font-mulish">
+            <div class="py-3 summary-row">
+              <div class="d-flex justify-content-between gap-5">
+                <p class="font-semibold text-lg font-poppins">Total Room Charges</p>
+                <p class="ml-auto font-bold font-roboto">₹<span class="font-mulish">
               {{totalSum}}
             </span></p></div>
-            <div class="d-flex justify-content-between gap-5"><p class="font-semibold text-lg font-poppins">Total Taxes</p>
-              <p class="ml-auto font-roboto font-bold">₹<span class="font-mulish">100</span></p></div>
+              <div class="d-flex justify-content-between gap-5"><p class="font-semibold text-lg font-poppins">Total Taxes</p>
+                <p class="ml-auto font-roboto font-bold">₹<span class="font-mulish">100</span></p></div>
+            </div>
+            <div class="py-4 d-flex justify-content-between"><p class="font-poppins">Total Price</p>
+              <p class="ml-auto font-roboto">₹<span class="font-mulish">{{totalSum + 100}}</span></p>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button data-toggle="modal" data-target="#makeBooking" type="button" class="w-full btn round-btn">
+                Confirm Booking
+              </button>
+            </div>
           </div>
-          <div class="py-4 d-flex justify-content-between"><p class="font-poppins">Total Price</p>
-            <p class="ml-auto font-roboto">₹<span class="font-mulish">{{totalSum + 100}}</span></p>
+          <div class="d-flex align-items-center justify-content-center flex-column" *ngIf="summaryData.length === 0">
+            <img style="max-width: 160px" src="assets/icons/schedule.png" alt="">
+            <div class="pt-4 footer-label">
+              Include accommodations in your booking.
+            </div>
           </div>
-          <div class="d-flex justify-content-center">
-            <button type="button" class="w-full btn round-btn">
-              Confirm Booking
-            </button>
-          </div>
-        </div>
-        <div class="d-flex align-items-center justify-content-center flex-column" *ngIf="summaryData.length === 0">
-          <img style="max-width: 160px" src="assets/icons/schedule.png" alt="">
-          <div class="pt-4 footer-label">
-            Include accommodations in your booking.
-          </div>
-        </div>
 
+        </div>
+      </div>
+    </div>
+
+    <div class="location">
+      <div class="section-sub-title">
+        location
+      </div>
+
+      <div [innerHTML]="mapSrc" class="loc-tile">
+
+      </div>
+
+      <div class="pt-3 address-text">
+        132 Dartmouth Street Boston, Massachusetts 02156 United States
+      </div>
+    </div>
+
+
+    <div>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Camping Accommodations'"
+                          [subTitle]="'Top Selling'">
+      </app-section-header>
+
+      <app-price-ui-cards [cardData]="accommodations"></app-price-ui-cards>
+    </div>
+
+    <div>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Camping Accommodations'"
+                          [subTitle]="'Top Selling'">
+      </app-section-header>
+      <app-testimonial-cards></app-testimonial-cards>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</ng-container>
+
+<div class="modal fade" id="makeBooking" tabindex="-1" role="dialog" aria-labelledby="changePasswordTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content change-pass-content">
+      <div class="modal-header border-none">
+        <div class="modal-title chng-pass-head" id="exampleModalLongTitle">
+          Create Booking
+        </div>
+        <div class="cursor-pointer" data-dismiss="modal">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-body d-flex justify-content-center border-none">
+        <form [formGroup]="userForm" (ngSubmit)="userAction()">
+          <div class="row p-3">
+            <div class="col-12 mb-2">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Name</mat-label>
+                <input tabindex="1" matInput formControlName="name" type="text" placeholder="Enter Your Name">
+                <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">Please enter a valid email</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 mb-2">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input tabindex="2" matInput formControlName="email" type="email" placeholder="Enter Your email">
+                <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">Please enter a valid email</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 mb-2">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Contact Number</mat-label>
+                <input tabindex="2" matInput formControlName="contact_number" type="text" placeholder="Enter Contact Number">
+                <mat-error *ngIf="userForm.get('contact_number')?.invalid && userForm.get('contact_number')?.touched">Please enter a valid Contact Number</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- Add more form fields here -->
+        </form>
+      </div>
+      <div class="d-flex justify-content-between mx-1 p-3 modal-footer border-none">
+        <button data-dismiss="modal" mat-raised-button>Cancel</button>
+        <button (click)="userAction()" class="color-white" mat-raised-button color="primary">Submit</button>
       </div>
     </div>
   </div>
-
-  <div class="location">
-    <div class="section-sub-title">
-      location
-    </div>
-
-    <div [innerHTML]="mapSrc" class="loc-tile">
-
-    </div>
-
-    <div class="pt-3 address-text">
-      132 Dartmouth Street Boston, Massachusetts 02156 United States
-    </div>
-  </div>
-
-
-  <div>
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Camping Accommodations'"
-                        [subTitle]="'Top Selling'">
-    </app-section-header>
-
-    <app-price-ui-cards [cardData]="accommodations"></app-price-ui-cards>
-  </div>
-
-  <div>
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Camping Accommodations'"
-                        [subTitle]="'Top Selling'">
-    </app-section-header>
-    <app-testimonial-cards></app-testimonial-cards>
-  </div>
 </div>
-
-<app-footer></app-footer>

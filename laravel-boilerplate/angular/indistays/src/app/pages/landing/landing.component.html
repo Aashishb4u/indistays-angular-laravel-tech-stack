@@ -1,190 +1,211 @@
-<app-app-header></app-app-header>
-<div style="background: #3f51b524">
-  <div class="carousal-container">
-    <ngb-carousel *ngIf="screenWidth > 500" [interval]="4000" [pauseOnHover]="false">
-      <ng-template *ngFor="let image of images" ngbSlide>
-        <div>
-          <div class="picsum-img-wrapper">
-            <img [src]="image" alt="Random first slide" />
-          </div>
-          <div class="carousel-caption carousal-text">
-            <div class="header">
-              Plan your next <br>
-              vacation with us
-            </div>
-            <div class="text">
-              Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </ngb-carousel>
-    <ngb-carousel *ngIf="screenWidth < 500" [interval]="4000" [pauseOnHover]="false">
-      <ng-template *ngFor="let image of mobileBannerImages" ngbSlide>
-        <div>
-          <div class="picsum-img-wrapper">
-            <img [src]="image" alt="Random first slide" />
-          </div>
-          <div class="carousel-caption carousal-text">
-            <div class="header">
-              Plan your next <br>
-              vacation with us
-            </div>
-            <div class="text">
-              Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </ngb-carousel>
-    <div class="landing-filters d-flex justify-content-center full-width">
-      <form class="d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
-        <div class="row col-md-12 col-lg-10 filter-tab-container">
-          <div class="m-1 mb-3 col-lg-12">
-            <div class="d-flex">
-              <div [class.active]="selectedTab === 'destination'" (click)="onChangeTab('destination')" class="filter-tab">Destination</div>
-              <div [class.active]="selectedTab === 'camping'" (click)="onChangeTab('camping')" class="filter-tab">Camping</div>
-            </div>
-          </div>
-          <div *ngIf="selectedTab === 'destination'" class="col-lg-3">
-            <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-              <mat-label>Destination</mat-label>
-              <mat-select formControlName="destination">
-                <mat-option *ngFor="let dest of destinations"
-                            [value]="dest.id">{{ dest.name }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div *ngIf="selectedTab === 'camping'" class="col-lg-3">
-            <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-              <mat-label>Camping</mat-label>
-              <mat-select formControlName="camping">
-                <mat-option *ngFor="let camp of campings"
-                            [value]="camp.id">{{ camp.name }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-5">
-            <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
-              <mat-label>Date Range</mat-label>
-              <mat-date-range-input
-                [rangePicker]="campaignOnePicker">
-                <input matStartDate placeholder="Start date" formControlName="start_date">
-                <input matEndDate placeholder="End date" formControlName="end_date">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-              <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-            </mat-form-field>
-          </div>
-          <div class="col-lg-3">
-            <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-              <mat-label>People</mat-label>
-              <mat-select formControlName="people">
-                <mat-option *ngFor="let bed of beds"
-                            [value]="bed">{{ bed }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div *ngIf="screenWidth > 500" class="col-lg-1 d-flex">
-            <button (click)="onSearch()" class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
-              <mat-icon>search</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="screenWidth < 500" class="col-12 d-flex">
-            <button (click)="onSearch()" class="btn p-1 btn-primary align-items-center primary-button d-flex justify-content-center search-btn color-white">
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-
-  <div class="landing-container">
+<ng-container *ngIf="showSpinner">
+  <div class="item p-3">
+    <ngx-skeleton-loader [theme]="{height: '10vh'}" count="1" ></ngx-skeleton-loader>
+    <ngx-skeleton-loader [theme]="{height: '40vh'}" count="1" ></ngx-skeleton-loader>
     <div>
-      <app-section-header [showMore]="false"
-                          [mainTitle]="'We Offer Best Services'"
-                          [subTitle]="'CATEGORY'">
-      </app-section-header>
-      <app-sticker-content-cards></app-sticker-content-cards>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(1, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+      </div>
+      <ngx-skeleton-loader [theme]="{height: '11vh'}" count="1" ></ngx-skeleton-loader>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(4, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!showSpinner">
+  <app-app-header></app-app-header>
+  <div style="background: #3f51b524">
+    <div class="carousal-container">
+      <ngb-carousel *ngIf="screenWidth > 500" [interval]="4000" [pauseOnHover]="false">
+        <ng-template *ngFor="let image of images" ngbSlide>
+          <div>
+            <div class="picsum-img-wrapper">
+              <img [src]="image" alt="Random first slide" />
+            </div>
+            <div class="carousel-caption carousal-text">
+              <div class="header">
+                Plan your next <br>
+                vacation with us
+              </div>
+              <div class="text">
+                Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+      <ngb-carousel *ngIf="screenWidth < 500" [interval]="4000" [pauseOnHover]="false">
+        <ng-template *ngFor="let image of mobileBannerImages" ngbSlide>
+          <div>
+            <div class="picsum-img-wrapper">
+              <img [src]="image" alt="Random first slide" />
+            </div>
+            <div class="carousel-caption carousal-text">
+              <div class="header">
+                Plan your next <br>
+                vacation with us
+              </div>
+              <div class="text">
+                Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+      <div class="landing-filters d-flex justify-content-center full-width">
+        <form class="d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
+          <div class="row col-md-12 col-lg-10 filter-tab-container">
+            <div class="m-1 mb-3 col-lg-12">
+              <div class="d-flex">
+                <div [class.active]="selectedTab === 'destination'" (click)="onChangeTab('destination')" class="filter-tab">Destination</div>
+                <div [class.active]="selectedTab === 'camping'" (click)="onChangeTab('camping')" class="filter-tab">Camping</div>
+              </div>
+            </div>
+            <div *ngIf="selectedTab === 'destination'" class="col-lg-3">
+              <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+                <mat-label>Destination</mat-label>
+                <mat-select formControlName="destination">
+                  <mat-option *ngFor="let dest of destinations"
+                              [value]="dest.id">{{ dest.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="selectedTab === 'camping'" class="col-lg-3">
+              <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+                <mat-label>Camping</mat-label>
+                <mat-select formControlName="camping">
+                  <mat-option *ngFor="let camp of campings"
+                              [value]="camp.id">{{ camp.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-5">
+              <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
+                <mat-label>Date Range</mat-label>
+                <mat-date-range-input
+                  [rangePicker]="campaignOnePicker">
+                  <input matStartDate placeholder="Start date" formControlName="start_date">
+                  <input matEndDate placeholder="End date" formControlName="end_date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-3">
+              <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+                <mat-label>People</mat-label>
+                <mat-select formControlName="people">
+                  <mat-option *ngFor="let bed of beds"
+                              [value]="bed">{{ bed }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div *ngIf="screenWidth > 500" class="col-lg-1 d-flex">
+              <button (click)="onSearch()" class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="screenWidth < 500" class="col-12 d-flex">
+              <button (click)="onSearch()" class="btn p-1 btn-primary align-items-center primary-button d-flex justify-content-center search-btn color-white">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <app-section-header [showMore]="true"
-                        [mainTitle]="'Top destinations'"
-                        [subTitle]="'Top Selling'">
-    </app-section-header>
 
-    <app-image-tiles [tilesData]="tilesData"></app-image-tiles>
+    <div class="landing-container">
+      <div>
+        <app-section-header [showMore]="false"
+                            [mainTitle]="'We Offer Best Services'"
+                            [subTitle]="'CATEGORY'">
+        </app-section-header>
+        <app-sticker-content-cards></app-sticker-content-cards>
+      </div>
 
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Camping Accommodations'"
-                        [subTitle]="'Top Selling'">
-    </app-section-header>
+      <app-section-header [showMore]="true"
+                          [mainTitle]="'Top destinations'"
+                          [subTitle]="'Top Selling'">
+      </app-section-header>
 
-    <app-price-ui-cards (onSelect)="onSelectAccommodation($event)" [cardData]="accommodations"></app-price-ui-cards>
+      <app-image-tiles [tilesData]="tilesData"></app-image-tiles>
 
-<!--    <div class="row">-->
-<!--      <div class="d-flex align-items-center col-1">-->
-<!--        <a class="btn-outline-secondary btn mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">-->
-<!--          <i class="fa fa-chevron-left"></i>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      <div class="col-10">-->
-<!--        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">-->
-<!--          <div class="carousel-inner">-->
-<!--            <div class="carousel-item active">-->
-<!--              <div class="row">-->
-<!--                <div class="col-md-4 mb-3">-->
-<!--                  <div class="card overflow-hidden">-->
-<!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">-->
-<!--                    <div class="card-body">-->
-<!--                      <h4 class="card-title">Special title treatment</h4>-->
-<!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Camping Accommodations'"
+                          [subTitle]="'Top Selling'">
+      </app-section-header>
 
-<!--                    </div>-->
+      <app-price-ui-cards (onSelect)="onSelectAccommodation($event)" [cardData]="accommodations"></app-price-ui-cards>
 
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 mb-3">-->
-<!--                  <div class="card overflow-hidden">-->
-<!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">-->
-<!--                    <div class="card-body">-->
-<!--                      <h4 class="card-title">Special title treatment</h4>-->
-<!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+      <!--    <div class="row">-->
+      <!--      <div class="d-flex align-items-center col-1">-->
+      <!--        <a class="btn-outline-secondary btn mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">-->
+      <!--          <i class="fa fa-chevron-left"></i>-->
+      <!--        </a>-->
+      <!--      </div>-->
+      <!--      <div class="col-10">-->
+      <!--        <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">-->
+      <!--          <div class="carousel-inner">-->
+      <!--            <div class="carousel-item active">-->
+      <!--              <div class="row">-->
+      <!--                <div class="col-md-4 mb-3">-->
+      <!--                  <div class="card overflow-hidden">-->
+      <!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">-->
+      <!--                    <div class="card-body">-->
+      <!--                      <h4 class="card-title">Special title treatment</h4>-->
+      <!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
 
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 mb-3">-->
-<!--                  <div class="card overflow-hidden">-->
-<!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">-->
-<!--                    <div class="card-body">-->
-<!--                      <h4 class="card-title">Special title treatment</h4>-->
-<!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+      <!--                    </div>-->
 
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="d-flex align-items-center col-1">-->
-<!--        <a class="btn-outline-secondary btn mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">-->
-<!--          <i class="fa fa-chevron-right"></i>-->
-<!--        </a>-->
-<!--      </div>-->
-<!--    </div>-->
+      <!--                  </div>-->
+      <!--                </div>-->
+      <!--                <div class="col-md-4 mb-3">-->
+      <!--                  <div class="card overflow-hidden">-->
+      <!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">-->
+      <!--                    <div class="card-body">-->
+      <!--                      <h4 class="card-title">Special title treatment</h4>-->
+      <!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+
+      <!--                    </div>-->
+      <!--                  </div>-->
+      <!--                </div>-->
+      <!--                <div class="col-md-4 mb-3">-->
+      <!--                  <div class="card overflow-hidden">-->
+      <!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">-->
+      <!--                    <div class="card-body">-->
+      <!--                      <h4 class="card-title">Special title treatment</h4>-->
+      <!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+
+      <!--                    </div>-->
+      <!--                  </div>-->
+      <!--                </div>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--      <div class="d-flex align-items-center col-1">-->
+      <!--        <a class="btn-outline-secondary btn mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">-->
+      <!--          <i class="fa fa-chevron-right"></i>-->
+      <!--        </a>-->
+      <!--      </div>-->
+      <!--    </div>-->
 
 
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Camping Accommodations'"
-                        [subTitle]="'Top Selling'">
-    </app-section-header>
-    <app-testimonial-cards></app-testimonial-cards>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Camping Accommodations'"
+                          [subTitle]="'Top Selling'">
+      </app-section-header>
+      <app-testimonial-cards></app-testimonial-cards>
+    </div>
   </div>
-</div>
-
-<app-footer></app-footer>
+  <app-footer></app-footer>
+</ng-container>

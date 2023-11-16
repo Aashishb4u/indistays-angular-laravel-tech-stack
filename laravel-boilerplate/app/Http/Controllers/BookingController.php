@@ -72,6 +72,9 @@ class BookingController extends Controller
         $customPricing = CustomBooking::findOrFail($id);
 
         $customPricingData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'contact_number' => 'required',
             'price' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',

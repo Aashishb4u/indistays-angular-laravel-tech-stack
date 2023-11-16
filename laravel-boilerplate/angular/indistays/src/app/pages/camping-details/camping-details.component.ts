@@ -4,6 +4,7 @@ import {ApiService} from "../../services/api.service";
 import {SharedService} from "../../services/shared.service";
 import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-camping-details',
@@ -20,15 +21,27 @@ export class CampingDetailsComponent implements OnInit{
   campAccommodations: any = [];
   summaryData: any = [];
   totalSum: any = 0;
+  showSpinner: any = true;
   campingDetails: any = null;
   mapSrc: SafeHtml;
   selectedAcc = [];
   accommodations = [];
-  constructor(private sanitizer: DomSanitizer, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {
+  userForm: FormGroup
+  constructor(public fb: FormBuilder, private sanitizer: DomSanitizer, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {
     this.campingId = this.route.snapshot.paramMap.get('id');
   }
 
+  userAction() {
+
+  }
+
   ngOnInit() {
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      contact_number: ['', Validators.required],
+      // Add more form controls as needed
+    });
     this.getAmenities();
     this.galleryOptions = [
       {
@@ -94,6 +107,7 @@ export class CampingDetailsComponent implements OnInit{
             medium: url,
           }
         });
+        this.showSpinner = false;
       })
     });
   }

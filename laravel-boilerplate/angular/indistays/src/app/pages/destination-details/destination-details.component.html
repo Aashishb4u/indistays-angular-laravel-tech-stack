@@ -1,63 +1,84 @@
-<app-app-header></app-app-header>
-<div style="background: #3f51b524" class="destination-details">
-  <div class="destination-tile">
-    <div [style.background]="'url(' + destinationBanner + ') center/cover no-repeat'" class="image-container">
-      <div class="content-tile">
-        <div class="title">
-          {{destinationDetails?.name}}
-        </div>
-        <div [innerHTML]="destinationDetails?.description" class="description">
-        </div>
+<ng-container *ngIf="showSpinner">
+  <div class="item p-3">
+    <ngx-skeleton-loader [theme]="{height: '40vh'}" count="1" ></ngx-skeleton-loader>
+    <div>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(1, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+      </div>
+      <ngx-skeleton-loader [theme]="{height: '11vh'}" count="1" ></ngx-skeleton-loader>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(4, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
       </div>
     </div>
   </div>
-
-  <div class="abstract-image-gallery">
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Explore the Must-See Attractions'"
-                        [subTitle]="'Top Selling'">
-    </app-section-header>
-    <div class="image-container">
-      <!-- First column with 1 image -->
-      <div class="gallery-column">
-        <img class="gallery-image" [src]="featuredImages[0]?.img" alt="Image 1">
-      </div>
-
-      <!-- Second column with 2 rows of images -->
-      <div class="gallery-column">
-        <img class="gallery-image" [src]="featuredImages[1]?.img" alt="Image 2">
-        <img class="gallery-image" [src]="featuredImages[2]?.img" alt="Image 3">
-      </div>
-
-      <!-- Third column with 2 rows of images -->
-      <div class="gallery-column">
-        <img class="gallery-image" [src]="featuredImages[3]?.img" alt="Image 4">
-        <img class="gallery-image" [src]="featuredImages[4]?.img" alt="Image 5">
+</ng-container>
+<ng-container *ngIf="!showSpinner">
+  <app-app-header></app-app-header>
+  <div style="background: #3f51b524" class="destination-details">
+    <div class="destination-tile">
+      <div [style.background]="'url(' + destinationBanner + ') center/cover no-repeat'" class="image-container">
+        <div class="content-tile">
+          <div class="title">
+            {{destinationDetails?.name}}
+          </div>
+          <div [innerHTML]="destinationDetails?.description" class="description">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div>
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Uncover Destinations Like This'"
-                        [subTitle]="'Embark'">
-    </app-section-header>
-    <app-image-tiles [tilesData]="destinations"></app-image-tiles>
-  </div>
-  <div>
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Explore Best Camping Destinations'"
-                        [subTitle]="'Camping'">
-    </app-section-header>
-    <app-listing-ui-card [listing]="camping"></app-listing-ui-card>
-  </div>
-  <div>
-    <app-section-header [showMore]="false"
-                        [mainTitle]="'Journey Experiences'"
-                        [subTitle]="'Happy Tourists'">
-    </app-section-header>
-    <app-testimonial-cards></app-testimonial-cards>
-  </div>
 
-</div>
+    <div class="abstract-image-gallery">
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Explore the Must-See Attractions'"
+                          [subTitle]="'Top Selling'">
+      </app-section-header>
+      <div class="image-container">
+        <!-- First column with 1 image -->
+        <div class="gallery-column">
+          <img class="gallery-image" [src]="featuredImages[0]?.img" alt="Image 1">
+        </div>
 
-<app-footer></app-footer>
+        <!-- Second column with 2 rows of images -->
+        <div class="gallery-column">
+          <img class="gallery-image" [src]="featuredImages[1]?.img" alt="Image 2">
+          <img class="gallery-image" [src]="featuredImages[2]?.img" alt="Image 3">
+        </div>
+
+        <!-- Third column with 2 rows of images -->
+        <div class="gallery-column">
+          <img class="gallery-image" [src]="featuredImages[3]?.img" alt="Image 4">
+          <img class="gallery-image" [src]="featuredImages[4]?.img" alt="Image 5">
+        </div>
+      </div>
+    </div>
+    <div>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Uncover Destinations Like This'"
+                          [subTitle]="'Embark'">
+      </app-section-header>
+      <app-image-tiles [tilesData]="destinations"></app-image-tiles>
+    </div>
+    <div>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Explore Best Camping Destinations'"
+                          [subTitle]="'Camping'">
+      </app-section-header>
+      <app-listing-ui-card [listing]="camping"></app-listing-ui-card>
+    </div>
+    <div>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Journey Experiences'"
+                          [subTitle]="'Happy Tourists'">
+      </app-section-header>
+      <app-testimonial-cards></app-testimonial-cards>
+    </div>
+
+  </div>
+  <app-footer></app-footer>
+</ng-container>

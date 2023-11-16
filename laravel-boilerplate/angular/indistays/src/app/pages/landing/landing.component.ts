@@ -39,6 +39,7 @@ export class LandingComponent  implements OnInit {
   tilesData: any = [];
   twoDaysBefore: any;
   twoDaysAfter: any;
+  showSpinner: any = true;
   ngOnInit() {
     const currentDate = moment(); // You can replace this with your actual date=
     this.twoDaysBefore = currentDate.clone().subtract(2, 'days');
@@ -70,6 +71,7 @@ export class LandingComponent  implements OnInit {
           img: this.sharedService.generateImageUrl(val.profile_image_url)
         }
       });
+      this.showSpinner = false;
     });
   }
 

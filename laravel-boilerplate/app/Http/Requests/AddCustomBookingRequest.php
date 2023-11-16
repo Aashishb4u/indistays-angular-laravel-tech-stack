@@ -23,6 +23,9 @@ class AddCustomBookingRequest extends FormRequest
     {
         return [
             'accommodation_id' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'contact_number' => 'required',
             'booking_price' => 'required|numeric',
             'beds' => 'required|numeric',
             'start_date' => 'required|date',

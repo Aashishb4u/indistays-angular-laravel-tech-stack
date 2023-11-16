@@ -67,6 +67,10 @@
   .gallery-column img:first-child {
     grid-row: span 2;
   }
+
+  .gallery-column .skeleton:first-child {
+    grid-row: span 2;
+  }
   .gallery-image {
     width: 100%;
     height: 100%;
@@ -80,9 +84,11 @@
   .destination-details {
     padding: 1rem;
     .destination-tile {
-      height: 60vh;
+      min-height: 60vh;
+      padding: 1rem;
       .content-tile {
         top: 1rem;
+        overflow: hidden;
         .title {
           font-size: 35px !important;
         }
@@ -110,5 +116,14 @@
     &:before {
       border-radius: 25px !important;
     }
+  }
+}
+
+.abstract-skeleton-gallery {
+  //display: flex;
+  //flex-wrap: wrap;
+  //gap: 1rem;
+  .skel {
+
   }
 }

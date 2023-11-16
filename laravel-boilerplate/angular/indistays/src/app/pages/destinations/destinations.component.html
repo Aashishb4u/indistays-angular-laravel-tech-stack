@@ -1,6 +1,28 @@
-<app-app-header></app-app-header>
-<div class="destination-container">
-  <app-image-tiles [tilesData]="destinations"></app-image-tiles>
-</div>
+<ng-container *ngIf="showSpinner">
+  <div class="item p-3">
+    <ngx-skeleton-loader [theme]="{height: '10vh'}" count="1" ></ngx-skeleton-loader>
+    <ngx-skeleton-loader [theme]="{height: '40vh'}" count="1" ></ngx-skeleton-loader>
+    <div>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(1, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '5vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+      </div>
+      <ngx-skeleton-loader [theme]="{height: '11vh'}" count="1" ></ngx-skeleton-loader>
+      <div style="display: grid; justify-content: center; grid-template-columns: repeat(4, 1fr); column-gap: 10px">
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{height: '11vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+</ng-container>
 
-<app-footer></app-footer>
+<ng-container *ngIf="!showSpinner">
+  <app-app-header></app-app-header>
+  <div class="destination-container">
+    <app-image-tiles [tilesData]="destinations"></app-image-tiles>
+  </div>
+  <app-footer></app-footer>
+
+</ng-container>
