@@ -80,6 +80,7 @@
     //background: #1A2B0D;
     border-radius: 20px;
     box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
+
     iframe {
       width: 100%;
     }
@@ -99,6 +100,7 @@
   gap: 34px;
   justify-content: space-between;
   padding: 3rem 0 0;
+
   .accommodation-list-title {
     color: #1A2B0D;
     font-size: 24px;
@@ -109,22 +111,27 @@
     flex-basis: 50%;
     height: 80px;
   }
+
   .summary {
     flex-basis: 50%;
     min-width: 25%;
+
     .summary-tile {
       border-radius: 24px;
       background: #FFF;
       box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
       //border-radius: 20px;
     }
+
     .summary-row {
       border-bottom: 1px solid lightgray;
+
       .trash-icon {
         color: red;
         cursor: pointer;
       }
     }
+
     .price-label {
       color: #828282;
       font-size: 12px;
@@ -137,9 +144,11 @@
     .accommodation-listing-fst {
       height: 80px;
     }
+
     .custom-date-picker {
       width: 300px;
     }
+
     .single-list {
       display: flex;
       background-color: #fff;
@@ -148,8 +157,10 @@
       overflow: hidden;
       box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
       justify-content: space-between;
+
       .single-list-img {
         flex-basis: 30%;
+
         img {
           object-fit: cover;
           width: 100%;
@@ -164,6 +175,7 @@
       flex: 1;
       padding: 16px;
       flex-direction: column;
+
       .details-content-container {
         flex-direction: column;
       }
@@ -175,6 +187,7 @@
       flex-direction: column;
       border-bottom: 1px solid #d3d3d369;
       padding: 0 0 10px 0;
+
       .amenity-icons i {
         font-size: 20px;
       }
@@ -214,6 +227,7 @@
     line-height: 132.5%; /* 31.8px */
     text-transform: capitalize;
   }
+
   .button {
     width: 30px;
     height: 30px;
@@ -223,6 +237,7 @@
     cursor: pointer;
     margin: 0 5px;
   }
+
   .value {
     min-width: 30px;
     text-align: center;
@@ -239,6 +254,7 @@
     line-height: 132.5%; /* 31.8px */
     text-transform: capitalize;
   }
+
   .discount-price {
     color: #5E6282;
     font-size: 16px;
@@ -265,18 +281,26 @@
   align-items: center;
 }
 
+@media (max-width: 1024px) {
+  .accommodation-listing {
+    .accommodation-listing-fst {
+      flex-direction: column;
+    }
 
-@media only screen and (max-width: 1024px) {
+    .single-list {
+      flex-direction: column;
+      flex-basis: 48%;
+      gap: 20px;
+    }
+  }
   .price-container {
     .actual-price {
       font-size: 20px;
     }
+
     .discount-price {
       font-size: 14px;
     }
-  }
-  .accommodation-listing-container .summary {
-    min-width: 30%;
   }
   .accommodation-listing {
     .single-accommodation {
@@ -284,9 +308,33 @@
       gap: 20px;
       flex-wrap: wrap;
     }
+
     .accommodation-listing-fst {
       height: inherit !important;
     }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .camping-details {
+    overflow: hidden;
+  }
+  .accommodation-listing {
+    .accommodation-listing-fst {
+      flex-direction: column;
+    }
+
+    .single-list {
+      flex-direction: column;
+      flex-basis: 100%;
+      gap: 20px;
+    }
+  }
+  .accommodation-listing-container {
+    flex-direction: column;
+  }
+  .accommodation-listing-container .summary {
+    min-width: 30%;
   }
   .listing-t-c {
     padding: 0 0 20px 0 !important;
@@ -297,17 +345,6 @@
   //.accommodation-listing-container {
   //  flex-direction: column;
   //}
-
-  .accommodation-listing {
-    .accommodation-listing-fst {
-      flex-direction: column;
-    }
-    .single-list {
-      flex-direction: column;
-      flex-basis: 48%;
-      gap: 20px;
-    }
-  }
 
   .price {
     padding: 1rem 0;
@@ -357,6 +394,7 @@
   .amenities {
     gap: 1rem;
     flex-wrap: wrap;
+
     .amenity {
       flex: 1;
     }
