@@ -162,7 +162,14 @@
   }
 }
 
-
+@media (max-width: 1024px) {
+  .listing-list-container .single-list {
+    gap: 20px;
+    img {
+      width: 40%;
+    }
+  }
+}
 
 /* Add additional styling as needed */
 

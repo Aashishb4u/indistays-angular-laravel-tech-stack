@@ -101,6 +101,28 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .about-us-banner {
+    img {
+      height: 35vh;
+    }
+  }
+
+  .about-us-content .left-image .image-tile {
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-us-content .right-image .image-tile {
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .about-us-banner {
     img {

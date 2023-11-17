@@ -259,8 +259,31 @@
   text-transform: capitalize;
 }
 
+.bottom-listing-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 @media only screen and (max-width: 1024px) {
+  .price-container {
+    .actual-price {
+      font-size: 20px;
+    }
+    .discount-price {
+      font-size: 14px;
+    }
+  }
+  .accommodation-listing-container .summary {
+    min-width: 30%;
+  }
   .accommodation-listing {
+    .single-accommodation {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
     .accommodation-listing-fst {
       height: inherit !important;
     }
@@ -271,9 +294,9 @@
   .camping-details {
     padding: 0 1rem 1rem;
   }
-  .accommodation-listing-container {
-    flex-direction: column;
-  }
+  //.accommodation-listing-container {
+  //  flex-direction: column;
+  //}
 
   .accommodation-listing {
     .accommodation-listing-fst {
@@ -281,6 +304,8 @@
     }
     .single-list {
       flex-direction: column;
+      flex-basis: 48%;
+      gap: 20px;
     }
   }
 
@@ -289,8 +314,10 @@
   }
 
   .bottom-listing-footer {
-    padding-top: 0rem !important;
+    padding-top: 0 !important;
     gap: 1rem !important;
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .camping-details .camp-header-section {

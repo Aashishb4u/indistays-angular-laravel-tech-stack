@@ -35,6 +35,12 @@
     }
   }
 }
+@media (max-width: 1024px) {
+  .content-tabs-container {
+    grid-template-columns: repeat(auto-fill, minmax(48%, 2fr));
+  }
+}
+
 
 @media only screen and (max-width: 600px) {
   .content-tabs-container {

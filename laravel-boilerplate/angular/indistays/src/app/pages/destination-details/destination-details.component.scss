@@ -81,6 +81,18 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .destination-details {
+    .destination-tile {
+      height: 40vh;
+    }
+  }
+
+  .listing-list-container .single-list img {
+    width: 40%;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .destination-details {
     padding: 1rem;

@@ -49,6 +49,11 @@
 .app-header-nav {
   height: 75px;
 }
+@media (max-width: 1024px) {
+  .nav-menu a {
+    font-size: 13px;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   .menu-bar {

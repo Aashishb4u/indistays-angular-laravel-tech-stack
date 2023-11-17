@@ -31,6 +31,16 @@ export class TestimonialCardsComponent {
           dots: true,
           autoplay: true
         }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+          autoplay: true
+        }
       }
     ]
   };

@@ -34,16 +34,16 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .image-tiles {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
   }
   .single-image-tile {
     flex-basis: 45%;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 600px) {
   .image-tiles {
     grid-template-columns: 1fr;
   }

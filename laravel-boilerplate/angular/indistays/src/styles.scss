@@ -151,6 +151,23 @@ body { margin: 0;
   }
 }
 
+@media (max-width: 1024px) {
+  .carousal-text {
+    top: 2vh;
+    .header {
+      font-size: 35px;
+      line-height: 1.2;
+    }
+
+    .text {
+      font-size: 20px;
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
+}
+
+
 @media only screen and (max-width: 600px) {
   .carousal-text {
     top: 2vh;
