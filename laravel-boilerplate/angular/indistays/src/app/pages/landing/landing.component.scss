@@ -21,6 +21,7 @@
 .carousal-container {
   height: 80vh;
   position: relative;
+  overflow: hidden;
   ngb-carousel {
     max-height: 100vh;
   }
