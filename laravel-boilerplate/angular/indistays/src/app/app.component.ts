@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {appConstants} from "../assets/constants/app-constants";
 import {StorageService} from "./services/storage.service";
 import {ApiService} from "./services/api.service";
@@ -13,8 +13,14 @@ import {NavigationEnd, Router} from "@angular/router";
 export class AppComponent implements OnInit{
   title = 'indistays';
   roles: any = [];
-  constructor(public router: Router, private storageService: StorageService, public apiService: ApiService) {
+  screenWidth: number;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.screenWidth = window.innerWidth;
+  }
+  constructor(public router: Router, private storageService: StorageService, public apiService: ApiService) {
+    this.screenWidth = window.innerWidth;
   }
 
 

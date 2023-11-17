@@ -1,3 +1,36 @@
-<div style="height: 100vh;">
+<div style="height: 100vh; margin-bottom: 30px">
   <router-outlet></router-outlet>
 </div>
+<nav *ngIf="screenWidth < 600" class="bottom-nav position-fixed
+d-grid border items-center bg-white visible full-width fixed bottom-0 pt-3 pb-2">
+  <div [routerLink]="'/home'" [routerLinkActive]="'active'" class="nav-tab">
+    <div class="d-flex">
+      <i class="fa fa-home"></i>
+    </div>
+    <div>Home</div>
+  </div>
+  <div [routerLink]="'/destinations'" [routerLinkActive]="'active'" class="nav-tab">
+    <div class="d-flex">
+      <i class="fa fa-compass"></i>
+    </div>
+    <div>Destination</div>
+  </div>
+  <div [routerLink]="'/campings'" [routerLinkActive]="'active'" class="nav-tab">
+    <div class="d-flex">
+      <i class="fa fa-free-code-camp"></i>
+    </div>
+    <div>Camping</div>
+  </div>
+  <div [routerLink]="'/about-us'" [routerLinkActive]="'active'" class="nav-tab">
+    <div class="d-flex">
+      <i class="fa fa-info-circle"></i>
+    </div>
+    <div>About Us</div>
+  </div>
+  <div [routerLink]="'/contact-us'" [routerLinkActive]="'active'" class="nav-tab">
+    <div class="d-flex">
+      <i class="fa fa-envelope"></i>
+    </div>
+    <div>Contact Us</div>
+  </div>
+</nav>

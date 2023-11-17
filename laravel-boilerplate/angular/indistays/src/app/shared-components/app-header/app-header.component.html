@@ -3,7 +3,42 @@
     <a class="navbar-brand d-flex align-items-center justify-content-center" href="#">
       <img width="50" [src]="sharedService?.companyLogoTransperant" alt="Company Logo" class="logo-image">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <div *ngIf="screenWidth < 600">
+      <div *ngIf="!isAuthenticated" class="ml-auto d-flex align-items-center flex-basis-30 justify-content-end">
+        <button class="setting-icon-mobile" [matMenuTriggerFor]="menu" mat-mini-fab
+                aria-label="Example icon button with a filter list icon">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="isAuthenticated" class="cursor-pointer flex-basis-30 d-flex justify-content-end">
+        <div [matMenuTriggerFor]="userMenu" #menuTrigger class="d-flex justify-content-center align-items-center">
+          <div class="user-icon">
+            <button mat-mini-fab class="mat-button-icon-btn m-r-1"
+                    aria-label="Example icon button with a plus one icon">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          </div>
+          <div class="user-name-box"><b>Hello, {{apiService?.userName | titlecase}}</b></div>
+        </div>
+        <mat-menu #userMenu="matMenu">
+          <ng-template matMenuContent let-id="id">
+            <button mat-menu-item
+                    (click)="onAdminPanel()">Admin Panel
+              <mat-icon color="primary">home</mat-icon>
+            </button>
+            <button mat-menu-item
+                    (click)="onChangePassword()">Change Password
+              <mat-icon color="primary">lock</mat-icon>
+            </button>
+            <button mat-menu-item
+                    (click)="logout()">Log Out
+              <mat-icon color="primary">logout</mat-icon>
+            </button>
+          </ng-template>
+        </mat-menu>
+      </div>
+    </div>
+    <button *ngIf="screenWidth > 600" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

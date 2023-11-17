@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ApiService} from "../../services/api.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {SharedService} from "../../services/shared.service";
@@ -13,8 +13,14 @@ export class AppHeaderComponent implements OnInit {
   showHeader: any = true;
   isAuthenticated: any = false;
   excludedPages: any = ['/login', '/change-password'];
-  constructor(public apiService: ApiService, public router: Router, public sharedService: SharedService) {
+  screenWidth: number;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.screenWidth = window.innerWidth;
+  }
+  constructor(public apiService: ApiService, public router: Router, public sharedService: SharedService) {
+    this.screenWidth = window.innerWidth;
   }
 
   ngOnInit() {
