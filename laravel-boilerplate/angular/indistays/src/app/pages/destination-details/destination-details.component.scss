@@ -1,5 +1,6 @@
 .destination-details {
-  padding: 1rem 3rem;
+  padding: 2rem 4rem;
+  overflow: hidden;
   .destination-tile {
     height: 80vh;
     display: flex;
@@ -101,6 +102,9 @@
   }
 
   .abstract-image-gallery {
+    .gallery-column img:first-child {
+      grid-row: 1 !important;
+    }
     .image-container {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 10px;
@@ -109,9 +113,9 @@
 
   .image-container {
     border-radius: 25px !important;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     .gallery-column {
-      grid-template-rows: repeat(1, 1fr);
+      grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
     }
     &:before {
       border-radius: 25px !important;
@@ -119,13 +123,3 @@
   }
 }
 
-.abstract-skeleton-gallery {
-  //display: flex;
-  //flex-wrap: wrap;
-  //gap: 1rem;
-  .abstract-image-gallery {
-    .gallery-column img:first-child {
-      row-span: 1;
-    }
-  }
-}
