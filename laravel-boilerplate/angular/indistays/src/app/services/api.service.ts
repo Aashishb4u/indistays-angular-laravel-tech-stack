@@ -262,6 +262,10 @@ export class ApiService {
     return this.http.post(`${this.baseURL}custom-booking`, data, {});
   }
 
+  makeBooking(data) {
+    return this.http.post(`${this.domainUrlApi}make/online-booking`, data, {});
+  }
+
   getCustomBookingById(data) {
     return this.http.post(`${this.baseURL}custom-booking/all`, data, {});
   }
@@ -315,7 +319,7 @@ export class ApiService {
       case 401: {
         this.logout().subscribe((res) => {
           this.showToast('Logged out due to authentication mismatch');
-          this.router.navigate(['/login']);
+          this.router.navigate(['']);
         });
         break;
       }

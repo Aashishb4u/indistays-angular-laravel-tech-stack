@@ -38,6 +38,13 @@ Route::group([
     Route::post('amenities', [AmenityController::class, 'index']);
 });
 
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'make' // Adding the 'auth' prefix
+], function ($router) {
+    Route::post('online-booking', [BookingController::class, 'addWebsiteBooking']);
+});
+
 
 Route::group([
     'middleware' => 'api',

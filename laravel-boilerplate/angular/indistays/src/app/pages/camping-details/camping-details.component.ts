@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryImageSize, NgxGalleryOptions} from "@kolkov/ngx-gallery";
 import {ApiService} from "../../services/api.service";
 import {SharedService} from "../../services/shared.service";
 import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MatFormField} from "@angular/material/form-field";
 
 @Component({
   selector: 'app-camping-details',
@@ -26,21 +27,83 @@ export class CampingDetailsComponent implements OnInit{
   mapSrc: SafeHtml;
   selectedAcc = [];
   accommodations = [];
-  userForm: FormGroup
-  constructor(public fb: FormBuilder, private sanitizer: DomSanitizer, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {
+  userForm: FormGroup;
+  dateRangeForm: FormGroup;
+  constructor(public fb: FormBuilder, private sanitizer: DomSanitizer, public sharedService: SharedService,
+              public apiService: ApiService, public route: ActivatedRoute) {
     this.campingId = this.route.snapshot.paramMap.get('id');
   }
 
   userAction() {
+    if (this.dateRangeForm.invalid) {
+      this.apiService.showToast('Please select Date Range');
+      this.dateRangeForm.markAllAsTouched();
+      this.toggleModal();
+      return;
+    }
 
+    if (this.userForm.invalid) {
+      this.apiService.showToast('Please select User Details');
+      this.userForm.markAllAsTouched();
+      this.toggleModal();
+      return;
+    }
+
+    const dateRangeVal = this.dateRangeForm.value;
+    const userDataVal = this.userForm.value;
+    const data = [...this.summaryData].map((res) => {
+      return {
+        beds: res.booking,
+        booking_price: +res.discount_price,
+        start_date: dateRangeVal.start_date,
+        end_date: dateRangeVal.end_date,
+        name: userDataVal.name,
+        email: userDataVal.email,
+        contact_number: userDataVal.contact_number,
+        accommodation_id: res.id
+      }
+    });
+    this.apiService.makeBooking(data).subscribe((res) => {
+      console.log(res);
+    });
   }
+
+  toggleModal() {
+    const modal = document.getElementById('makeBooking');
+    const backdrop = document.querySelector('.modal-backdrop');
+
+    if (modal) {
+      if (modal.classList.contains('show')) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+      } else {
+        modal.classList.add('show');
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
+      }
+    }
+
+    if (backdrop) {
+      backdrop.remove();
+    } else if (modal && modal.classList.contains('show')) {
+      const newBackdrop = document.createElement('div');
+      newBackdrop.classList.add('modal-backdrop', 'fade', 'show');
+      document.body.appendChild(newBackdrop);
+    }
+  }
+
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      contact_number: ['', Validators.required],
-      // Add more form controls as needed
+      name: ['', [Validators.required, Validators.minLength(1)]],
+      email: ['', [Validators.required, Validators.email]],
+      contact_number: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[0-9]{10}$/)]],
+    });
+
+    this.dateRangeForm = this.fb.group({
+      start_date: ['', Validators.required],
+      end_date: ['', Validators.required],
     });
     this.getAmenities();
     this.galleryOptions = [

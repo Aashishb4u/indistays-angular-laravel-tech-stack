@@ -87,7 +87,7 @@ export class HttpTokenInterceptorsService {
       case 400:
         this.apiService.showToast('Logged out due to authentication mismatch');
         this.apiService.logout().subscribe((res) => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['']);
           this.apiService.isAuthenticated.next(false);
           this.storageService.removeStoredItem(appConstants.REFRESH_TOKEN_KEY);
           this.storageService.removeStoredItem(appConstants.ACCESS_TOKEN_KEY);
@@ -97,7 +97,7 @@ export class HttpTokenInterceptorsService {
       case 403:
         this.apiService.logout().subscribe((res) => {
           this.apiService.showToast('Logged out due to authentication mismatch');
-          this.router.navigate(['/login']);
+          this.router.navigate(['']);
           this.apiService.isAuthenticated.next(false);
           this.storageService.removeStoredItem(appConstants.REFRESH_TOKEN_KEY);
           this.storageService.removeStoredItem(appConstants.ACCESS_TOKEN_KEY);
@@ -109,7 +109,7 @@ export class HttpTokenInterceptorsService {
         this.storageService.removeStoredItem(appConstants.REFRESH_TOKEN_KEY);
         this.storageService.removeStoredItem(appConstants.ACCESS_TOKEN_KEY);
         this.storageService.removeStoredItem(appConstants.USER_INFO);
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
         break;
     }
     return of(null);

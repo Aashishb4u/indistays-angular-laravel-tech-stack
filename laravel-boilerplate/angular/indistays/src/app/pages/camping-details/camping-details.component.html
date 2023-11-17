@@ -51,15 +51,17 @@
             availability
           </div>
           <div class="ml-auto custom-date-picker text-center">
-            <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
-              <mat-label>Date Range</mat-label>
-              <mat-date-range-input [rangePicker]="campaignOnePicker">
-                <input matStartDate placeholder="Start date">
-                <input matEndDate placeholder="End date">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-              <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-            </mat-form-field>
+            <form [formGroup]="dateRangeForm">
+              <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
+                <mat-label>Date Range</mat-label>
+                <mat-date-range-input [rangePicker]="campaignOnePicker">
+                  <input matStartDate placeholder="Start date" formControlName="start_date">
+                  <input matEndDate placeholder="End date" formControlName="end_date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+              </mat-form-field>
+            </form>
           </div>
         </div>
         <div class="single-accommodation">
@@ -129,7 +131,7 @@
               <div class="d-flex justify-content-between">
                 <div class="price-label d-flex justify-content-between font-bold">
                   <div class="font-roboto font-medium">₹</div>
-                  538.23 x 1 night x {{booking?.booking}}
+                  {{booking?.discount_price}} x 1 night x {{booking?.booking}}
                 </div>
                 <div class="text-black ml-auto font-mulish text-md font-bold">
                   <span class="text-md font-roboto">₹</span>{{booking?.discount_price * booking?.booking}}
@@ -149,7 +151,7 @@
               <p class="ml-auto font-roboto">₹<span class="font-mulish">{{totalSum + 100}}</span></p>
             </div>
             <div class="d-flex justify-content-center">
-              <button data-toggle="modal" data-target="#makeBooking" type="button" class="w-full btn round-btn">
+              <button (click)="toggleModal()" type="button" class="w-full btn round-btn">
                 Confirm Booking
               </button>
             </div>
@@ -207,7 +209,7 @@
         <div class="modal-title chng-pass-head" id="exampleModalLongTitle">
           Create Booking
         </div>
-        <div class="cursor-pointer" data-dismiss="modal">
+        <div (click)="toggleModal()" class="cursor-pointer">
           <i class="fa fa-times"></i>
         </div>
       </div>
@@ -240,7 +242,7 @@
         </form>
       </div>
       <div class="d-flex justify-content-between mx-1 p-3 modal-footer border-none">
-        <button data-dismiss="modal" mat-raised-button>Cancel</button>
+        <button (click)="toggleModal()"  mat-raised-button>Cancel</button>
         <button (click)="userAction()" class="color-white" mat-raised-button color="primary">Submit</button>
       </div>
     </div>

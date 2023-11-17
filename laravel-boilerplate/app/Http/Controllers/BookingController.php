@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\AddCustomBookingRequest;
+use App\Http\Requests\MakeBookingRequest;
 use App\Models\CustomBooking;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -59,6 +60,32 @@ class BookingController extends Controller
             DB::commit();
 
             return response()->json(['message' => 'Custom booking created successfully', 'data' => $customPricing], 201);
+        } catch (\Exception $e) {
+            // Handle any exceptions and rollback the transaction
+            DB::rollBack();
+            return response()->json(['message' => 'An error occurred while updating accommodation images.', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function addWebsiteBooking(MakeBookingRequest $request) {
+        DB::beginTransaction();
+
+        try {
+            $bookingsData = $request->all(); // Include all data
+            $bookings = [];
+
+            foreach ($bookingsData as $bookingData) {
+                // Parse and format the date values for each booking
+                $bookingData['start_date'] = Carbon::parse($bookingData['start_date'])->toDateTimeString();
+                $bookingData['end_date'] = Carbon::parse($bookingData['end_date'])->toDateTimeString();
+
+                $booking = CustomBooking::create($bookingData);
+                $bookings[] = $booking;
+            }
+
+            DB::commit();
+
+            return response()->json(['message' => 'Custom bookings created successfully', 'data' => $bookings], 201);
         } catch (\Exception $e) {
             // Handle any exceptions and rollback the transaction
             DB::rollBack();
