@@ -11,10 +11,10 @@ navbar-expand-md navbar-light bg-light">
           <mat-icon>settings</mat-icon>
         </button>
       </div>
-      <div *ngIf="isAuthenticated" class="cursor-pointer d-flex justify-content-end">
-        <div [matMenuTriggerFor]="userMenu" #menuTrigger class="d-flex justify-content-center align-items-center">
+      <div *ngIf="isAuthenticated" class="cursor-pointer user-icon-container">
+        <div [matMenuTriggerFor]="userMenu" #menuTrigger class="user-menu">
           <div class="user-icon">
-            <button mat-mini-fab class="mat-button-icon-btn m-r-1"
+            <button mat-mini-fab class="mat-button-icon-btn"
                     aria-label="Example icon button with a plus one icon">
               <mat-icon>account_circle</mat-icon>
             </button>

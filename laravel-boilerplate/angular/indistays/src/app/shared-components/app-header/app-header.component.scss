@@ -49,6 +49,18 @@
 .app-header-nav {
   height: 75px;
 }
+
+.user-icon-container {
+  display: flex;
+  justify-content: flex-end;
+  .user-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .nav-menu a {
     font-size: 13px;
@@ -56,6 +68,16 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .user-icon-container {
+    .user-menu {
+      gap: 10px;
+      flex-direction: column;
+      .user-name-box {
+        font-size: 12px;
+      }
+    }
+  }
+
   .menu-bar {
     background: #fff;
     padding: 1rem;
