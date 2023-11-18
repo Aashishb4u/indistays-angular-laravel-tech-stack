@@ -94,6 +94,9 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .gallery-image {
+    height: inherit;
+  }
   .destination-details {
     padding: 1rem;
     .destination-tile {
