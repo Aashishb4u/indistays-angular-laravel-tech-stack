@@ -106,7 +106,6 @@ class CampingController extends Controller
         $mapLink = $request->input('location_map_link');
         $address = $request->input('address');
         $destinationId = $request->input('destination_id');
-        var_dump($destinationId);
         $imageIdsToUpdate = $request->input('image_ids_to_update');
         $profileImage = $request->input('profile_image_url');
         $imageIdsToUpdateArray = json_decode($imageIdsToUpdate, true);

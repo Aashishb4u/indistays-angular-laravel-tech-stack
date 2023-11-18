@@ -132,6 +132,7 @@ export class AddEditCustomBookingComponent {
   }
 
   getCustomBookingById() {
+    this.sharedService.showSpinner.next(true);
     const data = {
       customPricingId: this.customPricingId
     }
@@ -156,10 +157,12 @@ export class AddEditCustomBookingComponent {
       this.componentForm.get('email').setValue(responseData.email);
       this.componentForm.get('contact_number').setValue(responseData.contact_number);
     }
+    this.sharedService.showSpinner.next(false);
   }
 
   userAction() {
     if (this.componentForm.valid) {
+      this.sharedService.showSpinner.next(true);
       if(this.customPricingId) {
         this.apiService.updateCustomBookingById(this.componentForm.value, this.customPricingId).subscribe(
           res => this.userActionSuccess(res),
@@ -182,6 +185,7 @@ export class AddEditCustomBookingComponent {
   }
 
   userActionSuccess(res) {
+    this.sharedService.showSpinner.next(false);
     this.apiService.showToast(res.message);
     this.router.navigate(['/dashboard/custom-booking']);
   }

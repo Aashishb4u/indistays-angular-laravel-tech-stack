@@ -52,6 +52,7 @@ export class CampingsComponent {
   }
 
   getCampings(nameFilter = '') {
+    this.sharedService.showSpinner.next(true);
     let params = new HttpParams()
       .set('currentPage', this.currentPage.toString())
       .set('pageSize', this.pageSize.toString());
@@ -80,6 +81,7 @@ export class CampingsComponent {
         return val;
       }) : [];
     this.totalLength = total;
+    this.sharedService.showSpinner.next(false);
   }
 
   onEditUser(id) {

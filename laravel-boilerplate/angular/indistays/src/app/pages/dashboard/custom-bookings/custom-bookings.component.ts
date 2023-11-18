@@ -48,6 +48,7 @@ export class CustomBookingsComponent {
   }
 
   getCustomBookings(nameFilter = '') {
+    this.sharedService.showSpinner.next(true);
     let params = new HttpParams()
       .set('currentPage', this.currentPage.toString())
       .set('pageSize', this.pageSize.toString());
@@ -81,8 +82,9 @@ export class CustomBookingsComponent {
           end_date: val.end_date,
           id: val.id
         }
-      })
+      });
     }
+    this.sharedService.showSpinner.next(false);
   }
 
   onEditUser(id) {

@@ -7,6 +7,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {appConstants} from "../../assets/constants/app-constants";
 import {tap} from "rxjs";
 import {of, switchMap} from "rxjs";
+import {SharedService} from "./shared.service";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class ApiService {
     camping: [],
     accommodations: []
   });
-  constructor(private router: Router, private http: HttpClient, public storageService: StorageService, public snackBar: MatSnackBar) {
+  constructor(public sharedService: SharedService, private router: Router, private http: HttpClient, public storageService: StorageService, public snackBar: MatSnackBar) {
     this.loadToken();
   }
 
@@ -309,6 +310,7 @@ export class ApiService {
 
   commonError(err: any) {
     const errCode = err.status;
+    this.sharedService.showSpinner.next(false);
     if (err && err.error && err.error.message) {
       this.showToast(err.error.message);
     } else if (err && err.message) {

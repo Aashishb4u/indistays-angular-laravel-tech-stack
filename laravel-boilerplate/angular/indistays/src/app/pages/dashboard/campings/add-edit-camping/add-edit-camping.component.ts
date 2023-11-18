@@ -134,6 +134,7 @@ export class AddEditCampingComponent {
     const data = {
       campingId: this.campingId
     }
+    this.sharedService.showSpinner.next(true);
     this.apiService.getCampingById(data).subscribe(
       res => this.getCampingByIdSuccess(res),
       error => {
@@ -174,6 +175,7 @@ export class AddEditCampingComponent {
         }))
       });
     }
+    this.sharedService.showSpinner.next(false);
   }
 
   clearGalleryImages() {
@@ -184,6 +186,7 @@ export class AddEditCampingComponent {
 
   userAction() {
     if (this.componentForm.valid) {
+      this.sharedService.showSpinner.next(true);
       console.log(this.componentForm.value);
       const galleryImagesArray: any = this.galleryImages.value;
       let galleryImagesStatus: any = [];
@@ -238,6 +241,7 @@ export class AddEditCampingComponent {
   }
 
   userActionSuccess(res) {
+    this.sharedService.showSpinner.next(false);
     this.apiService.showToast(res.message);
     this.router.navigate(['/dashboard/camping']);
   }

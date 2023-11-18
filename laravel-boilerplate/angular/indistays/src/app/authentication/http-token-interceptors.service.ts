@@ -19,6 +19,7 @@ import {Router} from '@angular/router';
 import {StorageService} from "../services/storage.service";
 import {ApiService} from "../services/api.service";
 import {appConstants} from "../../assets/constants/app-constants";
+import {SharedService} from "../services/shared.service";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class HttpTokenInterceptorsService {
 
   // tslint:disable-next-line:max-line-length
   constructor(private router: Router, private storageService: StorageService,
-              private apiService: ApiService) {
+              private apiService: ApiService, public sharedService: SharedService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -81,6 +82,7 @@ export class HttpTokenInterceptorsService {
   // We are not just authorized, we couldn't refresh token
 // or something else along the caching went wrong!
   private async handle400Errors(err) {
+    this.sharedService.showSpinner.next(false);
     // Potentially check the exact error reason for the 400
     // then log out the user automatically
     switch (err.status) {

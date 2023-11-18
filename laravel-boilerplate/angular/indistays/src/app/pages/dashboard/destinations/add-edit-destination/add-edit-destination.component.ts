@@ -113,6 +113,7 @@ export class AddEditDestinationComponent {
     const data = {
       destinationId: this.destinationId
     }
+    this.sharedService.showSpinner.next(true);
     this.apiService.getDestinationById(data).subscribe(
       res => this.getDestinationByIdSuccess(res),
       error => {
@@ -144,6 +145,7 @@ export class AddEditDestinationComponent {
         }))
       });
     }
+    this.sharedService.showSpinner.next(false);
   }
 
   clearGalleryImages() {
@@ -154,6 +156,7 @@ export class AddEditDestinationComponent {
 
   userAction() {
     if (this.componentForm.valid) {
+      this.sharedService.showSpinner.next(true);
       const galleryImagesArray: any = this.galleryImages.value;
       this.destinationFormData = new FormData();
       this.destinationFormData.append('name', this.componentForm.get('name').value)
@@ -204,6 +207,7 @@ export class AddEditDestinationComponent {
   }
 
   userActionSuccess(res) {
+    this.sharedService.showSpinner.next(false);
     this.apiService.showToast(res.message);
     this.router.navigate(['/dashboard/destinations']);
   }

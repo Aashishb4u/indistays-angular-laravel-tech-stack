@@ -57,6 +57,7 @@ export class AddEditUsersComponent implements OnInit {
   }
 
   getUserById() {
+    this.sharedService.showSpinner.next(true);
     const data = {
       userId: this.userId
     }
@@ -72,6 +73,7 @@ export class AddEditUsersComponent implements OnInit {
     this.userForm.get('name').setValue(res.data[0].name);
     this.userForm.get('email').setValue(res.data[0].email);
     this.userForm.get('userRole').setValue(res.data[0].user_role_id);
+    this.sharedService.showSpinner.next(false);
   }
 
   userAction() {
@@ -86,6 +88,7 @@ export class AddEditUsersComponent implements OnInit {
     }
 
     if (this.userForm.valid) {
+      this.sharedService.showSpinner.next(true);
       const data = {
         name: this.userForm.get('name').value,
         email: this.userForm.get('email').value,
@@ -115,6 +118,7 @@ export class AddEditUsersComponent implements OnInit {
   }
 
   userActionSuccess(res) {
+    this.sharedService.showSpinner.next(false);
     this.apiService.showToast(res.message);
     this.router.navigate(['/dashboard/users']);
   }

@@ -48,6 +48,7 @@ export class AccommodationComponent {
   }
 
   getAccommodations(nameFilter = '') {
+    this.sharedService.showSpinner.next(true);
     let params = new HttpParams()
       .set('currentPage', this.currentPage.toString())
       .set('pageSize', this.pageSize.toString());
@@ -74,6 +75,7 @@ export class AccommodationComponent {
         return val;
       }) : [];
     this.totalLength = total;
+    this.sharedService.showSpinner.next(false);
   }
 
   onEditUser(id) {

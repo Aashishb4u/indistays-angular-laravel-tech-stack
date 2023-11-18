@@ -148,6 +148,7 @@ export class AddEditAccommodationComponent {
   }
 
   getAccommodationById() {
+    this.sharedService.showSpinner.next(true);
     const data = {
       accommodationId: this.accommodationId
     }
@@ -189,6 +190,7 @@ export class AddEditAccommodationComponent {
         }))
       });
     }
+    this.sharedService.showSpinner.next(false);
   }
 
   clearGalleryImages() {
@@ -199,6 +201,7 @@ export class AddEditAccommodationComponent {
 
   userAction() {
     if (this.componentForm.valid) {
+      this.sharedService.showSpinner.next(true);
       const galleryImagesArray: any = this.galleryImages.value;
       let galleryImagesStatus: any = [];
       this.campingFormData = new FormData();
@@ -252,6 +255,7 @@ export class AddEditAccommodationComponent {
   }
 
   userActionSuccess(res) {
+    this.sharedService.showSpinner.next(false);
     this.apiService.showToast(res.message);
     this.router.navigate(['/dashboard/accommodation']);
   }

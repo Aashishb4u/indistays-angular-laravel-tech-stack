@@ -48,6 +48,7 @@ export class UsersComponent implements OnInit{
   }
 
   getUsers(nameFilter = '') {
+    this.sharedService.showSpinner.next(true);
     let params = new HttpParams()
       .set('currentPage', this.currentPage.toString())
       .set('pageSize', this.pageSize.toString());
@@ -70,6 +71,7 @@ export class UsersComponent implements OnInit{
       return val;
     }) : [];
     this.totalLength = total;
+    this.sharedService.showSpinner.next(false);
   }
 
   onEditUser(id) {
