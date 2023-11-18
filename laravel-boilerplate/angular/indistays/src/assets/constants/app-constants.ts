@@ -12,15 +12,15 @@ export const appConstants = {
     creativeHandLogoAnimation: 'assets/company-logo/creative_hand_logo_animation.gif',
 
     // Base Url
-    baseUrl: 'http://127.0.0.1:8000',
-    baseAuthUrl: 'http://127.0.0.1:8000/api/auth/',
-    baseURLAdminAPIs: 'http://127.0.0.1:8000/api/v1/',
-    domainUrlApi: 'http://127.0.0.1:8000/api/',
+    // baseUrl: 'http://127.0.0.1:8000',
+    // baseAuthUrl: 'http://127.0.0.1:8000/api/auth/',
+    // baseURLAdminAPIs: 'http://127.0.0.1:8000/api/v1/',
+    // domainUrlApi: 'http://127.0.0.1:8000/api/',
 
     // Production Url
-    // baseUrl: 'https://api.creativehand.co.in',
-    // baseAuthUrl: 'https://api.creativehand.co.in/api/auth/',
-    // baseURLAdminAPIs: 'https://api.creativehand.co.in/api/v1/',
-    // domainUrlApi: 'https://api.creativehand.co.in/api/',
+    baseUrl: 'https://api.creativehand.co.in',
+    baseAuthUrl: 'https://api.creativehand.co.in/api/auth/',
+    baseURLAdminAPIs: 'https://api.creativehand.co.in/api/v1/',
+    domainUrlApi: 'https://api.creativehand.co.in/api/',
 };
 
