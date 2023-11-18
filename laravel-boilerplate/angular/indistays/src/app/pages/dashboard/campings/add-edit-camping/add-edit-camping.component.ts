@@ -290,6 +290,7 @@ export class AddEditCampingComponent {
             this.galleryImages.controls[index].get('imageBase64').setValue(base64);
           }
           this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
+          this.sharedService.showSpinner.next(false);
         });
       }
     }

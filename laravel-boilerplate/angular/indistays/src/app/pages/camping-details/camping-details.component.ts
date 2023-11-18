@@ -147,7 +147,7 @@ export class CampingDetailsComponent implements OnInit{
             loaded: false,
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }
-        });
+        }).splice(0, 3);
         this.campingDetails = this.campings.find(v => v.id === +this.campingId);
         // this.accommodationDetails = this.campingDetails.
         this.campAccommodations = this.campingDetails.accommodations ?

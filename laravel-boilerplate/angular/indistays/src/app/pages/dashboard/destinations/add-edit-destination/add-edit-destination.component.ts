@@ -71,6 +71,7 @@ export class AddEditDestinationComponent {
   }
 
   async uploadFile(event) {
+    this.sharedService.showSpinner.next(true);
     let reader = new FileReader();
     let image = event.target.files[0];
     const destinationName: any = this.componentForm.get('name').value;
@@ -80,7 +81,6 @@ export class AddEditDestinationComponent {
         this.apiService.showToast('File size should not exceed 35 MB');
         return;
       }
-      // this.sharedService.showSpinner.next(true);
       reader.readAsDataURL(image);
       reader.onload = (onLoadEvent) => {
         const fileName = `${destinationName.toLowerCase()}-profile.png`;
@@ -90,6 +90,7 @@ export class AddEditDestinationComponent {
           this.profileImageFile.setValue(compressedImage.imageFile);
           this.profileImageBase64.setValue(base64);
         });
+        this.sharedService.showSpinner.next(false);
       }
     }
   }
@@ -256,6 +257,7 @@ export class AddEditDestinationComponent {
             this.galleryImages.controls[index].get('imageBase64').setValue(base64);
           }
           this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
+          this.sharedService.showSpinner.next(false);
         });
       }
     }

@@ -94,8 +94,8 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .gallery-image {
-    height: inherit;
+  .abstract-image-gallery .gallery-image {
+    height: inherit !important;
   }
   .destination-details {
     padding: 1rem;
@@ -130,7 +130,7 @@
     border-radius: 25px !important;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     .gallery-column {
-      grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-rows: 1fr;
     }
     &:before {
       border-radius: 25px !important;

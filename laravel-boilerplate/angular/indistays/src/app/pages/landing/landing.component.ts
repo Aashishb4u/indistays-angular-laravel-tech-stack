@@ -62,7 +62,7 @@ export class LandingComponent  implements OnInit {
           url: `/destination-details/${val.id}`,
           img: this.sharedService.generateImageUrl(val.profile_image_url)
         }
-      });
+      }).splice(0, 8);
       this.campings = res.camping;
       this.accommodations = [...res.accommodations].map((val) => {
         return {
@@ -70,7 +70,7 @@ export class LandingComponent  implements OnInit {
           url: `/camping-details/${val.id}`,
           img: this.sharedService.generateImageUrl(val.profile_image_url)
         }
-      });
+      }).splice(0, 3);
       this.showSpinner = false;
     });
   }

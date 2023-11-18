@@ -37,7 +37,7 @@
                   <mat-label>Camping</mat-label>
                   <mat-select tabindex="2" formControlName="camping">
                     <mat-option *ngFor="let camp of camping"
-                                [value]="camp.id">{{ camp.name }}</mat-option>
+                                [value]="camp.id">{{ camp.name}}, {{camp?.destination?.name}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>

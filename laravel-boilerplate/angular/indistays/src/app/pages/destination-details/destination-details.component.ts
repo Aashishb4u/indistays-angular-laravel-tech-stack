@@ -32,7 +32,7 @@ export class DestinationDetailsComponent implements OnInit {
             name: val.name,
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }
-        });
+        }).splice(0, 8);
         this.destinationDetails = this.destinations.find(v => v.id === +this.destinationId);
         this.camping = [...this.destinationDetails.campings].map((res) => {
           return {
