@@ -45,10 +45,10 @@ export class CampingDetailsComponent implements OnInit{
     if (this.userForm.invalid) {
       this.apiService.showToast('Please select User Details');
       this.userForm.markAllAsTouched();
-      this.toggleModal();
       return;
     }
 
+    this.sharedService.showSpinner.next(true);
     const dateRangeVal = this.dateRangeForm.value;
     const userDataVal = this.userForm.value;
     const data = [...this.summaryData].map((res) => {
@@ -64,7 +64,9 @@ export class CampingDetailsComponent implements OnInit{
       }
     });
     this.apiService.makeBooking(data).subscribe((res) => {
-      console.log(res);
+      this.apiService.showToast("Your Camping Booked Successfully");
+      this.sharedService.showSpinner.next(false);
+      this.toggleModal();
     });
   }
 
@@ -142,6 +144,7 @@ export class CampingDetailsComponent implements OnInit{
         this.accommodations = [...val.accommodations].map((val) => {
           return {
             ...val,
+            loaded: false,
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }
         });

@@ -19,7 +19,7 @@ navbar-expand-md navbar-light bg-light">
               <mat-icon>account_circle</mat-icon>
             </button>
           </div>
-          <div class="user-name-box"><b>Hello, {{apiService?.userName | titlecase}}</b></div>
+          <div class="user-name-box"><b>{{apiService?.userName | titlecase}}</b></div>
         </div>
         <mat-menu #userMenu="matMenu">
           <ng-template matMenuContent let-id="id">
@@ -77,7 +77,7 @@ navbar-expand-md navbar-light bg-light">
               <mat-icon>account_circle</mat-icon>
             </button>
           </div>
-          <div class="user-name-box"><b>Hello, {{apiService?.userName | titlecase}}</b></div>
+          <div class="user-name-box"><b>{{apiService?.userName | titlecase}}</b></div>
         </div>
         <mat-menu #userMenu="matMenu">
           <ng-template matMenuContent let-id="id">
