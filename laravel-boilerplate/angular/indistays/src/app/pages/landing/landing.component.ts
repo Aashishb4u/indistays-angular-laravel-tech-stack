@@ -4,6 +4,7 @@ import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angul
 import {SharedService} from "../../services/shared.service";
 import {Router} from "@angular/router";
 import * as moment from "moment";
+import {StorageService} from "../../services/storage.service";
 declare var $: any;
 
 @Component({
@@ -23,7 +24,8 @@ export class LandingComponent  implements OnInit {
     public sharedService: SharedService,
     public apiService: ApiService,
     public router: Router,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public storageService: StorageService
   ) {
     this.screenWidth = window.innerWidth;
   }
@@ -88,11 +90,14 @@ export class LandingComponent  implements OnInit {
       return;
     }
 
+    this.storageService.storeValue('start_date', this.filterForm.get('start_date').value);
+    this.storageService.storeValue('end_date', this.filterForm.get('end_date').value);
+
     if(this.selectedTab === 'destination') {
       const id =  this.filterForm.get('destination').value;
       this.router.navigate([`/destination-details/${id}`]);
     } else if (this.selectedTab === 'camping') {
-      const id =  this.filterForm.get('camping').value;
+      const id = this.filterForm.get('camping').value;
       this.router.navigate([`/camping-details/${id}`]);
     }
   }

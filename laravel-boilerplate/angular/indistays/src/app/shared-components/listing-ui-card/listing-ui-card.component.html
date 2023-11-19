@@ -11,17 +11,11 @@
             <i  class="color-secondary fa {{amenity?.icon}}" *ngFor="let amenity of amenities"></i>
           </div>
         </div>
-        <!--      <div class="amenities">-->
-        <!--        <div *ngFor="let amenity of amenities" class="amenity">-->
-        <!--          <i class="fa {{amenity?.icon}}"></i>-->
-        <!--          <div class="amen-name">{{amenity?.name}}</div>-->
-        <!--        </div>-->
-        <!--      </div>-->
         <div class="bottom-listing-footer align-items-center d-flex justify-content-between">
-          <div>
+          <div *ngIf="list?.startingAt">
             <div class="footer-label">Starting At</div>
             <div>
-              <span class="currency">$30</span>
+              <span class="currency">{{list?.startingAt}}</span>
               <span class="n-l">/night</span>
             </div>
           </div>

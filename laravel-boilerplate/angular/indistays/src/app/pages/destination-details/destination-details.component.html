@@ -64,7 +64,7 @@
       </app-section-header>
       <app-image-tiles [tilesData]="destinations"></app-image-tiles>
     </div>
-    <div>
+    <div *ngIf="camping && camping?.length > 0">
       <app-section-header [showMore]="false"
                           [mainTitle]="'Explore Best Camping Destinations'"
                           [subTitle]="'Camping'">
@@ -73,8 +73,8 @@
     </div>
     <div>
       <app-section-header [showMore]="false"
-                          [mainTitle]="'Journey Experiences'"
-                          [subTitle]="'Happy Tourists'">
+                          [mainTitle]="'Journey Chronicles'"
+                          [subTitle]="'testimonials'">
       </app-section-header>
       <app-testimonial-cards></app-testimonial-cards>
     </div>

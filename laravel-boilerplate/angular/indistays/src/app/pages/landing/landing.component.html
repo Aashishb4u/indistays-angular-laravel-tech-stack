@@ -67,7 +67,7 @@
                 <div [class.active]="selectedTab === 'camping'" (click)="onChangeTab('camping')" class="filter-tab">Camping</div>
               </div>
             </div>
-            <div *ngIf="selectedTab === 'destination'" class="col-lg-3 col-md-3">
+            <div *ngIf="selectedTab === 'destination'" class="col-lg-3 col-8">
               <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
                 <mat-label>Destination</mat-label>
                 <mat-select formControlName="destination">
@@ -76,7 +76,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div *ngIf="selectedTab === 'camping'" class="col-lg-3 col-md-3">
+            <div *ngIf="selectedTab === 'camping'" class="col-lg-3 col-8">
               <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
                 <mat-label>Camping</mat-label>
                 <mat-select formControlName="camping">
@@ -85,27 +85,54 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-lg-5 col-md-5">
-              <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
-                <mat-label>Date Range</mat-label>
-                <mat-date-range-input
-                  [rangePicker]="campaignOnePicker">
-                  <input matStartDate placeholder="Start date" formControlName="start_date">
-                  <input matEndDate placeholder="End date" formControlName="end_date">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-                <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-              </mat-form-field>
-            </div>
-            <div class="col-lg-3 col-md-3">
-              <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-                <mat-label>People</mat-label>
-                <mat-select formControlName="people">
-                  <mat-option *ngFor="let bed of beds"
-                              [value]="bed">{{ bed }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+            <ng-container *ngIf="screenWidth > 600">
+              <div class="col-lg-5 col-md-5">
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
+                  <mat-label>Date Range</mat-label>
+                  <mat-date-range-input
+                    [rangePicker]="campaignOnePicker">
+                    <input matStartDate placeholder="Start date" formControlName="start_date">
+                    <input matEndDate placeholder="End date" formControlName="end_date">
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3 col-md-3">
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+                  <mat-label>People</mat-label>
+                  <mat-select formControlName="people">
+                    <mat-option *ngFor="let bed of beds"
+                                [value]="bed">{{ bed }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="screenWidth < 600">
+              <div class="col-4">
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
+                  <mat-label>People</mat-label>
+                  <mat-select formControlName="people">
+                    <mat-option *ngFor="let bed of beds"
+                                [value]="bed">{{ bed }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
+                  <mat-label>Date Range</mat-label>
+                  <mat-date-range-input
+                    [rangePicker]="campaignOnePicker">
+                    <input matStartDate placeholder="Start date" formControlName="start_date">
+                    <input matEndDate placeholder="End date" formControlName="end_date">
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                </mat-form-field>
+              </div>
+            </ng-container>
+
             <div *ngIf="screenWidth > 500" class="col-lg-1 col-md-1 d-flex">
               <button (click)="onSearch()" class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
                 <mat-icon>search</mat-icon>

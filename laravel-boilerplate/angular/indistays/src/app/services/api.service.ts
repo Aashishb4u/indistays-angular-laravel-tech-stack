@@ -155,6 +155,10 @@ export class ApiService {
     return this.http.get(`${this.baseURL}users`, {params});
   }
 
+  getEnquiries(params) {
+    return this.http.get(`${this.baseURL}enquiries`, {params});
+  }
+
   getUserById(data) {
     return this.http.post(`${this.baseURL}users/all`, data, {});
   }
@@ -265,6 +269,10 @@ export class ApiService {
 
   makeBooking(data) {
     return this.http.post(`${this.domainUrlApi}make/online-booking`, data, {});
+  }
+
+  makeEnquiry(data) {
+    return this.http.post(`${this.domainUrlApi}make/enquiry`, data, {});
   }
 
   getCustomBookingById(data) {

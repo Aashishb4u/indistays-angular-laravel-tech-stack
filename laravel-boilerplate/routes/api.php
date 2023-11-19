@@ -43,6 +43,7 @@ Route::group([
     'prefix' => 'make' // Adding the 'auth' prefix
 ], function ($router) {
     Route::post('online-booking', [BookingController::class, 'addWebsiteBooking']);
+    Route::post('enquiry', [BookingController::class, 'makeEnquiry']);
 });
 
 
@@ -114,6 +115,8 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
         ->where('id', '[0-9]+');
     Route::delete('custom-booking/{id}', [BookingController::class, 'deleteCustomBooking']);
     Route::post('custom-booking/all', [BookingController::class, 'index']);
+
+    Route::get('enquiries', [BookingController::class, 'paginateEnquiries']);
 
     // Amenities APIs
     Route::post('amenities/all', [AmenityController::class, 'index']);

@@ -1,6 +1,6 @@
 <mat-drawer-container class="dashboard-sidenav-container" autosize>
   <mat-drawer #drawer class="dashboard-sidenav" mode="side">
-    <div (mouseleave)="drawer.toggle()">
+    <div>
       <div class="logo-container p-3">
         <img [src]="sharedService.companyLogo" alt="Company Logo" class="logo-image">
         <mat-divider class="mat-divider-white"></mat-divider>
@@ -31,6 +31,11 @@
         <div class="pb-3 d-flex pl-1 cursor-pointer">
           <button mat-button class="nav-list" routerLinkActive="active-link" [routerLink]="['/dashboard/custom-booking']">
             <mat-icon>book</mat-icon> &nbsp; Manual Booking
+          </button>
+        </div>
+        <div class="pb-3 d-flex pl-1 cursor-pointer">
+          <button mat-button class="nav-list" routerLinkActive="active-link" [routerLink]="['/dashboard/enquiries']">
+            <mat-icon>contact_support</mat-icon>&nbsp; Enquiries
           </button>
         </div>
       </div>

@@ -53,21 +53,23 @@
             <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Phone Number</mat-label>
-                <input tabindex="1" #phoneNumber maxlength="40" matInput formControlName="phoneNumber" type="text" placeholder="Enter Contact Number">
-                <mat-error *ngIf="contactUsForm.get('phoneNumber')?.invalid && contactUsForm.get('phoneNumber')?.touched">Please enter a valid Contact Number</mat-error>
+                <input tabindex="1" #phoneNumber maxlength="10" matInput formControlName="contact_number"
+                       type="tex" placeholder="Enter Contact Number">
+                <mat-hint align="end">{{phoneNumber.value.length}} / 10</mat-hint>
+                <mat-error *ngIf="contactUsForm.get('contact_number')?.invalid && contactUsForm.get('contact_number')?.touched">Please enter a valid Contact Number</mat-error>
               </mat-form-field>
             </div>
             <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>How did you find us?</mat-label>
-                <mat-select formControlName="finding">
+                <mat-select formControlName="lead_source">
                   <mat-option *ngFor="let item of findings"
                               [value]="item">{{ item }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="col-md-12 col-lg-6 col-sm-12 col-xs-12 mb-3">
-              <button class="snd-btn color-white" mat-raised-button color="accent">
+              <button (click)="sendMessage()" class="snd-btn color-white" mat-raised-button color="accent">
                 Send Message
               </button>
             </div>

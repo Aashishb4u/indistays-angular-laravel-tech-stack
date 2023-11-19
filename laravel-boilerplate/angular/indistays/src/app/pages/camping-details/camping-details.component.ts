@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatFormField} from "@angular/material/form-field";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-camping-details',
@@ -29,7 +30,7 @@ export class CampingDetailsComponent implements OnInit{
   accommodations = [];
   userForm: FormGroup;
   dateRangeForm: FormGroup;
-  constructor(public fb: FormBuilder, private sanitizer: DomSanitizer, public sharedService: SharedService,
+  constructor(public storageService: StorageService, public fb: FormBuilder, private sanitizer: DomSanitizer, public sharedService: SharedService,
               public apiService: ApiService, public route: ActivatedRoute) {
     this.campingId = this.route.snapshot.paramMap.get('id');
   }
@@ -108,6 +109,17 @@ export class CampingDetailsComponent implements OnInit{
       end_date: ['', Validators.required],
     });
     this.getAmenities();
+    const startDate = this.storageService.getStorageValue('start_date');
+    const endDate = this.storageService.getStorageValue('end_date');
+
+    if(startDate) {
+      this.dateRangeForm.get('start_date').setValue(new Date(startDate));
+    }
+
+    if(endDate) {
+      this.dateRangeForm.get('end_date').setValue(new Date(endDate));
+    }
+
     this.galleryOptions = [
       {
         thumbnailsColumns: 4,

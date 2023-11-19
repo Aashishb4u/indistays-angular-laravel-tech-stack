@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\AddCustomBookingRequest;
 use App\Http\Requests\MakeBookingRequest;
+use App\Http\Requests\MakeEnquiryRequest;
 use App\Models\CustomBooking;
+use App\Models\Enquiry;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +27,16 @@ class BookingController extends Controller
             }
         ]);
 
+        $data = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
+        return response()->json(['data' => $data]);
+    }
+
+    public function paginateEnquiries(Request $request)
+    {
+
+        $pageSize = $request->input('pageSize', 10);
+        $page = $request->input('currentPage', 1); // Get the 'page' query parameter
+        $query = Enquiry::query();
         $data = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
         return response()->json(['data' => $data]);
     }
@@ -93,6 +105,19 @@ class BookingController extends Controller
         }
     }
 
+    public function makeEnquiry(MakeEnquiryRequest $request) {
+        DB::beginTransaction();
+        try {
+            $enquiry = $request->all(); // Include all data
+            $enquiryRes = Enquiry::create($enquiry);
+            DB::commit();
+            return response()->json(['message' => 'Enquiry created successfully', $enquiryRes], 201);
+        } catch (\Exception $e) {
+            // Handle any exceptions and rollback the transaction
+            DB::rollBack();
+            return response()->json(['message' => 'An error occurred while updating accommodation images.', 'error' => $e->getMessage()], 500);
+        }
+    }
 
     public function editCustomBooking(Request $request, $id)
     {

@@ -24,6 +24,7 @@ import {ContactUsComponent} from "./pages/contact-us/contact-us.component";
 import {DestinationsListingComponent} from "./pages/destinations/destinations.component";
 import {CampingsListingComponent} from "./pages/campings/campings.component";
 import {AboutUsComponent} from "./pages/about-us/about-us.component";
+import {EnquiriesComponent} from "./pages/dashboard/enquiries/enquiries.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirect to 'users' by default
@@ -60,6 +61,7 @@ const routes: Routes = [
       { path: 'custom-booking', component: CustomBookingsComponent }, // Users component under dashboard
       { path: 'add-custom-booking', component: AddEditCustomBookingComponent },
       { path: 'edit-custom-booking/:id', component: AddEditCustomBookingComponent },
+      { path: 'enquiries', component: EnquiriesComponent }, // Users component under dashboard
     ],
   },
   { path:  'change-password', component:  ChangePasswordComponent, canActivate: [async () => await inject(AuthService).isUserLoggedIn()] },

@@ -72,6 +72,7 @@ import {CampingsListingComponent} from "./pages/campings/campings.component";
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 import { SpinnerComponent } from './shared-components/spinner/spinner.component';
+import { EnquiriesComponent } from './pages/dashboard/enquiries/enquiries.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { SpinnerComponent } from './shared-components/spinner/spinner.component'
     ContactUsComponent,
     CampingsListingComponent,
     AboutUsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    EnquiriesComponent
   ],
   imports: [
     BrowserModule,

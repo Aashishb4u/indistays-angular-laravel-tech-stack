@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div>
+    <div *ngIf="amenities && amenities?.length > 0">
       <div class="section-sub-title">
         amenities
       </div>
@@ -53,7 +53,6 @@
           <div class="ml-auto custom-date-picker text-center">
             <form [formGroup]="dateRangeForm">
               <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
-                <mat-label>Date Range</mat-label>
                 <mat-date-range-input [rangePicker]="campaignOnePicker">
                   <input matStartDate placeholder="Start date" formControlName="start_date">
                   <input matEndDate placeholder="End date" formControlName="end_date">
@@ -193,8 +192,8 @@
 
     <div>
       <app-section-header [showMore]="false"
-                          [mainTitle]="'Camping Accommodations'"
-                          [subTitle]="'Top Selling'">
+                          [mainTitle]="'Journey Chronicles'"
+                          [subTitle]="'testimonial'">
       </app-section-header>
       <app-testimonial-cards></app-testimonial-cards>
     </div>

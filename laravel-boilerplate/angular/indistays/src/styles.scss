@@ -196,3 +196,31 @@ body { margin: 0;
     transform: none
   }
 }
+
+.custom-date-picker {
+  .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+    background-color: #7CB518;
+    border-radius: 60px;
+    border: none;
+  }
+
+  .mat-mdc-floating-label, .mat-date-range-input-inner, .mat-mdc-button-base, .mat-date-range-input-separator {
+    color: #fff;
+  }
+
+  //.mat-date-range-input-inner {
+  //  font-size: 14px;
+  //}
+
+  .mat-mdc-form-field-flex {
+    padding: 0 10px;
+  }
+
+  .mdc-notched-outline__leading, .mdc-notched-outline__trailing {
+    border: none;
+  }
+
+  .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field .mdc-notched-outline__notch {
+    border: none;
+  }
+}
