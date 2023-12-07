@@ -7,7 +7,7 @@
       </div>
       <div class="row-1 my-3 d-flex justify-content-between">
         <div class="title">
-          <span style="color: #999; font-size: 18px">
+          <span style="color: #999" class="sub-title">
             {{acc?.camping?.name}}</span> <br>
           {{acc?.name}}
         </div>
@@ -15,12 +15,12 @@
 <!--          <span class="rate">{{acc?.ratings}}</span>-->
 <!--        </div>-->
       </div>
-      <div class="row-2 d-flex align-items-center justify-content-between">
+      <div class="row-2">
         <div class="place">
           <i class="fa fa-map-marker"></i> &ngsp; {{acc?.camping?.destination?.name}}
         </div>
-        <div class="price d-flex gap-1 align-items-center">
-          <div class="actual-price me-3">{{acc?.price}}</div>
+        <div class="price d-flex gap-2 align-items-center">
+          <div class="actual-price">{{acc?.price}}</div>
           <div class="discount-price">{{acc?.discount_price}}</div>
         </div>
       </div>

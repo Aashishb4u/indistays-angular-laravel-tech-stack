@@ -46,9 +46,15 @@
 @media (max-width: 600px) {
   .image-tiles {
     grid-template-columns: 1fr;
-  }
-  .single-image-tile {
-    flex-basis: 100%;
+    grid-auto-flow: column;
+    overflow: scroll;
+    .single-image-tile {
+      min-width: 60vw;
+      box-shadow: none !important;
+    }
+    .image-title {
+      font-size: 18px;
+    }
   }
 }
 

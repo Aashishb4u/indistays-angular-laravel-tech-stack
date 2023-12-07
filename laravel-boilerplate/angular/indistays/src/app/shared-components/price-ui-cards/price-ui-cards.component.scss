@@ -1,6 +1,6 @@
 .image-price-card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(31%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(19%, 1fr));
   gap: 1rem;
   .img-price-card {
     padding: 1.5rem;
@@ -21,6 +21,9 @@
     .row-1 {
       /* Add styles for the first row of content */
       .title {
+        .sub-title {
+          font-size: 18px;
+        }
         color: #222;
         /* Title-24px */
         font-size: 24px;
@@ -55,6 +58,9 @@
       text-align: center;
       font-size: 16px;
       font-style: normal;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-weight: 500;
       line-height: 24px; /* 150% */
       /* Add styles for the second row of content */
@@ -109,9 +115,41 @@
 @media only screen and (max-width: 600px) {
   .image-price-card-container {
     grid-template-columns: 1fr;
-  }
+    grid-auto-flow: column;
+    overflow: scroll;
+    .img-price-card {
+      padding: 1rem;
+      box-shadow: none;
+      min-width: 70vw;
+      img {
+        height: 30vh;
+      }
+      .row-1 {
+        /* Add styles for the first row of content */
+        .title {
+          font-size: 18px;
+          .sub-title {
+            font-size: 14px;
+          }
+        }
+      }
 
-  .img-price-card {
-    padding: 1rem;
+      .row-2 {
+        gap: 0.5rem;
+        .place {
+          font-size: 12px;
+        }
+        .price {
+          flex-direction: row-reverse;
+          .actual-price {
+            font-size: 12px;
+          }
+
+          .discount-price {
+            font-size: 14px;
+          }
+        }
+      }
+    }
   }
 }
