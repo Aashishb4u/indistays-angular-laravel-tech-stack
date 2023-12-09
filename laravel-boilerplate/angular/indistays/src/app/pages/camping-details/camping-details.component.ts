@@ -192,7 +192,7 @@ export class CampingDetailsComponent implements OnInit{
 
   getAmenities() {
     this.apiService.getAllAmenities().subscribe((res: any) => {
-      this.amenities = res.data.slice(5);
+      this.amenities = [...res.data].slice(5);
     });
   }
 

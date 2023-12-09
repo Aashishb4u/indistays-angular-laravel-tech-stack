@@ -38,7 +38,7 @@
       </div>
       <div class="amenities">
         <div *ngFor="let amenity of amenities" class="amenity">
-          <i class="fa {{amenity?.icon}}"></i>
+          <img style="max-width: 40px" [src]="amenity?.icon" alt="">
           <div class="amen-name">{{amenity?.name}}</div>
         </div>
       </div>
@@ -139,7 +139,7 @@
             </div>
             <div class="py-3 summary-row">
               <div class="d-flex justify-content-between gap-5">
-                <p class="font-semibold text-lg font-poppins">Total Room Charges</p>
+                <p class="font-semibold text-lg font-poppins">Total</p>
                 <p class="ml-auto font-bold font-roboto">₹<span class="font-mulish">
               {{totalSum}}
             </span></p></div>

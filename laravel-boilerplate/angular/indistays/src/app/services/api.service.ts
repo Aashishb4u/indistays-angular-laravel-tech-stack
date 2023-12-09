@@ -293,7 +293,8 @@ export class ApiService {
 
 
   getAllAmenities(params = {}) {
-    return this.http.post(`${this.baseURL}amenities/all`, {params});
+    return this.http.post(`${this.domainUrlApi}all/amenities`, {params});
+    // return this.http.get(`assets/constants/amenities.json`);
   }
 
   getAllDestinationsForWebsite(params = {}) {

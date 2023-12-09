@@ -8,7 +8,9 @@
           <div class="description" [innerHTML]="list?.description">
           </div>
           <div class="d-flex gap-3 amenity-icons">
-            <i  class="color-secondary fa {{amenity?.icon}}" *ngFor="let amenity of amenities"></i>
+            <ng-container *ngFor="let amenity of amenities">
+              <img style="width: 30px" [src]="amenity?.icon" alt="">
+            </ng-container>
           </div>
         </div>
         <div class="bottom-listing-footer align-items-center d-flex justify-content-between">
