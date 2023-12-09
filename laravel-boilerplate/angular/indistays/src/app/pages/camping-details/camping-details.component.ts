@@ -170,11 +170,20 @@ export class CampingDetailsComponent implements OnInit{
               img: this.sharedService.generateImageUrl(camp.profile_image_url)
             }
           }) : this.campAccommodations;
+
+        const people = this.storageService.getStorageValue('people');
+        if(people && this.campAccommodations && this.campAccommodations.length > 0) {
+          for(let i=0; i < +people; i++) {
+            this.onAddition(this.campAccommodations[0]);
+          }
+          this.campAccommodations[0].booking = +people;
+          this.calculate();
+        }
+
         this.amenities = this.campAccommodations.reduce((a, b) => {
           a = a.concat(b.amenities);
           return a
         }, []);
-        console.log(JSON.stringify(this.accommodations));
         this.mapSrc = this.sanitizer.bypassSecurityTrustHtml(this.campingDetails.location_map_link);
         this.galleryImages = this.campingDetails.images.map((img) => {
           const url = this.sharedService.generateImageUrl(img.url);

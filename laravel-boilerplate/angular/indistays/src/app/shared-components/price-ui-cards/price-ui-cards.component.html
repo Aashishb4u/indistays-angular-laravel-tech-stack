@@ -8,7 +8,8 @@
           <img [src]="acc?.img" alt="">
         </ng-container>
         <ng-template #placeHolder>
-          <img class="full-width" src="assets/images/placeholder.png" alt="">
+          <ngx-skeleton-loader [theme]="{height: '200px', 'border-radius': '20px'}" count="1" ></ngx-skeleton-loader>
+<!--          <img class="full-width" src="assets/images/placeholder.png" alt="">-->
         </ng-template>
       </div>
       <div class="row-1 my-3 d-flex justify-content-between">

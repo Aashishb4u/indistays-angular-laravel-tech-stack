@@ -91,6 +91,7 @@ export class LandingComponent  implements OnInit {
     }
 
     this.storageService.storeValue('start_date', this.filterForm.get('start_date').value);
+    this.storageService.storeValue('people', this.filterForm.get('people').value);
     this.storageService.storeValue('end_date', this.filterForm.get('end_date').value);
 
     if(this.selectedTab === 'destination') {

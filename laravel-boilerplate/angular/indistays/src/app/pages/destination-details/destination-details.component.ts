@@ -15,8 +15,10 @@ export class DestinationDetailsComponent implements OnInit {
   destinationBanner: any = null;
   showSpinner: any = true;
   destinations: any = [];
+  similarDestinations: any = [];
   featuredImages: any = [];
   camping: any = [];
+  bannerLoaded: any = false;
   constructor(public router: Router, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {
     this.destinationId = this.route.snapshot.paramMap.get('id');
   }
@@ -33,6 +35,7 @@ export class DestinationDetailsComponent implements OnInit {
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }
         }).splice(0, 8);
+        this.similarDestinations = [...this.destinations].filter(v => +v.id !== +this.destinationId);
         this.destinationDetails = this.destinations.find(v => v.id === +this.destinationId);
         this.camping = [...this.destinationDetails.campings].map((res) => {
           return {
@@ -61,4 +64,8 @@ export class DestinationDetailsComponent implements OnInit {
     {url: '/assets/images/banner_3.png'},
     {url: '/assets/images/tile_3.png'},
   ];
+
+  someEvent() {
+    this.bannerLoaded = true;
+  }
 }

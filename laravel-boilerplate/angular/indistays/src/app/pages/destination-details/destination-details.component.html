@@ -22,15 +22,21 @@
   <app-app-header></app-app-header>
   <div style="background: #3f51b524" class="destination-details">
     <div class="destination-tile">
-      <div [style.background]="'url(' + destinationBanner + ') center/cover no-repeat'" class="image-container">
-        <div class="content-tile">
-          <div class="title">
-            {{destinationDetails?.name}}
-          </div>
-          <div [innerHTML]="destinationDetails?.description" class="description">
+      <img (load)="someEvent()" [src]="destinationBanner" alt="Image" style="display: none;">
+      <ng-container *ngIf="bannerLoaded; else placeHolder">
+        <div [style.background]="'url(' + destinationBanner + ') center/cover no-repeat'" class="image-container">
+          <div class="content-tile">
+            <div class="title">
+              {{destinationDetails?.name}}
+            </div>
+            <div [innerHTML]="destinationDetails?.description" class="description">
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-template #placeHolder>
+        <ngx-skeleton-loader style="width: 100%" [theme]="{width: '100%', height: '50vh', 'border-radius': '20px'}" count="1" ></ngx-skeleton-loader>
+      </ng-template>
     </div>
 
     <div class="abstract-image-gallery">
@@ -57,19 +63,21 @@
         </div>
       </div>
     </div>
-    <div>
-      <app-section-header [showMore]="false"
-                          [mainTitle]="'Uncover Destinations Like This'"
-                          [subTitle]="'Embark'">
-      </app-section-header>
-      <app-image-tiles [tilesData]="destinations"></app-image-tiles>
-    </div>
+
     <div *ngIf="camping && camping?.length > 0">
       <app-section-header [showMore]="false"
                           [mainTitle]="'Explore Best Camping Destinations'"
                           [subTitle]="'Camping'">
       </app-section-header>
       <app-listing-ui-card [listing]="camping"></app-listing-ui-card>
+    </div>
+
+    <div>
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Uncover Destinations Like This'"
+                          [subTitle]="'Embark'">
+      </app-section-header>
+      <app-image-tiles [tilesData]="similarDestinations"></app-image-tiles>
     </div>
     <div>
       <app-section-header [showMore]="false"
