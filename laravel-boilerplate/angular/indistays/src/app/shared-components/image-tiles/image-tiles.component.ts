@@ -7,4 +7,7 @@ import {Component, Input} from '@angular/core';
 })
 export class ImageTilesComponent {
   @Input() tilesData: any = [];
+  someEvent(image) {
+    image.loaded = true;
+  }
 }

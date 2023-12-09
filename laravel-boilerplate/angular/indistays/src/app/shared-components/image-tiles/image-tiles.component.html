@@ -1,9 +1,13 @@
 <div class="image-tiles">
   <ng-container *ngFor="let image of tilesData">
-    <div [routerLink]="image.url" class="single-image-tile" [style.background-image]="'url(' + image?.img + ')'">
+    <img (load)="someEvent(image)" [src]="image?.img" alt="Image" style="display: none;">
+    <div *ngIf="image?.loaded; else placeHolder" [routerLink]="image.url" class="single-image-tile" [style.background-image]="'url(' + image?.img + ')'">
       <div class="image-title">
         {{ image?.name }}
       </div>
     </div>
+    <ng-template #placeHolder>
+      <img style="min-width: 200px" class="full-width" src="assets/images/placeholder.png" alt="">
+    </ng-template>
   </ng-container>
 </div>

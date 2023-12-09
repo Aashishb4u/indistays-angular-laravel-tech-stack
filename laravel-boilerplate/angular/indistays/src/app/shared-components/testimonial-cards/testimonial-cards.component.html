@@ -6,16 +6,16 @@
                       (breakpoint)="breakpoint($event)"
                       (afterChange)="afterChange($event)"
                       (beforeChange)="beforeChange($event)">
-    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+    <div ngxSlickItem *ngFor="let slide of reviews" class="slide">
       <div class="card feedback-card overflow-hidden">
-        <div class="card-body">
-          <p class="feedback-content card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="card-body d-flex flex-column gap-2 justify-content-between">
+          <p class="feedback-content card-text">{{slide?.comment}}</p>
           <div class="d-flex justify-content-center align-items-center">
             <img style="max-width: 45px" src="assets/icons/man.png" alt="">
             <div class="ms-2">
-              <div class="feedback-title">Willson Erickson </div>
+              <div class="feedback-title">{{slide?.name}}</div>
               <div class="d-flex fd-rating">
-                <div>4.8</div>
+                <div>{{slide?.ratings}}</div>
                 <div class="stars ms-1">
                   <div class="str" *ngFor="let star of [1,2,3,4]">
                     <i class="fa fa-star"></i>

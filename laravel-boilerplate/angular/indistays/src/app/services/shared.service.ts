@@ -12,6 +12,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class SharedService {
   noImageIcon: any = 'assets/no-image.jpeg';
+  ownerContact = '8788707579';
   sizeOfOriginalImage: any = '';
   submitFeedbackSuccess = new BehaviorSubject(false);
   submitEnquirySuccess = new BehaviorSubject(false);
@@ -34,6 +35,15 @@ export class SharedService {
       return null;
     } else {
       return { passwordMismatch: true };
+    }
+  }
+
+  sendMessage(message) {
+    const encodedMessage = encodeURI(message);
+    // https://api.whatsapp.com/send?phone=919403733265&text=Hello
+    const url = `https://api.whatsapp.com/send?phone=91${this.ownerContact}&text=${encodedMessage}`;
+    if (isPlatformBrowser(this.platformId) && typeof window !== 'undefined') {
+      window.open(url, '_blank');
     }
   }
 
