@@ -188,6 +188,12 @@
       border-bottom: 1px solid #d3d3d369;
       padding: 0 0 10px 0;
 
+      .listing-t-c-name {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
       .amenity-icons i {
         font-size: 20px;
       }
@@ -246,6 +252,8 @@
 }
 
 .price-container {
+  display: flex;
+  flex-direction: column;
   .price {
     margin: 1rem 0;
   }
@@ -341,6 +349,10 @@
   }
   .listing-t-c {
     padding: 0 0 20px 0 !important;
+    .listing-t-c-name {
+      flex-direction: row !important;
+      justify-content: space-between;
+    }
   }
   .camping-details {
     padding: 0 1rem 1rem;
@@ -348,10 +360,14 @@
   //.accommodation-listing-container {
   //  flex-direction: column;
   //}
-
-  .price {
-    padding: 1rem 0;
+  .price-container {
+    flex-direction: row !important;
+    .price {
+      padding: 0;
+      margin: 1rem 0 0 !important;
+    }
   }
+
 
   .bottom-listing-footer {
     padding-top: 0 !important;
@@ -400,7 +416,20 @@
 
     .amenity {
       flex: 1;
+      justify-content: space-between;
+      gap: 0.5rem;
+      .amen-name {
+        line-height: 1.2;
+      }
     }
+  }
+
+  .night-label {
+    font-size: 12px !important;
+  }
+
+  .bed-label {
+    color: #8080809c !important;
   }
 }
 

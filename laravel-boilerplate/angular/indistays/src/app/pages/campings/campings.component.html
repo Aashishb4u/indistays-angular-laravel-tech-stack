@@ -19,9 +19,11 @@
 </ng-container>
 
 <ng-container *ngIf="!showSpinner">
-  <app-app-header></app-app-header>
-  <div class="campings-container">
-    <app-price-ui-cards [cardData]="accommodations"></app-price-ui-cards>
+  <div style="background: #3f51b524">
+    <app-app-header></app-app-header>
+    <div class="campings-container">
+      <app-price-ui-cards [cardData]="accommodations"></app-price-ui-cards>
+    </div>
+    <app-footer></app-footer>
   </div>
-  <app-footer></app-footer>
 </ng-container>

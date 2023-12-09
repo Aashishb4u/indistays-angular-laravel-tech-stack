@@ -2,8 +2,14 @@
   <ng-container *ngFor="let acc of cardData">
     <div [routerLink]="acc.url" (click)="onSelectPriceCard(acc)" class="cursor-pointer
     img-price-card">
-      <div class="img"  >
-        <img [src]="acc?.img" alt="">
+      <div class="img">
+        <img (load)="someEvent(acc)" [src]="acc?.img" alt="Image" style="display: none;">
+        <ng-container *ngIf="acc?.loaded; else placeHolder">
+          <img [src]="acc?.img" alt="">
+        </ng-container>
+        <ng-template #placeHolder>
+          <img class="full-width" src="assets/images/placeholder.png" alt="">
+        </ng-template>
       </div>
       <div class="row-1 my-3 d-flex justify-content-between">
         <div class="title">

@@ -12,6 +12,10 @@ export class PriceUiCardsComponent implements OnInit {
     console.log(this.cardData);
   }
 
+  someEvent(image) {
+    image.loaded = true;
+  }
+
   onSelectPriceCard(acc) {
     this.onSelect.emit(acc);
   }

@@ -29,6 +29,11 @@
 }
 
 .dashboard-toolbar {
+  .dashboard-toolbar-c {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
   color: var(--primary-color);
   padding: 2rem;
 }
@@ -49,4 +54,10 @@
 
 .active-link {
   color: var(--secondary-color) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .welcome-back {
+    display: none;
+  }
 }

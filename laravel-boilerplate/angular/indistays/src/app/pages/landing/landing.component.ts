@@ -33,7 +33,7 @@ export class LandingComponent  implements OnInit {
   mobileBannerImages: any = [1,2,3].map((n) => `assets/images/mobile_banner_${n}.png`);
   destinations: any = [];
   campings: any = [];
-  beds: any = [1, 2, 3, 4, 5];
+  beds: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   filterForm: FormGroup;
   selectedTab: any = 'destination';
   categories: any = [];

@@ -44,45 +44,45 @@
 
   <div class="main-page-container">
     <mat-toolbar class="dashboard-toolbar">
-      <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-      &nbsp;
-      <div class="toolbar-logo-container mr-1">
-        <img [src]="sharedService.companyLogoTransperant" alt="Company Logo" class="logo-image">
-      </div>
+     <div class="dashboard-toolbar-c">
+       <div class="d-flex align-items-center">
+         <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+           <mat-icon>menu</mat-icon>
+         </button>
 
-      &nbsp;
-      <div class="d-flex full-width justify-content-between align-items-center">
-        <div class="font-14">
-          Welcome Back, &nbsp; <span class="font-18 color-secondary">{{apiService.userName | titlecase}}</span>
-        </div>
-        <div class="cursor-pointer flex-basis-30 d-flex justify-content-end">
-          <div [matMenuTriggerFor]="userMenu" #menuTrigger class="d-flex justify-content-center align-items-center">
-            <div class="user-icon">
-              <button mat-mini-fab class="mat-button-icon-btn m-r-1"
-                      aria-label="Example icon button with a plus one icon">
-                <mat-icon>account_circle</mat-icon>
-              </button>
-            </div>
-            <div class="color-white user-name-box">Hello, <br> <b>{{apiService?.userName | titlecase}}</b></div>
-          </div>
-          <mat-menu #userMenu="matMenu">
-            <ng-template matMenuContent let-id="id">
-              <button (click)="onWebsite()" mat-menu-item>Website
-                <mat-icon color="primary">website</mat-icon>
-              </button>
-              <button (click)="onChangePassword()" mat-menu-item>Change Password
-                <mat-icon color="primary">lock</mat-icon>
-              </button>
-              <button mat-menu-item
-                      (click)="logout()">Log Out
-                <mat-icon color="primary">logout</mat-icon>
-              </button>
-            </ng-template>
-          </mat-menu>
-        </div>
-      </div>
+         <div class="toolbar-logo-container mr-1">
+           <img [src]="sharedService.companyLogoTransperant" alt="Company Logo" class="logo-image">
+         </div>
+       </div>
+
+       <div class="d-flex full-width justify-content-end align-items-center">
+         <div class="cursor-pointer flex-basis-30 d-flex justify-content-end">
+           <div [matMenuTriggerFor]="userMenu" class="d-flex justify-content-center align-items-center">
+             <div class="user-icon">
+               <button  #menuTrigger mat-mini-fab class="mat-button-icon-btn m-r-1"
+                       aria-label="Example icon button with a plus one icon">
+                 <mat-icon>account_circle</mat-icon>
+               </button>
+             </div>
+             <div class="color-white user-name-box">Hello, <br> <b>{{apiService?.userName | titlecase}}</b></div>
+           </div>
+           <mat-menu #userMenu="matMenu" >
+             <ng-template matMenuContent let-id="id">
+               <button (click)="onWebsite()" mat-menu-item>Website
+                 <mat-icon color="primary">website</mat-icon>
+               </button>
+               <button (click)="onChangePassword()" mat-menu-item>Change Password
+                 <mat-icon color="primary">lock</mat-icon>
+               </button>
+               <button mat-menu-item
+                       (click)="logout()">Log Out
+                 <mat-icon color="primary">logout</mat-icon>
+               </button>
+             </ng-template>
+           </mat-menu>
+         </div>
+       </div>
+     </div>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

@@ -12,16 +12,19 @@ export class CampingsListingComponent implements OnInit {
   showSpinner: any = true;
   constructor(public apiService: ApiService, public sharedService: SharedService) {}
   ngOnInit() {
-    this.apiService.getDataStream();
-    this.apiService.dataStream.subscribe((res) => {
-      this.accommodations = [...res.accommodations].map((val) => {
-        return {
-          ...val,
-          url: `/camping-details/${val.id}`,
-          img: this.sharedService.generateImageUrl(val.profile_image_url)
-        }
+    this.apiService.getDataStream().then((res) => {
+      this.apiService.dataStream.subscribe((res) => {
+        this.accommodations = [...res.accommodations].map((val) => {
+          return {
+            ...val,
+            url: `/camping-details/${val.id}`,
+            img: this.sharedService.generateImageUrl(val.profile_image_url)
+          }
+        });
+        setTimeout((res) => {
+          this.showSpinner = false;
+        }, 500);
       });
-      this.showSpinner = false;
     });
   }
 }
