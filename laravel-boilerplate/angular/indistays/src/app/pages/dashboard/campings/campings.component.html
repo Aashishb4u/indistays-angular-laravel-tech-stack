@@ -47,7 +47,10 @@
                 </div>
                 <div class="full-width"
                      style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); background: var(--primary-color);padding: 10px;color: white;text-align: center;border-bottom-left-radius: 15px;">
-                  {{element.name}}
+                  {{element.name}}, <br>
+                  <div style="color: #808080">
+                    {{element?.destinationName}}
+                  </div>
                 </div>
               </div>
             </td>
@@ -58,16 +61,6 @@
             <th mat-header-cell *matHeaderCellDef> Google Map </th>
             <td mat-cell *matCellDef="let element">
               <div [innerHTML]="element?.mapLink" class="truncate-text camping-map">
-              </div>
-            </td>
-          </ng-container>
-
-          <!-- Weight Column -->
-          <ng-container matColumnDef="destinationName">
-            <th mat-header-cell *matHeaderCellDef> Destination </th>
-            <td mat-cell *matCellDef="let element">
-              <div class="d-flex justify-content-center truncate-text" style="min-width: 170px; padding: 15px">
-                {{element?.destinationName}}
               </div>
             </td>
           </ng-container>

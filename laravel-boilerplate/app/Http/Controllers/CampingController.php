@@ -38,6 +38,7 @@ class CampingController extends Controller
             'destination'
         ]);
 
+        $query->orderBy('created_at', 'desc'); // Order by the 'created_at' column in descending order
 
         $campings = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
 

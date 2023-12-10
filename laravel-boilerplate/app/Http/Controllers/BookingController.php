@@ -14,9 +14,8 @@ class BookingController extends Controller
 {
     public function paginate(Request $request)
     {
-
         $pageSize = $request->input('pageSize', 10);
-        $page = $request->input('currentPage', 1); // Get the 'page' query parameter
+        $page = $request->input('currentPage', 1);
         $query = CustomBooking::query();
 
         $query->with([
@@ -27,9 +26,12 @@ class BookingController extends Controller
             }
         ]);
 
-        $data = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
+        $query->orderBy('created_at', 'desc'); // Order by the 'created_at' column in descending order
+
+        $data = $query->paginate($pageSize, ['*'], 'page', $page);
         return response()->json(['data' => $data]);
     }
+
 
     public function paginateEnquiries(Request $request)
     {
@@ -37,6 +39,7 @@ class BookingController extends Controller
         $pageSize = $request->input('pageSize', 10);
         $page = $request->input('currentPage', 1); // Get the 'page' query parameter
         $query = Enquiry::query();
+        $query->orderBy('created_at', 'desc'); // Order by the 'created_at' column in descending order
         $data = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
         return response()->json(['data' => $data]);
     }
@@ -127,7 +130,7 @@ class BookingController extends Controller
             'name' => 'required',
             'email' => 'required',
             'contact_number' => 'required',
-            'price' => 'required|numeric',
+            'booking_price' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);

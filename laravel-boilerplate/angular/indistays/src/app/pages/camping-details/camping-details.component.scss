@@ -419,7 +419,7 @@
   .amenities {
     gap: 1rem;
     flex-wrap: wrap;
-
+    justify-content: center;
     .amenity {
       flex: 1;
       justify-content: space-around;

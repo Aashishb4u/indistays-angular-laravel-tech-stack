@@ -7,7 +7,7 @@
       {{mainTitle}}
     </div>
   </div>
-  <div *ngIf="showMore" class="see-more cursor-pointer">
+  <div [routerLink]="showMoreRoute" *ngIf="showMore" class="see-more cursor-pointer">
     see more
   </div>
 </div>

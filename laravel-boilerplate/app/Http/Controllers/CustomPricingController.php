@@ -26,6 +26,8 @@ class CustomPricingController extends Controller
             }
         ]);
 
+        $query->orderBy('created_at', 'desc'); // Order by the 'created_at' column in descending order
+
         $data = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
         return response()->json(['data' => $data]);
     }
@@ -74,6 +76,7 @@ class CustomPricingController extends Controller
 
         $customPricingData = $request->validate([
             'price' => 'required|numeric',
+            'discount_price' => 'required|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);

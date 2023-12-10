@@ -230,3 +230,7 @@ body { margin: 0;
   text-align: center;
   color: #666;
 }
+
+.grid-auto-flow-row {
+  grid-auto-flow: row !important;
+}

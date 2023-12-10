@@ -48,6 +48,8 @@ class DestinationController extends Controller
             $que->where('is_profile_image', false);
         }]);
 
+        $query->orderBy('created_at', 'desc'); // Order by the 'created_at' column in descending order
+
         $destinations = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
 
         return response()->json(['data' => $destinations]);

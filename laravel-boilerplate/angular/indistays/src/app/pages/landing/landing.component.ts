@@ -69,7 +69,7 @@ export class LandingComponent  implements OnInit {
       this.accommodations = [...res.accommodations].map((val) => {
         return {
           ...val,
-          url: `/camping-details/${val.id}`,
+          url: `/camping-details/${val.camping_id}`,
           img: this.sharedService.generateImageUrl(val.profile_image_url)
         }
       }).splice(0, 3);

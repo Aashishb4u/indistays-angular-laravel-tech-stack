@@ -1,6 +1,6 @@
 .image-price-card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(19%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(31%, 1fr));
   gap: 1rem;
   .img-price-card {
     padding: 1.5rem;
@@ -65,6 +65,7 @@
       line-height: 24px; /* 150% */
       /* Add styles for the second row of content */
       .place {
+        font-size: 12px;
         /* Add styles for the place */
         .fa {
           /* Add styles for icons */
@@ -72,8 +73,10 @@
       }
 
       .price {
+        flex-direction: row-reverse;
         /* Add styles for the price section */
         .actual-price {
+          font-size: 14px;
           text-decoration: line-through
           /* Add styles for the actual price */
         }

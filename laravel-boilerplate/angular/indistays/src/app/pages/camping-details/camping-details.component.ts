@@ -32,7 +32,6 @@ export class CampingDetailsComponent implements OnInit{
   dateRangeForm: FormGroup;
   constructor(public storageService: StorageService, public fb: FormBuilder, private sanitizer: DomSanitizer, public sharedService: SharedService,
               public apiService: ApiService, public route: ActivatedRoute) {
-    this.campingId = this.route.snapshot.paramMap.get('id');
   }
 
   userAction() {
@@ -103,7 +102,6 @@ export class CampingDetailsComponent implements OnInit{
       email: ['', [Validators.required, Validators.email]],
       contact_number: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[0-9]{10}$/)]],
     });
-
     this.dateRangeForm = this.fb.group({
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
@@ -144,6 +142,14 @@ export class CampingDetailsComponent implements OnInit{
         preview: true
       }
     ];
+    this.route.params.subscribe((params: any) => {
+      // Get the 'id' parameter from the route
+      this.campingId = +params['id'];
+      this.fetchData();
+    });
+  }
+
+  fetchData() {
     this.apiService.getDataStream().then((res) => {
       this.apiService.dataStream.subscribe((val) => {
         this.campings = [...val.camping].map((val) => {
@@ -157,6 +163,7 @@ export class CampingDetailsComponent implements OnInit{
           return {
             ...val,
             loaded: false,
+            url: `/camping-details/${val.camping_id}`,
             img: this.sharedService.generateImageUrl(val.profile_image_url)
           }
         }).splice(0, 3);
@@ -174,6 +181,8 @@ export class CampingDetailsComponent implements OnInit{
         const people = this.storageService.getStorageValue('people');
         if(people && this.campAccommodations && this.campAccommodations.length > 0) {
           for(let i=0; i < +people; i++) {
+            this.summaryData = [];
+            this.totalSum = 0;
             this.onAddition(this.campAccommodations[0]);
           }
           this.campAccommodations[0].booking = +people;

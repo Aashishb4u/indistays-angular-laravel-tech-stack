@@ -19,7 +19,7 @@ export class CustomBookingsComponent {
   currentPage = 1;
   users: [];
   dataSource: any = [];
-  displayedColumns: string[] = ['accommodation_name','name', 'camping_name', 'beds', 'actual_price', 'booking_price', 'start_date', 'end_date', 'action'];
+  displayedColumns: string[] = ['accommodation_name','name', 'start_date', 'end_date', 'beds', 'booking_price', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public fb: FormBuilder, public sharedService: SharedService, public router: Router, public apiService: ApiService, public storageService: StorageService) {

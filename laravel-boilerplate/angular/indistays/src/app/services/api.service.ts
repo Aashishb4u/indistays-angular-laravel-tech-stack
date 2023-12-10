@@ -260,7 +260,7 @@ export class ApiService {
   }
 
   updateCustomPricingById(data, id) {
-    return this.http.post(`${this.baseURL}custom-pricing/edit/${id}`, data, {});
+    return this.http.put(`${this.baseURL}custom-pricing/${id}`, data, {});
   }
 
   addCustomBooking(data) {
@@ -288,7 +288,7 @@ export class ApiService {
   }
 
   updateCustomBookingById(data, id) {
-    return this.http.post(`${this.baseURL}custom-booking/edit/${id}`, data, {});
+    return this.http.put(`${this.baseURL}custom-booking/${id}`, data, {});
   }
 
 

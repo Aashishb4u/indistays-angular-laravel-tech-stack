@@ -45,19 +45,12 @@
                   </div>
                   <div class="full-width"
                        style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); background: var(--primary-color);padding: 10px;color: white;text-align: center;border-bottom-left-radius: 15px;">
-                    {{element.accommodation_name}}
+                    {{element.accommodation_name}}, <br>
+                    <div style="color: #808080">
+                      {{element.camping_name}}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="camping_name">
-            <th mat-header-cell *matHeaderCellDef> Camping & Destination </th>
-            <td mat-cell *matCellDef="let element">
-              <div style="min-width: 200px"  class="p-3">
-                <div> {{element.camping_name}} </div>
               </div>
             </td>
           </ng-container>
@@ -66,13 +59,8 @@
           <ng-container matColumnDef="start_date">
             <th mat-header-cell *matHeaderCellDef> Start Date </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 150px" class="p-3">
-                <mat-chip-listbox  aria-label="Amenities">
-                  <mat-chip color="primary">
-                    <i style="margin: 0 5px" class="fa fa-calendar"></i>
-                    {{element.start_date | date:'d MMM yyyy'}}
-                  </mat-chip>
-                </mat-chip-listbox>
+              <div class="p-3">
+                {{element.start_date | date:'d MMM yyyy'}}
               </div>
             </td>
           </ng-container>
@@ -81,13 +69,8 @@
           <ng-container matColumnDef="end_date">
             <th mat-header-cell *matHeaderCellDef> End Date </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 150px" class="p-3">
-                <mat-chip-listbox  aria-label="Amenities">
-                  <mat-chip color="primary">
-                    <i style="margin: 0 5px" class="fa fa-calendar"></i>
-                    {{element.end_date | date:'d MMM yyyy'}}
-                  </mat-chip>
-                </mat-chip-listbox>
+              <div class="p-3">
+                {{element.end_date | date:'d MMM yyyy'}}
               </div>
             </td>
           </ng-container>
@@ -96,11 +79,7 @@
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef> New Price </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 150px" class="p-3">
-                <div style="display: inline;background: #df691e; padding: 5px 10px;border-radius: 5px;color: white;font-size: 14px;">
-                  {{element.price}}
-                </div>
-              </div>
+              {{element.price}}
             </td>
           </ng-container>
 
@@ -108,7 +87,7 @@
           <ng-container matColumnDef="actual_price">
             <th mat-header-cell *matHeaderCellDef> Actual Price </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 150px" class="p-3">
+              <div class="p-3">
                 {{element.actual_price}}
               </div>
             </td>
@@ -118,11 +97,7 @@
           <ng-container matColumnDef="discount_price">
             <th mat-header-cell *matHeaderCellDef>New Discount Price </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 150px" class="p-3">
-                <div style="display: inline;background: green;padding: 5px 10px;border-radius: 5px;color: white;font-size: 14px;">
-                  {{element.discount_price}}
-                </div>
-              </div>
+              {{element.discount_price}}
             </td>
           </ng-container>
 
@@ -130,9 +105,7 @@
           <ng-container matColumnDef="actual_discount_price">
             <th mat-header-cell *matHeaderCellDef> Actual Discount Price </th>
             <td mat-cell *matCellDef="let element">
-              <div style="min-width: 150px" class="p-3">
-                  {{element.actual_discount_price}}
-              </div>
+              {{element.actual_discount_price}}
             </td>
           </ng-container>
 

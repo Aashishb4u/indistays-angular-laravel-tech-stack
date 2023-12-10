@@ -7,6 +7,7 @@ import {Component, Input} from '@angular/core';
 })
 export class SectionHeaderComponent {
   @Input() showMore: any = false;
+  @Input() showMoreRoute: any = '';
   @Input() subTitle: any = '';
   @Input() mainTitle: any = '';
 }

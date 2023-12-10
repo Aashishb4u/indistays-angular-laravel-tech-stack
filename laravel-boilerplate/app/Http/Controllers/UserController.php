@@ -119,6 +119,7 @@ class UserController extends Controller
 
         // Eager load the 'userRole' relationship
         $query->with('userRole');
+        $query->orderBy('created_at', 'desc'); // Order by the 'created_at' column in descending order
 
         $users = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
 

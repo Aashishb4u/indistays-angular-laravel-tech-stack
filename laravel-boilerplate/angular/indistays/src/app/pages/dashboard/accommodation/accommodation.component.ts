@@ -19,7 +19,7 @@ export class AccommodationComponent {
   currentPage = 1;
   users: [];
   dataSource: any = [];
-  displayedColumns: string[] = ['name', 'camping', 'price', 'discount_price', 'amenities', 'gallery', 'action'];
+  displayedColumns: string[] = ['name', 'price', 'discount_price', 'amenities', 'gallery', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public fb: FormBuilder, public sharedService: SharedService, public router: Router, public apiService: ApiService, public storageService: StorageService) {

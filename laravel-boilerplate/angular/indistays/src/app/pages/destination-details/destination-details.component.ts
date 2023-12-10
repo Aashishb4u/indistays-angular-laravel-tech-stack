@@ -19,11 +19,17 @@ export class DestinationDetailsComponent implements OnInit {
   featuredImages: any = [];
   camping: any = [];
   bannerLoaded: any = false;
-  constructor(public router: Router, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {
-    this.destinationId = this.route.snapshot.paramMap.get('id');
-  }
+  constructor(public router: Router, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.params.subscribe((params: any) => {
+      // Get the 'id' parameter from the route
+      this.destinationId = +params['id'];
+      this.fetchData();
+    });
+  }
+
+  fetchData() {
     // Assuming currentDate is the date for which you want to calculate
     this.apiService.getDataStream().then((res) => {
       this.apiService.dataStream.subscribe((val) => {

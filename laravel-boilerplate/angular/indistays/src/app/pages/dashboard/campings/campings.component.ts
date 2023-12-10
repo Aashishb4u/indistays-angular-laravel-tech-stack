@@ -21,7 +21,7 @@ export class CampingsComponent {
   users: [];
   dataSource: any = [];
   mapSrc: any = '';
-  displayedColumns: string[] = ['name', 'destinationName', 'mapLink', 'address', 'gallery', 'action'];
+  displayedColumns: string[] = ['name', 'mapLink', 'address', 'gallery', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(

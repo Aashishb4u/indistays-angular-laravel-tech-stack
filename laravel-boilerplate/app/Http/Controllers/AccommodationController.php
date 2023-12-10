@@ -43,6 +43,8 @@ class AccommodationController extends Controller
             'amenities' // Eager load the amenities relationship
         ]);
 
+        $query->orderBy('created_at', 'desc'); // Order by the 'created_at' column in descending order
+
         $destinations = $query->paginate($pageSize, ['*'], 'page', $page); // Use 'page' as the query parameter name
 
         return response()->json(['data' => $destinations]);
