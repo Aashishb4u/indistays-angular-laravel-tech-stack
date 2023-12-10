@@ -60,7 +60,9 @@ export class AddEditAccommodationComponent {
       profileImageUrl: [''],
       profileImageBase64: [null],
       price: [0],
-      discount_price: [0]
+      weekend_price: [0],
+      discount_price: [0],
+      weekend_discount_price: [0]
       // Add more form controls as needed
     });
     this.accommodationId = this.route.snapshot.paramMap.get('id');
@@ -175,8 +177,10 @@ export class AddEditAccommodationComponent {
     }
     this.componentForm.get('camping').setValue(responseData.camping.id);
     this.componentForm.get('price').setValue(responseData.price);
+    this.componentForm.get('weekend_price').setValue(responseData.weekend_price);
     this.componentForm.get('beds').setValue(responseData.beds_available);
     this.componentForm.get('discount_price').setValue(responseData.discount_price);
+    this.componentForm.get('weekend_discount_price').setValue(responseData.weekend_discount_price);
 
     this.clearGalleryImages();
     if (galleryImages) {
@@ -210,7 +214,9 @@ export class AddEditAccommodationComponent {
       this.campingFormData.append('amenity_ids', this.componentForm.get('amenities').value)
       this.campingFormData.append('beds_available', this.componentForm.get('beds').value);
       this.campingFormData.append('price', this.componentForm.get('price').value);
+      this.campingFormData.append('weekend_price', this.componentForm.get('weekend_price').value);
       this.campingFormData.append('discount_price', this.componentForm.get('discount_price').value)
+      this.campingFormData.append('weekend_discount_price', this.componentForm.get('weekend_discount_price').value)
       this.campingFormData.delete("images[]");
       if(this.accommodationId) {
 

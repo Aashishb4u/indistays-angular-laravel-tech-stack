@@ -52,7 +52,6 @@
                     <input matStartDate placeholder="Start date" formControlName="start_date">
                     <input matEndDate placeholder="End date" formControlName="end_date">
                   </mat-date-range-input>
-                  <mat-hint>Start Date (MM/DD/YYYY) – End Date (MM/DD/YYYY)</mat-hint>
                   <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
                   <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
                 </mat-form-field>
@@ -65,6 +64,18 @@
                          placeholder="Enter Price">
                   <mat-error
                     *ngIf="componentForm.get('actual_price')?.invalid && componentForm.get('actual_price')?.touched">
+                    Please enter a valid Price
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Weekend Price</mat-label>
+                  <input tabindex="1" #weekend_price min="0" max="1000000" matInput formControlName="weekend_price" type="number"
+                         placeholder="Enter Price">
+                  <mat-error
+                    *ngIf="componentForm.get('weekend_price')?.invalid && componentForm.get('weekend_price')?.touched">
                     Please enter a valid Price
                   </mat-error>
                 </mat-form-field>
@@ -88,6 +99,18 @@
                          type="number" placeholder="Enter Discount">
                   <mat-error
                     *ngIf="componentForm.get('actual_discount_price')?.invalid && componentForm.get('actual_discount_price')?.touched">
+                    Please enter a valid Discount
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12 col-lg-2 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Weekend Discount Price</mat-label>
+                  <input tabindex="1" #weekend_discount_price min="0" max="1000000" matInput formControlName="weekend_discount_price"
+                         type="number" placeholder="Enter Discount">
+                  <mat-error
+                    *ngIf="componentForm.get('weekend_discount_price')?.invalid && componentForm.get('weekend_discount_price')?.touched">
                     Please enter a valid Discount
                   </mat-error>
                 </mat-form-field>

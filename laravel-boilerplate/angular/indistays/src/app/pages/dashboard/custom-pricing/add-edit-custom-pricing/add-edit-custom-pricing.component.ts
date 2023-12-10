@@ -53,7 +53,9 @@ export class AddEditCustomPricingComponent {
       start_date: [Date.now(), Validators.required],
       end_date: [Date.now(), Validators.required],
       actual_price: [0],
+      weekend_price: [0],
       actual_discount_price: [0],
+      weekend_discount_price: [0],
       price: [0],
       camping: [{ value: '', disabled: true }],
       discount_price: [0]
@@ -69,7 +71,9 @@ export class AddEditCustomPricingComponent {
     });
 
     this.componentForm.get('actual_price').disable();
+    this.componentForm.get('weekend_price').disable();
     this.componentForm.get('actual_discount_price').disable();
+    this.componentForm.get('weekend_discount_price').disable();
 
     this.customPricingId = this.route.snapshot.paramMap.get('id');
     if (this.customPricingId) {
@@ -137,7 +141,9 @@ export class AddEditCustomPricingComponent {
       this.componentForm.get('price').setValue(responseData.price);
       this.componentForm.get('discount_price').setValue(responseData.discount_price);
       this.componentForm.get('actual_price').setValue(responseData.accommodation.price);
+      this.componentForm.get('weekend_price').setValue(responseData.accommodation.weekend_price);
       this.componentForm.get('actual_discount_price').setValue(responseData.accommodation.discount_price);
+      this.componentForm.get('weekend_discount_price').setValue(responseData.accommodation.weekend_discount_price);
     }
   }
 

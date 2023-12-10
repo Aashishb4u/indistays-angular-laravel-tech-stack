@@ -195,6 +195,7 @@ class CampingController extends Controller
 
     public function index(Request $request)
     {
+
         $query = Camping::query();
 
         // Add a filter by 'id' if 'user_id' is provided in the request
@@ -210,9 +211,29 @@ class CampingController extends Controller
         }
 
         // Eager load the 'userRole' relationship
-        $query->with(['images', 'destination', 'accommodations', 'accommodations.amenities']);
-
+        $query->with(['images', 'destination', 'accommodations', 'accommodations.customPricing', 'accommodations.amenities']);
         $campings = $query->get();
+
+        // Manipulate the result to include or exclude customPricing based on the current date
+        $campings->transform(function ($camping) {
+            $camping->accommodations->transform(function ($accommodation) {
+                $accommodation->filter_custom_pricing = $accommodation->customPricing
+                    ->filter(function ($customPricing) {
+                        $currentDate = now()->toDateString();
+                        return now()->between($customPricing->start_date, $customPricing->end_date) ||
+                            ($customPricing->start_date <= $currentDate && $currentDate <= $customPricing->end_date) ||
+                            (is_null($customPricing->start_date) && $currentDate <= $customPricing->end_date) ||
+                            ($customPricing->start_date <= $currentDate && is_null($customPricing->end_date));
+                    })
+                    ->sortByDesc('created_at') // Sort in descending order based on created_at
+                    ->values()->toArray();
+
+                return $accommodation;
+            });
+
+            return $camping;
+        });
+
         return response()->json(['data' => $campings]);
     }
 

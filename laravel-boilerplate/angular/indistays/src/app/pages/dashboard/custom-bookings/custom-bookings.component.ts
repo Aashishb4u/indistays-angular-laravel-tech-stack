@@ -91,6 +91,14 @@ export class CustomBookingsComponent {
     this.router.navigate([`/dashboard/edit-custom-booking/${id}`])
   }
 
+  onConfirmBooking(id) {
+    console.log(id);
+  }
+
+  onRejectBooking(id) {
+    console.log(id);
+  }
+
   onDeleteUser(id) {
     const data = {
       title: 'Delete Custom Booking',

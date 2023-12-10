@@ -114,6 +114,8 @@ class AccommodationController extends Controller
         $name = $request->input('name');
         $discountPrice = $request->input('discount_price');
         $price = $request->input('price');
+        $weekendPrice = $request->input('weekend_price');
+        $weekendDiscountPrice = $request->input('weekend_discount_price');
         $beds_available = $request->input('beds_available');
         $imageArray = $request->file('images');
         $campingId = $request->input('camping_id');
@@ -152,7 +154,9 @@ class AccommodationController extends Controller
             $accommodation->update([
                 'name' => $name,
                 'price' => $price,
+                'weekend_price' => $weekendPrice,
                 'discount_price' => $discountPrice,
+                'weekend_discount_price' => $weekendDiscountPrice,
                 'beds_available' => $beds_available,
                 'camping_id' => (int)$campingId,
             ]);

@@ -24,6 +24,7 @@ export class CampingDetailsComponent implements OnInit{
   summaryData: any = [];
   totalSum: any = 0;
   showSpinner: any = true;
+  isWeekend: any = false;
   campingDetails: any = null;
   mapSrc: SafeHtml;
   selectedAcc = [];
@@ -70,6 +71,12 @@ export class CampingDetailsComponent implements OnInit{
     });
   }
 
+  checkIfWeekend() {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // Sunday is 0, Monday is 1, ..., Saturday is 6
+    this.isWeekend = dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0;
+  }
+
   toggleModal() {
     const modal = document.getElementById('makeBooking');
     const backdrop = document.querySelector('.modal-backdrop');
@@ -97,6 +104,7 @@ export class CampingDetailsComponent implements OnInit{
 
 
   ngOnInit() {
+    this.checkIfWeekend();
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(1)]],
       email: ['', [Validators.required, Validators.email]],
@@ -168,15 +176,30 @@ export class CampingDetailsComponent implements OnInit{
           }
         }).splice(0, 3);
         this.campingDetails = this.campings.find(v => v.id === +this.campingId);
+        console.log(this.isWeekend);
         // this.accommodationDetails = this.campingDetails.
         this.campAccommodations = this.campingDetails.accommodations ?
-          [...this.campingDetails.accommodations].map((camp) => {
+          [...this.campingDetails.accommodations].map((camp: any) => {
+
+            // Handling weekend scenario
+            if (this.isWeekend && camp.filter_custom_pricing.length === 0) {
+              camp.price = +camp.weekend_price ? camp.weekend_price : camp.price;
+              camp.discount_price = +camp.weekend_discount_price ? camp.weekend_discount_price : camp.discount_price;
+            } else if (camp.filter_custom_pricing.length > 0) {
+              // Handling custom Pricing scenario
+              const customPrice = camp.filter_custom_pricing[0];
+              camp.price = customPrice.price;
+              camp.discount_price = customPrice.discount_price;
+            }
+
             return {
               ...camp,
               booking: 0,
               img: this.sharedService.generateImageUrl(camp.profile_image_url)
             }
           }) : this.campAccommodations;
+
+        console.log(this.campAccommodations);
 
         const people = this.storageService.getStorageValue('people');
         if(people && this.campAccommodations && this.campAccommodations.length > 0) {
@@ -206,6 +229,11 @@ export class CampingDetailsComponent implements OnInit{
         this.showSpinner = false;
       })
     });
+  }
+
+  isTodayInRange(startDate: Date, endDate: Date): boolean {
+    const today = new Date();
+    return startDate <= today && today <= endDate;
   }
 
   getAmenities() {

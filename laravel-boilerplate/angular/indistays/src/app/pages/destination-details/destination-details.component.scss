@@ -47,7 +47,10 @@
           font-weight: 400;
           line-height: 180%; /* 28.8px */
           letter-spacing: 0.64px;
-
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          -webkit-line-clamp: 8;
         }
       }
     }
@@ -103,7 +106,7 @@
       min-height: 60vh;
       padding: 1rem;
       .content-tile {
-        top: 1rem;
+        padding: 25px !important;
         overflow: hidden;
         .title {
           font-size: 35px !important;

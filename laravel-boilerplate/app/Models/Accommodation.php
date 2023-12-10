@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accommodation extends Model
 {
-    protected $fillable = ['name', 'price', 'description', 'discount_price', 'beds_available', 'profile_image_url', 'camping_id', 'amenity_ids'];
+    protected $fillable = ['name', 'price', 'description', 'discount_price', 'beds_available', 'profile_image_url', 'camping_id', 'amenity_ids', 'weekend_price', 'weekend_discount_price'];
 
     public function camping()
     {
