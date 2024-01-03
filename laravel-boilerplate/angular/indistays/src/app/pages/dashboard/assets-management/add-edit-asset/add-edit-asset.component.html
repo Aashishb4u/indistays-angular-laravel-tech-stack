@@ -1,0 +1,79 @@
+<div class="dashboard-container p-3">
+  <div class="pb-3">
+    <mat-card>
+      <div class="d-flex justify-content-between p-3">
+        <div class="d-flex">
+          <div class="d-flex align-items-center">
+            <button (click)="goGridPage()" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+          </div>
+          <div class="ml-1 d-flex align-items-center">
+            <div style="font-size: 18px; font-weight: bold">{{this.assetId ? 'Update' : 'Add'}} Asset</div>
+          </div>
+        </div>
+        <div>
+          <button (click)="userAction()" class="color-white" mat-raised-button color="accent">{{this.assetId ? 'Update' : 'Add'}} Asset</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="pb-3">
+    <mat-card>
+      <div class="component-container p-5">
+        <div class="container">
+          <form [formGroup]="componentForm">
+            <div class="row">
+              <div class="col-md-12 col-lg-7 col-sm-12 col-xs-12 mb-3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Asset Name</mat-label>
+                  <input tabindex="1" #name maxlength="40" matInput formControlName="name" type="text" placeholder="Enter Camping Name">
+                  <mat-hint align="end">{{name.value.length}} / 40</mat-hint>
+                  <mat-error *ngIf="componentForm.get('name')?.invalid && componentForm.get('name')?.touched">Please enter a valid email</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 col-lg-5 col-sm-12 col-xs-12 mb-2">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Asset Type</mat-label>
+                  <mat-select tabindex="2" formControlName="asset_type">
+                    <mat-option *ngFor="let destination of ['website_banner', 'mobile_banner']"
+                                [value]="destination">{{ destination.split('_').join(' ') | titlecase}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-12">
+                <div class="mb-4 image-message">
+                  Please Add Asset Banner Image below.
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mb-4">
+                <div style="position: relative; border: 1px solid #666; border-radius: 5px" class="full-width d-flex justify-content-center">
+
+                  <ng-container>
+                    <img class="destination-banner"
+                         [src]="imageBase64?.value ?
+                         imageBase64?.value : imageUrlControl.value"
+                         alt="Business Image">
+                  </ng-container>
+
+                  <div style="position: absolute; top: 10px; right: 10px;">
+                    <div style="position: relative">
+                      <label  for="image" class="edit_profile_icon">
+                        <i class="fa fa-pencil"></i>
+                      </label>
+                      <input type='file' style="display: none" id="image"
+                             accept=".png, .jpg, .jpeg"
+                             (change)="uploadFile($event)"/>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

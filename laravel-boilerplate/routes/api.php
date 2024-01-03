@@ -4,6 +4,7 @@ use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CampingController;
 use App\Http\Controllers\AmenityController;
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CustomPricingController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
@@ -36,6 +37,7 @@ Route::group([
     Route::post('accommodations', [AccommodationController::class, 'index']);
     Route::post('custom-pricing', [CustomPricingController::class, 'index']);
     Route::post('amenities', [AmenityController::class, 'index']);
+    Route::post('assets', [AssetController::class, 'index']);
 });
 
 Route::group([
@@ -125,6 +127,10 @@ Route::prefix('v1')->middleware('auth.check')->group(function () {
     Route::post('upload-images/{entity}', [ImageController::class, 'uploadImages']);
     Route::post('upload-profile-image/{entity}/{id}', [ImageController::class, 'uploadProfileImage']);
 
-
+    Route::get('assets', [AssetController::class, 'paginate']);
+    Route::post('assets', [AssetController::class, 'addAsset']);
+    Route::post('assets/edit/{id}', [AssetController::class, 'editAsset'])
+    ->where('id', '[0-9]+');
+    Route::delete('assets/{id}', [AssetController::class, 'deleteAsset']);
     // Other v1 authenticated routes go here
 });

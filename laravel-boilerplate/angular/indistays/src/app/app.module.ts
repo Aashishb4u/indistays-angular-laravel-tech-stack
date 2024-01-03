@@ -73,6 +73,8 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 import { SpinnerComponent } from './shared-components/spinner/spinner.component';
 import { EnquiriesComponent } from './pages/dashboard/enquiries/enquiries.component';
+import { AssetsManagementComponent } from './pages/dashboard/assets-management/assets-management.component';
+import { AddEditAssetComponent } from './pages/dashboard/assets-management/add-edit-asset/add-edit-asset.component';
 
 @NgModule({
     declarations: [
@@ -111,7 +113,9 @@ import { EnquiriesComponent } from './pages/dashboard/enquiries/enquiries.compon
         CampingsListingComponent,
         AboutUsComponent,
         SpinnerComponent,
-        EnquiriesComponent
+        EnquiriesComponent,
+        AssetsManagementComponent,
+        AddEditAssetComponent
     ],
     imports: [
         BrowserModule,

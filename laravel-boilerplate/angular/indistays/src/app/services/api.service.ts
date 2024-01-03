@@ -211,6 +211,30 @@ export class ApiService {
     return this.http.post(`${this.baseURL}campings/all`, data, {});
   }
 
+  getAssets(params = {}) {
+    return this.http.get(`${this.baseURL}assets`, {params});
+  }
+
+  getAllAssets(params = {}) {
+    return this.http.post(`${this.domainUrlApi}all/assets`, {params});
+  }
+
+  addAsset(data) {
+    return this.http.post(`${this.baseURL}assets`, data, {});
+  }
+
+  deleteAsset(id) {
+    return this.http.delete(`${this.baseURL}assets/${id}`, {});
+  }
+
+  getAssetById(data) {
+    return this.http.post(`${this.baseURL}assets/all`, data, {});
+  }
+
+  updateAssetById(data, id) {
+    return this.http.post(`${this.baseURL}assets/edit/${id}`, data, {});
+  }
+
   getCampings(params) {
     return this.http.get(`${this.baseURL}campings`, {params});
   }

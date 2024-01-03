@@ -5,6 +5,7 @@ import {SharedService} from "../../services/shared.service";
 import {Router} from "@angular/router";
 import * as moment from "moment";
 import {StorageService} from "../../services/storage.service";
+import {HttpParams} from "@angular/common/http";
 declare var $: any;
 
 @Component({
@@ -29,8 +30,10 @@ export class LandingComponent  implements OnInit {
   ) {
     this.screenWidth = window.innerWidth;
   }
-  images: any = [1,2,3].map((n) => `assets/images/banner_${n}.png`);
-  mobileBannerImages: any = [1,2,3,4].map((n) => `assets/images/camp_${n}.png`);
+  images: any = [];
+  // images: any = [1,2,3].map((n) => `assets/images/banner_${n}.png`);
+  mobileBannerImages: any = [];
+  // mobileBannerImages: any = [1,2,3,4].map((n) => `assets/images/camp_${n}.png`);
   destinations: any = [];
   campings: any = [];
   beds: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -44,6 +47,7 @@ export class LandingComponent  implements OnInit {
   showSpinner: any = true;
   ngOnInit() {
     this.sharedService.showBackIcon.next(false);
+    this.getAssets();
     const currentDate = moment(); // You can replace this with your actual date=
     this.twoDaysBefore = currentDate.clone().subtract(2, 'days');
     this.twoDaysAfter = currentDate.clone().add(2, 'days');
@@ -106,5 +110,25 @@ export class LandingComponent  implements OnInit {
 
   onChangeTab(tab) {
     this.selectedTab = tab;
+  }
+
+  getAssets() {
+    this.sharedService.showSpinner.next(true);
+    this.apiService.getAllAssets().subscribe(
+      res => this.getAssetsSuccess(res),
+      error => {
+        this.apiService.commonError(error);
+      }
+    );
+  }
+
+  getAssetsSuccess(res) {
+    this.sharedService.showSpinner.next(false);
+    const response = res.data.map((val) => {
+      val.image_url = this.sharedService.generateImageUrl(val.image_url);
+      return val;
+    });
+    this.images = response.filter(v => v.asset_type === 'website_banner').map(v => v.image_url);
+    this.mobileBannerImages = response.filter(v => v.asset_type === 'mobile_banner').map(v => v.image_url);
   }
 }
