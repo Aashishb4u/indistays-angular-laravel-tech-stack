@@ -28,15 +28,15 @@
             <div class="picsum-img-wrapper">
               <img [src]="image" alt="Random first slide" />
             </div>
-            <div class="carousel-caption carousal-text">
-              <div class="header">
-                Plan your next <br>
-                vacation with us
-              </div>
-              <div class="text">
-                Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
-              </div>
-            </div>
+<!--            <div class="carousel-caption carousal-text">-->
+<!--              <div class="header">-->
+<!--                Plan your next <br>-->
+<!--                vacation with us-->
+<!--              </div>-->
+<!--              <div class="text">-->
+<!--                Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </ng-template>
       </ngb-carousel>
@@ -46,15 +46,15 @@
             <div class="picsum-img-wrapper">
               <img [src]="image" alt="Random first slide" />
             </div>
-            <div class="carousel-caption carousal-text">
-              <div class="header">
-                Plan your next <br>
-                vacation with us
-              </div>
-              <div class="text">
-                Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....
-              </div>
-            </div>
+<!--            <div class="carousel-caption carousal-text">-->
+<!--              <div class="header">-->
+<!--                Plan your next <br>-->
+<!--                vacation with us-->
+<!--              </div>-->
+<!--              <div class="text">-->
+<!--                Ditch the four corners of your boring office and work from the land of the blue skies, indigo rivers and green forests. Wrap up your zoom meetings....-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </ng-template>
       </ngb-carousel>
@@ -62,24 +62,24 @@
         <form class="d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
           <div class="row col-md-12 col-lg-10 filter-tab-container">
             <div class="m-1 mb-3 col-lg-12">
-              <div class="d-flex">
+              <div class="d-flex gap-2">
                 <div [class.active]="selectedTab === 'destination'" (click)="onChangeTab('destination')" class="filter-tab">Destination</div>
                 <div [class.active]="selectedTab === 'camping'" (click)="onChangeTab('camping')" class="filter-tab">Camping</div>
               </div>
             </div>
             <div *ngIf="selectedTab === 'destination'" class="col-lg-3 col-8">
-              <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-                <mat-label>Destination</mat-label>
-                <mat-select formControlName="destination">
+              <mat-label >Select Destination</mat-label>
+              <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2">
+                <mat-select placeholder="Eg. Nashik"  formControlName="destination">
                   <mat-option *ngFor="let dest of destinations"
                               [value]="dest.id">{{ dest.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div *ngIf="selectedTab === 'camping'" class="col-lg-3 col-8">
-              <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-                <mat-label>Camping</mat-label>
-                <mat-select formControlName="camping">
+              <mat-label >Select Camping</mat-label>
+              <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2">
+                <mat-select placeholder="Eg. Hotel XYZ" formControlName="camping">
                   <mat-option *ngFor="let camp of campings"
                               [value]="camp.id">{{ camp.name }}</mat-option>
                 </mat-select>
@@ -87,8 +87,8 @@
             </div>
             <ng-container *ngIf="screenWidth > 600">
               <div class="col-lg-5 col-md-5">
-                <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
-                  <mat-label>Date Range</mat-label>
+                <mat-label >Select Dates</mat-label>
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2 example-form-field">
                   <mat-date-range-input
                     [rangePicker]="campaignOnePicker">
                     <input matStartDate placeholder="Start date" formControlName="start_date">
@@ -99,8 +99,8 @@
                 </mat-form-field>
               </div>
               <div class="col-lg-3 col-md-3">
-                <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-                  <mat-label>People</mat-label>
+                <mat-label >Select People</mat-label>
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2">
                   <mat-select formControlName="people">
                     <mat-option *ngFor="let bed of beds"
                                 [value]="bed">{{ bed }}</mat-option>
@@ -111,8 +111,8 @@
 
             <ng-container *ngIf="screenWidth < 600">
               <div class="col-4">
-                <mat-form-field color="accent" appearance="outline" class="filter-control full-width">
-                  <mat-label>People</mat-label>
+                <mat-label >Select People</mat-label>
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2">
                   <mat-select formControlName="people">
                     <mat-option *ngFor="let bed of beds"
                                 [value]="bed">{{ bed }}</mat-option>
@@ -120,8 +120,8 @@
                 </mat-form-field>
               </div>
               <div class="col-12">
-                <mat-form-field color="accent" appearance="outline" class="filter-control full-width example-form-field">
-                  <mat-label>Date Range</mat-label>
+                <mat-label >Select Dates</mat-label>
+                <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2 example-form-field">
                   <mat-date-range-input
                     [rangePicker]="campaignOnePicker">
                     <input matStartDate placeholder="Start date" formControlName="start_date">
@@ -133,14 +133,14 @@
               </div>
             </ng-container>
 
-            <div *ngIf="screenWidth > 500" class="col-lg-1 col-md-1 d-flex">
+            <div *ngIf="screenWidth > 500" class="col-lg-1 col-md-1 d-flex align-items-center">
               <button (click)="onSearch()" class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
                 <mat-icon>search</mat-icon>
               </button>
             </div>
             <div *ngIf="screenWidth < 500" class="col-12 d-flex">
               <button (click)="onSearch()" class="btn p-1 btn-primary align-items-center primary-button d-flex justify-content-center search-btn color-white">
-                Search
+                BOOK NOW
               </button>
             </div>
           </div>

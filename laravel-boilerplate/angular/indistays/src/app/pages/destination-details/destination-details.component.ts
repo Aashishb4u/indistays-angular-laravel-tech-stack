@@ -22,6 +22,7 @@ export class DestinationDetailsComponent implements OnInit {
   constructor(public router: Router, public sharedService: SharedService, public apiService: ApiService, public route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.sharedService.showBackIcon.next(true);
     this.route.params.subscribe((params: any) => {
       // Get the 'id' parameter from the route
       this.destinationId = +params['id'];

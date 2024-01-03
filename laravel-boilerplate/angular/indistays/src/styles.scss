@@ -197,6 +197,12 @@ body { margin: 0;
   }
 }
 
+.mat-mdc-option .mdc-list-item__primary-text {
+  color: #666 !important;
+  font-size: 14px !important;
+  padding: 0.5rem 0 !important;
+}
+
 .custom-date-picker {
   .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
     background-color: #7CB518;
@@ -233,4 +239,23 @@ body { margin: 0;
 
 .grid-auto-flow-row {
   grid-auto-flow: row !important;
+}
+
+
+.primary-button {
+
+}
+
+.indistays-theme-btn {
+  background-color: var(--secondary-color) !important;
+  color: #fff;
+  height: 55px;
+  width: 53px;
+  border: none;
+  border-radius: 45px;
+  text-transform: uppercase;
+  .mat-icon {
+    font-size: 31px;
+  }
+  font-weight: bold;
 }

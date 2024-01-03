@@ -30,7 +30,7 @@ export class LandingComponent  implements OnInit {
     this.screenWidth = window.innerWidth;
   }
   images: any = [1,2,3].map((n) => `assets/images/banner_${n}.png`);
-  mobileBannerImages: any = [1,2,3].map((n) => `assets/images/mobile_banner_${n}.png`);
+  mobileBannerImages: any = [1,2,3,4].map((n) => `assets/images/camp_${n}.png`);
   destinations: any = [];
   campings: any = [];
   beds: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -43,6 +43,7 @@ export class LandingComponent  implements OnInit {
   twoDaysAfter: any;
   showSpinner: any = true;
   ngOnInit() {
+    this.sharedService.showBackIcon.next(false);
     const currentDate = moment(); // You can replace this with your actual date=
     this.twoDaysBefore = currentDate.clone().subtract(2, 'days');
     this.twoDaysAfter = currentDate.clone().add(2, 'days');

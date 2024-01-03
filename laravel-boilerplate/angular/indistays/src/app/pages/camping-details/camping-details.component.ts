@@ -36,16 +36,19 @@ export class CampingDetailsComponent implements OnInit{
   }
 
   userAction() {
+    this.toggleModal('makeBooking');
+
     if (this.dateRangeForm.invalid) {
       this.apiService.showToast('Please select Date Range');
       this.dateRangeForm.markAllAsTouched();
-      this.toggleModal();
+      this.toggleModal('makeBooking');
       return;
     }
 
     if (this.userForm.invalid) {
       this.apiService.showToast('Please select User Details');
       this.userForm.markAllAsTouched();
+      this.toggleModal('makeBooking');
       return;
     }
 
@@ -67,7 +70,8 @@ export class CampingDetailsComponent implements OnInit{
     this.apiService.makeBooking(data).subscribe((res) => {
       this.apiService.showToast("Your Camping Booked Successfully");
       this.sharedService.showSpinner.next(false);
-      this.toggleModal();
+      this.toggleModal('makeBooking');
+      this.toggleModal('confirmBooking');
     });
   }
 
@@ -77,8 +81,8 @@ export class CampingDetailsComponent implements OnInit{
     this.isWeekend = dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0;
   }
 
-  toggleModal() {
-    const modal = document.getElementById('makeBooking');
+  toggleModal(id) {
+    const modal = document.getElementById(id);
     const backdrop = document.querySelector('.modal-backdrop');
 
     if (modal) {
@@ -104,6 +108,7 @@ export class CampingDetailsComponent implements OnInit{
 
 
   ngOnInit() {
+    this.sharedService.showBackIcon.next(true);
     this.checkIfWeekend();
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(1)]],

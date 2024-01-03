@@ -16,6 +16,7 @@ export class SharedService {
   sizeOfOriginalImage: any = '';
   submitFeedbackSuccess = new BehaviorSubject(false);
   submitEnquirySuccess = new BehaviorSubject(false);
+  showBackIcon = new BehaviorSubject(false);
   dashboardMenu$ = new BehaviorSubject('dashboard');
   showSpinner = new BehaviorSubject(false);
   showBrandSpinner = new BehaviorSubject(false);

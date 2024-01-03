@@ -30,8 +30,10 @@
 
       .content-tile {
         position: absolute;
-        bottom: 1rem;
+        bottom: 0;
         padding: 2rem;
+        background: linear-gradient(to top,rgba(0,0,0,.7882352941),rgba(0,0,0,0));
+        border-radius: 25px;
         .title {
           color: #FCFCFC;
           font-size: 96px;

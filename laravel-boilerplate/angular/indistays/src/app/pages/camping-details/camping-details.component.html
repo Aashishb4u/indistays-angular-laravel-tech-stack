@@ -104,7 +104,9 @@
                   <div class="counter-btn-container">
                     <div class="counter-container">
                       <div class="button" (click)="acc.booking = acc.booking > 0 ? acc.booking - 1 : acc.booking; calculate()">-</div>
-                      <div class="value" id="counterValue">{{acc.booking}}</div>
+                      <div class="value" id="counterValue">
+                        <input (input)="calculate()" style="background: #3f51b514; border: none; text-align: center;" type="number" [(ngModel)]="acc.booking" class="form-control">
+                      </div>
                       <div class="button" (click)="onAddition(acc)">+</div>
                     </div>
                   </div>
@@ -121,13 +123,15 @@
             <div *ngIf="summaryData && summaryData.length">
               <div *ngFor="let booking of summaryData" class="py-2 summary-row">
                 <div class="pb-3 d-flex justify-content-between py-1 gap-5">
-                  <div class="d-flex justify-content-between items-end">
+                  <div class="d-flex justify-content-between items-end align-items-center">
                     <div class="text-black mb-0 font-semibold text-lg font-poppins pr-3">
                       {{booking?.name}}
                     </div>
                   </div>
-                  <div class="col-1 ml-auto d-flex align-items-center">
-                    <i class="trash-icon fa fa-trash"></i>
+                  <div class="ml-auto d-flex align-items-center">
+                    <button color="warn" class="trash-icon" mat-mini-fab aria-label="Example icon button with a menu icon">
+                      <i class="fa fa-trash"></i>
+                    </button>
                   </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -153,7 +157,7 @@
                 <p class="ml-auto font-roboto">₹<span class="font-mulish">{{totalSum + 100}}</span></p>
               </div>
               <div class="d-flex justify-content-center">
-                <button (click)="toggleModal()" type="button" class="w-full btn round-btn">
+                <button (click)="toggleModal('makeBooking')" type="button" class="w-100 indistays-theme-btn">
                   Confirm Booking
                 </button>
               </div>
@@ -212,7 +216,7 @@
         <div class="modal-title chng-pass-head" id="exampleModalLongTitle">
           Create Booking
         </div>
-        <div (click)="toggleModal()" class="cursor-pointer">
+        <div (click)="toggleModal('makeBooking')" class="cursor-pointer">
           <i class="fa fa-times"></i>
         </div>
       </div>
@@ -245,8 +249,27 @@
         </form>
       </div>
       <div class="d-flex justify-content-between mx-1 p-3 modal-footer border-none">
-        <button (click)="toggleModal()"  mat-raised-button>Cancel</button>
+        <button (click)="toggleModal('makeBooking')"  mat-raised-button>Cancel</button>
         <button (click)="userAction()" class="color-white" mat-raised-button color="primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmBooking" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content change-pass-content">
+      <div class="modal-body d-flex justify-content-center border-none">
+        <div>
+          <div>
+            <div (click)="toggleModal('confirmBooking')" class="cursor-pointer">
+              <i class="fa fa-times"></i>
+            </div>
+          </div>
+          <div>
+            <h1>Your Booking is Confirmed</h1>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
   grid-template-columns: repeat(auto-fill, minmax(31%, 1fr));
   gap: 1rem;
   .img-price-card {
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
     flex-basis: 31%;
     border-radius: 35px;
@@ -65,7 +65,7 @@
       line-height: 24px; /* 150% */
       /* Add styles for the second row of content */
       .place {
-        font-size: 12px;
+        font-size: 16px;
         /* Add styles for the place */
         .fa {
           /* Add styles for icons */
@@ -109,6 +109,22 @@
   }
 }
 
+
+.indistays-theme-btn {
+  background-color: var(--secondary-color) !important;
+  color: #fff !important;
+  height: 55px;
+  width: 53px;
+  border: none;
+  border-radius: 45px;
+  text-transform: uppercase;
+  .mat-icon {
+    font-size: 31px;
+  }
+  font-weight: bold;
+}
+
+
 @media (max-width: 1024px) {
   .image-price-card-container {
     grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
@@ -121,9 +137,9 @@
     grid-auto-flow: column;
     overflow: scroll;
     .img-price-card {
-      padding: 1rem;
+      padding: 2rem 1rem;
       box-shadow: none;
-      min-width: 70vw;
+      min-width: 80vw;
       img {
         height: 30vh;
       }
@@ -140,7 +156,7 @@
       .row-2 {
         gap: 0.5rem;
         .place {
-          font-size: 12px;
+          font-size: 16px;
         }
         .price {
           flex-direction: row-reverse;
@@ -154,5 +170,11 @@
         }
       }
     }
+  }
+
+  .search-btn {
+    width: 100% !important;
+    font-size: 16px;
+    height: 48px !important;
   }
 }

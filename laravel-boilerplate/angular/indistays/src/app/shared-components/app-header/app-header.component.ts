@@ -2,6 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ApiService} from "../../services/api.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {SharedService} from "../../services/shared.service";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-app-header',
@@ -19,7 +20,7 @@ export class AppHeaderComponent implements OnInit {
   onResize(event) {
     this.screenWidth = window.innerWidth;
   }
-  constructor(public apiService: ApiService, public router: Router, public sharedService: SharedService) {
+  constructor(private _location: Location, public apiService: ApiService, public router: Router, public sharedService: SharedService) {
     this.screenWidth = window.innerWidth;
   }
 
@@ -33,6 +34,10 @@ export class AppHeaderComponent implements OnInit {
       }
     });
     this.apiService.isAuthenticated.subscribe(res => this.isAuthenticated = res);
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   logout() {

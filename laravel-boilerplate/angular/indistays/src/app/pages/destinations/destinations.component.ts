@@ -12,6 +12,7 @@ export class DestinationsListingComponent implements OnInit {
   showSpinner: any = true;
   constructor(public apiService: ApiService, public sharedService: SharedService) {}
   ngOnInit() {
+    this.sharedService.showBackIcon.next(false);
     this.apiService.getDataStream().then((res) => {
       this.apiService.dataStream.subscribe((val) => {
         this.destinations = [...val.destinations].map((val) => {

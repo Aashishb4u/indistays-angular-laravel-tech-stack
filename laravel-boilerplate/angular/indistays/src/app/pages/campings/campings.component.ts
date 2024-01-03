@@ -12,6 +12,7 @@ export class CampingsListingComponent implements OnInit {
   showSpinner: any = true;
   constructor(public apiService: ApiService, public sharedService: SharedService) {}
   ngOnInit() {
+    this.sharedService.showBackIcon.next(false);
     this.apiService.getDataStream().then((res) => {
       this.apiService.dataStream.subscribe((res) => {
         this.accommodations = [...res.accommodations].map((val) => {

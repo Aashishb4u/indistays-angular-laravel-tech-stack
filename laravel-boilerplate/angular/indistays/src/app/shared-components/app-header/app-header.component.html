@@ -1,9 +1,16 @@
 <nav *ngIf="showHeader" class="app-header-nav full-width shadow-class navbar nav-background sticky-top
 navbar-expand-md navbar-light bg-light">
   <div #home class="landing-nav container-fluid">
-    <a class="navbar-brand d-flex align-items-center justify-content-center" href="#">
-      <img width="50" [src]="sharedService?.companyLogoTransperant" alt="Company Logo" class="logo-image">
-    </a>
+    <div class="d-flex align-items-center gap-3">
+      <div *ngIf="sharedService.showBackIcon | async" (click)="backClicked()" class="header-back">
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+      </div>
+      <a class="navbar-brand d-flex align-items-center justify-content-center" href="#">
+        <img width="50" [src]="sharedService?.companyLogoTransperant" alt="Company Logo" class="logo-image">
+      </a>
+    </div>
     <div *ngIf="screenWidth < 600">
       <div *ngIf="!isAuthenticated" class="ml-auto d-flex align-items-center justify-content-end">
         <button class="setting-icon-mobile" [matMenuTriggerFor]="menu" mat-mini-fab

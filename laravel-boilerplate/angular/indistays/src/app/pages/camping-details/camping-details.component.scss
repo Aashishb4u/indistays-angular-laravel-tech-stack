@@ -120,7 +120,7 @@
 
   .summary {
     flex-basis: 50%;
-    min-width: 25%;
+    min-width: 30%;
 
     .summary-tile {
       border-radius: 24px;
@@ -133,14 +133,16 @@
       border-bottom: 1px solid lightgray;
 
       .trash-icon {
-        color: red;
+        i {
+          color: #fff;
+        }
         cursor: pointer;
       }
     }
 
     .price-label {
       color: #828282;
-      font-size: 12px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 400;
     }
@@ -238,6 +240,11 @@
     font-weight: 600;
     line-height: 132.5%; /* 31.8px */
     text-transform: capitalize;
+    #counterValue {
+      input {
+        max-width: 90px;
+      }
+    }
   }
 
   .button {
@@ -443,5 +450,18 @@
   .modal-header {
     background: var(--primary-color);
     color: #fff;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .counter-btn-container {
+    width: 100%;
+    .counter-container {
+      #counterValue {
+        input {
+          max-width: 100%;
+        }
+      }
+    }
   }
 }
