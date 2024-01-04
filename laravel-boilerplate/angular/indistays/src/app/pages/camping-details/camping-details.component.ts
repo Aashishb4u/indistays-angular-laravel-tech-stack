@@ -29,6 +29,7 @@ export class CampingDetailsComponent implements OnInit{
   isWeekend: any = false;
   campingDetails: any = null;
   customerReview: any = null;
+  bookingMessage: any = '';
   mapSrc: SafeHtml;
   selectedAcc = [];
   accommodations = [];
@@ -86,21 +87,26 @@ export class CampingDetailsComponent implements OnInit{
         accommodation_id: res.id
       }
     });
+    const startDate = moment(data[0].start_date).format('DD/MM/YYYY');
+    const endDate = moment(data[0].end_date).format('DD/MM/YYYY');
+    const bookingDetails = this.summaryData.map((val) => {
+      const campingDetails = this.campings.find(v => v.id === +val.camping_id);
+      console.log(campingDetails);
+      return `${val.name} : ${val.booking} Beds at ${campingDetails.name} - ${campingDetails.destination.name}`
+    }).join(', ');
+    this.bookingMessage = `Please confirm my booking from ${startDate} to  ${endDate} for ${bookingDetails}`;
+    this.sharedService.sendMessage(this.bookingMessage);
+    setTimeout(() => {
+      this.bookingAPICall(data);
+    }, 2000);
+  }
 
+  bookingAPICall(data) {
     this.apiService.makeBooking(data).subscribe((res) => {
       this.apiService.showToast("Your Camping Booked Successfully");
       this.sharedService.showSpinner.next(false);
       this.toggleModal('makeBooking');
       this.toggleModal('confirmBooking');
-      const startDate = moment(data[0].start_date).format('DD/MM/YYYY');
-      const endDate = moment(data[0].end_date).format('DD/MM/YYYY');
-      const bookingDetails = this.summaryData.map((val) => {
-        const campingDetails = this.campings.find(v => v.id === +val.camping_id);
-        console.log(campingDetails);
-        return `${val.name} : ${val.booking} Beds at ${campingDetails.name} - ${campingDetails.destination.name}`
-      }).join(', ');
-      const message = `Please confirm my booking from ${startDate} to  ${endDate} for ${bookingDetails}`;
-      this.sharedService.sendMessage(message);
       this.summaryData = [];
       this.userForm.reset();
       // close modal
@@ -144,7 +150,6 @@ export class CampingDetailsComponent implements OnInit{
       document.body.appendChild(newBackdrop);
     }
   }
-
 
   ngOnInit() {
     this.sharedService.showBackIcon.next(true);
