@@ -6,6 +6,10 @@
 @import "assets/theme/custom-classes";
 // Custom theme -
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'Lato-Reg';
   src: url(/assets/fonts/Lato/Lato-Regular.ttf) format("truetype");
@@ -248,14 +252,14 @@ body { margin: 0;
 
 .indistays-theme-btn {
   background-color: var(--secondary-color) !important;
-  color: #fff;
-  height: 55px;
-  width: 53px;
-  border: none;
-  border-radius: 45px;
-  text-transform: uppercase;
+  color: #fff !important;
+  height: 55px !important;
+  width: 100% !important;
+  border: none !important;
+  border-radius: 45px !important;
+  text-transform: uppercase !important;
   .mat-icon {
-    font-size: 31px;
+    font-size: 31px !important;
   }
-  font-weight: bold;
+  font-weight: bold !important;
 }

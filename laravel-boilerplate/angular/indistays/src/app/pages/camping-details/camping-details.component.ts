@@ -26,13 +26,30 @@ export class CampingDetailsComponent implements OnInit{
   showSpinner: any = true;
   isWeekend: any = false;
   campingDetails: any = null;
+  customerReview: any = null;
   mapSrc: SafeHtml;
   selectedAcc = [];
   accommodations = [];
   userForm: FormGroup;
   dateRangeForm: FormGroup;
+  reviewForm: FormGroup;
+
+  @ViewChild('summaryElem', { static: false }) summaryElem: ElementRef;
   constructor(public storageService: StorageService, public fb: FormBuilder, private sanitizer: DomSanitizer, public sharedService: SharedService,
               public apiService: ApiService, public route: ActivatedRoute) {
+  }
+
+  submitReview() {
+    if (this.reviewForm.invalid) {
+      this.sharedService.showToast('Please fill mandatory fields');
+      this.reviewForm.markAllAsTouched();
+      return;
+    }
+    this.apiService.makeReview(this.reviewForm.value).subscribe((res) => {
+     this.sharedService.showToast('Review Added');
+     this.reviewForm.reset();
+     this.reviewForm.get('camping_id').setValue(this.campingId);
+    });
   }
 
   userAction() {
@@ -81,6 +98,10 @@ export class CampingDetailsComponent implements OnInit{
     this.isWeekend = dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0;
   }
 
+  goSummary() {
+    this.summaryElem.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
+
   toggleModal(id) {
     const modal = document.getElementById(id);
     const backdrop = document.querySelector('.modal-backdrop');
@@ -118,6 +139,11 @@ export class CampingDetailsComponent implements OnInit{
     this.dateRangeForm = this.fb.group({
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
+    });
+    this.reviewForm = this.fb.group({
+      camping_id: ['', Validators.required],
+      review: ['', Validators.required],
+      ratings: [0, Validators.required],
     });
     this.getAmenities();
     const startDate = this.storageService.getStorageValue('start_date');
@@ -158,8 +184,13 @@ export class CampingDetailsComponent implements OnInit{
     this.route.params.subscribe((params: any) => {
       // Get the 'id' parameter from the route
       this.campingId = +params['id'];
+      this.reviewForm.get('camping_id').setValue(this.campingId);
       this.fetchData();
     });
+  }
+
+  updateRating(e) {
+    this.reviewForm.get('ratings').setValue(e);
   }
 
   fetchData() {
@@ -181,7 +212,12 @@ export class CampingDetailsComponent implements OnInit{
           }
         }).splice(0, 3);
         this.campingDetails = this.campings.find(v => v.id === +this.campingId);
-        console.log(this.isWeekend);
+        if(this.campingDetails.customer_reviews && this.campingDetails.customer_reviews.length > 0) {
+          const sum = this.campingDetails.customer_reviews
+            .map(v => +v.ratings)
+            .reduce((acc, num) => acc + num, 0);
+          this.customerReview = sum / this.campingDetails.customer_reviews.length;
+        }
         // this.accommodationDetails = this.campingDetails.
         this.campAccommodations = this.campingDetails.accommodations ?
           [...this.campingDetails.accommodations].map((camp: any) => {
@@ -204,7 +240,6 @@ export class CampingDetailsComponent implements OnInit{
             }
           }) : this.campAccommodations;
 
-        console.log(this.campAccommodations);
 
         const people = this.storageService.getStorageValue('people');
         if(people && this.campAccommodations && this.campAccommodations.length > 0) {
@@ -221,6 +256,11 @@ export class CampingDetailsComponent implements OnInit{
           a = a.concat(b.amenities);
           return a
         }, []);
+
+        if(this.amenities && this.amenities.length > 0) {
+          this.amenities = this.sharedService.removeDuplicates(this.amenities, 'name');
+        }
+
         this.mapSrc = this.sanitizer.bypassSecurityTrustHtml(this.campingDetails.location_map_link);
         this.galleryImages = this.campingDetails.images.map((img) => {
           const url = this.sharedService.generateImageUrl(img.url);
@@ -249,6 +289,22 @@ export class CampingDetailsComponent implements OnInit{
 
   calculate() {
     this.totalSum = this.summaryData.reduce((sum, item) => sum + (+item.discount_price * item.booking), 0);
+  }
+
+  onSubtraction(acc) {
+    acc.booking = acc.booking > 0 ? acc.booking - 1 : acc.booking;
+    if(acc.booking === 0) {
+      this.summaryData = this.summaryData.filter(v => v.id !== acc.id);
+    }
+    this.calculate();
+  }
+
+  updateCart(booking) {
+    this.summaryData = this.summaryData.filter(v => v.id !== booking.id);
+  }
+
+  isBookingInCart(acc) {
+    return this.summaryData.find(v => v.id === acc.id);
   }
 
   onAddition(acc) {

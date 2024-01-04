@@ -18,6 +18,11 @@ class Camping extends Model
         return $this->hasMany(Accommodation::class);
     }
 
+    public function customerReviews()
+    {
+        return $this->hasMany(CustomerReview::class);
+    }
+
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');

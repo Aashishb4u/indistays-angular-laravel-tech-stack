@@ -233,7 +233,7 @@ class AccommodationController extends Controller
         $query->with([
             'images',
             'camping' => function ($que) {
-                $que->with('destination'); // Eager load the 'destination' relationship of 'camping'
+                $que->with(['destination', 'customerReviews']); // Eager load the 'destination' relationship of 'camping'
             },
             'camping.destination',
             'amenities' // Eager load the amenities relationship

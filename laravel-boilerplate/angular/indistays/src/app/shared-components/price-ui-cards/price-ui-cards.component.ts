@@ -15,6 +15,20 @@ export class PriceUiCardsComponent implements OnInit {
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit() {
+    console.log(this.cardData, '12233444');
+    if(this.cardData && this.cardData.length > 0) {
+      this.cardData = this.cardData.map((card) => {
+        card.customerReview = 'NA';
+        if(card.camping.customer_reviews && (card.camping.customer_reviews.length > 0)) {
+          const sum = card.camping.customer_reviews
+            .map(v => +v.ratings)
+            .reduce((acc, num) => acc + num, 0);
+          card.customerReview = sum / card.camping.customer_reviews.length;
+          card.customerReview = card.customerReview.toFixed(1);
+        }
+        return card;
+      });
+    }
     this.checkScreenSize();
     // Subscribe to window resize events
     this.resizeSubscription.add(this.listenToResize());

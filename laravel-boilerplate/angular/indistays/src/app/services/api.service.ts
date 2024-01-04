@@ -295,6 +295,10 @@ export class ApiService {
     return this.http.post(`${this.domainUrlApi}make/online-booking`, data, {});
   }
 
+  makeReview(data) {
+    return this.http.post(`${this.domainUrlApi}make/review`, data, {});
+  }
+
   makeEnquiry(data) {
     return this.http.post(`${this.domainUrlApi}make/enquiry`, data, {});
   }

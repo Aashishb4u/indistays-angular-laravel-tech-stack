@@ -50,22 +50,22 @@ navbar-expand-md navbar-light bg-light">
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div  class="collapse navbar-collapse menu-bar justify-content-between" id="navbarSupportedContent">
+    <div  class="navbar-collapse menu-bar justify-content-between" id="navbarSupportedContent">
       <div  class="d-flex ml-auto">
         <ul class="navbar-nav">
-          <li [routerLink]="'/home'" [routerLinkActive]="'active'" class="nav-item nav-menu">
+          <li [routerLink]="['/home']" [routerLinkActive]="'active'" class="nav-item nav-menu">
             <a class="cursor-pointer nav-link" aria-current="page">Home</a>
           </li>
-          <li [routerLink]="'/destinations'" [routerLinkActive]="'active'" class="nav-item nav-menu ">
+          <li [routerLink]="['/destinations']" [routerLinkActive]="'active'" class="nav-item nav-menu ">
             <a class="cursor-pointer nav-link">Destinations</a>
           </li>
-          <li [routerLink]="'/campings'" [routerLinkActive]="'active'" class="nav-item nav-menu ">
+          <li [routerLink]="['/campings']" [routerLinkActive]="'active'" class="nav-item nav-menu ">
             <a class="cursor-pointer nav-link">Camping</a>
           </li>
-          <li [routerLink]="'/about-us'" [routerLinkActive]="'active'" class="nav-item nav-menu">
+          <li [routerLink]="['/about-us']" [routerLinkActive]="'active'" class="nav-item nav-menu">
             <a class="cursor-pointer nav-link">About Us</a>
           </li>
-          <li [routerLink]="'/contact-us'" [routerLinkActive]="'active'" class="nav-item nav-menu">
+          <li [routerLink]="['/contact-us']" [routerLinkActive]="'active'" class="nav-item nav-menu">
             <a class="cursor-pointer nav-link" >Contact Us</a>
           </li>
         </ul>

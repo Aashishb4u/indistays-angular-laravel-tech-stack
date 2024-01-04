@@ -6,6 +6,7 @@ use App\Http\Controllers\CampingController;
 use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CustomPricingController;
+use App\Http\Controllers\CustomerReviewController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ Route::group([
     Route::post('custom-pricing', [CustomPricingController::class, 'index']);
     Route::post('amenities', [AmenityController::class, 'index']);
     Route::post('assets', [AssetController::class, 'index']);
+    Route::post('reviews', [CustomerReviewController::class, 'index']);
 });
 
 Route::group([
@@ -46,6 +48,7 @@ Route::group([
 ], function ($router) {
     Route::post('online-booking', [BookingController::class, 'addWebsiteBooking']);
     Route::post('enquiry', [BookingController::class, 'makeEnquiry']);
+    Route::post('review', [CustomerReviewController::class, 'addCustomerReview']);
 });
 
 

@@ -211,7 +211,7 @@ class CampingController extends Controller
         }
 
         // Eager load the 'userRole' relationship
-        $query->with(['images', 'destination', 'accommodations', 'accommodations.customPricing', 'accommodations.amenities']);
+        $query->with(['images', 'customerReviews', 'destination', 'accommodations', 'accommodations.customPricing', 'accommodations.amenities']);
         $campings = $query->get();
 
         // Manipulate the result to include or exclude customPricing based on the current date

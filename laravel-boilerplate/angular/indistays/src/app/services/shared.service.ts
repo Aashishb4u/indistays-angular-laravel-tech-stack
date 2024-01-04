@@ -39,6 +39,14 @@ export class SharedService {
     }
   }
 
+  removeDuplicates(arr, key) {
+    const uniqueMap = new Map();
+    arr.forEach(item => {
+      uniqueMap.set(item[key], item);
+    });
+    return Array.from(uniqueMap.values());
+  }
+
   sendMessage(message) {
     const encodedMessage = encodeURI(message);
     // https://api.whatsapp.com/send?phone=919403733265&text=Hello

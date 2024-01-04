@@ -1,0 +1,25 @@
+
+<ng-container *ngIf="mode === 'edit'; else viewMode">
+  <button mat-icon-button class="star-rating"
+          *ngFor="let ratingId of ratingArr;index as i"
+          [id]="'star_'+i"
+          (click)="onClick(i+1)"
+          [matTooltip]="ratingId+1" matTooltipPosition="above">
+    <mat-icon>
+      {{showIcon(i)}}
+    </mat-icon>
+  </button>
+  <mat-error *ngIf="starCount == null || starCount == 0">
+    Star count is <strong>required</strong> and cannot be zero
+  </mat-error>
+
+</ng-container>
+
+<ng-template #viewMode>
+  <button mat-icon-button class="star-rating"
+          *ngFor="let ratingId of ratingArr;index as i">
+    <mat-icon>
+      {{showIcon(i)}}
+    </mat-icon>
+  </button>
+</ng-template>

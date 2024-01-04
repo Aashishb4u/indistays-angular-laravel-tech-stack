@@ -75,6 +75,8 @@ import { SpinnerComponent } from './shared-components/spinner/spinner.component'
 import { EnquiriesComponent } from './pages/dashboard/enquiries/enquiries.component';
 import { AssetsManagementComponent } from './pages/dashboard/assets-management/assets-management.component';
 import { AddEditAssetComponent } from './pages/dashboard/assets-management/add-edit-asset/add-edit-asset.component';
+import { StarRatingsComponent } from './shared-components/star-ratings/star-ratings.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
     declarations: [
@@ -115,7 +117,8 @@ import { AddEditAssetComponent } from './pages/dashboard/assets-management/add-e
         SpinnerComponent,
         EnquiriesComponent,
         AssetsManagementComponent,
-        AddEditAssetComponent
+        AddEditAssetComponent,
+        StarRatingsComponent
     ],
     imports: [
         BrowserModule,
@@ -152,7 +155,7 @@ import { AddEditAssetComponent } from './pages/dashboard/assets-management/add-e
         GoogleMapsModule,
         NgbCarouselModule,
         SlickCarouselModule,
-        NgxGalleryModule,
+        NgxGalleryModule, MatTooltipModule,
         NgxSkeletonLoaderModule.forRoot()
     ],
     providers: [

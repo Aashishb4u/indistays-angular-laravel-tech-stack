@@ -102,73 +102,106 @@
                     <div class="py-2 bed-label footer-label">{{acc?.beds_available}} Beds Available</div>
                   </div>
                   <div class="counter-btn-container">
-                    <div class="counter-container">
-                      <div class="button" (click)="acc.booking = acc.booking > 0 ? acc.booking - 1 : acc.booking; calculate()">-</div>
-                      <div class="value" id="counterValue">
-                        <input (input)="calculate()" style="background: #3f51b514; border: none; text-align: center;" type="number" [(ngModel)]="acc.booking" class="form-control">
+                    <ng-container *ngIf="isBookingInCart(acc); else addBed">
+                      <div class="counter-container">
+                        <div class="button" (click)="onSubtraction(acc)">-</div>
+                        <div class="value" id="counterValue">
+                          <input (input)="calculate()" style="background: #3f51b514; border: none; text-align: center;" type="number" [(ngModel)]="acc.booking" class="form-control">
+                        </div>
+                        <div class="button" (click)="onAddition(acc)">+</div>
                       </div>
-                      <div class="button" (click)="onAddition(acc)">+</div>
-                    </div>
+                    </ng-container>
+                    <ng-template #addBed>
+                      <div class="add-bed-btn">
+                        <button (click)="onAddition(acc)" class="indistays-theme-btn" mat-raised-button>Add Bed</button>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="summary">
+        <div class="summary" #summaryElem>
           <div class="accommodation-list-title">
             Summary
           </div>
-          <div class="summary-tile block p-5 bg-white min-w-full">
-            <div *ngIf="summaryData && summaryData.length">
-              <div *ngFor="let booking of summaryData" class="py-2 summary-row">
-                <div class="pb-3 d-flex justify-content-between py-1 gap-5">
-                  <div class="d-flex justify-content-between items-end align-items-center">
-                    <div class="text-black mb-0 font-semibold text-lg font-poppins pr-3">
-                      {{booking?.name}}
+          <div class="d-flex flex-column gap-3">
+            <div class="summary-tile block p-4 bg-white min-w-full">
+              <div *ngIf="summaryData && summaryData.length">
+                <div *ngFor="let booking of summaryData" class="py-2 summary-row">
+                  <div class="pb-3 d-flex justify-content-between py-1 gap-5">
+                    <div class="d-flex justify-content-between items-end align-items-center">
+                      <div class="text-black mb-0 font-semibold text-lg font-poppins pr-3">
+                        {{booking?.name}}
+                      </div>
+                    </div>
+                    <div class="ml-auto d-flex align-items-center">
+                      <button (click)="updateCart(booking)" color="warn" class="trash-icon" mat-mini-fab aria-label="Example icon button with a menu icon">
+                        <i class="fa fa-trash"></i>
+                      </button>
                     </div>
                   </div>
-                  <div class="ml-auto d-flex align-items-center">
-                    <button color="warn" class="trash-icon" mat-mini-fab aria-label="Example icon button with a menu icon">
-                      <i class="fa fa-trash"></i>
-                    </button>
+                  <div class="d-flex justify-content-between">
+                    <div class="price-label d-flex justify-content-between font-bold">
+                      <div class="font-roboto font-medium">₹</div>
+                      {{booking?.discount_price}} x 1 night x {{booking?.booking}}
+                    </div>
+                    <div class="text-black ml-auto font-mulish text-md font-bold">
+                      <span class="text-md font-roboto">₹</span>{{booking?.discount_price * booking?.booking}}
+                    </div>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between">
-                  <div class="price-label d-flex justify-content-between font-bold">
-                    <div class="font-roboto font-medium">₹</div>
-                    {{booking?.discount_price}} x 1 night x {{booking?.booking}}
-                  </div>
-                  <div class="text-black ml-auto font-mulish text-md font-bold">
-                    <span class="text-md font-roboto">₹</span>{{booking?.discount_price * booking?.booking}}
-                  </div>
-                </div>
-              </div>
-              <div class="py-3 summary-row">
-                <div class="d-flex justify-content-between gap-5">
-                  <p class="font-semibold text-lg font-poppins">Total</p>
-                  <p class="ml-auto font-bold font-roboto">₹<span class="font-mulish">
+                <div class="py-3 summary-row">
+                  <div class="d-flex justify-content-between gap-5">
+                    <p class="font-semibold text-lg font-poppins">Total</p>
+                    <p class="ml-auto font-bold font-roboto">₹<span class="font-mulish">
               {{totalSum}}
             </span></p></div>
-                <div class="d-flex justify-content-between gap-5"><p class="font-semibold text-lg font-poppins">Total Taxes</p>
-                  <p class="ml-auto font-roboto font-bold">₹<span class="font-mulish">100</span></p></div>
+                  <div class="d-flex justify-content-between gap-5"><p class="font-semibold text-lg font-poppins">Total Taxes</p>
+                    <p class="ml-auto font-roboto font-bold">₹<span class="font-mulish">100</span></p></div>
+                </div>
+                <div class="py-4 d-flex justify-content-between"><p class="font-poppins">Total Price</p>
+                  <p class="ml-auto font-roboto">₹<span class="font-mulish">{{totalSum + 100}}</span></p>
+                </div>
+                <div class="confirm-booking-btn justify-content-center">
+                  <button (click)="toggleModal('makeBooking')" type="button" class="w-100 indistays-theme-btn">
+                    Confirm Booking
+                  </button>
+                </div>
               </div>
-              <div class="py-4 d-flex justify-content-between"><p class="font-poppins">Total Price</p>
-                <p class="ml-auto font-roboto">₹<span class="font-mulish">{{totalSum + 100}}</span></p>
-              </div>
-              <div class="d-flex justify-content-center">
-                <button (click)="toggleModal('makeBooking')" type="button" class="w-100 indistays-theme-btn">
-                  Confirm Booking
-                </button>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-center flex-column" *ngIf="summaryData.length === 0">
-              <img style="max-width: 160px" src="assets/icons/schedule.png" alt="">
-              <div class="pt-4 footer-label">
-                Include accommodations in your booking.
+              <div class="d-flex align-items-center justify-content-center flex-column" *ngIf="summaryData.length === 0">
+                <img style="max-width: 160px" src="assets/icons/schedule.png" alt="">
+                <div class="pt-4 footer-label">
+                  Include accommodations in your booking.
+                </div>
               </div>
             </div>
 
+            <div class="d-flex flex-column align-items-center summary-tile rating-box block p-5 bg-white">
+              <div class="sub-title">Overall Ratings</div>
+              <div class="rate">{{customerReview ? customerReview?.toFixed(1) : 'NA'}}</div>
+              <star-ratings [rating]="customerReview ? customerReview?.toFixed(0) : 0" [mode]="'view'"></star-ratings>
+            </div>
+
+            <div class="summary-tile block p-3 bg-white">
+              <form [formGroup]="reviewForm">
+                <div>
+                  <div class="form-group">
+                    <textarea formControlName="review" placeholder="Customer Review" class="indi-textarea form-control" id="exampleFormControlTextarea3" rows="7"></textarea>
+                  </div>
+                  <div class="rating-title">Add Your Ratings</div>
+                  <div class="ratings-container d-flex justify-content-center">
+                    <star-ratings (ratingUpdated)="updateRating($event)" [rating]="this.reviewForm.get('ratings').value"></star-ratings>
+                  </div>
+                  <div class="mt-4 d-flex justify-content-center">
+                    <button (click)="submitReview()" type="button" class="w-100 indistays-theme-btn">
+                      Submit Review
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -206,6 +239,20 @@
       <app-testimonial-cards></app-testimonial-cards>
     </div>
   </div>
+  <ng-container *ngIf="summaryData && summaryData.length">
+    <div class="justify-content-between w-100 position-fixed payment-amount-drawer d-flex">
+      <div class="d-flex flex-column">
+        <div class="text-gray-400 font-bold text-xl">Payment Amount</div>
+        <div class="py-1 text-gray-900 text-base d-flex gap-2 align-items-center">
+          <div>₹ {{totalSum + 100}}</div>
+          <div class="text-blue-500 px-1"><i (click)="goSummary()" class="text-xl fa fa-info-circle"></i></div>
+        </div>
+      </div>
+      <div class="w-5/12">
+        <button (click)="toggleModal('makeBooking')" class="indistays-theme-btn" mat-raised-button>BOOK NOW</button>
+      </div>
+    </div>
+  </ng-container>
   <app-footer></app-footer>
 </ng-container>
 
