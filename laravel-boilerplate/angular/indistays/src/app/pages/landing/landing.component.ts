@@ -61,6 +61,8 @@ export class LandingComponent  implements OnInit {
       end_date: [this.twoDaysAfter.format('YYYY-MM-DD'), Validators.required],
       // password: ['', Validators.required]
     });
+    this.storageService.storeValue('start_date', this.filterForm.get('start_date').value);
+    this.storageService.storeValue('end_date', this.filterForm.get('end_date').value);
     this.apiService.dataStream.subscribe((res) => {
       this.destinations = res.destinations;
       this.tilesData = [...res.destinations].map((val) => {

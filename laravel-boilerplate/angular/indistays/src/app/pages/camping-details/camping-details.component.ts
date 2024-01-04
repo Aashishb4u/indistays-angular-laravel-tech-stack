@@ -7,6 +7,8 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatFormField} from "@angular/material/form-field";
 import {StorageService} from "../../services/storage.service";
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-camping-details',
@@ -84,11 +86,26 @@ export class CampingDetailsComponent implements OnInit{
         accommodation_id: res.id
       }
     });
+
     this.apiService.makeBooking(data).subscribe((res) => {
       this.apiService.showToast("Your Camping Booked Successfully");
       this.sharedService.showSpinner.next(false);
       this.toggleModal('makeBooking');
       this.toggleModal('confirmBooking');
+      const startDate = moment(data[0].start_date).format('DD/MM/YYYY');
+      const endDate = moment(data[0].end_date).format('DD/MM/YYYY');
+      const bookingDetails = this.summaryData.map((val) => {
+        const campingDetails = this.campings.find(v => v.id === +val.camping_id);
+        console.log(campingDetails);
+        return `${val.name} : ${val.booking} Beds at ${campingDetails.name} - ${campingDetails.destination.name}`
+      }).join(', ');
+      const message = `Please confirm my booking from ${startDate} to  ${endDate} for ${bookingDetails}`;
+      this.sharedService.sendMessage(message);
+      this.summaryData = [];
+      this.userForm.reset();
+      // close modal
+      this.toggleModal('makeBooking');
+      this.storageService.removeStoredItem('people');
     });
   }
 
@@ -103,6 +120,7 @@ export class CampingDetailsComponent implements OnInit{
   }
 
   toggleModal(id) {
+    console.log('I am here');
     const modal = document.getElementById(id);
     const backdrop = document.querySelector('.modal-backdrop');
 

@@ -1,11 +1,21 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  Renderer2,
+  SimpleChanges
+} from '@angular/core';
 import {Subscription} from "rxjs";
 @Component({
   selector: 'app-price-ui-cards',
   templateUrl: './price-ui-cards.component.html',
   styleUrls: ['./price-ui-cards.component.scss']
 })
-export class PriceUiCardsComponent implements OnInit {
+export class PriceUiCardsComponent implements OnInit, OnChanges {
   accommodations: any = [];
   @Input() cardData: any = [];
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
@@ -15,23 +25,35 @@ export class PriceUiCardsComponent implements OnInit {
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit() {
-    console.log(this.cardData, '12233444');
-    if(this.cardData && this.cardData.length > 0) {
-      this.cardData = this.cardData.map((card) => {
-        card.customerReview = 'NA';
-        if(card.camping.customer_reviews && (card.camping.customer_reviews.length > 0)) {
-          const sum = card.camping.customer_reviews
-            .map(v => +v.ratings)
-            .reduce((acc, num) => acc + num, 0);
-          card.customerReview = sum / card.camping.customer_reviews.length;
-          card.customerReview = card.customerReview.toFixed(1);
-        }
-        return card;
-      });
-    }
     this.checkScreenSize();
     // Subscribe to window resize events
     this.resizeSubscription.add(this.listenToResize());
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'cardData': {
+            // this.doSomething(change.currentValue)
+            console.log(this.cardData, '12233444');
+            if(this.cardData && this.cardData.length > 0) {
+              this.cardData = this.cardData.map((card) => {
+                card.customerReview = 'NA';
+                if(card.camping.customer_reviews && (card.camping.customer_reviews.length > 0)) {
+                  const sum = card.camping.customer_reviews
+                    .map(v => +v.ratings)
+                    .reduce((acc, num) => acc + num, 0);
+                  card.customerReview = sum / card.camping.customer_reviews.length;
+                  card.customerReview = card.customerReview.toFixed(1);
+                }
+                return card;
+              });
+            }
+          }
+        }
+      }
+    }
   }
 
   private listenToResize() {

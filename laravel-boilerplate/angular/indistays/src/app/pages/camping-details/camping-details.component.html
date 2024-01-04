@@ -271,23 +271,23 @@
         <form [formGroup]="userForm" (ngSubmit)="userAction()">
           <div class="row p-3">
             <div class="col-12 mb-2">
+              <mat-label >Enter Your Name</mat-label>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Name</mat-label>
-                <input tabindex="1" matInput formControlName="name" type="text" placeholder="Enter Your Name">
+                <input matInput formControlName="name" type="text" placeholder="Eg. John Doe">
                 <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">Please enter a valid email</mat-error>
               </mat-form-field>
             </div>
             <div class="col-12 mb-2">
+              <mat-label >Enter Your Email</mat-label>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Email</mat-label>
-                <input tabindex="2" matInput formControlName="email" type="email" placeholder="Enter Your email">
+                <input tabindex="2" matInput formControlName="email" type="email" placeholder="xxxx@gmail.com">
                 <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">Please enter a valid email</mat-error>
               </mat-form-field>
             </div>
             <div class="col-12 mb-2">
+              <mat-label>Contact Number</mat-label>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Contact Number</mat-label>
-                <input tabindex="2" matInput formControlName="contact_number" type="text" placeholder="Enter Contact Number">
+                <input tabindex="2" matInput formControlName="contact_number" type="text" placeholder="+91xxxxxxxx">
                 <mat-error *ngIf="userForm.get('contact_number')?.invalid && userForm.get('contact_number')?.touched">Please enter a valid Contact Number</mat-error>
               </mat-form-field>
             </div>
@@ -306,15 +306,21 @@
 <div class="modal fade" id="confirmBooking" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content change-pass-content">
-      <div class="modal-body d-flex justify-content-center border-none">
-        <div>
-          <div>
-            <div (click)="toggleModal('confirmBooking')" class="cursor-pointer">
+      <div style="height: 55%" class="modal-body d-flex justify-content-center border-none">
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-end">
+            <button (click)="toggleModal('confirmBooking')" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
               <i class="fa fa-times"></i>
-            </div>
+            </button>
           </div>
-          <div>
-            <h1>Your Booking is Confirmed</h1>
+          <div class="d-flex p-4 justify-content-center flex-column align-items-center gap-3">
+            <img style="width: 45%" src="assets/icons/success.png" alt="">
+            <div class="text-xl text-cnter text-gray-400">Your Booking is Confirmed</div>
+            <div class="mt-2 mb-4">
+              <button (click)="toggleModal('confirmBooking')" class="indi-style-btn" color="primary" mat-raised-button>
+                Thanks
+              </button>
+            </div>
           </div>
         </div>
       </div>
