@@ -74,7 +74,6 @@ export class AddEditAssetComponent implements OnInit{
         // image.name = `${campingName.toLowerCase()}-profile.png`;
         // Create a new File object with the updated name
         const updatedImage = new File([image], `${campingName.toLowerCase()}-${this.sharedService.generateRandomString()}.png`, { type: image.type });
-
         const base64 = onLoadEvent.target.result;
         this.imageFile.setValue(updatedImage);
         this.imageBase64.setValue(base64);

@@ -83,13 +83,17 @@ export class AddEditDestinationComponent {
       }
       reader.readAsDataURL(image);
       reader.onload = (onLoadEvent) => {
-        const fileName = `${destinationName.toLowerCase()}-profile.png`;
-        const localUrl = onLoadEvent.target.result;
-        this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
-          const base64: string = compressedImage.base64;
-          this.profileImageFile.setValue(compressedImage.imageFile);
-          this.profileImageBase64.setValue(base64);
-        });
+        const updatedImage = new File([image], `${destinationName.toLowerCase()}-${this.sharedService.generateRandomString()}.png`, { type: image.type });
+        const base64 = onLoadEvent.target.result;
+        this.profileImageFile.setValue(updatedImage);
+        this.profileImageBase64.setValue(base64);
+        // const fileName = `${destinationName.toLowerCase()}-profile.png`;
+        // const localUrl = onLoadEvent.target.result;
+        // this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
+        //   const base64: string = compressedImage.base64;
+        //   this.profileImageFile.setValue(compressedImage.imageFile);
+        //   this.profileImageBase64.setValue(base64);
+        // });
         this.sharedService.showSpinner.next(false);
       }
     }
