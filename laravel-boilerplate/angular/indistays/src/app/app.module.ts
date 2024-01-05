@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -77,6 +77,7 @@ import { AssetsManagementComponent } from './pages/dashboard/assets-management/a
 import { AddEditAssetComponent } from './pages/dashboard/assets-management/add-edit-asset/add-edit-asset.component';
 import { StarRatingsComponent } from './shared-components/star-ratings/star-ratings.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
     declarations: [
@@ -156,7 +157,13 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         NgbCarouselModule,
         SlickCarouselModule,
         NgxGalleryModule, MatTooltipModule,
-        NgxSkeletonLoaderModule.forRoot()
+        NgxSkeletonLoaderModule.forRoot(),
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: !isDevMode(),
+          // Register the ServiceWorker as soon as the application is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [
         NgxImageCompressService,
