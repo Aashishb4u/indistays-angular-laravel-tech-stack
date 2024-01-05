@@ -8,7 +8,8 @@
 
 
 .filter-tab {
-  font-size: 15px; margin-right: 10px;
+  font-size: 14px;
+  margin-right: 10px;
   cursor: pointer;
   opacity: 1;
   color: #888;
@@ -23,7 +24,7 @@
   }
 }
 .carousal-container {
-  height: 100vh;
+  height: 80vh;
   position: relative;
   overflow: hidden;
   ngb-carousel {
@@ -38,12 +39,12 @@
 
 .landing-filters {
   z-index: 999;
-  top: 55%;
+  top: 60%;
   position: absolute;
   .filter-tab-container {
     box-shadow: 0 4px 43px 0 rgba(129, 138, 184, 0.25);
     padding: 1rem;
-    border-radius: 15px;
+    border-radius: 24px;
     background: #fff;
   }
 }

@@ -1,22 +1,25 @@
 <div class="image-price-card-container">
   <ng-container *ngFor="let acc of cardData">
-    <div [routerLink]="acc.url" (click)="onSelectPriceCard(acc)" class="cursor-pointer
-    img-price-card">
+    <div [routerLink]="acc.url" (click)="onSelectPriceCard(acc)"
+         class="cursor-pointer p-3 lg:p-4
+    img-price-card lg:rounded-3xl rounded-2xl sm:rounded-1xl">
       <div class="img">
         <img (load)="someEvent(acc)" [src]="acc?.img" alt="Image" style="display: none;">
         <ng-container *ngIf="acc?.loaded; else placeHolder">
-          <img [src]="acc?.img" alt="">
+          <img class="lg:rounded-2xl rounded-xl sm:rounded-1xl" [src]="acc?.img" alt="">
         </ng-container>
         <ng-template #placeHolder>
-          <ngx-skeleton-loader [theme]="{height: '250px', 'border-radius': '20px'}" count="1" ></ngx-skeleton-loader>
+          <ngx-skeleton-loader [theme]="{height: '250px', 'border-radius': '18px'}" count="1" ></ngx-skeleton-loader>
 <!--          <img class="full-width" src="assets/images/placeholder.png" alt="">-->
         </ng-template>
       </div>
-      <div class="row-1 my-3 d-flex align-items-center justify-content-between">
+      <div class="row-1 my-2 d-flex align-items-center justify-content-between">
         <div class="title">
-          <span style="color: #999" class="sub-title">
+          <span style="color: #999" class="sub-title lg:text-base sm:text-sm text-sm md:text-sm">
             {{acc?.camping?.name}}</span> <br>
-          {{acc?.name}}
+          <div class="lg:text-lg sm:text-lg text-lg md:text-lg">
+            {{acc?.name}}
+          </div>
         </div>
         <div class="rating"> <i class="fa fa-star"></i> &nbsp;
           <span class="rate">{{acc?.customerReview}}</span>
@@ -28,7 +31,7 @@
         </div>
         <div class="price d-flex gap-2 align-items-center">
           <div class="actual-price">{{acc?.price}}</div>
-          <div class="discount-price">{{acc?.discount_price}}</div>
+          <div class="discount-price rounded">{{acc?.discount_price}}</div>
         </div>
       </div>
       <div class="row-3 mb-2 mt-4">

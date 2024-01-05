@@ -98,7 +98,7 @@
                   <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
                 </mat-form-field>
               </div>
-              <div class="col-lg-3 col-md-3">
+              <div class="col-lg-2 col-md-3">
                 <mat-label >Select People</mat-label>
                 <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2">
                   <mat-select formControlName="people">
@@ -133,9 +133,9 @@
               </div>
             </ng-container>
 
-            <div *ngIf="screenWidth > 500" class="col-lg-1 col-md-1 d-flex align-items-center">
-              <button (click)="onSearch()" class="btn btn-primary align-items-center primary-button d-flex justify-content-start search-btn color-white">
-                <mat-icon>search</mat-icon>
+            <div *ngIf="screenWidth > 500" class="col-lg-2 col-md-1 d-flex align-items-center">
+              <button (click)="onSearch()" class="indistays-theme-btn">
+                BOOK NOW
               </button>
             </div>
             <div *ngIf="screenWidth < 500" class="col-12 d-flex">
@@ -151,27 +151,38 @@
 
     <div class="landing-container">
       <div>
-        <app-section-header [showMore]="false"
-                            [mainTitle]="'We Offer Best Services'"
-                            [subTitle]="'CATEGORY'">
-        </app-section-header>
-        <app-sticker-content-cards></app-sticker-content-cards>
+          <app-section-header [showMore]="false"
+                              [mainTitle]="'We Offer Best Services'"
+                              [subTitle]="'CATEGORY'">
+          </app-section-header>
+
+        <div class="lg:mt-7 sm:mt-3 md:mt-4 mt-4">
+          <app-sticker-content-cards></app-sticker-content-cards>
+        </div>
       </div>
 
-      <app-section-header [showMore]="true"
-                          [showMoreRoute]="'/destinations'"
-                          [mainTitle]="'Destination to Dive In'"
-                          [subTitle]="'Discover'">
-      </app-section-header>
+      <div class="lg:mt-8 sm:mt-4 md:mt-4 mt-5">
+        <app-section-header [showMore]="true"
+                            [showMoreRoute]="'/destinations'"
+                            [mainTitle]="'Destination to Dive In'"
+                            [subTitle]="'Discover'">
+        </app-section-header>
+      </div>
 
-      <app-image-tiles [tilesData]="tilesData"></app-image-tiles>
+      <div class="lg:mt-7 sm:mt-3 md:mt-4 mt-4">
+        <app-image-tiles [tilesData]="tilesData"></app-image-tiles>
+      </div>
 
-      <app-section-header [showMore]="false"
-                          [mainTitle]="'Camping Accommodations'"
-                          [subTitle]="'Top Selling'">
-      </app-section-header>
+      <div class="lg:mt-8 sm:mt-4 md:mt-4 mt-5">
+        <app-section-header [showMore]="false"
+                            [mainTitle]="'Camping Accommodations'"
+                            [subTitle]="'Top Selling'">
+        </app-section-header>
+      </div>
 
-      <app-price-ui-cards (onSelect)="onSelectAccommodation($event)" [cardData]="accommodations"></app-price-ui-cards>
+      <div class="lg:mt-7 sm:mt-3 md:mt-4 mt-4">
+        <app-price-ui-cards (onSelect)="onSelectAccommodation($event)" [cardData]="accommodations"></app-price-ui-cards>
+      </div>
 
       <!--    <div class="row">-->
       <!--      <div class="d-flex align-items-center col-1">-->
@@ -227,12 +238,15 @@
       <!--      </div>-->
       <!--    </div>-->
 
-
-      <app-section-header [showMore]="false"
-                          [mainTitle]="'Journey Chronicles'"
-                          [subTitle]="'testimonial'">
-      </app-section-header>
-      <app-testimonial-cards></app-testimonial-cards>
+      <div class="lg:mt-8 sm:mt-4 md:mt-4 mt-5">
+        <app-section-header [showMore]="false"
+                            [mainTitle]="'Journey Chronicles'"
+                            [subTitle]="'testimonial'">
+        </app-section-header>
+      </div>
+      <div class="lg:mt-7 sm:mt-3 md:mt-4 mt-4">
+        <app-testimonial-cards></app-testimonial-cards>
+      </div>
     </div>
   </div>
   <app-footer></app-footer>

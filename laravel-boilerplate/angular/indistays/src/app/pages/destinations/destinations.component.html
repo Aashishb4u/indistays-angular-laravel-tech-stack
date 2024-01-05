@@ -21,6 +21,12 @@
 <ng-container *ngIf="!showSpinner">
   <app-app-header></app-app-header>
   <div class="destination-container">
+    <div class="lg:mb-6 sm:mb-4 md:mb-4 mb-6">
+      <app-section-header [showMore]="false"
+                          [mainTitle]="'Destination to Dive In'"
+                          [subTitle]="'Discover'">
+      </app-section-header>
+    </div>
     <app-image-tiles [view]="'row'" [tilesData]="destinations"></app-image-tiles>
   </div>
   <app-footer></app-footer>

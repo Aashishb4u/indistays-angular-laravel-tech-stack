@@ -1,9 +1,10 @@
 <div class="content-tabs-container">
-  <div *ngFor="let category of categories" class="single-content-tab">
+  <div *ngFor="let category of categories"
+       class="p-4 px-5 lg:rounded-3xl rounded-2xl sm:rounded-1xl  single-content-tab">
     <div class="image">
       <img [src]="category?.img" alt="">
     </div>
-    <div class="title text-center">
+    <div class="title lg:text-lg sm:text-lg text-lg md:text-lg text-center">
       {{category?.name}}
     </div>
     <div class="content">

@@ -22,6 +22,12 @@
   <div style="background: #3f51b524">
     <app-app-header></app-app-header>
     <div class="campings-container">
+      <div class="lg:mb-6 sm:mb-4 md:mb-4 mb-6">
+        <app-section-header [showMore]="false"
+                            [mainTitle]="'Camping Accommodations'"
+                            [subTitle]="'Top Selling'">
+        </app-section-header>
+      </div>
       <app-price-ui-cards [view]="'row'" [cardData]="accommodations"></app-price-ui-cards>
     </div>
     <app-footer></app-footer>

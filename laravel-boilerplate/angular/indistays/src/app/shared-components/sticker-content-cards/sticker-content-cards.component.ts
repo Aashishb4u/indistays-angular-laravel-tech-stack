@@ -7,9 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class StickerContentCardsComponent implements OnInit {
   @Input() categories: any = [];
-  constructor() {}
+
+  constructor() {
+  }
+
   ngOnInit() {
-    this.categories =  [{
+    this.categories = [{
       name: 'Galmping',
       description: 'Glamorous camping that combines the comforts of home with the outdoor experience',
       img: 'assets/images/galmping.png'
@@ -17,12 +20,12 @@ export class StickerContentCardsComponent implements OnInit {
       {
         name: 'Camping Resorts',
         description: 'Campgrounds with extensive amenities and recreational facilities.',
-        img: 'assets/images/camping.png'
+        img: 'assets/images/tent.png'
       },
       {
-        name: 'Backcountry Camping',
-        description: 'Camping in remote wilderness areas away from established campgrounds',
-        img: 'assets/images/tent.png'
+        name: 'Private Villas',
+        description: 'Luxurious retreats with exclusive amenities for an intimate and upscale getaway.',
+        img: 'assets/images/camping.png'
       },
       {
         name: 'Group Camping',

@@ -223,19 +223,23 @@
 
 
     <div>
-      <app-section-header [showMore]="false"
-                          [mainTitle]="'Camping Accommodations'"
-                          [subTitle]="'Top Selling'">
-      </app-section-header>
+      <div class="lg:mt-8 sm:mt-4 md:mt-4 mt-5 lg:mb-6 sm:mb-4 md:mb-4 mb-6">
+        <app-section-header [showMore]="false"
+                            [mainTitle]="'Camping Accommodations'"
+                            [subTitle]="'Top Selling'">
+        </app-section-header>
+      </div>
 
       <app-price-ui-cards [cardData]="accommodations"></app-price-ui-cards>
     </div>
 
     <div>
-      <app-section-header [showMore]="false"
-                          [mainTitle]="'Journey Chronicles'"
-                          [subTitle]="'testimonial'">
-      </app-section-header>
+      <div class="lg:mt-8 sm:mt-4 md:mt-4 mt-5 lg:mb-6 sm:mb-4 md:mb-4 mb-6">
+        <app-section-header [showMore]="false"
+                            [mainTitle]="'Journey Chronicles'"
+                            [subTitle]="'testimonial'">
+        </app-section-header>
+      </div>
       <app-testimonial-cards></app-testimonial-cards>
     </div>
   </div>
