@@ -21,17 +21,18 @@
     }
     .white-btn {
       background: #fff;
-      color: #68941C;
-      font-size: 20px;
+      color: #68941c;
+      font-size: 18px;
       font-style: normal;
       font-weight: 700;
-      line-height: 24px; /* 120% */
-      letter-spacing: 0.5px;
-      padding: 15px 22px;
-      display: flex;
+      line-height: 24px;
+      letter-spacing: .5px;
       border-radius: 8px;
       width: 200px;
       justify-content: center;
+      height: 48px;
+      display: flex;
+      align-items: center;
     }
   }
 
