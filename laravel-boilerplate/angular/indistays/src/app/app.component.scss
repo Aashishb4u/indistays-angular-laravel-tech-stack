@@ -1,6 +1,6 @@
 .bottom-nav {
   grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-  z-index: 99999;
+  z-index: 9;
   .nav-tab {
     &.active {
       color: var(--primary-color);

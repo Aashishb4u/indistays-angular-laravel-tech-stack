@@ -113,7 +113,8 @@
                     </ng-container>
                     <ng-template #addBed>
                       <div class="add-bed-btn">
-                        <button (click)="onAddition(acc)" class="indistays-theme-btn" mat-raised-button>Add Bed</button>
+<!--                        <button (click)="onAddition(acc)" class="indistays-theme-btn" mat-raised-button>Add Bed</button>-->
+                        <button (click)="toggleModal('confirmBooking')" class="indistays-theme-btn" mat-raised-button>Add Bed</button>
                       </div>
                     </ng-template>
                   </div>
@@ -311,7 +312,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content change-pass-content">
       <div style="height: 55%" class="modal-body d-flex justify-content-center border-none">
-        <div class="d-flex flex-column">
+        <div class="w-100 d-flex flex-column">
           <div class="d-flex justify-content-end">
             <button (click)="toggleModal('confirmBooking')" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
               <i class="fa fa-times"></i>
@@ -319,12 +320,32 @@
           </div>
           <div class="d-flex p-4 justify-content-center flex-column align-items-center gap-3">
             <img style="width: 45%" src="assets/icons/success.png" alt="">
-            <div class="text-xl text-cnter text-gray-400">Your Booking is Confirmed</div>
-            <div class="mt-2 mb-4">
-              <button (click)="toggleModal('confirmBooking')" class="indi-style-btn" color="primary" mat-raised-button>
-                Thanks
-              </button>
+            <div class="text-xl text-center text-gray-400">Your Booking is Confirmed</div>
+            <div class="my-3 d-flex flex-column text-gray-400 text-center d-flex gap-2">
+              <div class="text-base">
+                Contact Details:
+              </div>
+              <div class="my-3 d-flex flex-column gap-3">
+                <div class="p-3 shadow-lg rounded-2xl d-flex gap-3 align-items-center">
+                  <div class="rounded-full w-9 h-9 text-base d-flex align-items-center justify-content-center bg-secondary text-white">
+                    <i class="rotate-90 text-base fa fa-phone"></i>
+                  </div>
+                  <div class="text-gray-800">+91-8788707579</div>
+                </div>
+                <div class="p-3 shadow-lg rounded-2xl d-flex gap-3 align-items-center">
+                  <div class="rounded-full w-9 h-9 text-base d-flex align-items-center justify-content-center bg-secondary text-white">
+                    <i class="p-2 fa text-base fa-envelope"></i>
+                  </div>
+                  <div class="text-gray-800">shubhammandlik@indistays.com</div>
+                </div>
+              </div>
             </div>
+
+<!--            <div class="mt-2 mb-4">-->
+<!--              <button (click)="toggleModal('confirmBooking')" class="indi-style-btn" color="primary" mat-raised-button>-->
+<!--                Thanks-->
+<!--              </button>-->
+<!--            </div>-->
           </div>
         </div>
       </div>
