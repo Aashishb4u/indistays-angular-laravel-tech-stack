@@ -1,0 +1,23 @@
+<div *ngIf="newVersionCheckerService.isNewVersionAvailable" class="checker-container {{containerClasses}}">
+  <!--<div  class="checker-container {{containerClasses}}">-->
+  <div class="w-100 p-2 bg-white d-flex">
+    <div class="mx-3">
+      <img class="w-16" src="assets/company-logo/logo-transparent.png" alt="">
+    </div>
+  </div>
+  <div (click)="applyUpdate()" class="cursor-pointer d-flex bg-primary gap-2 align-items-center new-version-checker-container bg-main-color p-3 robot_newVersionChecker">
+    <div class="pr-2">
+      <div class="bg-green-100 w-11 h-11 d-flex align-items-center justify-content-center color-primary rounded-full p-3">
+        <i class="rotate-12 fa-rotate-right fa text-base"></i>
+      </div>
+    </div>
+    <div class="new-version-checker-info d-flex flex-column gap-1 text-white">
+      <div class="font-bold text-base text-white">
+        Update available No
+      </div>
+      <div class="text-gray-200 text-xs d-flex gap-2 align-items-center">
+        click to update WhatsApp <i class="text-gray-300 text-xs fa fa-chevron-right"></i>
+      </div>
+    </div>
+  </div>
+</div>

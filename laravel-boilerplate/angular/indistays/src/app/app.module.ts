@@ -78,6 +78,7 @@ import { AddEditAssetComponent } from './pages/dashboard/assets-management/add-e
 import { StarRatingsComponent } from './shared-components/star-ratings/star-ratings.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NewVersionCheckerComponent } from './shared-components/new-version-checker/new-version-checker.component';
 
 @NgModule({
     declarations: [
@@ -119,7 +120,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         EnquiriesComponent,
         AssetsManagementComponent,
         AddEditAssetComponent,
-        StarRatingsComponent
+        StarRatingsComponent,
+        NewVersionCheckerComponent
     ],
     imports: [
         BrowserModule,
