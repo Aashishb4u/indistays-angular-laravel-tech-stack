@@ -245,24 +245,38 @@ export class AddEditDestinationComponent {
         this.galleryImages.controls[index].get('imageUrl').setValue('');
         this.galleryImages.controls[index].get('imageUrlOnUI').setValue('');
         const fileName = `${destinationName.toLowerCase()}-gallery-image-${index}.png`;
-        const localUrl = onLoadEvent.target.result;
-        this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
-          const base64: string = compressedImage.base64;
-          const imageFile: any = compressedImage.imageFile;
-          if (index === this.galleryImages.controls.length) {
-            this.galleryImages.push(this.fb.group({
-              imageId: '',
-              imageUrl: '',
-              imageUrlOnUI: '',
-              imageBase64: base64,
-              imageFile: imageFile,
-            })); // Add a new FormControl to the FormArray
-          } else {
-            this.galleryImages.controls[index].get('imageBase64').setValue(base64);
-          }
-          this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
-          this.sharedService.showSpinner.next(false);
-        });
+        const base64 = onLoadEvent.target.result;
+        const updatedImage = new File([image], fileName, { type: image.type });
+        if (index === this.galleryImages.controls.length) {
+          this.galleryImages.push(this.fb.group({
+            imageId: '',
+            imageUrl: '',
+            imageUrlOnUI: '',
+            imageBase64: base64,
+            imageFile: updatedImage,
+          })); // Add a new FormControl to the FormArray
+        } else {
+          this.galleryImages.controls[index].get('imageBase64').setValue(base64);
+        }
+        this.galleryImages.controls[index].get('imageFile').setValue(updatedImage);
+        this.sharedService.showSpinner.next(false);
+        // this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
+        //   const base64: string = compressedImage.base64;
+        //   const imageFile: any = compressedImage.imageFile;
+        //   if (index === this.galleryImages.controls.length) {
+        //     this.galleryImages.push(this.fb.group({
+        //       imageId: '',
+        //       imageUrl: '',
+        //       imageUrlOnUI: '',
+        //       imageBase64: base64,
+        //       imageFile: imageFile,
+        //     })); // Add a new FormControl to the FormArray
+        //   } else {
+        //     this.galleryImages.controls[index].get('imageBase64').setValue(base64);
+        //   }
+        //   this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
+        //   this.sharedService.showSpinner.next(false);
+        // });
       }
     }
   }

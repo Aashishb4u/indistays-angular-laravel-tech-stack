@@ -90,8 +90,8 @@ export class AddEditAccommodationComponent {
     const campingName: any = this.componentForm.get('name').value;
     if (event.target.files && event.target.files[0]) {
       const fileSizeInMB = image.size / (1024 * 1024);
-      if (fileSizeInMB > 35) {
-        this.apiService.showToast('File size should not exceed 35 MB');
+      if (fileSizeInMB > 2) {
+        this.apiService.showToast('File size should not exceed 2 MB');
         return;
       }
       // this.sharedService.showSpinner.next(true);
@@ -279,13 +279,14 @@ export class AddEditAccommodationComponent {
   }
 
   portfolioImageAction(event, index) {
+    console.log('checl');
     let reader = new FileReader();
     let image = event.target.files[0];
     const campingName: any = this.componentForm.get('name').value;
     if (event.target.files && event.target.files[0]) {
       const fileSizeInMB = image.size / (1024 * 1024);
-      if (fileSizeInMB > 35) {
-        this.apiService.showToast('File size should not exceed 35 MB');
+      if (fileSizeInMB > 2) {
+        this.apiService.showToast('File size should not exceed 2 MB');
         return;
       }
       if (this.galleryImages.controls.length >= 20) {
@@ -298,23 +299,37 @@ export class AddEditAccommodationComponent {
         this.galleryImages.controls[index].get('imageUrl').setValue('');
         this.galleryImages.controls[index].get('imageUrlOnUI').setValue('');
         const fileName = `${campingName.toLowerCase()}-gallery-image-${index}.png`;
-        const localUrl = onLoadEvent.target.result;
-        this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
-          const base64: string = compressedImage.base64;
-          const imageFile: any = compressedImage.imageFile;
-          if (index === this.galleryImages.controls.length) {
-            this.galleryImages.push(this.fb.group({
-              imageId: '',
-              imageUrl: '',
-              imageUrlOnUI: '',
-              imageBase64: base64,
-              imageFile: imageFile,
-            })); // Add a new FormControl to the FormArray
-          } else {
-            this.galleryImages.controls[index].get('imageBase64').setValue(base64);
-          }
-          this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
-        });
+        const base64 = onLoadEvent.target.result;
+        const updatedImage = new File([image], fileName, { type: image.type });
+        if (index === this.galleryImages.controls.length) {
+          this.galleryImages.push(this.fb.group({
+            imageId: '',
+            imageUrl: '',
+            imageUrlOnUI: '',
+            imageBase64: base64,
+            imageFile: updatedImage,
+          })); // Add a new FormControl to the FormArray
+        } else {
+          this.galleryImages.controls[index].get('imageBase64').setValue(base64);
+        }
+        this.galleryImages.controls[index].get('imageFile').setValue(updatedImage);
+        this.sharedService.showSpinner.next(false);
+        // this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
+        //   const base64: string = compressedImage.base64;
+        //   const imageFile: any = compressedImage.imageFile;
+        //   if (index === this.galleryImages.controls.length) {
+        //     this.galleryImages.push(this.fb.group({
+        //       imageId: '',
+        //       imageUrl: '',
+        //       imageUrlOnUI: '',
+        //       imageBase64: base64,
+        //       imageFile: imageFile,
+        //     })); // Add a new FormControl to the FormArray
+        //   } else {
+        //     this.galleryImages.controls[index].get('imageBase64').setValue(base64);
+        //   }
+        //   this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
+        // });
       }
     }
   }
@@ -326,7 +341,6 @@ export class AddEditAccommodationComponent {
 
   portfolioMultipleImagesAction(event) {
     const MAX_IMAGES = 5;
-
     if (this.galleryImages.controls.length >= MAX_IMAGES) {
       this.apiService.showToast('Image Upload Limit Exceeded');
       return;
@@ -356,33 +370,51 @@ export class AddEditAccommodationComponent {
         this.apiService.showToast('File size should not exceed 35 MB');
         return;
       }
-
+      this.sharedService.showSpinner.next(true);
       reader.readAsDataURL(image);
       reader.onload = (onLoadEvent) => {
-        const imageIndex = this.galleryImages.controls.length + i;
         const fileName = `${campingName.toLowerCase()}-gallery-image-${i}.png`;
-        const localUrl = onLoadEvent.target.result;
-        this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
-          const base64: string = compressedImage.base64;
-          const imageFile: any = compressedImage.imageFile;
-          const oldImages = this.galleryImages.controls.map(v => v.get('imageUrl').value).filter( v => v != '');
-          this.galleryImages.push(this.fb.group({
-            imageUrl: '',
-            imageUrlOnUI: '',
-            imageBase64: base64,
-            imageFile: imageFile,
-          }));
-          uploadImages.push(imageFile);
-          imagesProcessed++;
+        const base64 = onLoadEvent.target.result;
+        const updatedImage = new File([image], fileName, { type: image.type });
+        this.galleryImages.push(this.fb.group({
+          imageUrl: '',
+          imageUrlOnUI: '',
+          imageBase64: base64,
+          imageFile: updatedImage,
+        }));
+        uploadImages.push(updatedImage);
+        imagesProcessed++;
 
-          // Check if all images have been processed
-          if (imagesProcessed === selectedFiles.length) {
-            // this.campingFormData.append('oldImages', JSON.stringify(oldImages));
-            for (let j = 0; j < uploadImages.length; j++) {
-              this.campingFormData.append('files', uploadImages[j]);
-            }
+        // Check if all images have been processed
+        if (imagesProcessed === selectedFiles.length) {
+          // this.campingFormData.append('oldImages', JSON.stringify(oldImages));
+          for (let j = 0; j < uploadImages.length; j++) {
+            this.campingFormData.append('files', uploadImages[j]);
           }
-        });
+        }
+
+        this.sharedService.showSpinner.next(false);
+        // this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
+        //   const base64: string = compressedImage.base64;
+        //   const imageFile: any = compressedImage.imageFile;
+        //   const oldImages = this.galleryImages.controls.map(v => v.get('imageUrl').value).filter( v => v != '');
+        //   this.galleryImages.push(this.fb.group({
+        //     imageUrl: '',
+        //     imageUrlOnUI: '',
+        //     imageBase64: base64,
+        //     imageFile: imageFile,
+        //   }));
+        //   uploadImages.push(imageFile);
+        //   imagesProcessed++;
+        //
+        //   // Check if all images have been processed
+        //   if (imagesProcessed === selectedFiles.length) {
+        //     // this.campingFormData.append('oldImages', JSON.stringify(oldImages));
+        //     for (let j = 0; j < uploadImages.length; j++) {
+        //       this.campingFormData.append('files', uploadImages[j]);
+        //     }
+        //   }
+        // });
       }
     }
   }
