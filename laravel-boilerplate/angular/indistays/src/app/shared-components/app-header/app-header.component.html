@@ -21,7 +21,7 @@ navbar-expand-md navbar-light bg-light">
       <div *ngIf="isAuthenticated" class="cursor-pointer user-icon-container">
         <div [matMenuTriggerFor]="userMenu" #menuTrigger class="user-menu">
           <div class="user-icon">
-            <button mat-mini-fab class="mat-button-icon-btn"
+            <button (click)="sharedService.vibrateBtn()" mat-mini-fab class="mat-button-icon-btn"
                     aria-label="Example icon button with a plus one icon">
               <mat-icon>account_circle</mat-icon>
             </button>
@@ -50,7 +50,7 @@ navbar-expand-md navbar-light bg-light">
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div  class="navbar-collapse menu-bar justify-content-between" id="navbarSupportedContent">
+    <div *ngIf="screenWidth > 600" class="navbar-collapse menu-bar justify-content-between" id="navbarSupportedContent">
       <div  class="d-flex ml-auto">
         <ul class="navbar-nav">
           <li [routerLink]="['/home']" [routerLinkActive]="'active'" class="nav-item nav-menu">

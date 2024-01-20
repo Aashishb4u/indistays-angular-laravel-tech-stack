@@ -516,7 +516,7 @@
     background: #fff;
     z-index: 9;
     box-shadow: 1px 0 4rem 4px #00000026!important;
-    bottom: 65px;
+    bottom: 75px;
     padding: 1rem;
   }
 
@@ -542,4 +542,8 @@
   width: 200px;
   height: 48px;
   border-radius: 45px
+}
+
+#confirmBooking {
+  z-index: 999999;
 }

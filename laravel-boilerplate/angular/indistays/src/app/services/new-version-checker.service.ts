@@ -7,7 +7,7 @@ import { Subscription, interval } from 'rxjs';
 })
 export class NewVersionCheckerService {
   isNewVersionAvailable: boolean = false;
-  intervalSource = interval(2 * 60 * 1000); // every 15 mins
+  intervalSource = interval(60 * 500); // every half minute
   intervalSubscription: Subscription;
 
   constructor(

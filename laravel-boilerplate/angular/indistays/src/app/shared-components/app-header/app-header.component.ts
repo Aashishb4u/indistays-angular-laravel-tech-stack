@@ -37,6 +37,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   backClicked() {
+    this.sharedService.vibrateOnceOnClick();
     this._location.back();
   }
 

@@ -13,7 +13,7 @@ export class StickerContentCardsComponent implements OnInit {
 
   ngOnInit() {
     this.categories = [{
-      name: 'Galmping',
+      name: 'Glamping',
       description: 'Glamorous camping that combines the comforts of home with the outdoor experience',
       img: 'assets/images/galmping.png'
     },

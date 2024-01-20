@@ -39,6 +39,18 @@ export class SharedService {
     }
   }
 
+  vibrateOnceOnClick = () => {
+    // A simple one-liner is all that's needed.
+    // To use a single vibration, we simple
+    // provide an integer representing the ms
+    // a single pulse should last.
+    window.navigator?.vibrate?.(200);
+  }
+
+  vibrateBtn() {
+    window.navigator?.vibrate?.([50, 200, 50, 200]);
+  }
+
   removeDuplicates(arr, key) {
     const uniqueMap = new Map();
     arr.forEach(item => {

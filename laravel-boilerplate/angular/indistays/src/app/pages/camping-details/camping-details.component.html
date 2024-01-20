@@ -250,10 +250,10 @@
         <div class="text-gray-400 font-bold text-xl">Payment Amount</div>
         <div class="py-1 text-gray-900 text-base d-flex gap-2 align-items-center">
           <div>₹ {{totalSum + 100}}</div>
-          <div class="text-blue-500 px-1"><i (click)="goSummary()" class="text-xl fa fa-info-circle"></i></div>
+          <div class="text-indigo-400 px-1"><i (click)="goSummary()" class="text-xl fa fa-info-circle"></i></div>
         </div>
       </div>
-      <div class="w-5/12">
+      <div class="w-5/12 d-flex align-items-center">
         <button (click)="toggleModal('makeBooking')" class="indistays-theme-btn" mat-raised-button>BOOK NOW</button>
       </div>
     </div>
@@ -318,11 +318,11 @@
               <i class="fa fa-times"></i>
             </button>
           </div>
-          <div class="d-flex p-4 justify-content-center flex-column align-items-center gap-3">
-            <img style="width: 45%" src="assets/icons/success.png" alt="">
-            <div class="text-xl text-center text-gray-400">Your Booking is Confirmed</div>
-            <div class="my-3 d-flex flex-column text-gray-400 text-center d-flex gap-2">
-              <div class="text-base">
+          <div class="d-flex p-2 justify-content-center flex-column align-items-center gap-3">
+            <img style="width: 35%" src="assets/icons/success.png" alt="">
+            <div class="text-base text-center text-gray-400">We’ve received your enquiry. We’ll revert back to you asap. Please contact for immediate booking.</div>
+            <div class="my-3 d-flex flex-column text-center d-flex gap-2">
+              <div class="text-gray-600 text-sm">
                 Contact Details:
               </div>
               <div class="my-3 d-flex flex-column gap-3">
