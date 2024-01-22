@@ -2,8 +2,9 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {appConstants} from "../assets/constants/app-constants";
 import {StorageService} from "./services/storage.service";
 import {ApiService} from "./services/api.service";
-import {filter, forkJoin} from "rxjs";
+import {filter} from "rxjs";
 import {NavigationEnd, Router} from "@angular/router";
+import '@khmyznikov/pwa-install';
 
 @Component({
   selector: 'app-root',

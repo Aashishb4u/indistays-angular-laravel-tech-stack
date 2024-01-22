@@ -1,13 +1,12 @@
-import { NgModule, isDevMode } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgModule, isDevMode, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './pages/login/login.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LandingComponent } from './pages/landing/landing.component';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {LandingComponent} from './pages/landing/landing.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -31,150 +30,152 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpTokenInterceptorsService} from "./authentication/http-token-interceptors.service";
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AppHeaderComponent } from './shared-components/app-header/app-header.component';
-import { ChangePasswordComponent } from './pages/change-password/change-password.component';
-import { UsersComponent } from './pages/dashboard/users/users.component';
-import { AddEditUsersComponent } from './pages/dashboard/users/add-edit-users/add-edit-users.component';
-import { ConfirmationPopupComponent } from './shared-components/confirmation-popup/confirmation-popup.component';
-import { DebounceKeyUpDirective } from './custom-directives/debounce-key-up.directive';
-import { AbstractDebounceDirective } from './custom-directives/abstract-debounce.directive';
-import { DestinationsComponent } from './pages/dashboard/destinations/destinations.component';
-import { AddEditDestinationComponent } from './pages/dashboard/destinations/add-edit-destination/add-edit-destination.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {AppHeaderComponent} from './shared-components/app-header/app-header.component';
+import {ChangePasswordComponent} from './pages/change-password/change-password.component';
+import {UsersComponent} from './pages/dashboard/users/users.component';
+import {AddEditUsersComponent} from './pages/dashboard/users/add-edit-users/add-edit-users.component';
+import {ConfirmationPopupComponent} from './shared-components/confirmation-popup/confirmation-popup.component';
+import {DebounceKeyUpDirective} from './custom-directives/debounce-key-up.directive';
+import {AbstractDebounceDirective} from './custom-directives/abstract-debounce.directive';
+import {DestinationsComponent} from './pages/dashboard/destinations/destinations.component';
+import {AddEditDestinationComponent} from './pages/dashboard/destinations/add-edit-destination/add-edit-destination.component';
 import {NgxImageCompressService} from "ngx-image-compress";
 import {NgxEditorModule} from "ngx-editor";
 import {CampingsComponent} from "./pages/dashboard/campings/campings.component";
 import {AddEditCampingComponent} from "./pages/dashboard/campings/add-edit-camping/add-edit-camping.component";
-import { AccommodationComponent } from './pages/dashboard/accommodation/accommodation.component';
+import {AccommodationComponent} from './pages/dashboard/accommodation/accommodation.component';
 import {AddEditAccommodationComponent} from "./pages/dashboard/accommodation/add-edit-accommodation/add-edit-accommodation.component";
 import {GoogleMapsModule} from "@angular/google-maps";
-import { CustomPricingComponent } from './pages/dashboard/custom-pricing/custom-pricing.component';
-import { AddEditCustomPricingComponent } from './pages/dashboard/custom-pricing/add-edit-custom-pricing/add-edit-custom-pricing.component';
-import { CustomBookingsComponent } from './pages/dashboard/custom-bookings/custom-bookings.component';
-import { AddEditCustomBookingComponent } from './pages/dashboard/custom-bookings/add-edit-custom-booking/add-edit-custom-booking.component';
+import {CustomPricingComponent} from './pages/dashboard/custom-pricing/custom-pricing.component';
+import {AddEditCustomPricingComponent} from './pages/dashboard/custom-pricing/add-edit-custom-pricing/add-edit-custom-pricing.component';
+import {CustomBookingsComponent} from './pages/dashboard/custom-bookings/custom-bookings.component';
+import {AddEditCustomBookingComponent} from './pages/dashboard/custom-bookings/add-edit-custom-booking/add-edit-custom-booking.component';
 // Import your library
-import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { FooterComponent } from './shared-components/footer/footer.component';
-import { SectionHeaderComponent } from './shared-components/section-header/section-header.component';
-import { StickerContentCardsComponent } from './shared-components/sticker-content-cards/sticker-content-cards.component';
-import { ImageTilesComponent } from './shared-components/image-tiles/image-tiles.component';
-import { PriceUiCardsComponent } from './shared-components/price-ui-cards/price-ui-cards.component';
-import { TestimonialCardsComponent } from './shared-components/testimonial-cards/testimonial-cards.component';
-import { DestinationDetailsComponent } from './pages/destination-details/destination-details.component';
-import { ListingUiCardComponent } from './shared-components/listing-ui-card/listing-ui-card.component';
-import { CampingDetailsComponent } from './pages/camping-details/camping-details.component';
+import {SlickCarouselModule} from 'ngx-slick-carousel';
+import {FooterComponent} from './shared-components/footer/footer.component';
+import {SectionHeaderComponent} from './shared-components/section-header/section-header.component';
+import {StickerContentCardsComponent} from './shared-components/sticker-content-cards/sticker-content-cards.component';
+import {ImageTilesComponent} from './shared-components/image-tiles/image-tiles.component';
+import {PriceUiCardsComponent} from './shared-components/price-ui-cards/price-ui-cards.component';
+import {TestimonialCardsComponent} from './shared-components/testimonial-cards/testimonial-cards.component';
+import {DestinationDetailsComponent} from './pages/destination-details/destination-details.component';
+import {ListingUiCardComponent} from './shared-components/listing-ui-card/listing-ui-card.component';
+import {CampingDetailsComponent} from './pages/camping-details/camping-details.component';
 import {NgxGalleryModule} from "@kolkov/ngx-gallery";
-import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import {ContactUsComponent} from './pages/contact-us/contact-us.component';
 import {DestinationsListingComponent} from "./pages/destinations/destinations.component";
 import {CampingsListingComponent} from "./pages/campings/campings.component";
-import { AboutUsComponent } from './pages/about-us/about-us.component';
+import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
-import { SpinnerComponent } from './shared-components/spinner/spinner.component';
-import { EnquiriesComponent } from './pages/dashboard/enquiries/enquiries.component';
-import { AssetsManagementComponent } from './pages/dashboard/assets-management/assets-management.component';
-import { AddEditAssetComponent } from './pages/dashboard/assets-management/add-edit-asset/add-edit-asset.component';
-import { StarRatingsComponent } from './shared-components/star-ratings/star-ratings.component';
+import {SpinnerComponent} from './shared-components/spinner/spinner.component';
+import {EnquiriesComponent} from './pages/dashboard/enquiries/enquiries.component';
+import {AssetsManagementComponent} from './pages/dashboard/assets-management/assets-management.component';
+import {AddEditAssetComponent} from './pages/dashboard/assets-management/add-edit-asset/add-edit-asset.component';
+import {StarRatingsComponent} from './shared-components/star-ratings/star-ratings.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { NewVersionCheckerComponent } from './shared-components/new-version-checker/new-version-checker.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {NewVersionCheckerComponent} from './shared-components/new-version-checker/new-version-checker.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        DashboardComponent,
-        LandingComponent,
-        NotFoundComponent,
-        AppHeaderComponent,
-        ChangePasswordComponent,
-        UsersComponent,
-        AddEditUsersComponent,
-        ConfirmationPopupComponent,
-        DebounceKeyUpDirective,
-        DestinationsComponent,
-        DestinationsListingComponent,
-        AddEditDestinationComponent,
-        CampingsComponent,
-        AddEditCampingComponent,
-        AccommodationComponent,
-        AddEditAccommodationComponent,
-        CustomPricingComponent,
-        AddEditCustomPricingComponent,
-        CustomBookingsComponent,
-        AddEditCustomBookingComponent,
-        FooterComponent,
-        SectionHeaderComponent,
-        StickerContentCardsComponent,
-        ImageTilesComponent,
-        PriceUiCardsComponent,
-        TestimonialCardsComponent,
-        DestinationDetailsComponent,
-        ListingUiCardComponent,
-        CampingDetailsComponent,
-        ContactUsComponent,
-        CampingsListingComponent,
-        AboutUsComponent,
-        SpinnerComponent,
-        EnquiriesComponent,
-        AssetsManagementComponent,
-        AddEditAssetComponent,
-        StarRatingsComponent,
-        NewVersionCheckerComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        NgxEditorModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatListModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDividerModule,
-        MatCardModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatChipsModule,
-        MatCheckboxModule,
-        MatTableModule,
-        MatGridListModule,
-        MatDialogModule,
-        MatNativeDateModule,
-        MatDatepickerModule,
-        MatChipsModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        MatPaginatorModule,
-        MatTabsModule, // SwiperModule
-        ReactiveFormsModule,
-        NgbModule,
-        GoogleMapsModule,
-        NgbCarouselModule,
-        SlickCarouselModule,
-        NgxGalleryModule, MatTooltipModule,
-        NgxSkeletonLoaderModule.forRoot(),
-        ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: !isDevMode(),
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
-        })
-    ],
-    providers: [
-        NgxImageCompressService,
-        {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-        {provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptorsService, multi: true},
-    ],
-    exports: [
-        FooterComponent
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    LandingComponent,
+    NotFoundComponent,
+    AppHeaderComponent,
+    ChangePasswordComponent,
+    UsersComponent,
+    AddEditUsersComponent,
+    ConfirmationPopupComponent,
+    DebounceKeyUpDirective,
+    DestinationsComponent,
+    DestinationsListingComponent,
+    AddEditDestinationComponent,
+    CampingsComponent,
+    AddEditCampingComponent,
+    AccommodationComponent,
+    AddEditAccommodationComponent,
+    CustomPricingComponent,
+    AddEditCustomPricingComponent,
+    CustomBookingsComponent,
+    AddEditCustomBookingComponent,
+    FooterComponent,
+    SectionHeaderComponent,
+    StickerContentCardsComponent,
+    ImageTilesComponent,
+    PriceUiCardsComponent,
+    TestimonialCardsComponent,
+    DestinationDetailsComponent,
+    ListingUiCardComponent,
+    CampingDetailsComponent,
+    ContactUsComponent,
+    CampingsListingComponent,
+    AboutUsComponent,
+    SpinnerComponent,
+    EnquiriesComponent,
+    AssetsManagementComponent,
+    AddEditAssetComponent,
+    StarRatingsComponent,
+    NewVersionCheckerComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    NgxEditorModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
+    MatCardModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatChipsModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatTabsModule, // SwiperModule
+    ReactiveFormsModule,
+    NgbModule,
+    GoogleMapsModule,
+    NgbCarouselModule,
+    SlickCarouselModule,
+    NgxGalleryModule, MatTooltipModule,
+    NgxSkeletonLoaderModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
+  ],
+  providers: [
+    NgxImageCompressService,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptorsService, multi: true},
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [
+    FooterComponent
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
