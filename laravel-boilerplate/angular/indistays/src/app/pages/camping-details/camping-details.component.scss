@@ -322,8 +322,13 @@
 
     .single-list {
       flex-direction: column;
-      flex-basis: 48%;
+      flex-basis: 100%;
       gap: 20px;
+    }
+
+    .custom-date-picker {
+      justify-content: center;
+      align-items: center;
     }
   }
   .price-container {
@@ -546,4 +551,32 @@
 
 #confirmBooking {
   z-index: 999999;
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+
+  .accommodation-listing-container .accommodation-list-title {
+    display: flex;
+    justify-content: center;
+  }
+
+  .accommodation-listing-container .accommodation-listing .accommodation-listing-fst {
+    gap: 1rem;
+  }
+  .accommodation-listing-container .accommodation-listing {
+
+    .custom-date-picker {
+      width: 100% !important;
+      display: flex;
+    }
+  }
+
+  .camping-details {
+    padding: 0 2rem 2rem;
+  }
+
+  .accommodation-listing-container .summary {
+    min-width: 40%;
+  }
 }

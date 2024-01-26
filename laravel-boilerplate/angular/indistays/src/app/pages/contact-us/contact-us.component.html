@@ -20,10 +20,9 @@
         </div>
       </div>
       <div class="icons-container d-flex gap-3">
-        <i class="fa fa-whatsapp"></i>
-        <i class="fa fa-instagram"></i>
-        <i class="fa fa-facebook"></i>
-        <i class="fa fa-youtube"></i>
+        <i class="fa fa-whatsapp" (click)="sendMessage()"></i>
+        <i class="fa fa-instagram" (click)="goTo('instagram')"></i>
+        <i class="fa fa-facebook" (click)="goTo('facebook')"></i>
       </div>
     </div>
     <div class="contact-form">

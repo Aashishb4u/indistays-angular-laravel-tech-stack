@@ -18,7 +18,6 @@ export class LandingComponent  implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    console.log(event);
     this.screenWidth = window.innerWidth;
   }
   constructor(
@@ -51,7 +50,6 @@ export class LandingComponent  implements OnInit {
     const currentDate = moment(); // You can replace this with your actual date=
     this.twoDaysBefore = currentDate.clone().subtract(2, 'days');
     this.twoDaysAfter = currentDate.clone().add(2, 'days');
-    console.log(typeof this.twoDaysAfter);
     this.apiService.getDataStream();
     this.filterForm = this.formBuilder.group({
       destination: ['', Validators.required],
@@ -85,7 +83,6 @@ export class LandingComponent  implements OnInit {
   }
 
   onSelectAccommodation(event) {
-    console.log(event);
   }
 
   onSearch() {
@@ -130,7 +127,16 @@ export class LandingComponent  implements OnInit {
       val.image_url = this.sharedService.generateImageUrl(val.image_url);
       return val;
     });
-    this.images = response.filter(v => v.asset_type === 'website_banner').map(v => v.image_url);
-    this.mobileBannerImages = response.filter(v => v.asset_type === 'mobile_banner').map(v => v.image_url);
+    this.images = response.filter(v => v.asset_type === 'website_banner').map((v) => {
+      v.image_url;
+      v.loaded = false;
+      return v;
+    });
+    this.mobileBannerImages = response.filter(v => v.asset_type === 'mobile_banner')
+        .map((v) => {
+          v.image_url;
+          v.loaded = false;
+          return v;
+        });
   }
 }

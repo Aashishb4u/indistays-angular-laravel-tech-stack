@@ -1,0 +1,100 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://indistays.com/#organization",
+      "name": "Indistays",
+      "url": "https://indistays.com/",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61555347935346",
+        "https://www.instagram.com/indistays"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://indistays.com/#logo",
+        "inLanguage": "en-US",
+        "url": "https://indistays.com/assets/icons/icon-72x72.png",
+        "width": 71,
+        "height": 72,
+        "caption": "Indistays"
+      },
+      "image": {
+        "@id": "https://indistays.com/#logo"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://indistays.com/#website",
+      "url": "https://indistays.com/",
+      "name": "Indistays",
+      "description": "Your go-to for top-notch camping accommodations.",
+      "publisher": {
+        "@id": "https://indistays.com/#organization"
+      },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": "https://indistays.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      ],
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://indistays.com/#primaryimage",
+      "inLanguage": "en-US",
+      "url": "https://indistays.com/wp-content/uploads/2019/01/tudip-link-banner.jpg",
+      "width": 1200,
+      "height": 630,
+      "caption": "tudip-link-banner"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://indistays.com/#webpage",
+      "url": "https://indistays.com/",
+      "name": "Best IT Services | Digital Transformation | Outsourcing - Tudip Technologies",
+      "isPartOf": {
+        "@id": "https://indistays.com/#website"
+      },
+      "about": {
+        "@id": "https://indistays.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://indistays.com/#primaryimage"
+      },
+      "datePublished": "2014-06-03T10:19:07+00:00",
+      "dateModified": "2023-03-01T12:36:47+00:00",
+      "description": "Tudip is a customer-focused, extreme technology, IT services company, that helps clients to achieve Serenity through Integrity and Innovation. We deploy the best solutions to our clients with innovative solutions and capabilities that take the business to the next level.",
+      "breadcrumb": {
+        "@id": "https://indistays.com/#breadcrumb"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": [
+            "https://indistays.com/"
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://indistays.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "WebPage",
+            "@id": "https://indistays.com/",
+            "url": "https://indistays.com/",
+            "name": "Home"
+          }
+        }
+      ]
+    }
+  ]
+}

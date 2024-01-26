@@ -78,7 +78,10 @@ import {StarRatingsComponent} from './shared-components/star-ratings/star-rating
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {NewVersionCheckerComponent} from './shared-components/new-version-checker/new-version-checker.component';
-
+import { ImageCompressionDirective } from './custom-directives/image-compression.directive';
+// import { LazyLoadImageDirective } from './custom-directives/lazy-load-image.directive';
+// Import library module
+// import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +123,9 @@ import {NewVersionCheckerComponent} from './shared-components/new-version-checke
     AssetsManagementComponent,
     AddEditAssetComponent,
     StarRatingsComponent,
-    NewVersionCheckerComponent
+    NewVersionCheckerComponent,
+    ImageCompressionDirective,
+    // LazyLoadImageDirective
   ],
   imports: [
     BrowserModule,
@@ -159,6 +164,7 @@ import {NewVersionCheckerComponent} from './shared-components/new-version-checke
     SlickCarouselModule,
     NgxGalleryModule, MatTooltipModule,
     NgxSkeletonLoaderModule.forRoot(),
+    // NgxJsonLdModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

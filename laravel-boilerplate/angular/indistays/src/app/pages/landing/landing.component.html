@@ -26,7 +26,10 @@
         <ng-template *ngFor="let image of images" ngbSlide>
           <div>
             <div class="picsum-img-wrapper">
-              <img [src]="image" alt="Indistays Banner" [attr.aria-label]="'Indistays Banner'" role="img" />
+              <img (load)="image.loaded = true" appImageCompression [src]="image.image_url" alt="Indistays Banner" [attr.aria-label]="'Indistays Banner'" role="img" />
+              <ng-container *ngIf="!image.loaded">
+                <ngx-skeleton-loader [theme]="{height: '28vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+              </ng-container>
             </div>
 <!--            <div class="carousel-caption carousal-text">-->
 <!--              <div class="header">-->
@@ -44,7 +47,10 @@
         <ng-template *ngFor="let image of mobileBannerImages" ngbSlide>
           <div>
             <div class="picsum-img-wrapper">
-              <img [src]="image" alt="Random first slide" />
+              <img (load)="image.loaded = true" appImageCompression [src]="image.image_url" alt="Random first slide" />
+              <ng-container *ngIf="!image.loaded">
+                <ngx-skeleton-loader [theme]="{height: '35vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
+              </ng-container>
             </div>
 <!--            <div class="carousel-caption carousal-text">-->
 <!--              <div class="header">-->
@@ -59,7 +65,7 @@
         </ng-template>
       </ngb-carousel>
       <div class="landing-filters d-flex justify-content-center full-width">
-        <form class="d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
+        <form class="filter-from d-flex full-width justify-content-center full-width" [formGroup]="filterForm">
           <div class="row col-md-12 col-lg-10 filter-tab-container">
             <div class="m-1 mb-3 col-lg-12">
               <div class="d-flex gap-2">
@@ -67,7 +73,7 @@
                 <div [class.active]="selectedTab === 'camping'" (click)="onChangeTab('camping')" class="filter-tab">Camping</div>
               </div>
             </div>
-            <div *ngIf="selectedTab === 'destination'" class="col-lg-3 col-8">
+            <div *ngIf="selectedTab === 'destination'" class="col-lg-3 col-sm-12 col-8 col-md-12">
               <mat-label >Select Destination</mat-label>
               <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2">
                 <mat-select placeholder="Eg. Nashik"  formControlName="destination">
@@ -76,7 +82,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div *ngIf="selectedTab === 'camping'" class="col-lg-3 col-8">
+            <div *ngIf="selectedTab === 'camping'" class="col-lg-3 col-md-10 col-8">
               <mat-label >Select Camping</mat-label>
               <mat-form-field color="accent" appearance="outline" class="filter-control full-width mt-2">
                 <mat-select placeholder="Eg. Hotel XYZ" formControlName="camping">
@@ -133,7 +139,7 @@
               </div>
             </ng-container>
 
-            <div *ngIf="screenWidth > 500" class="col-lg-2 col-md-1 d-flex align-items-center">
+            <div *ngIf="screenWidth > 500" class="col-lg-2 col-md-4 d-flex align-items-center">
               <button (click)="onSearch()" class="indistays-theme-btn">
                 BOOK NOW
               </button>
@@ -197,7 +203,7 @@
       <!--              <div class="row">-->
       <!--                <div class="col-md-4 mb-3">-->
       <!--                  <div class="card overflow-hidden">-->
-      <!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">-->
+      <!--                    <img appImageCompression class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532781914607-2031eca2f00d?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=7c625ea379640da3ef2e24f20df7ce8d">-->
       <!--                    <div class="card-body">-->
       <!--                      <h4 class="card-title">Special title treatment</h4>-->
       <!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
@@ -208,7 +214,7 @@
       <!--                </div>-->
       <!--                <div class="col-md-4 mb-3">-->
       <!--                  <div class="card overflow-hidden">-->
-      <!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">-->
+      <!--                    <img appImageCompression class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=42b2d9ae6feb9c4ff98b9133addfb698">-->
       <!--                    <div class="card-body">-->
       <!--                      <h4 class="card-title">Special title treatment</h4>-->
       <!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
@@ -218,7 +224,7 @@
       <!--                </div>-->
       <!--                <div class="col-md-4 mb-3">-->
       <!--                  <div class="card overflow-hidden">-->
-      <!--                    <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">-->
+      <!--                    <img appImageCompression class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">-->
       <!--                    <div class="card-body">-->
       <!--                      <h4 class="card-title">Special title treatment</h4>-->
       <!--                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->

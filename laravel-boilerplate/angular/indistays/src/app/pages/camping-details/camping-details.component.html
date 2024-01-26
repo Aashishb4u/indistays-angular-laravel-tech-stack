@@ -182,7 +182,9 @@
             <div class="d-flex flex-column align-items-center summary-tile rating-box block p-5 bg-white">
               <div class="sub-title">Overall Ratings</div>
               <div class="rate">{{customerReview ? customerReview?.toFixed(1) : 'NA'}}</div>
-              <star-ratings [rating]="customerReview ? customerReview?.toFixed(0) : 0" [mode]="'view'"></star-ratings>
+              <div class="d-flex">
+                <star-ratings [rating]="customerReview ? customerReview?.toFixed(0) : 0" [mode]="'view'"></star-ratings>
+              </div>
             </div>
 
             <div class="summary-tile block p-3 bg-white">

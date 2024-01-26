@@ -25,6 +25,7 @@
     "@khmyznikov/pwa-install": "^0.3.3",
     "@kolkov/ngx-gallery": "^2.0.1",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
+    "@ngx-lite/json-ld": "^14.0.0",
     "@popperjs/core": "^2.11.6",
     "@types/web-app-manifest": "^1.0.7",
     "bootstrap": "^5.2.3",

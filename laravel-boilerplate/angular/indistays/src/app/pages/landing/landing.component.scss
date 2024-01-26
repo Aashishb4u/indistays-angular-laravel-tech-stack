@@ -64,9 +64,17 @@
   font-weight: bold;
 }
 
-@media (max-width: 1024px) {
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .landing-container {
+    padding: 10px 3rem;
+  }
+
   .landing-filters {
     position: relative !important;
+    .filter-from {
+      width: 90% !important;
+      margin: 3rem 0;
+    }
   }
 
   .carousal-container {
