@@ -25,11 +25,8 @@
       <ngb-carousel *ngIf="screenWidth > 500" [interval]="4000" [pauseOnHover]="false">
         <ng-template *ngFor="let image of images" ngbSlide>
           <div>
-            <div class="picsum-img-wrapper">
-              <img (load)="image.loaded = true" appImageCompression [src]="image.image_url" alt="Indistays Banner" [attr.aria-label]="'Indistays Banner'" role="img" />
-              <ng-container *ngIf="!image.loaded">
-                <ngx-skeleton-loader [theme]="{height: '28vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
-              </ng-container>
+            <div class="picsum-img-wrapper desktop">
+              <img appImageCompression [src]="image.image_url" alt="Indistays Banner" [attr.aria-label]="'Indistays Banner'" role="img" />
             </div>
 <!--            <div class="carousel-caption carousal-text">-->
 <!--              <div class="header">-->
@@ -46,11 +43,8 @@
       <ngb-carousel *ngIf="screenWidth < 500" [interval]="4000" [pauseOnHover]="false">
         <ng-template *ngFor="let image of mobileBannerImages" ngbSlide>
           <div>
-            <div class="picsum-img-wrapper">
-              <img (load)="image.loaded = true" appImageCompression [src]="image.image_url" alt="Random first slide" />
-              <ng-container *ngIf="!image.loaded">
-                <ngx-skeleton-loader [theme]="{height: '35vh', width: '100%'}" count="1" ></ngx-skeleton-loader>
-              </ng-container>
+            <div class="picsum-img-wrapper mobile">
+              <img appImageCompression [src]="image.image_url" alt="Random first slide" />
             </div>
 <!--            <div class="carousel-caption carousal-text">-->
 <!--              <div class="header">-->

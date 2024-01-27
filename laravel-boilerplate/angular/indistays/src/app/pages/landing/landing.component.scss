@@ -1,4 +1,10 @@
 .picsum-img-wrapper {
+  &.desktop {
+    min-height: 20vh;
+  }
+  &.mobile {
+    min-height: 20vh;
+  }
   img {
     width: 100%;
     object-fit: cover;

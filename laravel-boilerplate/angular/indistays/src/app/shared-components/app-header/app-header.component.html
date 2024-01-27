@@ -11,7 +11,7 @@ navbar-expand-md navbar-light bg-light">
         <img width="50" [src]="sharedService?.companyLogoTransperant" alt="Company Logo" class="logo-image">
       </a>
     </div>
-    <div *ngIf="screenWidth < 600">
+    <div *ngIf="screenWidth < 768">
       <div *ngIf="!isAuthenticated" class="ml-auto d-flex align-items-center justify-content-end">
         <button class="setting-icon-mobile" [matMenuTriggerFor]="menu" mat-mini-fab
                 aria-label="Example icon button with a filter list icon">
@@ -46,11 +46,11 @@ navbar-expand-md navbar-light bg-light">
         </mat-menu>
       </div>
     </div>
-    <button *ngIf="screenWidth > 600" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <button *ngIf="screenWidth > 767" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div *ngIf="screenWidth > 600" class="navbar-collapse menu-bar justify-content-between" id="navbarSupportedContent">
+    <div *ngIf="screenWidth > 767" class="navbar-collapse menu-bar justify-content-between" id="navbarSupportedContent">
       <div  class="d-flex ml-auto">
         <ul class="navbar-nav">
           <li [routerLink]="['/home']" [routerLinkActive]="'active'" class="nav-item nav-menu">
