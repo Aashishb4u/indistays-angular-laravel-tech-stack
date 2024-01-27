@@ -6,7 +6,7 @@
   box-shadow: 2px 4px 5px 2px rgba(129, 138, 184, 0.25);
   padding: 2rem;
   font-size: 16px;
-  min-height: 300px;
+  min-height: 400px;
   .feedback-content {
     color: rgba(26, 43, 13, 0.50);
     text-align: center;
@@ -44,6 +44,7 @@
 
 @media only screen and (max-width: 600px) {
   .feedback-card {
+    min-height: 330px;
     .feedback-content {
       font-size: 14px;
     }
