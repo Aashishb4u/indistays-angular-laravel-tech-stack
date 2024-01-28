@@ -1,0 +1,13 @@
+identifier: l6r8x945f0c6i3la
+appPort: 1864
+staticPort: 1668
+reloadPort: 2667
+hostName: localhost
+projectName: indistays
+homeFolder: >-
+  /Users/aashishbhagwat/Documents/indistays/laravel-boilerplate/angular/indistays
+distFolder: dist/indistays
+outDir: >-
+  /Users/aashishbhagwat/Documents/indistays/laravel-boilerplate/angular/indistays/dist/indistays
+handle404: ''
+allowErrorCollect: true

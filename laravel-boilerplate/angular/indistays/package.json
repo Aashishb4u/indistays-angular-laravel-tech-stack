@@ -27,6 +27,8 @@
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@ngx-lite/json-ld": "^14.0.0",
     "@popperjs/core": "^2.11.6",
+    "@scullyio/init": "^2.1.41",
+    "@scullyio/scully-plugin-puppeteer": "^2.1.41",
     "@types/web-app-manifest": "^1.0.7",
     "bootstrap": "^5.2.3",
     "jquery": "^3.7.1",
