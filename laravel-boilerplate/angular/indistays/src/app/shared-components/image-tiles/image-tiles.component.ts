@@ -1,5 +1,6 @@
 import { Component, Input, Renderer2, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-image-tiles',
@@ -9,9 +10,10 @@ import { Subscription } from 'rxjs';
 export class ImageTilesComponent implements OnInit, OnDestroy {
   @Input() tilesData: any[] = [];
   @Input() view: string = 'column';
+  @Input() lazyLoaded: any = true;
   private resizeSubscription: Subscription = new Subscription();
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(public sharedService: SharedService, private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit() {
     this.checkScreenSize();

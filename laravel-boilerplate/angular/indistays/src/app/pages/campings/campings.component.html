@@ -28,7 +28,7 @@
                             [subTitle]="'Top Selling'">
         </app-section-header>
       </div>
-      <app-price-ui-cards [view]="'row'" [cardData]="accommodations"></app-price-ui-cards>
+      <app-price-ui-cards [lazyLoaded]="false" [view]="'row'" [cardData]="accommodations"></app-price-ui-cards>
     </div>
     <app-footer></app-footer>
   </div>

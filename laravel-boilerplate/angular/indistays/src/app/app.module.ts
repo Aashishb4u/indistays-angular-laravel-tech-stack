@@ -79,6 +79,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {NewVersionCheckerComponent} from './shared-components/new-version-checker/new-version-checker.component';
 import { ImageCompressionDirective } from './custom-directives/image-compression.directive';
+import {LAZYLOAD_IMAGE_HOOKS, LazyLoadImageModule, ScrollHooks} from "ng-lazyload-image";
 // import { LazyLoadImageDirective } from './custom-directives/lazy-load-image.directive';
 // Import library module
 // import { NgxJsonLdModule } from '@ngx-lite/json-ld';
@@ -164,6 +165,7 @@ import { ImageCompressionDirective } from './custom-directives/image-compression
     SlickCarouselModule,
     NgxGalleryModule, MatTooltipModule,
     NgxSkeletonLoaderModule.forRoot(),
+    LazyLoadImageModule,
     // NgxJsonLdModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
@@ -173,6 +175,7 @@ import { ImageCompressionDirective } from './custom-directives/image-compression
     })
   ],
   providers: [
+    { provide: LAZYLOAD_IMAGE_HOOKS, useClass: ScrollHooks },
     NgxImageCompressService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     {provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptorsService, multi: true},

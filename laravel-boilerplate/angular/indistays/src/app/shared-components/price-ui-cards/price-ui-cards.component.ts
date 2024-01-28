@@ -10,6 +10,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import {Subscription} from "rxjs";
+import {SharedService} from "../../services/shared.service";
 @Component({
   selector: 'app-price-ui-cards',
   templateUrl: './price-ui-cards.component.html',
@@ -20,9 +21,10 @@ export class PriceUiCardsComponent implements OnInit, OnChanges {
   @Input() cardData: any = [];
   @Output() onSelect: EventEmitter<any> = new EventEmitter();
   @Input() view: string = 'column';
+  @Input() lazyLoaded: any = true;
   private resizeSubscription: Subscription = new Subscription();
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(public sharedService: SharedService, private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit() {
     this.checkScreenSize();

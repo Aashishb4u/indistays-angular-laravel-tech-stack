@@ -31,6 +31,7 @@
     "bootstrap": "^5.2.3",
     "jquery": "^3.7.1",
     "moment": "^2.29.4",
+    "ng-lazyload-image": "^9.1.3",
     "ngx-editor": "^15.3.0",
     "ngx-image-compress": "^15.1.5",
     "ngx-skeleton-loader": "^6.0.0",

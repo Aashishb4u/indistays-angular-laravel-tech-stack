@@ -1,17 +1,33 @@
 <div class="image-tiles">
-  <ng-container *ngFor="let image of tilesData">
-    <img (load)="someEvent(image)" [src]="image?.img" alt="Image" style="display: none;">
-    <div *ngIf="image?.loaded; else placeHolder"
-         [routerLink]="image.url"
-         class="single-image-tile lg:rounded-3xl
+  <ng-container *ngIf="lazyLoaded; else eagerLoaded">
+    <ng-container *ngFor="let image of tilesData">
+      <div [defaultImage]="sharedService.defaultImage" [lazyLoad]="image.img"
+           [routerLink]="image.url"
+           class="single-image-tile lg:rounded-3xl
          rounded-2xl sm:rounded-1xl"
-         [style.background-image]="'url(' + image?.img + ')'">
-      <div class="image-title lg:text-lg text-base uppercase">
-        {{ image?.name }}
+           [style.background-image]="'url(' + image?.img + ')'">
+        <div class="image-title lg:text-lg text-base uppercase">
+          {{ image?.name }}
+        </div>
       </div>
-    </div>
+    </ng-container>
+  </ng-container>
+  <ng-template #eagerLoaded>
+    <ng-container *ngFor="let image of tilesData">
+      <img (load)="image.loaded = true"
+           [src]="image?.img" alt="Image" style="display: none;">
+      <div *ngIf="image.loaded; else placeHolder"
+           [routerLink]="image.url"
+           class="single-image-tile lg:rounded-3xl
+         rounded-2xl sm:rounded-1xl"
+           [style.background-image]="'url(' + image?.img + ')'">
+        <div class="image-title lg:text-lg text-base uppercase">
+          {{ image?.name }}
+        </div>
+      </div>
+    </ng-container>
     <ng-template #placeHolder>
       <ngx-skeleton-loader [theme]="{height: '200px', 'border-radius': '20px'}" count="1" ></ngx-skeleton-loader>
     </ng-template>
-  </ng-container>
+  </ng-template>
 </div>

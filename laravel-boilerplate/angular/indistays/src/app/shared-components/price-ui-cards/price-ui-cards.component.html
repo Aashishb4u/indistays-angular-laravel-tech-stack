@@ -3,16 +3,28 @@
     <div [routerLink]="acc.url" (click)="onSelectPriceCard(acc)"
          class="cursor-pointer p-3 lg:p-4
     img-price-card lg:rounded-3xl rounded-2xl sm:rounded-1xl">
-      <div class="img">
-        <img (load)="someEvent(acc)" [src]="acc?.img" alt="Image" style="display: none;">
-        <ng-container *ngIf="acc?.loaded; else placeHolder">
-          <img class="lg:rounded-2xl rounded-xl sm:rounded-1xl" [src]="acc?.img" alt="">
-        </ng-container>
-        <ng-template #placeHolder>
-          <ngx-skeleton-loader [theme]="{height: '250px', 'border-radius': '18px'}" count="1" ></ngx-skeleton-loader>
-<!--          <img class="full-width" src="assets/images/placeholder.png" alt="">-->
-        </ng-template>
-      </div>
+      <ng-container *ngIf="lazyLoaded; else eagerLoaded">
+        <div class="img">
+          <ng-container>
+            <img [defaultImage]="sharedService.defaultImage"
+                 [lazyLoad]="acc?.img"
+                 class="lg:rounded-2xl rounded-xl sm:rounded-1xl"
+                 [src]="acc?.img" alt="">
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-template #eagerLoaded>
+        <div class="img">
+          <img (load)="someEvent(acc)" [src]="acc?.img" alt="Image" style="display: none;">
+          <ng-container *ngIf="acc?.loaded; else placeHolder">
+            <img class="lg:rounded-2xl rounded-xl sm:rounded-1xl" [src]="acc?.img" alt="">
+          </ng-container>
+          <ng-template #placeHolder>
+            <ngx-skeleton-loader [theme]="{height: '250px', 'border-radius': '18px'}" count="1" ></ngx-skeleton-loader>
+            <!--          <img class="full-width" src="assets/images/placeholder.png" alt="">-->
+          </ng-template>
+        </div>
+      </ng-template>
       <div class="row-1 my-2 d-flex align-items-center justify-content-between">
         <div class="title">
           <span style="color: #999" class="sub-title lg:text-base sm:text-sm text-sm md:text-sm">

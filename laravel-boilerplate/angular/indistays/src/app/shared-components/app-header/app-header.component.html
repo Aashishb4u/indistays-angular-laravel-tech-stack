@@ -51,22 +51,22 @@ navbar-expand-md navbar-light bg-light">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div *ngIf="screenWidth > 767" class="navbar-collapse menu-bar justify-content-between" id="navbarSupportedContent">
-      <div  class="d-flex ml-auto">
+      <div  class="d-flex w-100 ml-auto">
         <ul class="navbar-nav">
           <li [routerLink]="['/home']" [routerLinkActive]="'active'" class="nav-item nav-menu">
-            <a class="cursor-pointer nav-link" aria-current="page">Home</a>
+            <div class="cursor-pointer nav-link" aria-current="page">Home</div>
           </li>
           <li [routerLink]="['/destinations']" [routerLinkActive]="'active'" class="nav-item nav-menu ">
-            <a class="cursor-pointer nav-link">Destinations</a>
+            <div class="cursor-pointer nav-link">Destinations</div>
           </li>
           <li [routerLink]="['/campings']" [routerLinkActive]="'active'" class="nav-item nav-menu ">
-            <a class="cursor-pointer nav-link">Camping</a>
+            <div class="cursor-pointer nav-link">Camping</div>
           </li>
           <li [routerLink]="['/about-us']" [routerLinkActive]="'active'" class="nav-item nav-menu">
-            <a class="cursor-pointer nav-link">About Us</a>
+            <div class="cursor-pointer nav-link">About Us</div>
           </li>
           <li [routerLink]="['/contact-us']" [routerLinkActive]="'active'" class="nav-item nav-menu">
-            <a class="cursor-pointer nav-link" >Contact Us</a>
+            <div class="cursor-pointer nav-link" >Contact Us</div>
           </li>
         </ul>
       </div>

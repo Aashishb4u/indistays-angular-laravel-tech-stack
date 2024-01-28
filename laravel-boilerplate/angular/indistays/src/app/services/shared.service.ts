@@ -26,6 +26,7 @@ export class SharedService {
   companyLogoAnimation: any = appConstants.creativeHandLogoAnimation;
   businessLogoName: any = '';
   businessLogoImageLink: any = '';
+  defaultImage: any = 'https://indistays.com/assets/company-logo/default-image.png';
   constructor(@Inject(PLATFORM_ID) private platformId: object, public dialog: MatDialog, public imageCompress: NgxImageCompressService, public snackBar: MatSnackBar) { }
 
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
