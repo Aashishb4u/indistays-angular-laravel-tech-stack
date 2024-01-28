@@ -166,13 +166,14 @@
     gap: 20px;
     img {
       width: 40%;
+      object-fit: cover;
     }
   }
 }
 
 /* Add additional styling as needed */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
   .listing-list-container {
     .single-list {
       flex-direction: column;
