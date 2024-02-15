@@ -191,11 +191,26 @@ class DestinationController extends Controller
 
     public function deleteDestination($id)
     {
-        $destination = Destination::findOrFail($id);
-        $destination->delete();
+        try {
+            // Find the destination
+            $destination = Destination::findOrFail($id);
 
-        return response()->json(['message' => 'Destination deleted successfully']);
+            // Delete related campings
+            $destination->campings()->delete();
+
+            // Delete images associated with the destination
+            $destination->images()->delete();
+
+            // Now, delete the destination record
+            $destination->delete();
+
+            return response()->json(['message' => 'Destination deleted successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, log errors, or return an error response
+            return response()->json(['error' => 'Error deleting destination'], 500);
+        }
     }
+
 
     // Get all users
     public function index(Request $request) {

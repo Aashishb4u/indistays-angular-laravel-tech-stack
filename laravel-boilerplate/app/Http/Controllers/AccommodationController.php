@@ -207,11 +207,30 @@ class AccommodationController extends Controller
 
     public function deleteAccommodation($id)
     {
-        $accommodation = Accommodation::findOrFail($id);
-        $accommodation->delete();
+        try {
+            // Find the accommodation
+            $accommodation = Accommodation::findOrFail($id);
 
-        return response()->json(['message' => 'Accommodation deleted successfully']);
+            // Detach amenities related to the accommodation
+            $accommodation->amenities()->detach();
+
+            // Delete related records in other tables (if any) like CustomPricing, CustomBooking, etc.
+            $accommodation->customPricing()->delete();
+            $accommodation->customBooking()->delete();
+
+            // Delete images associated with the accommodation
+            $accommodation->images()->delete();
+
+            // Now, delete the accommodation record
+            $accommodation->delete();
+
+            return response()->json(['message' => 'Accommodation deleted successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, log errors, or return an error response
+            return response()->json(['error' => 'Error deleting accommodation'], 500);
+        }
     }
+
 
     public function index(Request $request)
     {

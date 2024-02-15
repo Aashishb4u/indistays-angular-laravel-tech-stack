@@ -187,11 +187,29 @@ class CampingController extends Controller
 
     public function deleteCamping($id)
     {
-        $camping = Camping::findOrFail($id);
-        $camping->delete();
+        try {
+            // Find the camping
+            $camping = Camping::findOrFail($id);
 
-        return response()->json(['message' => 'Camping deleted successfully']);
+            // Delete related accommodations
+            $camping->accommodations()->delete();
+
+            // Delete customer reviews associated with the camping
+            $camping->customerReviews()->delete();
+
+            // Delete images associated with the camping
+            $camping->images()->delete();
+
+            // Now, delete the camping record
+            $camping->delete();
+
+            return response()->json(['message' => 'Camping deleted successfully']);
+        } catch (\Exception $e) {
+            // Handle exceptions, log errors, or return an error response
+            return response()->json(['error' => 'Error deleting camping'], 500);
+        }
     }
+
 
     public function index(Request $request)
     {
