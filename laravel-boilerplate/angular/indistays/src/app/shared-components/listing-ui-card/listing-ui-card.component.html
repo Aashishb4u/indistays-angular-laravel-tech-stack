@@ -1,7 +1,7 @@
 <div class="listing-list-container d-flex flex-column gap-5">
   <ng-container *ngFor="let list of listing">
     <div [routerLink]="list?.url" class="single-list p-3">
-      <img [src]="list?.img" alt="">
+      <img class="object-fit-cover" [src]="list?.img" alt="">
       <div class="details-container">
         <div class="listing-t-c">
           <div class="title">{{list?.name}}</div>
@@ -9,7 +9,7 @@
           </div>
           <div class="d-flex gap-3 amenity-icons">
             <ng-container *ngFor="let amenity of amenities">
-              <img style="width: 30px" [src]="amenity?.icon" alt="">
+              <img class="object-fit-cover" style="width: 30px" [src]="amenity?.icon" alt="">
             </ng-container>
           </div>
         </div>

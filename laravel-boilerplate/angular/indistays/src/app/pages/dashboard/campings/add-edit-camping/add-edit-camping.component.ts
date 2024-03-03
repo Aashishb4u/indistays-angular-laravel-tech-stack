@@ -264,8 +264,8 @@ export class AddEditCampingComponent {
     const campingName: any = this.componentForm.get('name').value;
     if (event.target.files && event.target.files[0]) {
       const fileSizeInMB = image.size / (1024 * 1024);
-      if (fileSizeInMB > 35) {
-        this.apiService.showToast('File size should not exceed 35 MB');
+      if (fileSizeInMB > 20) {
+        this.apiService.showToast('File size should not exceed 20 MB');
         return;
       }
       if (this.galleryImages.controls.length >= 20) {
@@ -278,24 +278,38 @@ export class AddEditCampingComponent {
         this.galleryImages.controls[index].get('imageUrl').setValue('');
         this.galleryImages.controls[index].get('imageUrlOnUI').setValue('');
         const fileName = `${campingName.toLowerCase()}-gallery-image-${index}.png`;
-        const localUrl = onLoadEvent.target.result;
-        this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
-          const base64: string = compressedImage.base64;
-          const imageFile: any = compressedImage.imageFile;
-          if (index === this.galleryImages.controls.length) {
-            this.galleryImages.push(this.fb.group({
-              imageId: '',
-              imageUrl: '',
-              imageUrlOnUI: '',
-              imageBase64: base64,
-              imageFile: imageFile,
-            })); // Add a new FormControl to the FormArray
-          } else {
-            this.galleryImages.controls[index].get('imageBase64').setValue(base64);
-          }
-          this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
-          this.sharedService.showSpinner.next(false);
-        });
+        const base64 = onLoadEvent.target.result;
+        const updatedImage = new File([image], fileName, { type: image.type });
+        if (index === this.galleryImages.controls.length) {
+          this.galleryImages.push(this.fb.group({
+            imageId: '',
+            imageUrl: '',
+            imageUrlOnUI: '',
+            imageBase64: base64,
+            imageFile: updatedImage,
+          })); // Add a new FormControl to the FormArray
+        } else {
+          this.galleryImages.controls[index].get('imageBase64').setValue(base64);
+        }
+        this.galleryImages.controls[index].get('imageFile').setValue(updatedImage);
+        this.sharedService.showSpinner.next(false);
+        // this.sharedService.compressFile(localUrl, fileName).then((compressedImage: any) => {
+        //   const base64: string = compressedImage.base64;
+        //   const imageFile: any = compressedImage.imageFile;
+        //   if (index === this.galleryImages.controls.length) {
+        //     this.galleryImages.push(this.fb.group({
+        //       imageId: '',
+        //       imageUrl: '',
+        //       imageUrlOnUI: '',
+        //       imageBase64: base64,
+        //       imageFile: imageFile,
+        //     })); // Add a new FormControl to the FormArray
+        //   } else {
+        //     this.galleryImages.controls[index].get('imageBase64').setValue(base64);
+        //   }
+        //   this.galleryImages.controls[index].get('imageFile').setValue(imageFile);
+        //   this.sharedService.showSpinner.next(false);
+        // });
       }
     }
   }

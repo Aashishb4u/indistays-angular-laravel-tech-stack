@@ -219,82 +219,93 @@ export class CampingDetailsComponent implements OnInit{
   fetchData() {
     this.apiService.getDataStream().then((res) => {
       this.apiService.dataStream.subscribe((val) => {
-        this.campings = [...val.camping].map((val) => {
-          return {
-            ...val,
-            name: val.name,
-            img: this.sharedService.generateImageUrl(val.profile_image_url)
-          }
-        });
-        this.accommodations = [...val.accommodations].map((val) => {
-          return {
-            ...val,
-            loaded: false,
-            url: `/camping-details/${val.camping_id}`,
-            img: this.sharedService.generateImageUrl(val.profile_image_url)
-          }
-        }).splice(0, 3);
-        this.campingDetails = this.campings.find(v => v.id === +this.campingId);
-        if(this.campingDetails.customer_reviews && this.campingDetails.customer_reviews.length > 0) {
-          const sum = this.campingDetails.customer_reviews
-            .map(v => +v.ratings)
-            .reduce((acc, num) => acc + num, 0);
-          this.customerReview = sum / this.campingDetails.customer_reviews.length;
-        }
-        // this.accommodationDetails = this.campingDetails.
-        this.campAccommodations = this.campingDetails.accommodations ?
-          [...this.campingDetails.accommodations].map((camp: any) => {
-
-            // Handling weekend scenario
-            if (this.isWeekend && camp.filter_custom_pricing.length === 0) {
-              camp.price = +camp.weekend_price ? camp.weekend_price : camp.price;
-              camp.discount_price = +camp.weekend_discount_price ? camp.weekend_discount_price : camp.discount_price;
-            } else if (camp.filter_custom_pricing.length > 0) {
-              // Handling custom Pricing scenario
-              const customPrice = camp.filter_custom_pricing[0];
-              camp.price = customPrice.price;
-              camp.discount_price = customPrice.discount_price;
-            }
-
+        const campingPromise = new Promise<void>((resolve) => {
+          this.campings = [...val.camping].map((camp) => {
             return {
               ...camp,
-              booking: 0,
+              name: camp.name,
               img: this.sharedService.generateImageUrl(camp.profile_image_url)
             }
-          }) : this.campAccommodations;
-
-
-        const people = this.storageService.getStorageValue('people');
-        if(people && this.campAccommodations && this.campAccommodations.length > 0) {
-          for(let i=0; i < +people; i++) {
-            this.summaryData = [];
-            this.totalSum = 0;
-            this.onAddition(this.campAccommodations[0]);
-          }
-          this.campAccommodations[0].booking = +people;
-          this.calculate();
-        }
-
-        this.amenities = this.campAccommodations.reduce((a, b) => {
-          a = a.concat(b.amenities);
-          return a
-        }, []);
-
-        if(this.amenities && this.amenities.length > 0) {
-          this.amenities = this.sharedService.removeDuplicates(this.amenities, 'name');
-        }
-
-        this.mapSrc = this.sanitizer.bypassSecurityTrustHtml(this.campingDetails.location_map_link);
-        this.galleryImages = this.campingDetails.images.map((img) => {
-          const url = this.sharedService.generateImageUrl(img.url);
-          return {
-            url: url,
-            small: url,
-            big: url,
-            medium: url,
-          }
+          });
+          resolve();
         });
-        this.showSpinner = false;
+
+        const accommodationsPromise = new Promise<void>((resolve) => {
+          this.accommodations = [...val.accommodations].map((acc) => {
+            return {
+              ...acc,
+              loaded: false,
+              url: `/camping-details/${acc.camping_id}`,
+              img: this.sharedService.generateImageUrl(acc.profile_image_url)
+            }
+          }).splice(0, 3);
+          resolve();
+        });
+
+        Promise.all([campingPromise, accommodationsPromise]).then(() => {
+
+          this.campingDetails = this.campings.find(v => v.id === +this.campingId);
+          if(this.campingDetails.customer_reviews && this.campingDetails.customer_reviews.length > 0) {
+            const sum = this.campingDetails.customer_reviews
+              .map(v => +v.ratings)
+              .reduce((acc, num) => acc + num, 0);
+            this.customerReview = sum / this.campingDetails.customer_reviews.length;
+          }
+          // this.accommodationDetails = this.campingDetails.
+          this.campAccommodations = this.campingDetails.accommodations ?
+            [...this.campingDetails.accommodations].map((camp: any) => {
+
+              // Handling weekend scenario
+              if (this.isWeekend && camp.filter_custom_pricing.length === 0) {
+                camp.price = +camp.weekend_price ? camp.weekend_price : camp.price;
+                camp.discount_price = +camp.weekend_discount_price ? camp.weekend_discount_price : camp.discount_price;
+              } else if (camp.filter_custom_pricing.length > 0) {
+                // Handling custom Pricing scenario
+                const customPrice = camp.filter_custom_pricing[0];
+                camp.price = customPrice.price;
+                camp.discount_price = customPrice.discount_price;
+              }
+
+              return {
+                ...camp,
+                booking: 0,
+                img: this.sharedService.generateImageUrl(camp.profile_image_url)
+              }
+            }) : this.campAccommodations;
+
+
+          const people = this.storageService.getStorageValue('people');
+          if(people && this.campAccommodations && this.campAccommodations.length > 0) {
+            for(let i=0; i < +people; i++) {
+              this.summaryData = [];
+              this.totalSum = 0;
+              this.onAddition(this.campAccommodations[0]);
+            }
+            this.campAccommodations[0].booking = +people;
+            this.calculate();
+          }
+
+          this.amenities = this.campAccommodations.reduce((a, b) => {
+            a = a.concat(b.amenities);
+            return a
+          }, []);
+
+          if(this.amenities && this.amenities.length > 0) {
+            this.amenities = this.sharedService.removeDuplicates(this.amenities, 'name');
+          }
+
+          this.mapSrc = this.sanitizer.bypassSecurityTrustHtml(this.campingDetails.location_map_link);
+          this.galleryImages = this.campingDetails.images.map((img) => {
+            const url = this.sharedService.generateImageUrl(img.url);
+            return {
+              url: url,
+              small: url,
+              big: url,
+              medium: url,
+            }
+          });
+          this.showSpinner = false;
+        });
       })
     });
   }

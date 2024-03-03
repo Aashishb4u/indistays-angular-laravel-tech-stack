@@ -93,6 +93,19 @@ laravel-boilerplate/
 - Install Composer to run Php Laravel
 `sudo apt install composer`
 
+## Increase Upload Limit:
+
+- Check the php fpm version
+`sudo vim /etc/php/<php version>/fpm/php.ini`
+Eg: `sudo vim /etc/php/8.1/fpm/php.ini`
+
+- Add following changes
+`upload_max_filesize = 20M`
+`post_max_size = 20M` 
+
+- Restart FPM (Add corresponding php version)
+`sudo service php8.1-fpm restart` 
+
 ## Install Database (MySql)
 
 - Install mysql (Ubuntu)

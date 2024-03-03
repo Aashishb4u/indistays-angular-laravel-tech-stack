@@ -90,7 +90,7 @@ export class AddEditAccommodationComponent {
     const campingName: any = this.componentForm.get('name').value;
     if (event.target.files && event.target.files[0]) {
       const fileSizeInMB = image.size / (1024 * 1024);
-      if (fileSizeInMB > 2) {
+      if (fileSizeInMB > 20) {
         this.apiService.showToast('File size should not exceed 2 MB');
         return;
       }
@@ -285,8 +285,8 @@ export class AddEditAccommodationComponent {
     const campingName: any = this.componentForm.get('name').value;
     if (event.target.files && event.target.files[0]) {
       const fileSizeInMB = image.size / (1024 * 1024);
-      if (fileSizeInMB > 2) {
-        this.apiService.showToast('File size should not exceed 2 MB');
+      if (fileSizeInMB > 20) {
+        this.apiService.showToast('File size should not exceed 20 MB');
         return;
       }
       if (this.galleryImages.controls.length >= 20) {

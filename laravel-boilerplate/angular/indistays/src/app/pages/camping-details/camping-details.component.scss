@@ -85,10 +85,10 @@
     min-height: 350px;
     //background: #1A2B0D;
     border-radius: 20px;
-    box-shadow: 0px 4px 43px 0px rgba(129, 138, 184, 0.25);
 
     iframe {
       width: 100%;
+      min-height: 350px !important;
     }
   }
 }

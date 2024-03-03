@@ -194,6 +194,10 @@ class CampingController extends Controller
             // Delete related accommodations
             $camping->accommodations()->delete();
 
+            // Delete Custom Pricing and Booking
+            $camping->accommodations()->customPricing()->delete();
+            $camping->accommodations()->customBooking()->delete();
+
             // Delete customer reviews associated with the camping
             $camping->customerReviews()->delete();
 

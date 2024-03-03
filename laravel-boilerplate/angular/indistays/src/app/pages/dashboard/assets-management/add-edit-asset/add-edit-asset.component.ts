@@ -64,8 +64,8 @@ export class AddEditAssetComponent implements OnInit{
     const campingName: any = this.componentForm.get('name').value;
     if (event.target.files && event.target.files[0]) {
       const fileSizeInMB = image.size / (1024 * 1024);
-      if (fileSizeInMB > 10) {
-        this.apiService.showToast('File size should not exceed 10 MB');
+      if (fileSizeInMB > 20) {
+        this.apiService.showToast('File size should not exceed 20 MB');
         return;
       }
       // this.sharedService.showSpinner.next(true);

@@ -77,8 +77,8 @@ export class AddEditDestinationComponent {
     const destinationName: any = this.componentForm.get('name').value;
     if (event.target.files && event.target.files[0]) {
       const fileSizeInMB = image.size / (1024 * 1024);
-      if (fileSizeInMB > 35) {
-        this.apiService.showToast('File size should not exceed 35 MB');
+      if (fileSizeInMB > 20) {
+        this.apiService.showToast('File size should not exceed 20 MB');
         return;
       }
       reader.readAsDataURL(image);

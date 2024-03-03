@@ -120,6 +120,7 @@ body { margin: 0;
   iframe {
     width: 100% !important;
     border-radius: 15px;
+    min-height: 350px !important;
   }
 }
 
@@ -262,4 +263,9 @@ body { margin: 0;
     font-size: 31px !important;
   }
   font-weight: bold !important;
+}
+
+strong {
+  font-weight: 800 !important;
+  color: #666 !important;
 }

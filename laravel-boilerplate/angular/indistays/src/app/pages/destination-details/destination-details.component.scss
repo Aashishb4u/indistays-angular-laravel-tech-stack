@@ -64,7 +64,8 @@
   .image-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 10px;
+    height: 100vh;
   }
   .gallery-column {
     display: grid;
@@ -84,6 +85,25 @@
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    &.left-one {
+      min-height: 100vh;
+    }
+
+    &.middle-top {
+      min-height: 30vh;
+    }
+
+    &.middle-bottom {
+      min-height: 70vh;
+    }
+
+    &.right-top {
+      min-height: 60vh;
+    }
+
+    &.right-bottom {
+      min-height: 40vh;
+    }
   }
 }
 
