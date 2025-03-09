@@ -1,7 +1,7 @@
 <div class="listing-list-container d-flex flex-column gap-5">
   <ng-container *ngFor="let list of listing">
     <div [routerLink]="list?.url" class="single-list p-3">
-      <img class="object-fit-cover" [src]="list?.img" alt="">
+      <img class="rounded-4 object-fit-cover" [src]="list?.img" alt="">
       <div class="details-container">
         <div class="listing-t-c">
           <div class="title">{{list?.name}}</div>

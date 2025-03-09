@@ -78,7 +78,7 @@
       <app-listing-ui-card [listing]="camping"></app-listing-ui-card>
     </div>
 
-    <div>
+    <div *ngIf="similarDestinations && similarDestinations.length">
       <div class="lg:mt-8 sm:mt-4 md:mt-4 mt-5 lg:mb-6 sm:mb-4 md:mb-4 mb-6">
         <app-section-header [showMore]="false"
                             [mainTitle]="'Uncover Destinations Like This'"
