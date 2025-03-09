@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /login
+Disallow: /dashboard
+Allow: /home
+Allow: /destinations
+Allow: /campings
+Allow: /about-us
+Allow: /contact-us
+Allow: /destination-details
+Allow: /camping-details
